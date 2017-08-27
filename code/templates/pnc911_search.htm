@@ -1,0 +1,314 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel pnc911 search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN direccion_validacion_fieldblock}		
+	<div class="container {$fielddispclass_direccion_validacion}" data-fieldname="direccion_validacion">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 direccion_validacion}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_direccion_validacion}
+			</div>
+			<div class="col-md-4" >
+				{$direccion_validacion_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$direccion_validacion_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END direccion_validacion_fieldblock}
+	{BEGIN direccion_libre_fieldblock}		
+	<div class="container {$fielddispclass_direccion_libre}" data-fieldname="direccion_libre">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 direccion_libre}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_direccion_libre}
+			</div>
+			<div class="col-md-4" >
+				{$direccion_libre_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$direccion_libre_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END direccion_libre_fieldblock}
+	{BEGIN coordenadas_x_fieldblock}		
+	<div class="container {$fielddispclass_coordenadas_x}" data-fieldname="coordenadas_x">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 coordenadas_x}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_coordenadas_x}
+			</div>
+			<div class="col-md-4" >
+				{$coordenadas_x_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$coordenadas_x_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END coordenadas_x_fieldblock}
+	{BEGIN coordenadas_y_fieldblock}		
+	<div class="container {$fielddispclass_coordenadas_y}" data-fieldname="coordenadas_y">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 coordenadas_y}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_coordenadas_y}
+			</div>
+			<div class="col-md-4" >
+				{$coordenadas_y_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$coordenadas_y_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END coordenadas_y_fieldblock}
+	{BEGIN departamento_fieldblock}		
+	<div class="container {$fielddispclass_departamento}" data-fieldname="departamento">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 departamento}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_departamento}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END departamento_fieldblock}
+	{BEGIN municipio_fieldblock}		
+	<div class="container {$fielddispclass_municipio}" data-fieldname="municipio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 municipio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_municipio}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END municipio_fieldblock}
+	{BEGIN ppddsc_fieldblock}		
+	<div class="container {$fielddispclass_ppddsc}" data-fieldname="ppddsc">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 ppddsc}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_ppddsc}
+			</div>
+			<div class="col-md-4" >
+				{$ppddsc_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$ppddsc_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END ppddsc_fieldblock}
+	{BEGIN meses_fieldblock}		
+	<div class="container {$fielddispclass_meses}" data-fieldname="meses">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 meses}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_meses}
+			</div>
+			<div class="col-md-4" >
+				{$meses_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$meses_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END meses_fieldblock}
+	{BEGIN tipificacion_fieldblock}		
+	<div class="container {$fielddispclass_tipificacion}" data-fieldname="tipificacion">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 tipificacion}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_tipificacion}
+			</div>
+			<div class="col-md-4" >
+				{$tipificacion_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$tipificacion_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END tipificacion_fieldblock}
+	{BEGIN avisos911_fieldblock}		
+	<div class="container {$fielddispclass_avisos911}" data-fieldname="avisos911">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label pnc911 avisos911}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_avisos911}
+			</div>
+			<div class="col-md-4" >
+				{$avisos911_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$avisos911_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END avisos911_fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

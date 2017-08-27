@@ -1,0 +1,638 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel hechos_delictivos search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN id1_fieldblock}		
+	<div class="container {$fielddispclass_id1}" data-fieldname="id1">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos id1}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_id1}
+			</div>
+			<div class="col-md-4" >
+				{$id1_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$id1_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END id1_fieldblock}
+	{BEGIN correlativo_fieldblock}		
+	<div class="container {$fielddispclass_correlativo}" data-fieldname="correlativo">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos correlativo}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_correlativo}
+			</div>
+			<div class="col-md-4" >
+				{$correlativo_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$correlativo_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END correlativo_fieldblock}
+	{BEGIN numero_fieldblock}		
+	<div class="container {$fielddispclass_numero}" data-fieldname="numero">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos numero}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_numero}
+			</div>
+			<div class="col-md-4" >
+				{$numero_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$numero_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END numero_fieldblock}
+	{BEGIN id_fieldblock}		
+	<div class="container {$fielddispclass_id}" data-fieldname="id">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos id}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_id}
+			</div>
+			<div class="col-md-4" >
+				{$id_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$id_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END id_fieldblock}
+	{BEGIN codigo_muni_fieldblock}		
+	<div class="container {$fielddispclass_codigo_muni}" data-fieldname="codigo_muni">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos codigo_muni}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_codigo_muni}
+			</div>
+			<div class="col-md-4" >
+				{$codigo_muni_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$codigo_muni_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END codigo_muni_fieldblock}
+	{BEGIN numero2_fieldblock}		
+	<div class="container {$fielddispclass_numero2}" data-fieldname="numero2">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos numero2}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_numero2}
+			</div>
+			<div class="col-md-4" >
+				{$numero2_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$numero2_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END numero2_fieldblock}
+	{BEGIN depart_he_fieldblock}		
+	<div class="container {$fielddispclass_depart_he}" data-fieldname="depart_he">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos depart_he}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_depart_he}
+			</div>
+			<div class="col-md-4" >
+				{$depart_he_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$depart_he_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END depart_he_fieldblock}
+	{BEGIN muni_he_fieldblock}		
+	<div class="container {$fielddispclass_muni_he}" data-fieldname="muni_he">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos muni_he}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_muni_he}
+			</div>
+			<div class="col-md-4" >
+				{$muni_he_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$muni_he_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END muni_he_fieldblock}
+	{BEGIN lugar_esp_fieldblock}		
+	<div class="container {$fielddispclass_lugar_esp}" data-fieldname="lugar_esp">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos lugar_esp}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_lugar_esp}
+			</div>
+			<div class="col-md-4" >
+				{$lugar_esp_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$lugar_esp_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END lugar_esp_fieldblock}
+	{BEGIN lugaranalisis_fieldblock}		
+	<div class="container {$fielddispclass_lugaranalisis}" data-fieldname="lugaranalisis">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos lugaranalisis}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_lugaranalisis}
+			</div>
+			<div class="col-md-4" >
+				{$lugaranalisis_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$lugaranalisis_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END lugaranalisis_fieldblock}
+	{BEGIN area_fieldblock}		
+	<div class="container {$fielddispclass_area}" data-fieldname="area">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos area}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_area}
+			</div>
+			<div class="col-md-4" >
+				{$area_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$area_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END area_fieldblock}
+	{BEGIN forma_cono_fieldblock}		
+	<div class="container {$fielddispclass_forma_cono}" data-fieldname="forma_cono">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos forma_cono}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_forma_cono}
+			</div>
+			<div class="col-md-4" >
+				{$forma_cono_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$forma_cono_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END forma_cono_fieldblock}
+	{BEGIN delito_fieldblock}		
+	<div class="container {$fielddispclass_delito}" data-fieldname="delito">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos delito}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_delito}
+			</div>
+			<div class="col-md-4" >
+				{$delito_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$delito_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END delito_fieldblock}
+	{BEGIN delito_espe_fieldblock}		
+	<div class="container {$fielddispclass_delito_espe}" data-fieldname="delito_espe">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos delito_espe}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_delito_espe}
+			</div>
+			<div class="col-md-4" >
+				{$delito_espe_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$delito_espe_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END delito_espe_fieldblock}
+	{BEGIN dia_hecho_fieldblock}		
+	<div class="container {$fielddispclass_dia_hecho}" data-fieldname="dia_hecho">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos dia_hecho}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_dia_hecho}
+			</div>
+			<div class="col-md-4" >
+				{$dia_hecho_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$dia_hecho_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END dia_hecho_fieldblock}
+	{BEGIN edad_victima_fieldblock}		
+	<div class="container {$fielddispclass_edad_victima}" data-fieldname="edad_victima">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos edad_victima}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_edad_victima}
+			</div>
+			<div class="col-md-4" >
+				{$edad_victima_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$edad_victima_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END edad_victima_fieldblock}
+	{BEGIN ran_eta_vic_fieldblock}		
+	<div class="container {$fielddispclass_ran_eta_vic}" data-fieldname="ran_eta_vic">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos ran_eta_vic}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_ran_eta_vic}
+			</div>
+			<div class="col-md-4" >
+				{$ran_eta_vic_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$ran_eta_vic_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END ran_eta_vic_fieldblock}
+	{BEGIN s_victima_fieldblock}		
+	<div class="container {$fielddispclass_s_victima}" data-fieldname="s_victima">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos s_victima}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_s_victima}
+			</div>
+			<div class="col-md-4" >
+				{$s_victima_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$s_victima_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END s_victima_fieldblock}
+	{BEGIN circunstancias_fieldblock}		
+	<div class="container {$fielddispclass_circunstancias}" data-fieldname="circunstancias">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos circunstancias}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_circunstancias}
+			</div>
+			<div class="col-md-4" >
+				{$circunstancias_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$circunstancias_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END circunstancias_fieldblock}
+	{BEGIN movil_fieldblock}		
+	<div class="container {$fielddispclass_movil}" data-fieldname="movil">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos movil}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_movil}
+			</div>
+			<div class="col-md-4" >
+				{$movil_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$movil_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END movil_fieldblock}
+	{BEGIN relacion_vi_agre_fieldblock}		
+	<div class="container {$fielddispclass_relacion_vi_agre}" data-fieldname="relacion_vi_agre">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos relacion_vi_agre}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_relacion_vi_agre}
+			</div>
+			<div class="col-md-4" >
+				{$relacion_vi_agre_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$relacion_vi_agre_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END relacion_vi_agre_fieldblock}
+	{BEGIN oc_victima_fieldblock}		
+	<div class="container {$fielddispclass_oc_victima}" data-fieldname="oc_victima">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos oc_victima}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_oc_victima}
+			</div>
+			<div class="col-md-4" >
+				{$oc_victima_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$oc_victima_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END oc_victima_fieldblock}
+	{BEGIN sector_ppd_fieldblock}		
+	<div class="container {$fielddispclass_sector_ppd}" data-fieldname="sector_ppd">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos sector_ppd}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sector_ppd}
+			</div>
+			<div class="col-md-4" >
+				{$sector_ppd_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sector_ppd_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sector_ppd_fieldblock}
+	{BEGIN mes_hecho_fieldblock}		
+	<div class="container {$fielddispclass_mes_hecho}" data-fieldname="mes_hecho">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos mes_hecho}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_mes_hecho}
+			</div>
+			<div class="col-md-4" >
+				{$mes_hecho_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$mes_hecho_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END mes_hecho_fieldblock}
+	{BEGIN hora_hecho_fieldblock}		
+	<div class="container {$fielddispclass_hora_hecho}" data-fieldname="hora_hecho">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos hora_hecho}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_hora_hecho}
+			</div>
+			<div class="col-md-4" >
+				{$hora_hecho_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$hora_hecho_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END hora_hecho_fieldblock}
+	{BEGIN tipo_arma_fieldblock}		
+	<div class="container {$fielddispclass_tipo_arma}" data-fieldname="tipo_arma">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos tipo_arma}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_tipo_arma}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_arma_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_arma_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END tipo_arma_fieldblock}
+	{BEGIN a_o_hecho_fieldblock}		
+	<div class="container {$fielddispclass_a_o_hecho}" data-fieldname="a_o_hecho">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos a_o_hecho}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_a_o_hecho}
+			</div>
+			<div class="col-md-4" >
+				{$a_o_hecho_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$a_o_hecho_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END a_o_hecho_fieldblock}
+	{BEGIN rango_hora_fieldblock}		
+	<div class="container {$fielddispclass_rango_hora}" data-fieldname="rango_hora">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label hechos_delictivos rango_hora}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_rango_hora}
+			</div>
+			<div class="col-md-4" >
+				{$rango_hora_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$rango_hora_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END rango_hora_fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

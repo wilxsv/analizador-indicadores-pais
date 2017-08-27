@@ -1,0 +1,224 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel Sector_PPD search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN departamento_fieldblock}		
+	<div class="container {$fielddispclass_departamento}" data-fieldname="departamento">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Sector_PPD departamento}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_departamento}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END departamento_fieldblock}
+	{BEGIN municipio_fieldblock}		
+	<div class="container {$fielddispclass_municipio}" data-fieldname="municipio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Sector_PPD municipio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_municipio}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END municipio_fieldblock}
+	{BEGIN area_fieldblock}		
+	<div class="container {$fielddispclass_area}" data-fieldname="area">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Sector_PPD area}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_area}
+			</div>
+			<div class="col-md-4" >
+				{$area_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$area_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END area_fieldblock}
+	{BEGIN sect_estan_fieldblock}		
+	<div class="container {$fielddispclass_sect_estan}" data-fieldname="sect_estan">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Sector_PPD sect_estan}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sect_estan}
+			</div>
+			<div class="col-md-4" >
+				{$sect_estan_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sect_estan_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sect_estan_fieldblock}
+	{BEGIN COUNT_sect_ppd__fieldblock}		
+	<div class="container {$fielddispclass_COUNT_sect_ppd_}" data-fieldname="COUNT_sect_ppd_">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Sector_PPD COUNT_sect_ppd_}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_COUNT_sect_ppd_}
+			</div>
+			<div class="col-md-4" >
+				{$COUNT_sect_ppd__editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$COUNT_sect_ppd__editcontrol1}
+			</div>
+		</div>
+	</div>
+{END COUNT_sect_ppd__fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

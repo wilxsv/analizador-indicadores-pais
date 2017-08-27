@@ -1,0 +1,69 @@
+<div {$pageattrs}>
+
+{BEGIN container_dcount}
+<div class="rnr-c rnr-cv rnr-c-dcount">
+
+
+<div  class="rnr-brickcontents style1 rnr-b-detailspreviewheader {$brickclass_detailspreviewheader}">	<h1>{$pagetitlelabel Mined_Prueba detailspreview}</h1>
+</div>
+
+
+
+<div  class="rnr-brickcontents style1 rnr-b-detailspreviewdetailsfount {$brickclass_detailspreviewdetailsfount}">{mlang_message DETAILS_FOUND}: <strong>{$row_count}.</strong>
+</div>
+
+
+{BEGIN display_first}
+<div  class="rnr-brickcontents style1 rnr-b-detailspreviewdispfirst {$brickclass_detailspreviewdispfirst}">{mlang_message DISPLAYING_FIRST}: <strong>{$display_count}</strong>.
+</div>{END display_first}
+
+
+</div>
+{END container_dcount}
+
+
+
+{BEGIN container_detailspreviewgrid}
+
+
+{BEGIN details_data}
+<table class="rnr-c rnr-cont rnr-c--detailspreviewgrid rnr-b-detailspreviewgrid rnr-gridtable">
+{BEGIN details_row_header}
+	<thead>
+		<tr class="rnr-toprow style1 {$gridHeader_class}" >
+			<th class="{$x_class}">{$label Mined_Prueba x}</th>
+			<th class="{$y_class}">{$label Mined_Prueba y}</th>
+			<th class="{$departamento_class}">{$label Mined_Prueba departamento}</th>
+			<th class="{$municipio_class}">{$label Mined_Prueba municipio}</th>
+			<th class="{$sector_ppd_class}">{$label Mined_Prueba sector_ppd}</th>
+			<th class="{$nombre_c_e_class}">{$label Mined_Prueba nombre_c_e}</th>
+			<th class="{$ipce_0_1_class}">{$label Mined_Prueba ipce_0_1}</th>
+			<th class="{$DisplayOnMap_class}">{$label Mined_Prueba DisplayOnMap}</th>
+			<th class="rnr-edge">&nbsp;</th>
+		</tr>
+	</thead>
+{END details_row_header}
+	<tbody>
+{BEGIN details_row}
+		<tr class="rnr-row style1">
+			<td class="{$x_class}">{$x_value}</td>
+			<td class="{$y_class}">{$y_value}</td>
+			<td class="{$departamento_class}">{$departamento_value}</td>
+			<td class="{$municipio_class}">{$municipio_value}</td>
+			<td class="{$sector_ppd_class}">{$sector_ppd_value}</td>
+			<td class="{$nombre_c_e_class}">{$nombre_c_e_value}</td>
+			<td class="{$ipce_0_1_class}">{$ipce_0_1_value}</td>
+			<td class="{$DisplayOnMap_class}">{$DisplayOnMap_value}</td>
+			<td class="rnr-edge">&nbsp;</td>
+		</tr>
+{END details_row}	
+	</tbody>
+</table>
+
+{END details_data}
+
+
+
+{END container_detailspreviewgrid}
+
+</div>

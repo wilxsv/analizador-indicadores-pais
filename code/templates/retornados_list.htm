@@ -1,0 +1,1190 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-list" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_top}
+<div {$top_chiddenattr} data-pageid="{$pageid}" data-container="top" class="container    "> 
+
+
+{BEGIN container_menu}<nav {$menu_chiddenattr} data-pageid="{$pageid}" data-container="menu" class="navbar navbar-default ">					
+
+
+
+{BEGIN container_hdr}
+<div {$hdr_chiddenattr} data-pageid="{$pageid}" data-container="hdr" class=" navbar-header   "> 
+
+{BEGIN logo_block}
+<a href="{$home_link}" {$logo_hiddenattr} data-pageid="{$pageid}" data-brick="logo" class="navbar-brand" >{$logo}</a>
+{END logo_block}
+
+
+{BEGIN collapse_block}
+<button {$bsnavbarcollapse_hiddenattr} data-pageid="{$pageid}" data-brick="bsnavbarcollapse" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target=".bs-navcontrolled">	
+	<span class="sr-only">Toggle navigation</span>	
+	<span class="icon-bar"></span>					
+</button>												
+
+{END collapse_block}
+
+
+
+</div>
+{END container_hdr}
+
+
+
+
+
+
+{BEGIN container_menu_1}<div {$menu_1_chiddenattr} data-pageid="{$pageid}" data-container="menu_1" class="bs-navform navbar-collapse bs-hidden-xs bs-navcontrolled" aria-expanded="false" >												   
+{BEGIN menu_block}
+{$menu main horizontal}
+
+{END menu_block}
+
+
+
+
+
+{BEGIN container_more}
+<div {$more_chiddenattr} data-pageid="{$pageid}" data-container="more" class=" navbar-right navbar-form   "> 
+
+{BEGIN more_list}
+<div {$morebutton_hiddenattr} data-pageid="{$pageid}" data-brick="morebutton" class="btn-group bs-navsection">
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<span class="glyphicon glyphicon-cog"></span>
+		<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu">
+		
+				
+				
+		
+				{BEGIN asearch_link}
+		<li><a href="retornados_search.php" {$advsearchlink_attrs}>{mlang_message ADVANCED_SEARCH}</a></li>
+		{END asearch_link}
+
+				{BEGIN searchPanelTopButtons}
+		<li><a href=# id="showOptPanel{$id}">{mlang_message SHOW_SEARCH_PANEL}</a></li>
+		{END searchPanelTopButtons}	
+		
+				
+				<li role="separator" class="divider"></li>	
+		
+				
+				{BEGIN export_link}
+		<li><a target="_blank" href="retornados_export.php"  {$exportlink_attrs}>{mlang_message EXPORT_RESULTS}</a></li>
+		{END export_link}
+
+				{BEGIN import_link}
+		<li><a href="retornados_import.php?{$crosstable_attrs}"  {$importlink_attrs}>{mlang_message IMPORT}</a></li>
+		{END import_link}
+
+					<li role="separator" class="divider"></li>
+				{BEGIN EnglishLANGLINK}
+				<li><a href="#" data-lang="English" class="rnr-langlink">
+					{BEGIN EnglishLANGLINK_ACTIVE}<span class="glyphicon glyphicon-ok">&nbsp;</span>{END EnglishLANGLINK_ACTIVE}
+					English</a></li>
+				{END EnglishLANGLINK}
+				{BEGIN SpanishLANGLINK}
+				<li><a href="#" data-lang="Spanish" class="rnr-langlink">
+					{BEGIN SpanishLANGLINK_ACTIVE}<span class="glyphicon glyphicon-ok">&nbsp;</span>{END SpanishLANGLINK_ACTIVE}
+					Español</a></li>
+				{END SpanishLANGLINK}
+		
+	</ul>  
+</div>
+
+{END more_list}
+
+
+{BEGIN security_block}
+<span {$loggedas_hiddenattr} data-pageid="{$pageid}" data-brick="loggedas" id="login_block{$id}" class="bs-navsection">
+	{BEGIN guestloginbutton}
+		<button class="btn btn-info" type="button" {$guestloginlink_attrs}>{mlang_message LOGIN}</button>
+	{END guestloginbutton}
+	{BEGIN loggedas_message} 
+		<span class="dropdown">
+			<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon-user"></span>	{$username}</button>
+			<ul class="dropdown-menu">
+		{BEGIN logoutbutton}
+				<li><a href="#" {$logoutlink_attrs}>{mlang_message LOG_OUT}</a></li>
+		{END logoutbutton}
+		
+
+			</ul>
+		</span>
+	{END loggedas_message}
+</span>
+{END security_block}
+
+
+
+</div>
+{END container_more}
+
+
+
+
+
+
+
+
+{BEGIN container_more_1}
+<div {$more_1_chiddenattr} data-pageid="{$pageid}" data-container="more_1" class=" navbar-right navbar-form   "> 
+
+{BEGIN searchform_block}
+<span {$search_hiddenattr} data-pageid="{$pageid}" data-brick="search" class="form-group">
+
+ <div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+		<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="{mlang_message SHOW_ALL}">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>
+{END searchform_block}
+
+
+
+</div>
+{END container_more_1}
+
+
+
+
+												</div>						{END container_menu_1}
+
+
+									</nav>{END container_menu}
+
+
+
+
+
+
+{BEGIN container_breadcrumbs}
+<div {$breadcrumbs_chiddenattr} data-pageid="{$pageid}" data-container="breadcrumbs" class="    "> 
+
+
+
+
+{BEGIN container_bc}
+<div {$bc_chiddenattr} data-pageid="{$pageid}" data-container="bc" class="    "> 
+
+{BEGIN breadcrumbs}
+<ol class="breadcrumb">
+<li ><a href="{$home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumbs}
+
+
+
+</div>
+{END container_bc}
+
+
+
+
+
+
+</div>
+{END container_breadcrumbs}
+
+
+
+
+
+
+
+
+
+{BEGIN container_messagerow}
+<div {$messagerow_chiddenattr} data-pageid="{$pageid}" data-container="messagerow" class="row rnr-rowcontainer ">
+
+
+
+
+{BEGIN container_message}
+<div {$message_chiddenattr} data-pageid="{$pageid}" data-container="message" class="   col-md-12 "> 
+
+{BEGIN message_block}
+<div {$message_hiddenattr} data-pageid="{$pageid}" data-brick="message" class="alert {$message_class}" role="alert">{$message}</div>
+{END message_block}
+
+
+
+</div>
+{END container_message}
+
+
+
+
+
+
+</div>{END container_messagerow}
+
+
+
+
+
+
+
+
+{BEGIN container_gridcontrols}
+<div {$gridcontrols_chiddenattr} data-pageid="{$pageid}" data-container="gridcontrols" class="row rnr-rowcontainer bs-navcontrolled bs-hidden-xs">
+
+
+
+
+{BEGIN container_add_delete}
+<div {$add_delete_chiddenattr} data-pageid="{$pageid}" data-container="add_delete" class=" bottom-margin  col-md-6 "> 
+
+{BEGIN newrecord_controls_block}
+	
+	
+{END newrecord_controls_block}
+
+
+{BEGIN record_controls_block}
+<span {$recordcontrol_hiddenattr} data-pageid="{$pageid}" data-brick="recordcontrol">
+			</span>
+
+{END record_controls_block}
+
+
+
+</div>
+{END container_add_delete}
+
+
+
+
+
+
+
+
+{BEGIN container_gridinfo}
+<div {$gridinfo_chiddenattr} data-pageid="{$pageid}" data-container="gridinfo" class=" bottom-margin text-right col-md-6 "> 
+
+{BEGIN details_found}
+<span {$details_found_hiddenattr} data-pageid="{$pageid}" data-brick="details_found" class="form-inline form-inline-always">
+	{$records_indicator}
+	<span>
+	{BEGIN recordspp_block}
+			{$recsPerPage}
+	{END recordspp_block}
+	</span>
+</span>
+{END details_found}
+
+
+{BEGIN print_friendly}
+<span {$printpanel_hiddenattr} data-pageid="{$pageid}" data-brick="printpanel" class="bs-printpanel" id="printpanelblock{$id}">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="{mlang_message WR_PRINT_FRIENDLY}">
+		<span class="glyphicon glyphicon-print" ></span>
+		<span class="caret"></span>
+    </button>
+	<ul class="dropdown-menu pull-right" >
+		<li>
+			<div class="container-fluid" id="print_friendly_scope{$id}">
+				<div class="row">
+					<div class="col-md-4">{mlang_message PPANEL_SCOPE}</div>
+										{BEGIN print_friendly_all}
+					<div class="col-md-8">
+						<label for="printAll{$id}">
+							<input type="radio" id="printAll{$id}" data-href="retornados_print.php?all=1&amp;{$crosstable_attrs}" name="printScope">
+							{mlang_message PPANEL_ALL_PAGES}
+						</label>
+					</div>
+					{END print_friendly_all}
+				</div>
+				<div class="row">
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-8">
+						<label for="printPage{$id}">
+							<input type="radio" id="printPage{$id}" data-href="retornados_print.php?{$crosstable_attrs}" name="printScope" checked>
+							{mlang_message PPANEL_THIS_PAGE}
+						</label>
+					</div>
+				</div>
+							</div>
+		</li>
+		<li class="divider" role="separator"></li>
+
+		
+				<li>	
+			<div class="rnr-printdetails">
+				<label for="printPerPage{$id}">
+											{mlang_message RECORDS_PP}:
+				</label>
+				<input type="number" id="printPerPage{$id}" value="{$print_recspp}" class="rnr-printrecspp">		
+			</div>
+		</li>
+		<li class="divider" role="separator"></li>
+		<li class="rnr-printbutton">				
+			<button type="button" class="btn btn-primary" id="print_friendly_button{$id}" >{mlang_message PPANEL_PRINT}</button>			
+		</li>
+	</ul>	
+</span>
+
+{END print_friendly}
+
+
+
+
+</div>
+{END container_gridinfo}
+
+
+
+
+
+
+
+
+{BEGIN container_gridinfo_sort}
+<div {$gridinfo_sort_chiddenattr} data-pageid="{$pageid}" data-container="gridinfo_sort" class=" bottom-margin text-right col-md-12 "> 
+
+{BEGIN reorder_records}
+<div {$reorder_records_hiddenattr} data-pageid="{$pageid}" data-brick="reorder_records" class="form-inline sortby-ctrl">
+{mlang_message SORT_BY}&nbsp;{$sortByDropdown}
+</div>
+
+{END reorder_records}
+
+
+
+</div>
+{END container_gridinfo_sort}
+
+
+
+
+
+
+</div>{END container_gridcontrols}
+
+
+
+
+
+
+</div>
+{END container_top}
+
+
+		</div>
+		<div class="bs-middle bs-centered">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+
+{BEGIN container_filt}
+<div {$filt_chiddenattr} data-pageid="{$pageid}" data-container="filt" class="    "> 
+
+{BEGIN searchPanel}
+<div {$searchpanel_hiddenattr} data-pageid="{$pageid}" data-brick="searchpanel" class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} >
+	<!-- Search panel content -->
+	
+	<div class="panel-heading">
+		<div class="btn-group" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{mlang_message SEARCH_IN}
+			<span class="caret"></span>
+			</button>
+		</div>
+
+		
+		<div class="btn-group searchpanel-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>{mlang_message SEARCH_SHOW_OPTIONS_BUTTON}</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ALL_CONDITIONS}</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ANY_CONDITIONS}</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>{mlang_message HIDE}</a></li>
+			</ul>
+		</div>
+	
+		
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+
+
+	</div>
+	
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+		<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</button>
+	</div>
+</div>
+
+
+{END searchPanel}
+
+
+
+
+</div>
+{END container_filt}
+
+
+			</div>
+			<div class="bs-center">
+				
+
+{BEGIN container_grid}
+<div {$grid_chiddenattr} data-pageid="{$pageid}" data-container="grid" class="    "> 
+
+{BEGIN grid_block}
+	<style>
+	.bs-gridcell[data-field=a_o]:before {
+		content: "{$label retornados a_o}";
+	}
+	.bs-gridcell[data-field=mes]:before {
+		content: "{$label retornados mes}";
+	}
+	.bs-gridcell[data-field=fechaentrevista]:before {
+		content: "{$label retornados fechaentrevista}";
+	}
+	.bs-gridcell[data-field=tipoentrevista]:before {
+		content: "{$label retornados tipoentrevista}";
+	}
+	.bs-gridcell[data-field=ficha]:before {
+		content: "{$label retornados ficha}";
+	}
+	.bs-gridcell[data-field=numalien]:before {
+		content: "{$label retornados numalien}";
+	}
+	.bs-gridcell[data-field=fechanacimiento]:before {
+		content: "{$label retornados fechanacimiento}";
+	}
+	.bs-gridcell[data-field=documentoficha]:before {
+		content: "{$label retornados documentoficha}";
+	}
+	.bs-gridcell[data-field=numerodocumento]:before {
+		content: "{$label retornados numerodocumento}";
+	}
+	.bs-gridcell[data-field=nombredocumento]:before {
+		content: "{$label retornados nombredocumento}";
+	}
+	.bs-gridcell[data-field=consulado]:before {
+		content: "{$label retornados consulado}";
+	}
+	.bs-gridcell[data-field=consulado_analisis]:before {
+		content: "{$label retornados consulado_analisis}";
+	}
+	.bs-gridcell[data-field=departamento]:before {
+		content: "{$label retornados departamento}";
+	}
+	.bs-gridcell[data-field=municipio]:before {
+		content: "{$label retornados municipio}";
+	}
+	.bs-gridcell[data-field=sexo]:before {
+		content: "{$label retornados sexo}";
+	}
+	.bs-gridcell[data-field=edad]:before {
+		content: "{$label retornados edad}";
+	}
+	.bs-gridcell[data-field=rango_etario]:before {
+		content: "{$label retornados rango_etario}";
+	}
+	.bs-gridcell[data-field=tipoedad]:before {
+		content: "{$label retornados tipoedad}";
+	}
+	.bs-gridcell[data-field=paisrepatriacion]:before {
+		content: "{$label retornados paisrepatriacion}";
+	}
+	.bs-gridcell[data-field=regionrepatriacion]:before {
+		content: "{$label retornados regionrepatriacion}";
+	}
+	.bs-gridcell[data-field=antecedentes_penales]:before {
+		content: "{$label retornados antecedentes_penales}";
+	}
+	.bs-gridcell[data-field=tipo_antecedentes]:before {
+		content: "{$label retornados tipo_antecedentes}";
+	}
+	.bs-gridcell[data-field=antecedentes]:before {
+		content: "{$label retornados antecedentes}";
+	}
+	.bs-gridcell[data-field=sectorppd]:before {
+		content: "{$label retornados sectorppd}";
+	}
+	.bs-gridcell[data-field=num_mes]:before {
+		content: "{$label retornados num_mes}";
+	}
+	.bs-gridcell[data-field=antecedente_analisis]:before {
+		content: "{$label retornados antecedente_analisis}";
+	}
+</style>
+<table {$grid_hiddenattr} data-pageid="{$pageid}" data-brick="grid" class="table {$grid_classes} bs-flexgrid rnr-b-grid rnr-gridtable" cellpadding="0" >
+	<thead>
+										{BEGIN grid_header}
+								<tr class="rnr-toprow {$gridHeader_class}" >
+									{BEGIN record_header}
+									{BEGIN listIcons_column}
+									<th iEditCont="all">&nbsp;</th>
+									{END listIcons_column}	
+
+									
+																		
+									{BEGIN a_o_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$a_o_class}" data-field=a_o>
+									{BEGIN a_o_fieldheader}
+																				<span {$a_o_orderlinkattrs}>
+											{$label retornados a_o}
+										</span>
+									{END a_o_fieldheader}
+									</th>
+									{END a_o_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN mes_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$mes_class}" data-field=mes>
+									{BEGIN mes_fieldheader}
+																				<span {$mes_orderlinkattrs}>
+											{$label retornados mes}
+										</span>
+									{END mes_fieldheader}
+									</th>
+									{END mes_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN fechaentrevista_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$fechaentrevista_class}" data-field=fechaentrevista>
+									{BEGIN fechaentrevista_fieldheader}
+																				<span {$fechaentrevista_orderlinkattrs}>
+											{$label retornados fechaentrevista}
+										</span>
+									{END fechaentrevista_fieldheader}
+									</th>
+									{END fechaentrevista_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN tipoentrevista_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$tipoentrevista_class}" data-field=tipoentrevista>
+									{BEGIN tipoentrevista_fieldheader}
+																				<span {$tipoentrevista_orderlinkattrs}>
+											{$label retornados tipoentrevista}
+										</span>
+									{END tipoentrevista_fieldheader}
+									</th>
+									{END tipoentrevista_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN ficha_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$ficha_class}" data-field=ficha>
+									{BEGIN ficha_fieldheader}
+																				<span {$ficha_orderlinkattrs}>
+											{$label retornados ficha}
+										</span>
+									{END ficha_fieldheader}
+									</th>
+									{END ficha_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN numalien_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$numalien_class}" data-field=numalien>
+									{BEGIN numalien_fieldheader}
+																				<span {$numalien_orderlinkattrs}>
+											{$label retornados numalien}
+										</span>
+									{END numalien_fieldheader}
+									</th>
+									{END numalien_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN fechanacimiento_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$fechanacimiento_class}" data-field=fechanacimiento>
+									{BEGIN fechanacimiento_fieldheader}
+																				<span {$fechanacimiento_orderlinkattrs}>
+											{$label retornados fechanacimiento}
+										</span>
+									{END fechanacimiento_fieldheader}
+									</th>
+									{END fechanacimiento_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN documentoficha_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$documentoficha_class}" data-field=documentoficha>
+									{BEGIN documentoficha_fieldheader}
+																				<span {$documentoficha_orderlinkattrs}>
+											{$label retornados documentoficha}
+										</span>
+									{END documentoficha_fieldheader}
+									</th>
+									{END documentoficha_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN numerodocumento_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$numerodocumento_class}" data-field=numerodocumento>
+									{BEGIN numerodocumento_fieldheader}
+																				<span {$numerodocumento_orderlinkattrs}>
+											{$label retornados numerodocumento}
+										</span>
+									{END numerodocumento_fieldheader}
+									</th>
+									{END numerodocumento_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN nombredocumento_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$nombredocumento_class}" data-field=nombredocumento>
+									{BEGIN nombredocumento_fieldheader}
+																				<span {$nombredocumento_orderlinkattrs}>
+											{$label retornados nombredocumento}
+										</span>
+									{END nombredocumento_fieldheader}
+									</th>
+									{END nombredocumento_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN consulado_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$consulado_class}" data-field=consulado>
+									{BEGIN consulado_fieldheader}
+																				<span {$consulado_orderlinkattrs}>
+											{$label retornados consulado}
+										</span>
+									{END consulado_fieldheader}
+									</th>
+									{END consulado_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN consulado_analisis_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$consulado_analisis_class}" data-field=consulado_analisis>
+									{BEGIN consulado_analisis_fieldheader}
+																				<span {$consulado_analisis_orderlinkattrs}>
+											{$label retornados consulado_analisis}
+										</span>
+									{END consulado_analisis_fieldheader}
+									</th>
+									{END consulado_analisis_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN departamento_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$departamento_class}" data-field=departamento>
+									{BEGIN departamento_fieldheader}
+																				<span {$departamento_orderlinkattrs}>
+											{$label retornados departamento}
+										</span>
+									{END departamento_fieldheader}
+									</th>
+									{END departamento_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN municipio_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$municipio_class}" data-field=municipio>
+									{BEGIN municipio_fieldheader}
+																				<span {$municipio_orderlinkattrs}>
+											{$label retornados municipio}
+										</span>
+									{END municipio_fieldheader}
+									</th>
+									{END municipio_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN sexo_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$sexo_class}" data-field=sexo>
+									{BEGIN sexo_fieldheader}
+																				<span {$sexo_orderlinkattrs}>
+											{$label retornados sexo}
+										</span>
+									{END sexo_fieldheader}
+									</th>
+									{END sexo_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN edad_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$edad_class}" data-field=edad>
+									{BEGIN edad_fieldheader}
+																				<span {$edad_orderlinkattrs}>
+											{$label retornados edad}
+										</span>
+									{END edad_fieldheader}
+									</th>
+									{END edad_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN rango_etario_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$rango_etario_class}" data-field=rango_etario>
+									{BEGIN rango_etario_fieldheader}
+																				<span {$rango_etario_orderlinkattrs}>
+											{$label retornados rango_etario}
+										</span>
+									{END rango_etario_fieldheader}
+									</th>
+									{END rango_etario_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN tipoedad_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$tipoedad_class}" data-field=tipoedad>
+									{BEGIN tipoedad_fieldheader}
+																				<span {$tipoedad_orderlinkattrs}>
+											{$label retornados tipoedad}
+										</span>
+									{END tipoedad_fieldheader}
+									</th>
+									{END tipoedad_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN paisrepatriacion_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$paisrepatriacion_class}" data-field=paisrepatriacion>
+									{BEGIN paisrepatriacion_fieldheader}
+																				<span {$paisrepatriacion_orderlinkattrs}>
+											{$label retornados paisrepatriacion}
+										</span>
+									{END paisrepatriacion_fieldheader}
+									</th>
+									{END paisrepatriacion_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN regionrepatriacion_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$regionrepatriacion_class}" data-field=regionrepatriacion>
+									{BEGIN regionrepatriacion_fieldheader}
+																				<span {$regionrepatriacion_orderlinkattrs}>
+											{$label retornados regionrepatriacion}
+										</span>
+									{END regionrepatriacion_fieldheader}
+									</th>
+									{END regionrepatriacion_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN antecedentes_penales_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$antecedentes_penales_class}" data-field=antecedentes_penales>
+									{BEGIN antecedentes_penales_fieldheader}
+																				<span {$antecedentes_penales_orderlinkattrs}>
+											{$label retornados antecedentes_penales}
+										</span>
+									{END antecedentes_penales_fieldheader}
+									</th>
+									{END antecedentes_penales_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN tipo_antecedentes_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$tipo_antecedentes_class}" data-field=tipo_antecedentes>
+									{BEGIN tipo_antecedentes_fieldheader}
+																				<span {$tipo_antecedentes_orderlinkattrs}>
+											{$label retornados tipo_antecedentes}
+										</span>
+									{END tipo_antecedentes_fieldheader}
+									</th>
+									{END tipo_antecedentes_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN antecedentes_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$antecedentes_class}" data-field=antecedentes>
+									{BEGIN antecedentes_fieldheader}
+																				<span {$antecedentes_orderlinkattrs}>
+											{$label retornados antecedentes}
+										</span>
+									{END antecedentes_fieldheader}
+									</th>
+									{END antecedentes_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN sectorppd_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$sectorppd_class}" data-field=sectorppd>
+									{BEGIN sectorppd_fieldheader}
+																				<span {$sectorppd_orderlinkattrs}>
+											{$label retornados sectorppd}
+										</span>
+									{END sectorppd_fieldheader}
+									</th>
+									{END sectorppd_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN num_mes_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$num_mes_class}" data-field=num_mes>
+									{BEGIN num_mes_fieldheader}
+																				<span {$num_mes_orderlinkattrs}>
+											{$label retornados num_mes}
+										</span>
+									{END num_mes_fieldheader}
+									</th>
+									{END num_mes_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN antecedente_analisis_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$antecedente_analisis_class}" data-field=antecedente_analisis>
+									{BEGIN antecedente_analisis_fieldheader}
+																				<span {$antecedente_analisis_orderlinkattrs}>
+											{$label retornados antecedente_analisis}
+										</span>
+									{END antecedente_analisis_fieldheader}
+									</th>
+									{END antecedente_analisis_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN endrecordheader_block}
+									<th class="rnr-cs">&nbsp;</th>
+									
+									{END endrecordheader_block}
+									
+									{END record_header}
+									
+								</tr>
+								{END grid_header}
+
+	</thead>
+	<tbody>	
+		{BEGIN grid_row}
+<tr class="{$rowclass} bs-gridrow" {$rowattrs} {$rowstyle}>
+	{BEGIN grid_record}
+	{BEGIN listIcons_column}
+	<td class="bs-gridicons" iEditCont="all" {$rowstyle} {$recordattrs}>
+	
+	
+	
+		</td>	
+	{END listIcons_column}	
+
+	
+	
+
+	{BEGIN a_o_fieldcolumn}
+	<td class="bs-gridcell {$a_o_class}"  data-field=a_o {$rowstyle} {$recordattrs}>
+		{$a_o_value}
+	</td>
+{END a_o_fieldcolumn}
+
+
+	{BEGIN mes_fieldcolumn}
+	<td class="bs-gridcell {$mes_class}"  data-field=mes {$rowstyle} {$recordattrs}>
+		{$mes_value}
+	</td>
+{END mes_fieldcolumn}
+
+
+	{BEGIN fechaentrevista_fieldcolumn}
+	<td class="bs-gridcell {$fechaentrevista_class}"  data-field=fechaentrevista {$rowstyle} {$recordattrs}>
+		{$fechaentrevista_value}
+	</td>
+{END fechaentrevista_fieldcolumn}
+
+
+	{BEGIN tipoentrevista_fieldcolumn}
+	<td class="bs-gridcell {$tipoentrevista_class}"  data-field=tipoentrevista {$rowstyle} {$recordattrs}>
+		{$tipoentrevista_value}
+	</td>
+{END tipoentrevista_fieldcolumn}
+
+
+	{BEGIN ficha_fieldcolumn}
+	<td class="bs-gridcell {$ficha_class}"  data-field=ficha {$rowstyle} {$recordattrs}>
+		{$ficha_value}
+	</td>
+{END ficha_fieldcolumn}
+
+
+	{BEGIN numalien_fieldcolumn}
+	<td class="bs-gridcell {$numalien_class}"  data-field=numalien {$rowstyle} {$recordattrs}>
+		{$numalien_value}
+	</td>
+{END numalien_fieldcolumn}
+
+
+	{BEGIN fechanacimiento_fieldcolumn}
+	<td class="bs-gridcell {$fechanacimiento_class}"  data-field=fechanacimiento {$rowstyle} {$recordattrs}>
+		{$fechanacimiento_value}
+	</td>
+{END fechanacimiento_fieldcolumn}
+
+
+	{BEGIN documentoficha_fieldcolumn}
+	<td class="bs-gridcell {$documentoficha_class}"  data-field=documentoficha {$rowstyle} {$recordattrs}>
+		{$documentoficha_value}
+	</td>
+{END documentoficha_fieldcolumn}
+
+
+	{BEGIN numerodocumento_fieldcolumn}
+	<td class="bs-gridcell {$numerodocumento_class}"  data-field=numerodocumento {$rowstyle} {$recordattrs}>
+		{$numerodocumento_value}
+	</td>
+{END numerodocumento_fieldcolumn}
+
+
+	{BEGIN nombredocumento_fieldcolumn}
+	<td class="bs-gridcell {$nombredocumento_class}"  data-field=nombredocumento {$rowstyle} {$recordattrs}>
+		{$nombredocumento_value}
+	</td>
+{END nombredocumento_fieldcolumn}
+
+
+	{BEGIN consulado_fieldcolumn}
+	<td class="bs-gridcell {$consulado_class}"  data-field=consulado {$rowstyle} {$recordattrs}>
+		{$consulado_value}
+	</td>
+{END consulado_fieldcolumn}
+
+
+	{BEGIN consulado_analisis_fieldcolumn}
+	<td class="bs-gridcell {$consulado_analisis_class}"  data-field=consulado_analisis {$rowstyle} {$recordattrs}>
+		{$consulado_analisis_value}
+	</td>
+{END consulado_analisis_fieldcolumn}
+
+
+	{BEGIN departamento_fieldcolumn}
+	<td class="bs-gridcell {$departamento_class}"  data-field=departamento {$rowstyle} {$recordattrs}>
+		{$departamento_value}
+	</td>
+{END departamento_fieldcolumn}
+
+
+	{BEGIN municipio_fieldcolumn}
+	<td class="bs-gridcell {$municipio_class}"  data-field=municipio {$rowstyle} {$recordattrs}>
+		{$municipio_value}
+	</td>
+{END municipio_fieldcolumn}
+
+
+	{BEGIN sexo_fieldcolumn}
+	<td class="bs-gridcell {$sexo_class}"  data-field=sexo {$rowstyle} {$recordattrs}>
+		{$sexo_value}
+	</td>
+{END sexo_fieldcolumn}
+
+
+	{BEGIN edad_fieldcolumn}
+	<td class="bs-gridcell {$edad_class}"  data-field=edad {$rowstyle} {$recordattrs}>
+		{$edad_value}
+	</td>
+{END edad_fieldcolumn}
+
+
+	{BEGIN rango_etario_fieldcolumn}
+	<td class="bs-gridcell {$rango_etario_class}"  data-field=rango_etario {$rowstyle} {$recordattrs}>
+		{$rango_etario_value}
+	</td>
+{END rango_etario_fieldcolumn}
+
+
+	{BEGIN tipoedad_fieldcolumn}
+	<td class="bs-gridcell {$tipoedad_class}"  data-field=tipoedad {$rowstyle} {$recordattrs}>
+		{$tipoedad_value}
+	</td>
+{END tipoedad_fieldcolumn}
+
+
+	{BEGIN paisrepatriacion_fieldcolumn}
+	<td class="bs-gridcell {$paisrepatriacion_class}"  data-field=paisrepatriacion {$rowstyle} {$recordattrs}>
+		{$paisrepatriacion_value}
+	</td>
+{END paisrepatriacion_fieldcolumn}
+
+
+	{BEGIN regionrepatriacion_fieldcolumn}
+	<td class="bs-gridcell {$regionrepatriacion_class}"  data-field=regionrepatriacion {$rowstyle} {$recordattrs}>
+		{$regionrepatriacion_value}
+	</td>
+{END regionrepatriacion_fieldcolumn}
+
+
+	{BEGIN antecedentes_penales_fieldcolumn}
+	<td class="bs-gridcell {$antecedentes_penales_class}"  data-field=antecedentes_penales {$rowstyle} {$recordattrs}>
+		{$antecedentes_penales_value}
+	</td>
+{END antecedentes_penales_fieldcolumn}
+
+
+	{BEGIN tipo_antecedentes_fieldcolumn}
+	<td class="bs-gridcell {$tipo_antecedentes_class}"  data-field=tipo_antecedentes {$rowstyle} {$recordattrs}>
+		{$tipo_antecedentes_value}
+	</td>
+{END tipo_antecedentes_fieldcolumn}
+
+
+	{BEGIN antecedentes_fieldcolumn}
+	<td class="bs-gridcell {$antecedentes_class}"  data-field=antecedentes {$rowstyle} {$recordattrs}>
+		{$antecedentes_value}
+	</td>
+{END antecedentes_fieldcolumn}
+
+
+	{BEGIN sectorppd_fieldcolumn}
+	<td class="bs-gridcell {$sectorppd_class}"  data-field=sectorppd {$rowstyle} {$recordattrs}>
+		{$sectorppd_value}
+	</td>
+{END sectorppd_fieldcolumn}
+
+
+	{BEGIN num_mes_fieldcolumn}
+	<td class="bs-gridcell {$num_mes_class}"  data-field=num_mes {$rowstyle} {$recordattrs}>
+		{$num_mes_value}
+	</td>
+{END num_mes_fieldcolumn}
+
+
+	{BEGIN antecedente_analisis_fieldcolumn}
+	<td class="bs-gridcell {$antecedente_analisis_class}"  data-field=antecedente_analisis {$rowstyle} {$recordattrs}>
+		{$antecedente_analisis_value}
+	</td>
+{END antecedente_analisis_fieldcolumn}
+
+	{BEGIN endrecord_block}
+	<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+	{END endrecord_block}
+									
+	{END grid_record}
+
+</tr>
+{END grid_row}
+	</tbody>
+	<tfoot>
+										
+	</tfoot>
+</table>
+
+
+
+{END grid_block}
+
+
+
+</div>
+{END container_grid}
+
+
+
+{BEGIN container_pagination}
+<div {$pagination_chiddenattr} data-pageid="{$pageid}" data-container="pagination" class="  text-center col-md-12 "> 
+
+{BEGIN pagination_block}
+<div {$pagination_hiddenattr} data-pageid="{$pageid}" data-brick="pagination">
+{$pagination}
+</div>
+{END pagination_block}
+
+
+
+</div>
+{END container_pagination}
+
+
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+	</head>
+	
+	<body class="{$stylename} function-print" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+	<div class="rnr-page">
+		<div class="rnr-top {$blockclass_top}">
+			
+
+{BEGIN container_pdf}
+<div class="rnr-c rnr-ch rnr-c-pdf">
+
+{BEGIN printbuttons}
+<div  class="style1 rnr-bl rnr-b-printbuttons {$brickclass_printbuttons}">{BEGIN divideintopages_block}
+<a href="#" class="divideintopages rnr-button button" {$divideintopages_attrs}>{mlang_message PRINT_DIVIDE_INTO_PAGES}</a>
+{END divideintopages_block}
+</div>
+{END printbuttons}
+
+<div class="rnr-hfiller"></div>
+</div>
+{END container_pdf}
+
+
+
+{BEGIN container_master}
+<div class="rnr-c rnr-ch rnr-c-master">
+
+{BEGIN mastertable_block}
+<div  class="style1 rnr-bl rnr-b-masterinfoprint {$brickclass_masterinfoprint}">{$showmasterfile}
+</div>
+{END mastertable_block}
+
+<div class="rnr-hfiller"></div>
+</div>
+{END container_master}
+
+
+		</div>
+		<div class="rnr-middle">
+			<div class="rnr-left {$blockclass_left}">
+				
+			</div>
+			<div class="rnr-center {$blockclass_center}">
+				
+
+{BEGIN container_pageheader}
+<div class="rnr-c rnr-cv rnr-c-pageheader">
+
+{BEGIN printheader}
+<div  class="rnr-brickcontents style1 rnr-b-printheader {$brickclass_printheader}">	<h1>{$pagetitlelabel Mined_Prueba print}</h1>
+</div>{END printheader}
+
+
+{BEGIN page_number}
+<div  class="rnr-brickcontents style1 rnr-b-page_of_print {$brickclass_page_of_print}"><h1>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></h1></div>{END page_number}
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+	<table class="rnr-c rnr-c-grid rnr-b-grid rnr-gridtable rp-maintable" cellpadding="0">
+	<thead>
+	{BEGIN grid_header}
+<tr class="rnr-toprow style1 {$gridHeader_class}" >
+{BEGIN record_header}
+		{BEGIN x_fieldheadercolumn}
+<th class="runner-cc {$x_class}" {$x_style}>
+	{BEGIN x_fieldheader}
+	<b>{$label Mined_Prueba x}</b>
+	{END x_fieldheader}
+</th>
+{END x_fieldheadercolumn}
+	{BEGIN y_fieldheadercolumn}
+<th class="runner-cc {$y_class}" {$y_style}>
+	{BEGIN y_fieldheader}
+	<b>{$label Mined_Prueba y}</b>
+	{END y_fieldheader}
+</th>
+{END y_fieldheadercolumn}
+	{BEGIN departamento_fieldheadercolumn}
+<th class="runner-cc {$departamento_class}" {$departamento_style}>
+	{BEGIN departamento_fieldheader}
+	<b>{$label Mined_Prueba departamento}</b>
+	{END departamento_fieldheader}
+</th>
+{END departamento_fieldheadercolumn}
+	{BEGIN municipio_fieldheadercolumn}
+<th class="runner-cc {$municipio_class}" {$municipio_style}>
+	{BEGIN municipio_fieldheader}
+	<b>{$label Mined_Prueba municipio}</b>
+	{END municipio_fieldheader}
+</th>
+{END municipio_fieldheadercolumn}
+	{BEGIN sector_ppd_fieldheadercolumn}
+<th class="runner-cc {$sector_ppd_class}" {$sector_ppd_style}>
+	{BEGIN sector_ppd_fieldheader}
+	<b>{$label Mined_Prueba sector_ppd}</b>
+	{END sector_ppd_fieldheader}
+</th>
+{END sector_ppd_fieldheadercolumn}
+	{BEGIN nombre_c_e_fieldheadercolumn}
+<th class="runner-cc {$nombre_c_e_class}" {$nombre_c_e_style}>
+	{BEGIN nombre_c_e_fieldheader}
+	<b>{$label Mined_Prueba nombre_c_e}</b>
+	{END nombre_c_e_fieldheader}
+</th>
+{END nombre_c_e_fieldheadercolumn}
+	{BEGIN ipce_0_1_fieldheadercolumn}
+<th class="runner-cc {$ipce_0_1_class}" {$ipce_0_1_style}>
+	{BEGIN ipce_0_1_fieldheader}
+	<b>{$label Mined_Prueba ipce_0_1}</b>
+	{END ipce_0_1_fieldheader}
+</th>
+{END ipce_0_1_fieldheadercolumn}
+	{BEGIN DisplayOnMap_fieldheadercolumn}
+<th class="runner-cc {$DisplayOnMap_class}" {$DisplayOnMap_style}>
+	{BEGIN DisplayOnMap_fieldheader}
+	<b>{$label Mined_Prueba DisplayOnMap}</b>
+	{END DisplayOnMap_fieldheader}
+</th>
+{END DisplayOnMap_fieldheadercolumn}
+		
+	<th class="rnr-edge">&nbsp;</th>
+	{BEGIN endrecordheader_block}
+	<th class="rnr-cs">&nbsp;</th>
+	{END endrecordheader_block}
+	{END record_header}
+</tr>
+{END grid_header}
+
+	</thead>
+	<tbody>	
+	{BEGIN grid_row}
+	<tr class="rnr-row style1 {$rowclass}" {$rowattrs} {$rowstyle}>
+		{BEGIN grid_record}
+				{BEGIN x_fieldcolumn}
+<td  class="runner-cc {$x_class}" {$x_style} {$recordattrs}>
+	{$x_value}
+</td>
+{END x_fieldcolumn}
+	{BEGIN y_fieldcolumn}
+<td  class="runner-cc {$y_class}" {$y_style} {$recordattrs}>
+	{$y_value}
+</td>
+{END y_fieldcolumn}
+	{BEGIN departamento_fieldcolumn}
+<td  class="runner-cc {$departamento_class}" {$departamento_style} {$recordattrs}>
+	{$departamento_value}
+</td>
+{END departamento_fieldcolumn}
+	{BEGIN municipio_fieldcolumn}
+<td  class="runner-cc {$municipio_class}" {$municipio_style} {$recordattrs}>
+	{$municipio_value}
+</td>
+{END municipio_fieldcolumn}
+	{BEGIN sector_ppd_fieldcolumn}
+<td  class="runner-cc {$sector_ppd_class}" {$sector_ppd_style} {$recordattrs}>
+	{$sector_ppd_value}
+</td>
+{END sector_ppd_fieldcolumn}
+	{BEGIN nombre_c_e_fieldcolumn}
+<td  class="runner-cc {$nombre_c_e_class}" {$nombre_c_e_style} {$recordattrs}>
+	{$nombre_c_e_value}
+</td>
+{END nombre_c_e_fieldcolumn}
+	{BEGIN ipce_0_1_fieldcolumn}
+<td  class="runner-cc {$ipce_0_1_class}" {$ipce_0_1_style} {$recordattrs}>
+	{$ipce_0_1_value}
+</td>
+{END ipce_0_1_fieldcolumn}
+	{BEGIN DisplayOnMap_fieldcolumn}
+<td  class="runner-cc {$DisplayOnMap_class}" {$DisplayOnMap_style} {$recordattrs}>
+	{$DisplayOnMap_value}
+</td>
+{END DisplayOnMap_fieldcolumn}
+
+		<td class="rnr-edge" {$recordattrs}>&nbsp;</td>
+		{BEGIN endrecord_block}
+		<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+		{END endrecord_block}
+										
+		{END grid_record}
+
+	</tr>
+	{END grid_row}
+
+
+	
+	</tbody>
+</table>
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+			</div>
+			<div class="rnr-right {$blockclass_right}">
+				
+			</div>
+		</div>
+		<div class="rnr-bottom {$blockclass_bottom}">
+			
+		</div>
+	</div>
+		
+		{$footer}
+	{END body}
+	</body>
+</html>

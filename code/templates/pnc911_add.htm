@@ -1,0 +1,360 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-add" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_editpage}
+<div {$editpage_chiddenattr} data-pageid="{$pageid}" data-container="editpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-9 col-md-offset-3"> 
+
+{BEGIN addheader}
+	<h2 {$addheader_hiddenattr} data-pageid="{$pageid}" data-brick="addheader" >{$pagetitlelabel pnc911 add}</h2>
+
+{END addheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+
+
+{BEGIN container_message}
+<div {$message_chiddenattr} data-pageid="{$pageid}" data-container="message" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN message_block}
+<div {$message_hiddenattr} data-pageid="{$pageid}" data-brick="message" class="alert {$message_class}" role="alert">
+<h5>{$message}</h5>
+<div>
+{BEGIN back_button}
+		<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{BEGIN view_page_button}
+	<button class="btn btn-sm btn-default" {$view_page_button_attrs}>{mlang_message VIEW}</button>
+{END view_page_button}
+{BEGIN edit_page_button}
+	<button class="btn btn-sm btn-default" {$edit_page_button_attrs}>{mlang_message EDIT}</button>
+{END edit_page_button}
+</div>
+</div>
+
+{END message_block}
+
+
+
+</div>
+{END container_message}
+
+
+
+
+
+
+
+</div>
+{END container_editpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$addfields_hiddenattr} data-pageid="{$pageid}" data-brick="addfields" class="form-horizontal" role="form">
+			{BEGIN tipificacion_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_tipificacion}" data-fieldname="tipificacion" data-signal-error-for="tipificacion{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_tipificacion}">
+		{BEGIN tipificacion_label}{$label pnc911 tipificacion}{END tipificacion_label}
+	</label>
+	<div class="col-md-6" >
+		{$tipificacion_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="tipificacion">
+		<div class="text-muted" >
+		{$tooltip pnc911 tipificacion}
+		</div>
+	</div>
+</div>
+</div>
+{END tipificacion_fieldblock}
+
+			{BEGIN avisos911_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_avisos911}" data-fieldname="avisos911" data-signal-error-for="avisos911{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_avisos911}">
+		{BEGIN avisos911_label}{$label pnc911 avisos911}{END avisos911_label}
+	</label>
+	<div class="col-md-6" >
+		{$avisos911_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="avisos911">
+		<div class="text-muted" >
+		{$tooltip pnc911 avisos911}
+		</div>
+	</div>
+</div>
+</div>
+{END avisos911_fieldblock}
+
+			{BEGIN direccion_validacion_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_direccion_validacion}" data-fieldname="direccion_validacion" data-signal-error-for="direccion_validacion{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_direccion_validacion}">
+		{BEGIN direccion_validacion_label}{$label pnc911 direccion_validacion}{END direccion_validacion_label}
+	</label>
+	<div class="col-md-6" >
+		{$direccion_validacion_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="direccion_validacion">
+		<div class="text-muted" >
+		{$tooltip pnc911 direccion_validacion}
+		</div>
+	</div>
+</div>
+</div>
+{END direccion_validacion_fieldblock}
+
+			{BEGIN direccion_libre_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_direccion_libre}" data-fieldname="direccion_libre" data-signal-error-for="direccion_libre{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_direccion_libre}">
+		{BEGIN direccion_libre_label}{$label pnc911 direccion_libre}{END direccion_libre_label}
+	</label>
+	<div class="col-md-6" >
+		{$direccion_libre_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="direccion_libre">
+		<div class="text-muted" >
+		{$tooltip pnc911 direccion_libre}
+		</div>
+	</div>
+</div>
+</div>
+{END direccion_libre_fieldblock}
+
+			{BEGIN coordenadas_x_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_coordenadas_x}" data-fieldname="coordenadas_x" data-signal-error-for="coordenadas_x{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_coordenadas_x}">
+		{BEGIN coordenadas_x_label}{$label pnc911 coordenadas_x}{END coordenadas_x_label}
+	</label>
+	<div class="col-md-6" >
+		{$coordenadas_x_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="coordenadas_x">
+		<div class="text-muted" >
+		{$tooltip pnc911 coordenadas_x}
+		</div>
+	</div>
+</div>
+</div>
+{END coordenadas_x_fieldblock}
+
+			{BEGIN coordenadas_y_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_coordenadas_y}" data-fieldname="coordenadas_y" data-signal-error-for="coordenadas_y{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_coordenadas_y}">
+		{BEGIN coordenadas_y_label}{$label pnc911 coordenadas_y}{END coordenadas_y_label}
+	</label>
+	<div class="col-md-6" >
+		{$coordenadas_y_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="coordenadas_y">
+		<div class="text-muted" >
+		{$tooltip pnc911 coordenadas_y}
+		</div>
+	</div>
+</div>
+</div>
+{END coordenadas_y_fieldblock}
+
+			{BEGIN departamento_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_departamento}" data-fieldname="departamento" data-signal-error-for="departamento{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_departamento}">
+		{BEGIN departamento_label}{$label pnc911 departamento}{END departamento_label}
+	</label>
+	<div class="col-md-6" >
+		{$departamento_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="departamento">
+		<div class="text-muted" >
+		{$tooltip pnc911 departamento}
+		</div>
+	</div>
+</div>
+</div>
+{END departamento_fieldblock}
+
+			{BEGIN municipio_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_municipio}" data-fieldname="municipio" data-signal-error-for="municipio{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_municipio}">
+		{BEGIN municipio_label}{$label pnc911 municipio}{END municipio_label}
+	</label>
+	<div class="col-md-6" >
+		{$municipio_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="municipio">
+		<div class="text-muted" >
+		{$tooltip pnc911 municipio}
+		</div>
+	</div>
+</div>
+</div>
+{END municipio_fieldblock}
+
+			{BEGIN ppddsc_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_ppddsc}" data-fieldname="ppddsc" data-signal-error-for="ppddsc{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_ppddsc}">
+		{BEGIN ppddsc_label}{$label pnc911 ppddsc}{END ppddsc_label}
+	</label>
+	<div class="col-md-6" >
+		{$ppddsc_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="ppddsc">
+		<div class="text-muted" >
+		{$tooltip pnc911 ppddsc}
+		</div>
+	</div>
+</div>
+</div>
+{END ppddsc_fieldblock}
+
+			{BEGIN meses_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_meses}" data-fieldname="meses" data-signal-error-for="meses{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_meses}">
+		{BEGIN meses_label}{$label pnc911 meses}{END meses_label}
+	</label>
+	<div class="col-md-6" >
+		{$meses_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="meses">
+		<div class="text-muted" >
+		{$tooltip pnc911 meses}
+		</div>
+	</div>
+</div>
+</div>
+{END meses_fieldblock}
+
+
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_buttons}
+<div {$buttons_chiddenattr} data-pageid="{$pageid}" data-container="buttons" class=" form-group   "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-3"> 
+
+{BEGIN addbuttons}
+	{BEGIN save_button}
+	<button class="btn btn-primary" {$savebutton_attrs}>{mlang_message SAVE}</button>
+	{END save_button}
+	{BEGIN reset_button}
+	<button class="btn btn-default" id="resetButton{$id}">{mlang_message RESET}</button>
+	{END reset_button}
+	{BEGIN back_button}
+		<button class="btn btn-default" id="backButton{$id}">{mlang_message BACK_TO_LIST}</button>
+	{END back_button}
+	{BEGIN cancel_button}
+	<a href="#" class="btn btn-default" id="cancelButton{$id}">{mlang_message CANCEL}</a>
+	{END cancel_button}
+
+{END addbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_buttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

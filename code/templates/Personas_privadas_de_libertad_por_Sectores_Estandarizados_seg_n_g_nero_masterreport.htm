@@ -1,0 +1,65 @@
+<div {$pageattrs}>
+
+{BEGIN container_column}
+<div class="rnr-c rnr-ch rnr-c-column">
+
+{BEGIN masterlist_title}
+<div  class="style1 rnr-bl rnr-b-masterlistheader {$brickclass_masterlistheader}"><a {$backtomasterlink_attrs} class="btn btn-link btn-xs">{mlang_message BACK_TO} {$backtomasterlink_caption}</a><span>{$pagetitlelabel Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero masterreport}</span></div>
+{END masterlist_title}
+
+<div class="rnr-hfiller"></div>
+</div>
+{END container_column}
+
+
+
+{BEGIN container_mastergrid}
+
+
+
+	<style>
+	.bs-gridcell[data-field=sector_ppd]:before {
+		content: "{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero sector_ppd}";
+	}
+	.bs-gridcell[data-field=genero]:before {
+		content: "{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero genero}";
+	}
+	.bs-gridcell[data-field=COUNT_genero_]:before {
+		content: "{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero COUNT_genero_}";
+	}
+	.bs-gridcell[data-field=mun_resid]:before {
+		content: "{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero mun_resid}";
+	}
+	.bs-gridcell[data-field=depart_resid]:before {
+		content: "{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero depart_resid}";
+	}
+</style>
+<table {$masterlistgrid_hiddenattr} data-pageid="{$pageid}" data-brick="masterlistgrid" class="table rnr-b-mastergridfields rnr-gridtable bs-flexgrid" >
+		<thead>
+		<tr>
+			<th class="{$sector_ppd_class}">{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero sector_ppd}</th>
+			<th class="{$genero_class}">{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero genero}</th>
+			<th class="{$COUNT_genero__class}">{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero COUNT_genero_}</th>
+			<th class="{$mun_resid_class}">{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero mun_resid}</th>
+			<th class="{$depart_resid_class}">{$label Personas_privadas_de_libertad_por_Sectores_Estandarizados_seg_n_g_nero depart_resid}</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<tr>
+			<td class="{$sector_ppd_class} bs-gridcell" data-field=sector_ppd>{$sector_ppd_mastervalue}</td>
+			<td class="{$genero_class} bs-gridcell" data-field=genero>{$genero_mastervalue}</td>
+			<td class="{$COUNT_genero__class} bs-gridcell" data-field=COUNT_genero_>{$COUNT_genero__mastervalue}</td>
+			<td class="{$mun_resid_class} bs-gridcell" data-field=mun_resid>{$mun_resid_mastervalue}</td>
+			<td class="{$depart_resid_class} bs-gridcell" data-field=depart_resid>{$depart_resid_mastervalue}</td>
+		</tr>
+	</tbody>
+
+</table> 
+
+
+
+
+{END container_mastergrid}
+
+</div>

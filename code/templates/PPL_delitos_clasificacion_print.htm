@@ -1,0 +1,482 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-print" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel PPL_delitos_clasificacion print}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+	<table class="table table-bordered rp-maintable" {$printgrid_hiddenattr} data-pageid="{$pageid}" data-brick="printgrid" >
+	<thead>
+	{BEGIN grid_header}
+		<tr class="{$gridHeader_class}" >
+		{BEGIN record_header}
+			{BEGIN id_fieldheadercolumn}
+			<th class="{$id_class}" {$id_style}  data-field="id">
+				{$label PPL_delitos_clasificacion id}
+			</th>
+			{END id_fieldheadercolumn}
+			{BEGIN sipe_fieldheadercolumn}
+			<th class="{$sipe_class}" {$sipe_style}  data-field="sipe">
+				{$label PPL_delitos_clasificacion sipe}
+			</th>
+			{END sipe_fieldheadercolumn}
+			{BEGIN afis_fieldheadercolumn}
+			<th class="{$afis_class}" {$afis_style}  data-field="afis">
+				{$label PPL_delitos_clasificacion afis}
+			</th>
+			{END afis_fieldheadercolumn}
+			{BEGIN edad_fieldheadercolumn}
+			<th class="{$edad_class}" {$edad_style}  data-field="edad">
+				{$label PPL_delitos_clasificacion edad}
+			</th>
+			{END edad_fieldheadercolumn}
+			{BEGIN rangoetario_fieldheadercolumn}
+			<th class="{$rangoetario_class}" {$rangoetario_style}  data-field="rangoetario">
+				{$label PPL_delitos_clasificacion rangoetario}
+			</th>
+			{END rangoetario_fieldheadercolumn}
+			{BEGIN genero_fieldheadercolumn}
+			<th class="{$genero_class}" {$genero_style}  data-field="genero">
+				{$label PPL_delitos_clasificacion genero}
+			</th>
+			{END genero_fieldheadercolumn}
+			{BEGIN fecha_nac_fieldheadercolumn}
+			<th class="{$fecha_nac_class}" {$fecha_nac_style}  data-field="fecha_nac">
+				{$label PPL_delitos_clasificacion fecha_nac}
+			</th>
+			{END fecha_nac_fieldheadercolumn}
+			{BEGIN edad1_fieldheadercolumn}
+			<th class="{$edad1_class}" {$edad1_style}  data-field="edad1">
+				{$label PPL_delitos_clasificacion edad1}
+			</th>
+			{END edad1_fieldheadercolumn}
+			{BEGIN dui_fieldheadercolumn}
+			<th class="{$dui_class}" {$dui_style}  data-field="dui">
+				{$label PPL_delitos_clasificacion dui}
+			</th>
+			{END dui_fieldheadercolumn}
+			{BEGIN nivel_edu_fieldheadercolumn}
+			<th class="{$nivel_edu_class}" {$nivel_edu_style}  data-field="nivel_edu">
+				{$label PPL_delitos_clasificacion nivel_edu}
+			</th>
+			{END nivel_edu_fieldheadercolumn}
+			{BEGIN educacionanalisis_fieldheadercolumn}
+			<th class="{$educacionanalisis_class}" {$educacionanalisis_style}  data-field="educacionanalisis">
+				{$label PPL_delitos_clasificacion educacionanalisis}
+			</th>
+			{END educacionanalisis_fieldheadercolumn}
+			{BEGIN profesion_oficio_fieldheadercolumn}
+			<th class="{$profesion_oficio_class}" {$profesion_oficio_style}  data-field="profesion_oficio">
+				{$label PPL_delitos_clasificacion profesion_oficio}
+			</th>
+			{END profesion_oficio_fieldheadercolumn}
+			{BEGIN estado_civil_fieldheadercolumn}
+			<th class="{$estado_civil_class}" {$estado_civil_style}  data-field="estado_civil">
+				{$label PPL_delitos_clasificacion estado_civil}
+			</th>
+			{END estado_civil_fieldheadercolumn}
+			{BEGIN ciudadania_fieldheadercolumn}
+			<th class="{$ciudadania_class}" {$ciudadania_style}  data-field="ciudadania">
+				{$label PPL_delitos_clasificacion ciudadania}
+			</th>
+			{END ciudadania_fieldheadercolumn}
+			{BEGIN mun_nacimiento_fieldheadercolumn}
+			<th class="{$mun_nacimiento_class}" {$mun_nacimiento_style}  data-field="mun_nacimiento">
+				{$label PPL_delitos_clasificacion mun_nacimiento}
+			</th>
+			{END mun_nacimiento_fieldheadercolumn}
+			{BEGIN depto_nacim_fieldheadercolumn}
+			<th class="{$depto_nacim_class}" {$depto_nacim_style}  data-field="depto_nacim">
+				{$label PPL_delitos_clasificacion depto_nacim}
+			</th>
+			{END depto_nacim_fieldheadercolumn}
+			{BEGIN direccion_fieldheadercolumn}
+			<th class="{$direccion_class}" {$direccion_style}  data-field="direccion">
+				{$label PPL_delitos_clasificacion direccion}
+			</th>
+			{END direccion_fieldheadercolumn}
+			{BEGIN mun_resid_fieldheadercolumn}
+			<th class="{$mun_resid_class}" {$mun_resid_style}  data-field="mun_resid">
+				{$label PPL_delitos_clasificacion mun_resid}
+			</th>
+			{END mun_resid_fieldheadercolumn}
+			{BEGIN depart_resid_fieldheadercolumn}
+			<th class="{$depart_resid_class}" {$depart_resid_style}  data-field="depart_resid">
+				{$label PPL_delitos_clasificacion depart_resid}
+			</th>
+			{END depart_resid_fieldheadercolumn}
+			{BEGIN delitosanalisis_fieldheadercolumn}
+			<th class="{$delitosanalisis_class}" {$delitosanalisis_style}  data-field="delitosanalisis">
+				{$label PPL_delitos_clasificacion delitosanalisis}
+			</th>
+			{END delitosanalisis_fieldheadercolumn}
+			{BEGIN sj_interno_fieldheadercolumn}
+			<th class="{$sj_interno_class}" {$sj_interno_style}  data-field="sj_interno">
+				{$label PPL_delitos_clasificacion sj_interno}
+			</th>
+			{END sj_interno_fieldheadercolumn}
+			{BEGIN fase_fieldheadercolumn}
+			<th class="{$fase_class}" {$fase_style}  data-field="fase">
+				{$label PPL_delitos_clasificacion fase}
+			</th>
+			{END fase_fieldheadercolumn}
+			{BEGIN org_delictiva_fieldheadercolumn}
+			<th class="{$org_delictiva_class}" {$org_delictiva_style}  data-field="org_delictiva">
+				{$label PPL_delitos_clasificacion org_delictiva}
+			</th>
+			{END org_delictiva_fieldheadercolumn}
+			{BEGIN tipo_mara_fieldheadercolumn}
+			<th class="{$tipo_mara_class}" {$tipo_mara_style}  data-field="tipo_mara">
+				{$label PPL_delitos_clasificacion tipo_mara}
+			</th>
+			{END tipo_mara_fieldheadercolumn}
+			{BEGIN reincidente_fieldheadercolumn}
+			<th class="{$reincidente_class}" {$reincidente_style}  data-field="reincidente">
+				{$label PPL_delitos_clasificacion reincidente}
+			</th>
+			{END reincidente_fieldheadercolumn}
+			{BEGIN deportado_fieldheadercolumn}
+			<th class="{$deportado_class}" {$deportado_style}  data-field="deportado">
+				{$label PPL_delitos_clasificacion deportado}
+			</th>
+			{END deportado_fieldheadercolumn}
+			{BEGIN direccion1_fieldheadercolumn}
+			<th class="{$direccion1_class}" {$direccion1_style}  data-field="direccion1">
+				{$label PPL_delitos_clasificacion direccion1}
+			</th>
+			{END direccion1_fieldheadercolumn}
+			{BEGIN sector_fieldheadercolumn}
+			<th class="{$sector_class}" {$sector_style}  data-field="sector">
+				{$label PPL_delitos_clasificacion sector}
+			</th>
+			{END sector_fieldheadercolumn}
+			{BEGIN celda_fieldheadercolumn}
+			<th class="{$celda_class}" {$celda_style}  data-field="celda">
+				{$label PPL_delitos_clasificacion celda}
+			</th>
+			{END celda_fieldheadercolumn}
+			{BEGIN fecha_ing__sp_fieldheadercolumn}
+			<th class="{$fecha_ing__sp_class}" {$fecha_ing__sp_style}  data-field="fecha_ing__sp">
+				{$label PPL_delitos_clasificacion fecha_ing__sp}
+			</th>
+			{END fecha_ing__sp_fieldheadercolumn}
+			{BEGIN libro_fieldheadercolumn}
+			<th class="{$libro_class}" {$libro_style}  data-field="libro">
+				{$label PPL_delitos_clasificacion libro}
+			</th>
+			{END libro_fieldheadercolumn}
+			{BEGIN fecha_ing__cp_fieldheadercolumn}
+			<th class="{$fecha_ing__cp_class}" {$fecha_ing__cp_style}  data-field="fecha_ing__cp">
+				{$label PPL_delitos_clasificacion fecha_ing__cp}
+			</th>
+			{END fecha_ing__cp_fieldheadercolumn}
+			{BEGIN total_delitos_fieldheadercolumn}
+			<th class="{$total_delitos_class}" {$total_delitos_style}  data-field="total_delitos">
+				{$label PPL_delitos_clasificacion total_delitos}
+			</th>
+			{END total_delitos_fieldheadercolumn}
+			{BEGIN delitos_fieldheadercolumn}
+			<th class="{$delitos_class}" {$delitos_style}  data-field="delitos">
+				{$label PPL_delitos_clasificacion delitos}
+			</th>
+			{END delitos_fieldheadercolumn}
+			{BEGIN delitoanalisis_fieldheadercolumn}
+			<th class="{$delitoanalisis_class}" {$delitoanalisis_style}  data-field="delitoanalisis">
+				{$label PPL_delitos_clasificacion delitoanalisis}
+			</th>
+			{END delitoanalisis_fieldheadercolumn}
+			{BEGIN sector_ppd_fieldheadercolumn}
+			<th class="{$sector_ppd_class}" {$sector_ppd_style}  data-field="sector_ppd">
+				{$label PPL_delitos_clasificacion sector_ppd}
+			</th>
+			{END sector_ppd_fieldheadercolumn}
+			{BEGIN endrecordheader_block}
+			<th class="rnr-cs">&nbsp;</th>
+			{END endrecordheader_block}
+		{END record_header}
+		</tr>
+	{END grid_header}
+	</thead>
+	
+	<tbody>	
+	{BEGIN grid_row}
+		<tr class="{$rowclass}" {$rowattrs} {$rowstyle}>
+		{BEGIN grid_record}
+			{BEGIN id_fieldcolumn}
+			<td  class="{$id_class}" {$id_style} {$recordattrs}>
+				{$id_value}
+			</td>
+			{END id_fieldcolumn}
+			{BEGIN sipe_fieldcolumn}
+			<td  class="{$sipe_class}" {$sipe_style} {$recordattrs}>
+				{$sipe_value}
+			</td>
+			{END sipe_fieldcolumn}
+			{BEGIN afis_fieldcolumn}
+			<td  class="{$afis_class}" {$afis_style} {$recordattrs}>
+				{$afis_value}
+			</td>
+			{END afis_fieldcolumn}
+			{BEGIN edad_fieldcolumn}
+			<td  class="{$edad_class}" {$edad_style} {$recordattrs}>
+				{$edad_value}
+			</td>
+			{END edad_fieldcolumn}
+			{BEGIN rangoetario_fieldcolumn}
+			<td  class="{$rangoetario_class}" {$rangoetario_style} {$recordattrs}>
+				{$rangoetario_value}
+			</td>
+			{END rangoetario_fieldcolumn}
+			{BEGIN genero_fieldcolumn}
+			<td  class="{$genero_class}" {$genero_style} {$recordattrs}>
+				{$genero_value}
+			</td>
+			{END genero_fieldcolumn}
+			{BEGIN fecha_nac_fieldcolumn}
+			<td  class="{$fecha_nac_class}" {$fecha_nac_style} {$recordattrs}>
+				{$fecha_nac_value}
+			</td>
+			{END fecha_nac_fieldcolumn}
+			{BEGIN edad1_fieldcolumn}
+			<td  class="{$edad1_class}" {$edad1_style} {$recordattrs}>
+				{$edad1_value}
+			</td>
+			{END edad1_fieldcolumn}
+			{BEGIN dui_fieldcolumn}
+			<td  class="{$dui_class}" {$dui_style} {$recordattrs}>
+				{$dui_value}
+			</td>
+			{END dui_fieldcolumn}
+			{BEGIN nivel_edu_fieldcolumn}
+			<td  class="{$nivel_edu_class}" {$nivel_edu_style} {$recordattrs}>
+				{$nivel_edu_value}
+			</td>
+			{END nivel_edu_fieldcolumn}
+			{BEGIN educacionanalisis_fieldcolumn}
+			<td  class="{$educacionanalisis_class}" {$educacionanalisis_style} {$recordattrs}>
+				{$educacionanalisis_value}
+			</td>
+			{END educacionanalisis_fieldcolumn}
+			{BEGIN profesion_oficio_fieldcolumn}
+			<td  class="{$profesion_oficio_class}" {$profesion_oficio_style} {$recordattrs}>
+				{$profesion_oficio_value}
+			</td>
+			{END profesion_oficio_fieldcolumn}
+			{BEGIN estado_civil_fieldcolumn}
+			<td  class="{$estado_civil_class}" {$estado_civil_style} {$recordattrs}>
+				{$estado_civil_value}
+			</td>
+			{END estado_civil_fieldcolumn}
+			{BEGIN ciudadania_fieldcolumn}
+			<td  class="{$ciudadania_class}" {$ciudadania_style} {$recordattrs}>
+				{$ciudadania_value}
+			</td>
+			{END ciudadania_fieldcolumn}
+			{BEGIN mun_nacimiento_fieldcolumn}
+			<td  class="{$mun_nacimiento_class}" {$mun_nacimiento_style} {$recordattrs}>
+				{$mun_nacimiento_value}
+			</td>
+			{END mun_nacimiento_fieldcolumn}
+			{BEGIN depto_nacim_fieldcolumn}
+			<td  class="{$depto_nacim_class}" {$depto_nacim_style} {$recordattrs}>
+				{$depto_nacim_value}
+			</td>
+			{END depto_nacim_fieldcolumn}
+			{BEGIN direccion_fieldcolumn}
+			<td  class="{$direccion_class}" {$direccion_style} {$recordattrs}>
+				{$direccion_value}
+			</td>
+			{END direccion_fieldcolumn}
+			{BEGIN mun_resid_fieldcolumn}
+			<td  class="{$mun_resid_class}" {$mun_resid_style} {$recordattrs}>
+				{$mun_resid_value}
+			</td>
+			{END mun_resid_fieldcolumn}
+			{BEGIN depart_resid_fieldcolumn}
+			<td  class="{$depart_resid_class}" {$depart_resid_style} {$recordattrs}>
+				{$depart_resid_value}
+			</td>
+			{END depart_resid_fieldcolumn}
+			{BEGIN delitosanalisis_fieldcolumn}
+			<td  class="{$delitosanalisis_class}" {$delitosanalisis_style} {$recordattrs}>
+				{$delitosanalisis_value}
+			</td>
+			{END delitosanalisis_fieldcolumn}
+			{BEGIN sj_interno_fieldcolumn}
+			<td  class="{$sj_interno_class}" {$sj_interno_style} {$recordattrs}>
+				{$sj_interno_value}
+			</td>
+			{END sj_interno_fieldcolumn}
+			{BEGIN fase_fieldcolumn}
+			<td  class="{$fase_class}" {$fase_style} {$recordattrs}>
+				{$fase_value}
+			</td>
+			{END fase_fieldcolumn}
+			{BEGIN org_delictiva_fieldcolumn}
+			<td  class="{$org_delictiva_class}" {$org_delictiva_style} {$recordattrs}>
+				{$org_delictiva_value}
+			</td>
+			{END org_delictiva_fieldcolumn}
+			{BEGIN tipo_mara_fieldcolumn}
+			<td  class="{$tipo_mara_class}" {$tipo_mara_style} {$recordattrs}>
+				{$tipo_mara_value}
+			</td>
+			{END tipo_mara_fieldcolumn}
+			{BEGIN reincidente_fieldcolumn}
+			<td  class="{$reincidente_class}" {$reincidente_style} {$recordattrs}>
+				{$reincidente_value}
+			</td>
+			{END reincidente_fieldcolumn}
+			{BEGIN deportado_fieldcolumn}
+			<td  class="{$deportado_class}" {$deportado_style} {$recordattrs}>
+				{$deportado_value}
+			</td>
+			{END deportado_fieldcolumn}
+			{BEGIN direccion1_fieldcolumn}
+			<td  class="{$direccion1_class}" {$direccion1_style} {$recordattrs}>
+				{$direccion1_value}
+			</td>
+			{END direccion1_fieldcolumn}
+			{BEGIN sector_fieldcolumn}
+			<td  class="{$sector_class}" {$sector_style} {$recordattrs}>
+				{$sector_value}
+			</td>
+			{END sector_fieldcolumn}
+			{BEGIN celda_fieldcolumn}
+			<td  class="{$celda_class}" {$celda_style} {$recordattrs}>
+				{$celda_value}
+			</td>
+			{END celda_fieldcolumn}
+			{BEGIN fecha_ing__sp_fieldcolumn}
+			<td  class="{$fecha_ing__sp_class}" {$fecha_ing__sp_style} {$recordattrs}>
+				{$fecha_ing__sp_value}
+			</td>
+			{END fecha_ing__sp_fieldcolumn}
+			{BEGIN libro_fieldcolumn}
+			<td  class="{$libro_class}" {$libro_style} {$recordattrs}>
+				{$libro_value}
+			</td>
+			{END libro_fieldcolumn}
+			{BEGIN fecha_ing__cp_fieldcolumn}
+			<td  class="{$fecha_ing__cp_class}" {$fecha_ing__cp_style} {$recordattrs}>
+				{$fecha_ing__cp_value}
+			</td>
+			{END fecha_ing__cp_fieldcolumn}
+			{BEGIN total_delitos_fieldcolumn}
+			<td  class="{$total_delitos_class}" {$total_delitos_style} {$recordattrs}>
+				{$total_delitos_value}
+			</td>
+			{END total_delitos_fieldcolumn}
+			{BEGIN delitos_fieldcolumn}
+			<td  class="{$delitos_class}" {$delitos_style} {$recordattrs}>
+				{$delitos_value}
+			</td>
+			{END delitos_fieldcolumn}
+			{BEGIN delitoanalisis_fieldcolumn}
+			<td  class="{$delitoanalisis_class}" {$delitoanalisis_style} {$recordattrs}>
+				{$delitoanalisis_value}
+			</td>
+			{END delitoanalisis_fieldcolumn}
+			{BEGIN sector_ppd_fieldcolumn}
+			<td  class="{$sector_ppd_class}" {$sector_ppd_style} {$recordattrs}>
+				{$sector_ppd_value}
+			</td>
+			{END sector_ppd_fieldcolumn}
+			{BEGIN endrecord_block}
+			<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+			{END endrecord_block}
+		{END grid_record}
+		</tr>
+{END grid_row}
+	</tbody>
+
+</table>
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

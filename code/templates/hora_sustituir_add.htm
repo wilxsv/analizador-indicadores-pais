@@ -1,0 +1,972 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-add" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_editpage}
+<div {$editpage_chiddenattr} data-pageid="{$pageid}" data-container="editpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-9 col-md-offset-3"> 
+
+{BEGIN addheader}
+	<h2 {$addheader_hiddenattr} data-pageid="{$pageid}" data-brick="addheader" >{$pagetitlelabel hora_sustituir add}</h2>
+
+{END addheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+
+
+{BEGIN container_message}
+<div {$message_chiddenattr} data-pageid="{$pageid}" data-container="message" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN message_block}
+<div {$message_hiddenattr} data-pageid="{$pageid}" data-brick="message" class="alert {$message_class}" role="alert">
+<h5>{$message}</h5>
+<div>
+{BEGIN back_button}
+		<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{BEGIN view_page_button}
+	<button class="btn btn-sm btn-default" {$view_page_button_attrs}>{mlang_message VIEW}</button>
+{END view_page_button}
+{BEGIN edit_page_button}
+	<button class="btn btn-sm btn-default" {$edit_page_button_attrs}>{mlang_message EDIT}</button>
+{END edit_page_button}
+</div>
+</div>
+
+{END message_block}
+
+
+
+</div>
+{END container_message}
+
+
+
+
+
+
+
+</div>
+{END container_editpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$addfields_hiddenattr} data-pageid="{$pageid}" data-brick="addfields" class="form-horizontal" role="form">
+			{BEGIN id1_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_id1}" data-fieldname="id1" data-signal-error-for="id1{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_id1}">
+		{BEGIN id1_label}{$label hora_sustituir id1}{END id1_label}
+	</label>
+	<div class="col-md-6" >
+		{$id1_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="id1">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir id1}
+		</div>
+	</div>
+</div>
+</div>
+{END id1_fieldblock}
+
+			{BEGIN correlativo_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_correlativo}" data-fieldname="correlativo" data-signal-error-for="correlativo{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_correlativo}">
+		{BEGIN correlativo_label}{$label hora_sustituir correlativo}{END correlativo_label}
+	</label>
+	<div class="col-md-6" >
+		{$correlativo_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="correlativo">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir correlativo}
+		</div>
+	</div>
+</div>
+</div>
+{END correlativo_fieldblock}
+
+			{BEGIN numero_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_numero}" data-fieldname="numero" data-signal-error-for="numero{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_numero}">
+		{BEGIN numero_label}{$label hora_sustituir numero}{END numero_label}
+	</label>
+	<div class="col-md-6" >
+		{$numero_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="numero">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir numero}
+		</div>
+	</div>
+</div>
+</div>
+{END numero_fieldblock}
+
+			{BEGIN id_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_id}" data-fieldname="id" data-signal-error-for="id{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_id}">
+		{BEGIN id_label}{$label hora_sustituir id}{END id_label}
+	</label>
+	<div class="col-md-6" >
+		{$id_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="id">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir id}
+		</div>
+	</div>
+</div>
+</div>
+{END id_fieldblock}
+
+			{BEGIN codigo_muni_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_codigo_muni}" data-fieldname="codigo_muni" data-signal-error-for="codigo_muni{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_codigo_muni}">
+		{BEGIN codigo_muni_label}{$label hora_sustituir codigo_muni}{END codigo_muni_label}
+	</label>
+	<div class="col-md-6" >
+		{$codigo_muni_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="codigo_muni">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir codigo_muni}
+		</div>
+	</div>
+</div>
+</div>
+{END codigo_muni_fieldblock}
+
+			{BEGIN numero2_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_numero2}" data-fieldname="numero2" data-signal-error-for="numero2{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_numero2}">
+		{BEGIN numero2_label}{$label hora_sustituir numero2}{END numero2_label}
+	</label>
+	<div class="col-md-6" >
+		{$numero2_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="numero2">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir numero2}
+		</div>
+	</div>
+</div>
+</div>
+{END numero2_fieldblock}
+
+			{BEGIN depart_he_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_depart_he}" data-fieldname="depart_he" data-signal-error-for="depart_he{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_depart_he}">
+		{BEGIN depart_he_label}{$label hora_sustituir depart_he}{END depart_he_label}
+	</label>
+	<div class="col-md-6" >
+		{$depart_he_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="depart_he">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir depart_he}
+		</div>
+	</div>
+</div>
+</div>
+{END depart_he_fieldblock}
+
+			{BEGIN muni_he_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_muni_he}" data-fieldname="muni_he" data-signal-error-for="muni_he{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_muni_he}">
+		{BEGIN muni_he_label}{$label hora_sustituir muni_he}{END muni_he_label}
+	</label>
+	<div class="col-md-6" >
+		{$muni_he_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="muni_he">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir muni_he}
+		</div>
+	</div>
+</div>
+</div>
+{END muni_he_fieldblock}
+
+			{BEGIN dire_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_dire_hecho}" data-fieldname="dire_hecho" data-signal-error-for="dire_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_dire_hecho}">
+		{BEGIN dire_hecho_label}{$label hora_sustituir dire_hecho}{END dire_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$dire_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="dire_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir dire_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END dire_hecho_fieldblock}
+
+			{BEGIN lugar_esp_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_lugar_esp}" data-fieldname="lugar_esp" data-signal-error-for="lugar_esp{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_lugar_esp}">
+		{BEGIN lugar_esp_label}{$label hora_sustituir lugar_esp}{END lugar_esp_label}
+	</label>
+	<div class="col-md-6" >
+		{$lugar_esp_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="lugar_esp">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir lugar_esp}
+		</div>
+	</div>
+</div>
+</div>
+{END lugar_esp_fieldblock}
+
+			{BEGIN lugaranalisis_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_lugaranalisis}" data-fieldname="lugaranalisis" data-signal-error-for="lugaranalisis{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_lugaranalisis}">
+		{BEGIN lugaranalisis_label}{$label hora_sustituir lugaranalisis}{END lugaranalisis_label}
+	</label>
+	<div class="col-md-6" >
+		{$lugaranalisis_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="lugaranalisis">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir lugaranalisis}
+		</div>
+	</div>
+</div>
+</div>
+{END lugaranalisis_fieldblock}
+
+			{BEGIN area_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_area}" data-fieldname="area" data-signal-error-for="area{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_area}">
+		{BEGIN area_label}{$label hora_sustituir area}{END area_label}
+	</label>
+	<div class="col-md-6" >
+		{$area_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="area">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir area}
+		</div>
+	</div>
+</div>
+</div>
+{END area_fieldblock}
+
+			{BEGIN forma_cono_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_forma_cono}" data-fieldname="forma_cono" data-signal-error-for="forma_cono{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_forma_cono}">
+		{BEGIN forma_cono_label}{$label hora_sustituir forma_cono}{END forma_cono_label}
+	</label>
+	<div class="col-md-6" >
+		{$forma_cono_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="forma_cono">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir forma_cono}
+		</div>
+	</div>
+</div>
+</div>
+{END forma_cono_fieldblock}
+
+			{BEGIN delito_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_delito}" data-fieldname="delito" data-signal-error-for="delito{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_delito}">
+		{BEGIN delito_label}{$label hora_sustituir delito}{END delito_label}
+	</label>
+	<div class="col-md-6" >
+		{$delito_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="delito">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir delito}
+		</div>
+	</div>
+</div>
+</div>
+{END delito_fieldblock}
+
+			{BEGIN delito_espe_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_delito_espe}" data-fieldname="delito_espe" data-signal-error-for="delito_espe{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_delito_espe}">
+		{BEGIN delito_espe_label}{$label hora_sustituir delito_espe}{END delito_espe_label}
+	</label>
+	<div class="col-md-6" >
+		{$delito_espe_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="delito_espe">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir delito_espe}
+		</div>
+	</div>
+</div>
+</div>
+{END delito_espe_fieldblock}
+
+			{BEGIN dia_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_dia_hecho}" data-fieldname="dia_hecho" data-signal-error-for="dia_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_dia_hecho}">
+		{BEGIN dia_hecho_label}{$label hora_sustituir dia_hecho}{END dia_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$dia_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="dia_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir dia_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END dia_hecho_fieldblock}
+
+			{BEGIN hora_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_hora_hecho}" data-fieldname="hora_hecho" data-signal-error-for="hora_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_hora_hecho}">
+		{BEGIN hora_hecho_label}{$label hora_sustituir hora_hecho}{END hora_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$hora_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="hora_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir hora_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END hora_hecho_fieldblock}
+
+			{BEGIN rango_hora_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_rango_hora}" data-fieldname="rango_hora" data-signal-error-for="rango_hora{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_rango_hora}">
+		{BEGIN rango_hora_label}{$label hora_sustituir rango_hora}{END rango_hora_label}
+	</label>
+	<div class="col-md-6" >
+		{$rango_hora_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="rango_hora">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir rango_hora}
+		</div>
+	</div>
+</div>
+</div>
+{END rango_hora_fieldblock}
+
+			{BEGIN fecha_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_fecha_hecho}" data-fieldname="fecha_hecho" data-signal-error-for="fecha_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_fecha_hecho}">
+		{BEGIN fecha_hecho_label}{$label hora_sustituir fecha_hecho}{END fecha_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$fecha_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="fecha_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir fecha_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END fecha_hecho_fieldblock}
+
+			{BEGIN a_o_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_a_o_hecho}" data-fieldname="a_o_hecho" data-signal-error-for="a_o_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_a_o_hecho}">
+		{BEGIN a_o_hecho_label}{$label hora_sustituir a_o_hecho}{END a_o_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$a_o_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="a_o_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir a_o_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END a_o_hecho_fieldblock}
+
+			{BEGIN edad_victima_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_edad_victima}" data-fieldname="edad_victima" data-signal-error-for="edad_victima{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_edad_victima}">
+		{BEGIN edad_victima_label}{$label hora_sustituir edad_victima}{END edad_victima_label}
+	</label>
+	<div class="col-md-6" >
+		{$edad_victima_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="edad_victima">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir edad_victima}
+		</div>
+	</div>
+</div>
+</div>
+{END edad_victima_fieldblock}
+
+			{BEGIN ran_eta_vic_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_ran_eta_vic}" data-fieldname="ran_eta_vic" data-signal-error-for="ran_eta_vic{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_ran_eta_vic}">
+		{BEGIN ran_eta_vic_label}{$label hora_sustituir ran_eta_vic}{END ran_eta_vic_label}
+	</label>
+	<div class="col-md-6" >
+		{$ran_eta_vic_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="ran_eta_vic">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir ran_eta_vic}
+		</div>
+	</div>
+</div>
+</div>
+{END ran_eta_vic_fieldblock}
+
+			{BEGIN s_victima_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_s_victima}" data-fieldname="s_victima" data-signal-error-for="s_victima{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_s_victima}">
+		{BEGIN s_victima_label}{$label hora_sustituir s_victima}{END s_victima_label}
+	</label>
+	<div class="col-md-6" >
+		{$s_victima_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="s_victima">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir s_victima}
+		</div>
+	</div>
+</div>
+</div>
+{END s_victima_fieldblock}
+
+			{BEGIN oc_victima_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_oc_victima}" data-fieldname="oc_victima" data-signal-error-for="oc_victima{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_oc_victima}">
+		{BEGIN oc_victima_label}{$label hora_sustituir oc_victima}{END oc_victima_label}
+	</label>
+	<div class="col-md-6" >
+		{$oc_victima_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="oc_victima">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir oc_victima}
+		</div>
+	</div>
+</div>
+</div>
+{END oc_victima_fieldblock}
+
+			{BEGIN relacion_vi_agre_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_relacion_vi_agre}" data-fieldname="relacion_vi_agre" data-signal-error-for="relacion_vi_agre{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_relacion_vi_agre}">
+		{BEGIN relacion_vi_agre_label}{$label hora_sustituir relacion_vi_agre}{END relacion_vi_agre_label}
+	</label>
+	<div class="col-md-6" >
+		{$relacion_vi_agre_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="relacion_vi_agre">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir relacion_vi_agre}
+		</div>
+	</div>
+</div>
+</div>
+{END relacion_vi_agre_fieldblock}
+
+			{BEGIN edad_agresor_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_edad_agresor}" data-fieldname="edad_agresor" data-signal-error-for="edad_agresor{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_edad_agresor}">
+		{BEGIN edad_agresor_label}{$label hora_sustituir edad_agresor}{END edad_agresor_label}
+	</label>
+	<div class="col-md-6" >
+		{$edad_agresor_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="edad_agresor">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir edad_agresor}
+		</div>
+	</div>
+</div>
+</div>
+{END edad_agresor_fieldblock}
+
+			{BEGIN sexo__agresor_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_sexo__agresor}" data-fieldname="sexo__agresor" data-signal-error-for="sexo__agresor{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_sexo__agresor}">
+		{BEGIN sexo__agresor_label}{$label hora_sustituir sexo__agresor}{END sexo__agresor_label}
+	</label>
+	<div class="col-md-6" >
+		{$sexo__agresor_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="sexo__agresor">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir sexo__agresor}
+		</div>
+	</div>
+</div>
+</div>
+{END sexo__agresor_fieldblock}
+
+			{BEGIN ocupa_agresor_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_ocupa_agresor}" data-fieldname="ocupa_agresor" data-signal-error-for="ocupa_agresor{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_ocupa_agresor}">
+		{BEGIN ocupa_agresor_label}{$label hora_sustituir ocupa_agresor}{END ocupa_agresor_label}
+	</label>
+	<div class="col-md-6" >
+		{$ocupa_agresor_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="ocupa_agresor">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir ocupa_agresor}
+		</div>
+	</div>
+</div>
+</div>
+{END ocupa_agresor_fieldblock}
+
+			{BEGIN movil_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_movil}" data-fieldname="movil" data-signal-error-for="movil{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_movil}">
+		{BEGIN movil_label}{$label hora_sustituir movil}{END movil_label}
+	</label>
+	<div class="col-md-6" >
+		{$movil_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="movil">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir movil}
+		</div>
+	</div>
+</div>
+</div>
+{END movil_fieldblock}
+
+			{BEGIN tipo_arma_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_tipo_arma}" data-fieldname="tipo_arma" data-signal-error-for="tipo_arma{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_tipo_arma}">
+		{BEGIN tipo_arma_label}{$label hora_sustituir tipo_arma}{END tipo_arma_label}
+	</label>
+	<div class="col-md-6" >
+		{$tipo_arma_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="tipo_arma">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir tipo_arma}
+		</div>
+	</div>
+</div>
+</div>
+{END tipo_arma_fieldblock}
+
+			{BEGIN canton_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_canton_hecho}" data-fieldname="canton_hecho" data-signal-error-for="canton_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_canton_hecho}">
+		{BEGIN canton_hecho_label}{$label hora_sustituir canton_hecho}{END canton_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$canton_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="canton_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir canton_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END canton_hecho_fieldblock}
+
+			{BEGIN colonia_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_colonia_hecho}" data-fieldname="colonia_hecho" data-signal-error-for="colonia_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_colonia_hecho}">
+		{BEGIN colonia_hecho_label}{$label hora_sustituir colonia_hecho}{END colonia_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$colonia_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="colonia_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir colonia_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END colonia_hecho_fieldblock}
+
+			{BEGIN caserio_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_caserio_hecho}" data-fieldname="caserio_hecho" data-signal-error-for="caserio_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_caserio_hecho}">
+		{BEGIN caserio_hecho_label}{$label hora_sustituir caserio_hecho}{END caserio_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$caserio_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="caserio_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir caserio_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END caserio_hecho_fieldblock}
+
+			{BEGIN calle_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_calle_hecho}" data-fieldname="calle_hecho" data-signal-error-for="calle_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_calle_hecho}">
+		{BEGIN calle_hecho_label}{$label hora_sustituir calle_hecho}{END calle_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$calle_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="calle_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir calle_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END calle_hecho_fieldblock}
+
+			{BEGIN avenida_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_avenida_hecho}" data-fieldname="avenida_hecho" data-signal-error-for="avenida_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_avenida_hecho}">
+		{BEGIN avenida_hecho_label}{$label hora_sustituir avenida_hecho}{END avenida_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$avenida_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="avenida_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir avenida_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END avenida_hecho_fieldblock}
+
+			{BEGIN casa_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_casa_hecho}" data-fieldname="casa_hecho" data-signal-error-for="casa_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_casa_hecho}">
+		{BEGIN casa_hecho_label}{$label hora_sustituir casa_hecho}{END casa_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$casa_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="casa_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir casa_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END casa_hecho_fieldblock}
+
+			{BEGIN comu_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_comu_hecho}" data-fieldname="comu_hecho" data-signal-error-for="comu_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_comu_hecho}">
+		{BEGIN comu_hecho_label}{$label hora_sustituir comu_hecho}{END comu_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$comu_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="comu_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir comu_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END comu_hecho_fieldblock}
+
+			{BEGIN barrio_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_barrio_hecho}" data-fieldname="barrio_hecho" data-signal-error-for="barrio_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_barrio_hecho}">
+		{BEGIN barrio_hecho_label}{$label hora_sustituir barrio_hecho}{END barrio_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$barrio_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="barrio_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir barrio_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END barrio_hecho_fieldblock}
+
+			{BEGIN comp_hecho_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_comp_hecho}" data-fieldname="comp_hecho" data-signal-error-for="comp_hecho{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_comp_hecho}">
+		{BEGIN comp_hecho_label}{$label hora_sustituir comp_hecho}{END comp_hecho_label}
+	</label>
+	<div class="col-md-6" >
+		{$comp_hecho_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="comp_hecho">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir comp_hecho}
+		</div>
+	</div>
+</div>
+</div>
+{END comp_hecho_fieldblock}
+
+			{BEGIN sector_ppd_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_sector_ppd}" data-fieldname="sector_ppd" data-signal-error-for="sector_ppd{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_sector_ppd}">
+		{BEGIN sector_ppd_label}{$label hora_sustituir sector_ppd}{END sector_ppd_label}
+	</label>
+	<div class="col-md-6" >
+		{$sector_ppd_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="sector_ppd">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir sector_ppd}
+		</div>
+	</div>
+</div>
+</div>
+{END sector_ppd_fieldblock}
+
+			{BEGIN tipo_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_tipo}" data-fieldname="tipo" data-signal-error-for="tipo{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_tipo}">
+		{BEGIN tipo_label}{$label hora_sustituir tipo}{END tipo_label}
+	</label>
+	<div class="col-md-6" >
+		{$tipo_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="tipo">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir tipo}
+		</div>
+	</div>
+</div>
+</div>
+{END tipo_fieldblock}
+
+			{BEGIN nombre_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_nombre}" data-fieldname="nombre" data-signal-error-for="nombre{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_nombre}">
+		{BEGIN nombre_label}{$label hora_sustituir nombre}{END nombre_label}
+	</label>
+	<div class="col-md-6" >
+		{$nombre_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="nombre">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir nombre}
+		</div>
+	</div>
+</div>
+</div>
+{END nombre_fieldblock}
+
+			{BEGIN x_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_x}" data-fieldname="x" data-signal-error-for="x{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_x}">
+		{BEGIN x_label}{$label hora_sustituir x}{END x_label}
+	</label>
+	<div class="col-md-6" >
+		{$x_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="x">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir x}
+		</div>
+	</div>
+</div>
+</div>
+{END x_fieldblock}
+
+			{BEGIN y_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_y}" data-fieldname="y" data-signal-error-for="y{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_y}">
+		{BEGIN y_label}{$label hora_sustituir y}{END y_label}
+	</label>
+	<div class="col-md-6" >
+		{$y_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="y">
+		<div class="text-muted" >
+		{$tooltip hora_sustituir y}
+		</div>
+	</div>
+</div>
+</div>
+{END y_fieldblock}
+
+
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_buttons}
+<div {$buttons_chiddenattr} data-pageid="{$pageid}" data-container="buttons" class=" form-group   "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-3"> 
+
+{BEGIN addbuttons}
+	{BEGIN save_button}
+	<button class="btn btn-primary" {$savebutton_attrs}>{mlang_message SAVE}</button>
+	{END save_button}
+	{BEGIN reset_button}
+	<button class="btn btn-default" id="resetButton{$id}">{mlang_message RESET}</button>
+	{END reset_button}
+	{BEGIN back_button}
+		<button class="btn btn-default" id="backButton{$id}">{mlang_message BACK_TO_LIST}</button>
+	{END back_button}
+	{BEGIN cancel_button}
+	<a href="#" class="btn btn-default" id="cancelButton{$id}">{mlang_message CANCEL}</a>
+	{END cancel_button}
+
+{END addbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_buttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

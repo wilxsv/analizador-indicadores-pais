@@ -1,0 +1,368 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel homicidios_sv_2016 search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN __ocupacion__fieldblock}		
+	<div class="container {$fielddispclass___ocupacion_}" data-fieldname="__ocupacion_">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __ocupacion_}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___ocupacion_}
+			</div>
+			<div class="col-md-4" >
+				{$__ocupacion__editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__ocupacion__editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __ocupacion__fieldblock}
+	{BEGIN __municipio__fieldblock}		
+	<div class="container {$fielddispclass___municipio_}" data-fieldname="__municipio_">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __municipio_}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___municipio_}
+			</div>
+			<div class="col-md-4" >
+				{$__municipio__editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__municipio__editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __municipio__fieldblock}
+	{BEGIN __dpto1_fieldblock}		
+	<div class="container {$fielddispclass___dpto1}" data-fieldname="__dpto1">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __dpto1}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___dpto1}
+			</div>
+			<div class="col-md-4" >
+				{$__dpto1_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__dpto1_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __dpto1_fieldblock}
+	{BEGIN __tipo_arma_fieldblock}		
+	<div class="container {$fielddispclass___tipo_arma}" data-fieldname="__tipo_arma">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __tipo_arma}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___tipo_arma}
+			</div>
+			<div class="col-md-4" >
+				{$__tipo_arma_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__tipo_arma_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __tipo_arma_fieldblock}
+	{BEGIN __cdpto_cmun_fieldblock}		
+	<div class="container {$fielddispclass___cdpto_cmun}" data-fieldname="__cdpto_cmun">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __cdpto_cmun}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___cdpto_cmun}
+			</div>
+			<div class="col-md-4" >
+				{$__cdpto_cmun_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__cdpto_cmun_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __cdpto_cmun_fieldblock}
+	{BEGIN __ocupacion_1_fieldblock}		
+	<div class="container {$fielddispclass___ocupacion_1}" data-fieldname="__ocupacion_1">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __ocupacion_1}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___ocupacion_1}
+			</div>
+			<div class="col-md-4" >
+				{$__ocupacion_1_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__ocupacion_1_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __ocupacion_1_fieldblock}
+	{BEGIN __municipio_fieldblock}		
+	<div class="container {$fielddispclass___municipio}" data-fieldname="__municipio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __municipio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___municipio}
+			</div>
+			<div class="col-md-4" >
+				{$__municipio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__municipio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __municipio_fieldblock}
+	{BEGIN __movil_fieldblock}		
+	<div class="container {$fielddispclass___movil}" data-fieldname="__movil">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __movil}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___movil}
+			</div>
+			<div class="col-md-4" >
+				{$__movil_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__movil_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __movil_fieldblock}
+	{BEGIN __circunstan_fieldblock}		
+	<div class="container {$fielddispclass___circunstan}" data-fieldname="__circunstan">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __circunstan}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___circunstan}
+			</div>
+			<div class="col-md-4" >
+				{$__circunstan_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__circunstan_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __circunstan_fieldblock}
+	{BEGIN __causa_prel_fieldblock}		
+	<div class="container {$fielddispclass___causa_prel}" data-fieldname="__causa_prel">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __causa_prel}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___causa_prel}
+			</div>
+			<div class="col-md-4" >
+				{$__causa_prel_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__causa_prel_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __causa_prel_fieldblock}
+	{BEGIN __causa_pr_1_fieldblock}		
+	<div class="container {$fielddispclass___causa_pr_1}" data-fieldname="__causa_pr_1">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __causa_pr_1}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___causa_pr_1}
+			</div>
+			<div class="col-md-4" >
+				{$__causa_pr_1_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__causa_pr_1_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __causa_pr_1_fieldblock}
+	{BEGIN __observacio_fieldblock}		
+	<div class="container {$fielddispclass___observacio}" data-fieldname="__observacio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 __observacio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype___observacio}
+			</div>
+			<div class="col-md-4" >
+				{$__observacio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$__observacio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END __observacio_fieldblock}
+	{BEGIN COUNT___municipio__fieldblock}		
+	<div class="container {$fielddispclass_COUNT___municipio_}" data-fieldname="COUNT___municipio_">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label homicidios_sv_2016 COUNT___municipio_}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_COUNT___municipio_}
+			</div>
+			<div class="col-md-4" >
+				{$COUNT___municipio__editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$COUNT___municipio__editcontrol1}
+			</div>
+		</div>
+	</div>
+{END COUNT___municipio__fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

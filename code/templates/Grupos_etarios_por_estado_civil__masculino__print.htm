@@ -1,0 +1,182 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-print" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel Grupos_etarios_por_estado_civil__masculino_ print}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+	<table class="table table-bordered rp-maintable" {$printgrid_hiddenattr} data-pageid="{$pageid}" data-brick="printgrid" >
+	<thead>
+	{BEGIN grid_header}
+		<tr class="{$gridHeader_class}" >
+		{BEGIN record_header}
+			{BEGIN rangoetario_fieldheadercolumn}
+			<th class="{$rangoetario_class}" {$rangoetario_style}  data-field="rangoetario">
+				{$label Grupos_etarios_por_estado_civil__masculino_ rangoetario}
+			</th>
+			{END rangoetario_fieldheadercolumn}
+			{BEGIN sector_ppd_fieldheadercolumn}
+			<th class="{$sector_ppd_class}" {$sector_ppd_style}  data-field="sector_ppd">
+				{$label Grupos_etarios_por_estado_civil__masculino_ sector_ppd}
+			</th>
+			{END sector_ppd_fieldheadercolumn}
+			{BEGIN mun_resid_fieldheadercolumn}
+			<th class="{$mun_resid_class}" {$mun_resid_style}  data-field="mun_resid">
+				{$label Grupos_etarios_por_estado_civil__masculino_ mun_resid}
+			</th>
+			{END mun_resid_fieldheadercolumn}
+			{BEGIN depart_resid_fieldheadercolumn}
+			<th class="{$depart_resid_class}" {$depart_resid_style}  data-field="depart_resid">
+				{$label Grupos_etarios_por_estado_civil__masculino_ depart_resid}
+			</th>
+			{END depart_resid_fieldheadercolumn}
+			{BEGIN estado_civil_fieldheadercolumn}
+			<th class="{$estado_civil_class}" {$estado_civil_style}  data-field="estado_civil">
+				{$label Grupos_etarios_por_estado_civil__masculino_ estado_civil}
+			</th>
+			{END estado_civil_fieldheadercolumn}
+			{BEGIN COUNT_mun_resid__fieldheadercolumn}
+			<th class="{$COUNT_mun_resid__class}" {$COUNT_mun_resid__style}  data-field="COUNT_mun_resid_">
+				{$label Grupos_etarios_por_estado_civil__masculino_ COUNT_mun_resid_}
+			</th>
+			{END COUNT_mun_resid__fieldheadercolumn}
+			{BEGIN endrecordheader_block}
+			<th class="rnr-cs">&nbsp;</th>
+			{END endrecordheader_block}
+		{END record_header}
+		</tr>
+	{END grid_header}
+	</thead>
+	
+	<tbody>	
+	{BEGIN grid_row}
+		<tr class="{$rowclass}" {$rowattrs} {$rowstyle}>
+		{BEGIN grid_record}
+			{BEGIN rangoetario_fieldcolumn}
+			<td  class="{$rangoetario_class}" {$rangoetario_style} {$recordattrs}>
+				{$rangoetario_value}
+			</td>
+			{END rangoetario_fieldcolumn}
+			{BEGIN sector_ppd_fieldcolumn}
+			<td  class="{$sector_ppd_class}" {$sector_ppd_style} {$recordattrs}>
+				{$sector_ppd_value}
+			</td>
+			{END sector_ppd_fieldcolumn}
+			{BEGIN mun_resid_fieldcolumn}
+			<td  class="{$mun_resid_class}" {$mun_resid_style} {$recordattrs}>
+				{$mun_resid_value}
+			</td>
+			{END mun_resid_fieldcolumn}
+			{BEGIN depart_resid_fieldcolumn}
+			<td  class="{$depart_resid_class}" {$depart_resid_style} {$recordattrs}>
+				{$depart_resid_value}
+			</td>
+			{END depart_resid_fieldcolumn}
+			{BEGIN estado_civil_fieldcolumn}
+			<td  class="{$estado_civil_class}" {$estado_civil_style} {$recordattrs}>
+				{$estado_civil_value}
+			</td>
+			{END estado_civil_fieldcolumn}
+			{BEGIN COUNT_mun_resid__fieldcolumn}
+			<td  class="{$COUNT_mun_resid__class}" {$COUNT_mun_resid__style} {$recordattrs}>
+				{$COUNT_mun_resid__value}
+			</td>
+			{END COUNT_mun_resid__fieldcolumn}
+			{BEGIN endrecord_block}
+			<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+			{END endrecord_block}
+		{END grid_record}
+		</tr>
+{END grid_row}
+	</tbody>
+
+</table>
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<HTML {$html_attrs}><HEAD> 
+<META http-equiv="X-UA-Compatible" content="IE=Edge"> 
+<META name="viewport" content="width=device-width, initial-scale=1.0"> 
+<TITLE>{$pagetitle}</TITLE> 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<LINK href="styles/default.css" rel="stylesheet" type="text/css"> {BEGIN rtlCSS}<LINK href="styles/defaultRTL.css" rel="stylesheet" type="text/css">{END rtlCSS} {BEGIN styleCSSFiles}<LINK href="{$stylepath}" rel="stylesheet" type="text/css">{END styleCSSFiles} 
+<META name="GENERATOR" content="MSHTML 11.00.9600.18618">     
+</HEAD> 
+<BODY class="{$stylename} function-search" {$bodyattrs}>{BEGIN body}
+
+{$header} 
+<STYLE>
+			{$containerCss}
+		</STYLE>
+ 
+<DIV class="bs-top">
+{BEGIN container_searchpage}<DIV class="container" data-container="searchpage" data-pageid="{$pageid}" {$searchpage_chiddenattr}>
+{BEGIN container_header}<DIV class="col-md-6 col-md-offset-3" data-container="header" data-pageid="{$pageid}" {$header_chiddenattr}>
+{BEGIN searchheader}<H2 data-brick="bssearchheader" data-pageid="{$pageid}" {$bssearchheader_hiddenattr}>
+{$pagetitlelabel Retornados_Dashboard search}</H2>{END searchheader}</DIV>{END container_header}</DIV>
+{END container_searchpage}{BEGIN container_fields}<DIV class="col-md-12" data-container="fields" data-pageid="{$pageid}" {$fields_chiddenattr}>
+<DIV class="form-horizontal" role="form" data-brick="bssearchfields" data-pageid="{$pageid}" {$bssearchfields_hiddenattr}>
+<DIV class="container">
+<DIV class="form-group">
+<DIV class="col-md-12">	&nbsp;</DIV></DIV></DIV>
+<DIV class="container {$fielddispclass_Regi_n_Repatriaci_n_por_a_o_departamento}" data-fieldname="Regi_n_Repatriaci_n_por_a_o_departamento">
+<DIV class="form-group">
+<DIV class="col-md-2">
+{$label Retornados_Dashboard Regi_n_Repatriaci_n_por_a_o_departamento} </DIV>
+<DIV class="col-md-2">{$searchtype_Regi_n_Repatriaci_n_por_a_o_departamento} 
+</DIV>
+<DIV class="col-md-4">
+{$Regi_n_Repatriaci_n_por_a_o_departamento_editcontrol} 
+</DIV>
+<DIV class="col-md-4">
+{$Regi_n_Repatriaci_n_por_a_o_departamento_editcontrol1} 
+</DIV></DIV></DIV>
+<DIV class="container {$fielddispclass_Regi_n_Repatriaci_n_por_a_o_municipio}" data-fieldname="Regi_n_Repatriaci_n_por_a_o_municipio">
+<DIV class="form-group">
+<DIV class="col-md-2">
+{$label Retornados_Dashboard Regi_n_Repatriaci_n_por_a_o_municipio} </DIV>
+<DIV class="col-md-2">{$searchtype_Regi_n_Repatriaci_n_por_a_o_municipio} 
+</DIV>
+<DIV class="col-md-4">
+{$Regi_n_Repatriaci_n_por_a_o_municipio_editcontrol} 
+</DIV>
+<DIV class="col-md-4">
+{$Regi_n_Repatriaci_n_por_a_o_municipio_editcontrol1} 
+</DIV></DIV></DIV></DIV></DIV>
+{END container_fields}{BEGIN container_bottombuttons}<DIV class="container" data-container="bottombuttons" data-pageid="{$pageid}" {$bottombuttons_chiddenattr}>
+{BEGIN container_leftbuttons}<DIV class="col-md-3 col-md-offset-4" data-container="leftbuttons" data-pageid="{$pageid}" {$leftbuttons_chiddenattr}>{BEGIN searchbuttons}{BEGIN search_button}<BUTTON class="btn btn-primary" {$searchbutton_attrs}>
+{mlang_message SEARCH}</BUTTON> {END search_button}{BEGIN reset_button}<BUTTON class="btn btn-default" {$resetbutton_attrs}>
+{mlang_message RESET}</BUTTON> {END reset_button}{BEGIN back_button}<BUTTON class="btn btn-default" {$backbutton_attrs}>
+{mlang_message BACK_TO_DASHBOARD}</BUTTON>{END back_button}{END searchbuttons} </DIV>{END container_leftbuttons}</DIV>{END container_bottombuttons}</DIV>
+<DIV class="bs-middle">
+<DIV class="bs-topmiddle"></DIV>
+<DIV class="bs-left" {$blockattr_left}></DIV> 
+<DIV class="bs-center"></DIV> 
+<DIV class="bs-right"></DIV></DIV>
+<DIV class="bs-bottom"></DIV>
+{$footer}{END body} </BODY></HTML>

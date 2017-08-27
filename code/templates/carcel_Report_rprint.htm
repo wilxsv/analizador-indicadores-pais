@@ -1,0 +1,195 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-rprint" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel carcel_Report rprint}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+
+<style>
+	td.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary {background-color:#ffffbb;}
+	td.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary {background-color:#ffe0b0;}
+
+</style>
+
+<div id="grid_block{$id}" class="rnr-report-gridblock">
+			{BEGIN grid_block}
+<table {$report_print_hiddenattr} data-pageid="{$pageid}" data-brick="report_print" class="table table-striped table-bordered rnr-b-grid rnr-gridtable" cellpadding="0" >
+<thead>
+<tr class="rnr-toprow table-header style1">
+
+<th>{$label carcel_Report id}</th>
+<th>{$label carcel_Report sipe}</th>
+<th>{$label carcel_Report afis}</th>
+<th>{$label carcel_Report edad}</th>
+<th>{$label carcel_Report rangoetario}</th>
+<th>{$label carcel_Report genero}</th>
+<th>{$label carcel_Report fecha_nac}</th>
+<th>{$label carcel_Report edad1}</th>
+<th>{$label carcel_Report dui}</th>
+<th>{$label carcel_Report nivel_edu}</th>
+<th>{$label carcel_Report educacionanalisis}</th>
+<th>{$label carcel_Report profesion_oficio}</th>
+<th>{$label carcel_Report estado_civil}</th>
+<th>{$label carcel_Report ciudadania}</th>
+<th>{$label carcel_Report mun_nacimiento}</th>
+<th>{$label carcel_Report depto_nacim}</th>
+<th>{$label carcel_Report direccion}</th>
+<th>{$label carcel_Report mun_resid}</th>
+<th>{$label carcel_Report depart_resid}</th>
+<th>{$label carcel_Report delitosanalisis}</th>
+<th>{$label carcel_Report sj_interno}</th>
+<th>{$label carcel_Report fase}</th>
+<th>{$label carcel_Report org_delictiva}</th>
+<th>{$label carcel_Report tipo_mara}</th>
+<th>{$label carcel_Report reincidente}</th>
+<th>{$label carcel_Report deportado}</th>
+<th>{$label carcel_Report direccion1}</th>
+<th>{$label carcel_Report sector}</th>
+<th>{$label carcel_Report celda}</th>
+<th>{$label carcel_Report fecha_ing__sp}</th>
+<th>{$label carcel_Report libro}</th>
+<th>{$label carcel_Report fecha_ing__cp}</th>
+<th>{$label carcel_Report total_delitos}</th>
+<th>{$label carcel_Report delitos}</th>
+<th>{$label carcel_Report delitoanalisis}</th>
+<th>{$label carcel_Report sector_ppd}</th>
+</tr>
+</thead>
+<tbody>
+{BEGIN grid_row}
+<!-------------------------------------  data ----------------------------------------->
+{BEGIN row_data}
+<tr class="rnr-row style1" {$rowattrs}>
+	<td {$recordattrs}>{$id_value}</td>
+	<td {$recordattrs}>{$sipe_value}</td>
+	<td {$recordattrs}>{$afis_value}</td>
+	<td {$recordattrs}>{$edad_value}</td>
+	<td {$recordattrs}>{$rangoetario_value}</td>
+	<td {$recordattrs}>{$genero_value}</td>
+	<td {$recordattrs}>{$fecha_nac_value}</td>
+	<td {$recordattrs}>{$edad1_value}</td>
+	<td {$recordattrs}>{$dui_value}</td>
+	<td {$recordattrs}>{$nivel_edu_value}</td>
+	<td {$recordattrs}>{$educacionanalisis_value}</td>
+	<td {$recordattrs}>{$profesion_oficio_value}</td>
+	<td {$recordattrs}>{$estado_civil_value}</td>
+	<td {$recordattrs}>{$ciudadania_value}</td>
+	<td {$recordattrs}>{$mun_nacimiento_value}</td>
+	<td {$recordattrs}>{$depto_nacim_value}</td>
+	<td {$recordattrs}>{$direccion_value}</td>
+	<td {$recordattrs}>{$mun_resid_value}</td>
+	<td {$recordattrs}>{$depart_resid_value}</td>
+	<td {$recordattrs}>{$delitosanalisis_value}</td>
+	<td {$recordattrs}>{$sj_interno_value}</td>
+	<td {$recordattrs}>{$fase_value}</td>
+	<td {$recordattrs}>{$org_delictiva_value}</td>
+	<td {$recordattrs}>{$tipo_mara_value}</td>
+	<td {$recordattrs}>{$reincidente_value}</td>
+	<td {$recordattrs}>{$deportado_value}</td>
+	<td {$recordattrs}>{$direccion1_value}</td>
+	<td {$recordattrs}>{$sector_value}</td>
+	<td {$recordattrs}>{$celda_value}</td>
+	<td {$recordattrs}>{$fecha_ing__sp_value}</td>
+	<td {$recordattrs}>{$libro_value}</td>
+	<td {$recordattrs}>{$fecha_ing__cp_value}</td>
+	<td {$recordattrs}>{$total_delitos_value}</td>
+	<td {$recordattrs}>{$delitos_value}</td>
+	<td {$recordattrs}>{$delitoanalisis_value}</td>
+	<td {$recordattrs}>{$sector_ppd_value}</td>
+</tr>
+{END row_data}
+
+{END grid_row}
+</tbody>
+</table>
+{END grid_block}
+</div>
+
+
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

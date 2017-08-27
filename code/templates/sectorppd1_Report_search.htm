@@ -1,0 +1,332 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel sectorppd1_Report search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN sector_estandarizado_fieldblock}		
+	<div class="container {$fielddispclass_sector_estandarizado}" data-fieldname="sector_estandarizado">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report sector_estandarizado}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sector_estandarizado}
+			</div>
+			<div class="col-md-4" >
+				{$sector_estandarizado_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sector_estandarizado_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sector_estandarizado_fieldblock}
+	{BEGIN departamento_fieldblock}		
+	<div class="container {$fielddispclass_departamento}" data-fieldname="departamento">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report departamento}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_departamento}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END departamento_fieldblock}
+	{BEGIN municipio_fieldblock}		
+	<div class="container {$fielddispclass_municipio}" data-fieldname="municipio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report municipio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_municipio}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END municipio_fieldblock}
+	{BEGIN canton_fieldblock}		
+	<div class="container {$fielddispclass_canton}" data-fieldname="canton">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report canton}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_canton}
+			</div>
+			<div class="col-md-4" >
+				{$canton_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$canton_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END canton_fieldblock}
+	{BEGIN area_fieldblock}		
+	<div class="container {$fielddispclass_area}" data-fieldname="area">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report area}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_area}
+			</div>
+			<div class="col-md-4" >
+				{$area_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$area_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END area_fieldblock}
+	{BEGIN tipo_fieldblock}		
+	<div class="container {$fielddispclass_tipo}" data-fieldname="tipo">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report tipo}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_tipo}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END tipo_fieldblock}
+	{BEGIN nombre_fieldblock}		
+	<div class="container {$fielddispclass_nombre}" data-fieldname="nombre">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report nombre}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_nombre}
+			</div>
+			<div class="col-md-4" >
+				{$nombre_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$nombre_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END nombre_fieldblock}
+	{BEGIN x_fieldblock}		
+	<div class="container {$fielddispclass_x}" data-fieldname="x">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report x}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_x}
+			</div>
+			<div class="col-md-4" >
+				{$x_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$x_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END x_fieldblock}
+	{BEGIN y_fieldblock}		
+	<div class="container {$fielddispclass_y}" data-fieldname="y">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report y}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_y}
+			</div>
+			<div class="col-md-4" >
+				{$y_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$y_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END y_fieldblock}
+	{BEGIN f10_fieldblock}		
+	<div class="container {$fielddispclass_f10}" data-fieldname="f10">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report f10}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_f10}
+			</div>
+			<div class="col-md-4" >
+				{$f10_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$f10_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END f10_fieldblock}
+	{BEGIN f11_fieldblock}		
+	<div class="container {$fielddispclass_f11}" data-fieldname="f11">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label sectorppd1_Report f11}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_f11}
+			</div>
+			<div class="col-md-4" >
+				{$f11_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$f11_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END f11_fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

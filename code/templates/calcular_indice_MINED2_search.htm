@@ -1,0 +1,844 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+	</head>
+	
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+	<div class="rnr-page">
+		<div class="rnr-top {$blockclass_top}">
+			
+
+{BEGIN container_search}
+<div class="rnr-c rnr-cv rnr-c-search">
+
+{BEGIN searchheader}
+<div  class="rnr-brickcontents style2 rnr-b-srchheader {$brickclass_srchheader}"><span>	<h1>{$pagetitlelabel calcular_indice_MINED2 search}</h1>
+</span></div>{END searchheader}
+
+
+{BEGIN conditions_block}
+<div  class="rnr-brickcontents style1 rnr-b-srchconditions {$brickclass_srchconditions}">	<center>
+	<span class=fieldname>{mlang_message SEARCH_CRITERIA}:&nbsp;</span>	
+	<input type="radio" class="rnr-radio-button" name="srchType{$id}" {$all_checkbox}><label for="all_checkbox"> {mlang_message ALL_CONDITIONS}</label>
+	&nbsp;&nbsp;&nbsp;
+	<input type="radio" class="rnr-radio-button" name="srchType{$id}" {$any_checkbox}><label for="any_checkbox"> {mlang_message ANY_CONDITION}</label>
+	</center></div>{END conditions_block}
+
+
+
+<div  class="rnr-brickcontents style1 rnr-b-wrapper {$wrapperclass_fields} rnr-wrapper rnr-cbw-fields">
+
+{BEGIN container_fields}
+<div class="rnr-c rnr-cv rnr-c-fields">
+
+
+<div  class="rnr-brickcontents style1 rnr-b-srchfields {$brickclass_srchfields}"><table class="fieldGrid">
+	<tr>
+		<td>&nbsp;</td>
+		<td>{mlang_message SEARCH_NOT}</td>
+		<td colspan=3>&nbsp; </td>
+	</tr>
+	<tr class="{$fielddispclass_idderespuesta}">
+	{BEGIN idderespuesta_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 idderespuesta}
+	</td>
+	<td>
+		<input type="checkbox" {$idderespuesta_notbox}>
+	</td>
+	<td>
+		{$searchtype_idderespuesta}
+	</td>
+	<td>
+		{$idderespuesta_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$idderespuesta_editcontrol1}&nbsp;
+	</td>
+{END idderespuesta_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_codigo}">
+	{BEGIN codigo_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 codigo}
+	</td>
+	<td>
+		<input type="checkbox" {$codigo_notbox}>
+	</td>
+	<td>
+		{$searchtype_codigo}
+	</td>
+	<td>
+		{$codigo_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$codigo_editcontrol1}&nbsp;
+	</td>
+{END codigo_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_depto}">
+	{BEGIN depto_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 depto}
+	</td>
+	<td>
+		<input type="checkbox" {$depto_notbox}>
+	</td>
+	<td>
+		{$searchtype_depto}
+	</td>
+	<td>
+		{$depto_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$depto_editcontrol1}&nbsp;
+	</td>
+{END depto_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_departamento}">
+	{BEGIN departamento_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 departamento}
+	</td>
+	<td>
+		<input type="checkbox" {$departamento_notbox}>
+	</td>
+	<td>
+		{$searchtype_departamento}
+	</td>
+	<td>
+		{$departamento_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$departamento_editcontrol1}&nbsp;
+	</td>
+{END departamento_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_mun}">
+	{BEGIN mun_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 mun}
+	</td>
+	<td>
+		<input type="checkbox" {$mun_notbox}>
+	</td>
+	<td>
+		{$searchtype_mun}
+	</td>
+	<td>
+		{$mun_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$mun_editcontrol1}&nbsp;
+	</td>
+{END mun_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_municipio}">
+	{BEGIN municipio_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 municipio}
+	</td>
+	<td>
+		<input type="checkbox" {$municipio_notbox}>
+	</td>
+	<td>
+		{$searchtype_municipio}
+	</td>
+	<td>
+		{$municipio_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$municipio_editcontrol1}&nbsp;
+	</td>
+{END municipio_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_nombre_c_e}">
+	{BEGIN nombre_c_e_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 nombre_c_e}
+	</td>
+	<td>
+		<input type="checkbox" {$nombre_c_e_notbox}>
+	</td>
+	<td>
+		{$searchtype_nombre_c_e}
+	</td>
+	<td>
+		{$nombre_c_e_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$nombre_c_e_editcontrol1}&nbsp;
+	</td>
+{END nombre_c_e_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_x}">
+	{BEGIN x_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 x}
+	</td>
+	<td>
+		<input type="checkbox" {$x_notbox}>
+	</td>
+	<td>
+		{$searchtype_x}
+	</td>
+	<td>
+		{$x_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$x_editcontrol1}&nbsp;
+	</td>
+{END x_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_y}">
+	{BEGIN y_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 y}
+	</td>
+	<td>
+		<input type="checkbox" {$y_notbox}>
+	</td>
+	<td>
+		{$searchtype_y}
+	</td>
+	<td>
+		{$y_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$y_editcontrol1}&nbsp;
+	</td>
+{END y_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_sector_ppd}">
+	{BEGIN sector_ppd_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 sector_ppd}
+	</td>
+	<td>
+		<input type="checkbox" {$sector_ppd_notbox}>
+	</td>
+	<td>
+		{$searchtype_sector_ppd}
+	</td>
+	<td>
+		{$sector_ppd_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$sector_ppd_editcontrol1}&nbsp;
+	</td>
+{END sector_ppd_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_matricula_inicial}">
+	{BEGIN matricula_inicial_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 matricula_inicial}
+	</td>
+	<td>
+		<input type="checkbox" {$matricula_inicial_notbox}>
+	</td>
+	<td>
+		{$searchtype_matricula_inicial}
+	</td>
+	<td>
+		{$matricula_inicial_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$matricula_inicial_editcontrol1}&nbsp;
+	</td>
+{END matricula_inicial_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_matricula_final}">
+	{BEGIN matricula_final_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 matricula_final}
+	</td>
+	<td>
+		<input type="checkbox" {$matricula_final_notbox}>
+	</td>
+	<td>
+		{$searchtype_matricula_final}
+	</td>
+	<td>
+		{$matricula_final_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$matricula_final_editcontrol1}&nbsp;
+	</td>
+{END matricula_final_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_maras}">
+	{BEGIN maras_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 maras}
+	</td>
+	<td>
+		<input type="checkbox" {$maras_notbox}>
+	</td>
+	<td>
+		{$searchtype_maras}
+	</td>
+	<td>
+		{$maras_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$maras_editcontrol1}&nbsp;
+	</td>
+{END maras_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_robos}">
+	{BEGIN robos_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 robos}
+	</td>
+	<td>
+		<input type="checkbox" {$robos_notbox}>
+	</td>
+	<td>
+		{$searchtype_robos}
+	</td>
+	<td>
+		{$robos_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$robos_editcontrol1}&nbsp;
+	</td>
+{END robos_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_hurtos}">
+	{BEGIN hurtos_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 hurtos}
+	</td>
+	<td>
+		<input type="checkbox" {$hurtos_notbox}>
+	</td>
+	<td>
+		{$searchtype_hurtos}
+	</td>
+	<td>
+		{$hurtos_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$hurtos_editcontrol1}&nbsp;
+	</td>
+{END hurtos_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_drogas}">
+	{BEGIN drogas_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 drogas}
+	</td>
+	<td>
+		<input type="checkbox" {$drogas_notbox}>
+	</td>
+	<td>
+		{$searchtype_drogas}
+	</td>
+	<td>
+		{$drogas_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$drogas_editcontrol1}&nbsp;
+	</td>
+{END drogas_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_violaciones}">
+	{BEGIN violaciones_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 violaciones}
+	</td>
+	<td>
+		<input type="checkbox" {$violaciones_notbox}>
+	</td>
+	<td>
+		{$searchtype_violaciones}
+	</td>
+	<td>
+		{$violaciones_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$violaciones_editcontrol1}&nbsp;
+	</td>
+{END violaciones_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_pab}">
+	{BEGIN pab_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 pab}
+	</td>
+	<td>
+		<input type="checkbox" {$pab_notbox}>
+	</td>
+	<td>
+		{$searchtype_pab}
+	</td>
+	<td>
+		{$pab_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$pab_editcontrol1}&nbsp;
+	</td>
+{END pab_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_paf}">
+	{BEGIN paf_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 paf}
+	</td>
+	<td>
+		<input type="checkbox" {$paf_notbox}>
+	</td>
+	<td>
+		{$searchtype_paf}
+	</td>
+	<td>
+		{$paf_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$paf_editcontrol1}&nbsp;
+	</td>
+{END paf_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_escasos_recursos}">
+	{BEGIN escasos_recursos_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 escasos_recursos}
+	</td>
+	<td>
+		<input type="checkbox" {$escasos_recursos_notbox}>
+	</td>
+	<td>
+		{$searchtype_escasos_recursos}
+	</td>
+	<td>
+		{$escasos_recursos_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$escasos_recursos_editcontrol1}&nbsp;
+	</td>
+{END escasos_recursos_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_incorpo_actividades_prod}">
+	{BEGIN incorpo_actividades_prod_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 incorpo_actividades_prod}
+	</td>
+	<td>
+		<input type="checkbox" {$incorpo_actividades_prod_notbox}>
+	</td>
+	<td>
+		{$searchtype_incorpo_actividades_prod}
+	</td>
+	<td>
+		{$incorpo_actividades_prod_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$incorpo_actividades_prod_editcontrol1}&nbsp;
+	</td>
+{END incorpo_actividades_prod_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_lejania_ce}">
+	{BEGIN lejania_ce_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 lejania_ce}
+	</td>
+	<td>
+		<input type="checkbox" {$lejania_ce_notbox}>
+	</td>
+	<td>
+		{$searchtype_lejania_ce}
+	</td>
+	<td>
+		{$lejania_ce_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$lejania_ce_editcontrol1}&nbsp;
+	</td>
+{END lejania_ce_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_violencia_pandilleril}">
+	{BEGIN violencia_pandilleril_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 violencia_pandilleril}
+	</td>
+	<td>
+		<input type="checkbox" {$violencia_pandilleril_notbox}>
+	</td>
+	<td>
+		{$searchtype_violencia_pandilleril}
+	</td>
+	<td>
+		{$violencia_pandilleril_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$violencia_pandilleril_editcontrol1}&nbsp;
+	</td>
+{END violencia_pandilleril_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_embarazo}">
+	{BEGIN embarazo_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 embarazo}
+	</td>
+	<td>
+		<input type="checkbox" {$embarazo_notbox}>
+	</td>
+	<td>
+		{$searchtype_embarazo}
+	</td>
+	<td>
+		{$embarazo_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$embarazo_editcontrol1}&nbsp;
+	</td>
+{END embarazo_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_acoso}">
+	{BEGIN acoso_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 acoso}
+	</td>
+	<td>
+		<input type="checkbox" {$acoso_notbox}>
+	</td>
+	<td>
+		{$searchtype_acoso}
+	</td>
+	<td>
+		{$acoso_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$acoso_editcontrol1}&nbsp;
+	</td>
+{END acoso_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_violacion_sexual}">
+	{BEGIN violacion_sexual_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 violacion_sexual}
+	</td>
+	<td>
+		<input type="checkbox" {$violacion_sexual_notbox}>
+	</td>
+	<td>
+		{$searchtype_violacion_sexual}
+	</td>
+	<td>
+		{$violacion_sexual_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$violacion_sexual_editcontrol1}&nbsp;
+	</td>
+{END violacion_sexual_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_cambio_domicilio}">
+	{BEGIN cambio_domicilio_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 cambio_domicilio}
+	</td>
+	<td>
+		<input type="checkbox" {$cambio_domicilio_notbox}>
+	</td>
+	<td>
+		{$searchtype_cambio_domicilio}
+	</td>
+	<td>
+		{$cambio_domicilio_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$cambio_domicilio_editcontrol1}&nbsp;
+	</td>
+{END cambio_domicilio_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_migracion}">
+	{BEGIN migracion_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 migracion}
+	</td>
+	<td>
+		<input type="checkbox" {$migracion_notbox}>
+	</td>
+	<td>
+		{$searchtype_migracion}
+	</td>
+	<td>
+		{$migracion_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$migracion_editcontrol1}&nbsp;
+	</td>
+{END migracion_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_bajo_rendimiento}">
+	{BEGIN bajo_rendimiento_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 bajo_rendimiento}
+	</td>
+	<td>
+		<input type="checkbox" {$bajo_rendimiento_notbox}>
+	</td>
+	<td>
+		{$searchtype_bajo_rendimiento}
+	</td>
+	<td>
+		{$bajo_rendimiento_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$bajo_rendimiento_editcontrol1}&nbsp;
+	</td>
+{END bajo_rendimiento_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_enfermedad}">
+	{BEGIN enfermedad_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 enfermedad}
+	</td>
+	<td>
+		<input type="checkbox" {$enfermedad_notbox}>
+	</td>
+	<td>
+		{$searchtype_enfermedad}
+	</td>
+	<td>
+		{$enfermedad_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$enfermedad_editcontrol1}&nbsp;
+	</td>
+{END enfermedad_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_prostitucion}">
+	{BEGIN prostitucion_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 prostitucion}
+	</td>
+	<td>
+		<input type="checkbox" {$prostitucion_notbox}>
+	</td>
+	<td>
+		{$searchtype_prostitucion}
+	</td>
+	<td>
+		{$prostitucion_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$prostitucion_editcontrol1}&nbsp;
+	</td>
+{END prostitucion_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_dep_mun}">
+	{BEGIN dep_mun_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 dep_mun}
+	</td>
+	<td>
+		<input type="checkbox" {$dep_mun_notbox}>
+	</td>
+	<td>
+		{$searchtype_dep_mun}
+	</td>
+	<td>
+		{$dep_mun_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$dep_mun_editcontrol1}&nbsp;
+	</td>
+{END dep_mun_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_max_matric2016}">
+	{BEGIN max_matric2016_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 max_matric2016}
+	</td>
+	<td>
+		<input type="checkbox" {$max_matric2016_notbox}>
+	</td>
+	<td>
+		{$searchtype_max_matric2016}
+	</td>
+	<td>
+		{$max_matric2016_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$max_matric2016_editcontrol1}&nbsp;
+	</td>
+{END max_matric2016_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_mrf2016}">
+	{BEGIN mrf2016_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 mrf2016}
+	</td>
+	<td>
+		<input type="checkbox" {$mrf2016_notbox}>
+	</td>
+	<td>
+		{$searchtype_mrf2016}
+	</td>
+	<td>
+		{$mrf2016_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$mrf2016_editcontrol1}&nbsp;
+	</td>
+{END mrf2016_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_pab_af}">
+	{BEGIN pab_af_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 pab_af}
+	</td>
+	<td>
+		<input type="checkbox" {$pab_af_notbox}>
+	</td>
+	<td>
+		{$searchtype_pab_af}
+	</td>
+	<td>
+		{$pab_af_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$pab_af_editcontrol1}&nbsp;
+	</td>
+{END pab_af_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_r_h}">
+	{BEGIN r_h_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 r_h}
+	</td>
+	<td>
+		<input type="checkbox" {$r_h_notbox}>
+	</td>
+	<td>
+		{$searchtype_r_h}
+	</td>
+	<td>
+		{$r_h_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$r_h_editcontrol1}&nbsp;
+	</td>
+{END r_h_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_ipce_naive}">
+	{BEGIN ipce_naive_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 ipce_naive}
+	</td>
+	<td>
+		<input type="checkbox" {$ipce_naive_notbox}>
+	</td>
+	<td>
+		{$searchtype_ipce_naive}
+	</td>
+	<td>
+		{$ipce_naive_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$ipce_naive_editcontrol1}&nbsp;
+	</td>
+{END ipce_naive_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_ipce_0_1}">
+	{BEGIN ipce_0_1_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 ipce_0_1}
+	</td>
+	<td>
+		<input type="checkbox" {$ipce_0_1_notbox}>
+	</td>
+	<td>
+		{$searchtype_ipce_0_1}
+	</td>
+	<td>
+		{$ipce_0_1_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$ipce_0_1_editcontrol1}&nbsp;
+	</td>
+{END ipce_0_1_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_a_o}">
+	{BEGIN a_o_fieldblock}		
+	<td>
+		{$label calcular_indice_MINED2 a_o}
+	</td>
+	<td>
+		<input type="checkbox" {$a_o_notbox}>
+	</td>
+	<td>
+		{$searchtype_a_o}
+	</td>
+	<td>
+		{$a_o_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$a_o_editcontrol1}&nbsp;
+	</td>
+{END a_o_fieldblock}
+	</tr>
+
+</table></div>
+
+
+{BEGIN searchbuttons}
+<div  class="rnr-brickcontents style2 rnr-b-srchbuttons {$brickclass_srchbuttons}">{BEGIN search_button}
+<a href="#" class="rnr-button main" {$searchbutton_attrs}>{mlang_message SEARCH}</a>
+{END search_button} 
+{BEGIN reset_button}
+<a href="#" class="rnr-button" {$resetbutton_attrs}>{mlang_message RESET}</a>
+{END reset_button}
+{BEGIN back_button}
+<a href="#" class="rnr-button" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</a>
+{END back_button}</div>{END searchbuttons}
+
+
+</div>
+{END container_fields}
+
+</div>
+
+
+</div>
+{END container_search}
+
+
+		</div>
+		<div class="rnr-middle">
+			<div class="rnr-left {$blockclass_left}">
+				
+			</div>
+			<div class="rnr-center {$blockclass_center}">
+				
+			</div>
+			<div class="rnr-right {$blockclass_right}">
+				
+			</div>
+		</div>
+		<div class="rnr-bottom {$blockclass_bottom}">
+			
+		</div>
+	</div>
+		
+		{$footer}
+	{END body}
+	</body>
+</html>

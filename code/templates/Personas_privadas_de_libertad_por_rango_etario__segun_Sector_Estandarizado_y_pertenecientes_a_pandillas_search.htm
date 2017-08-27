@@ -1,0 +1,243 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+	</head>
+	
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+	<div class="rnr-page">
+		<div class="rnr-top {$blockclass_top}">
+			
+
+{BEGIN container_fields}
+<div class="rnr-c rnr-cv rnr-c-fields">
+
+{BEGIN searchheader}
+<div  class="rnr-brickcontents style2 rnr-b-srchheader {$brickclass_srchheader}"><span>	<h1>{$pagetitlelabel Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas search}</h1>
+</span></div>{END searchheader}
+
+
+{BEGIN conditions_block}
+<div  class="rnr-brickcontents style1 rnr-b-srchconditions {$brickclass_srchconditions}">	<center>
+	<span class=fieldname>{mlang_message SEARCH_CRITERIA}:&nbsp;</span>	
+	<input type="radio" class="rnr-radio-button" name="srchType{$id}" {$all_checkbox}><label for="all_checkbox"> {mlang_message ALL_CONDITIONS}</label>
+	&nbsp;&nbsp;&nbsp;
+	<input type="radio" class="rnr-radio-button" name="srchType{$id}" {$any_checkbox}><label for="any_checkbox"> {mlang_message ANY_CONDITION}</label>
+	</center></div>{END conditions_block}
+
+
+
+<div  class="rnr-brickcontents style1 rnr-b-srchfields {$brickclass_srchfields}"><table class="fieldGrid">
+	<tr>
+		<td>&nbsp;</td>
+		<td>{mlang_message SEARCH_NOT}</td>
+		<td colspan=3>&nbsp; </td>
+	</tr>
+	<tr class="{$fielddispclass_tipo_mara}">
+	{BEGIN tipo_mara_fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas tipo_mara}
+	</td>
+	<td>
+		<input type="checkbox" {$tipo_mara_notbox}>
+	</td>
+	<td>
+		{$searchtype_tipo_mara}
+	</td>
+	<td>
+		{$tipo_mara_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$tipo_mara_editcontrol1}&nbsp;
+	</td>
+{END tipo_mara_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_sector_ppd}">
+	{BEGIN sector_ppd_fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas sector_ppd}
+	</td>
+	<td>
+		<input type="checkbox" {$sector_ppd_notbox}>
+	</td>
+	<td>
+		{$searchtype_sector_ppd}
+	</td>
+	<td>
+		{$sector_ppd_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$sector_ppd_editcontrol1}&nbsp;
+	</td>
+{END sector_ppd_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_org_delictiva}">
+	{BEGIN org_delictiva_fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas org_delictiva}
+	</td>
+	<td>
+		<input type="checkbox" {$org_delictiva_notbox}>
+	</td>
+	<td>
+		{$searchtype_org_delictiva}
+	</td>
+	<td>
+		{$org_delictiva_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$org_delictiva_editcontrol1}&nbsp;
+	</td>
+{END org_delictiva_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_COUNT_rangoetario_}">
+	{BEGIN COUNT_rangoetario__fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas COUNT_rangoetario_}
+	</td>
+	<td>
+		<input type="checkbox" {$COUNT_rangoetario__notbox}>
+	</td>
+	<td>
+		{$searchtype_COUNT_rangoetario_}
+	</td>
+	<td>
+		{$COUNT_rangoetario__editcontrol}&nbsp;
+	</td>
+	<td>
+		{$COUNT_rangoetario__editcontrol1}&nbsp;
+	</td>
+{END COUNT_rangoetario__fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_rangoetario}">
+	{BEGIN rangoetario_fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas rangoetario}
+	</td>
+	<td>
+		<input type="checkbox" {$rangoetario_notbox}>
+	</td>
+	<td>
+		{$searchtype_rangoetario}
+	</td>
+	<td>
+		{$rangoetario_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$rangoetario_editcontrol1}&nbsp;
+	</td>
+{END rangoetario_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_carcel_genero}">
+	{BEGIN carcel_genero_fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas carcel_genero}
+	</td>
+	<td>
+		<input type="checkbox" {$carcel_genero_notbox}>
+	</td>
+	<td>
+		{$searchtype_carcel_genero}
+	</td>
+	<td>
+		{$carcel_genero_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$carcel_genero_editcontrol1}&nbsp;
+	</td>
+{END carcel_genero_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_mun_resid}">
+	{BEGIN mun_resid_fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas mun_resid}
+	</td>
+	<td>
+		<input type="checkbox" {$mun_resid_notbox}>
+	</td>
+	<td>
+		{$searchtype_mun_resid}
+	</td>
+	<td>
+		{$mun_resid_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$mun_resid_editcontrol1}&nbsp;
+	</td>
+{END mun_resid_fieldblock}
+	</tr>
+	<tr class="{$fielddispclass_depart_resid}">
+	{BEGIN depart_resid_fieldblock}		
+	<td>
+		{$label Personas_privadas_de_libertad_por_rango_etario__segun_Sector_Estandarizado_y_pertenecientes_a_pandillas depart_resid}
+	</td>
+	<td>
+		<input type="checkbox" {$depart_resid_notbox}>
+	</td>
+	<td>
+		{$searchtype_depart_resid}
+	</td>
+	<td>
+		{$depart_resid_editcontrol}&nbsp;
+	</td>
+	<td>
+		{$depart_resid_editcontrol1}&nbsp;
+	</td>
+{END depart_resid_fieldblock}
+	</tr>
+
+</table></div>
+
+
+{BEGIN searchbuttons}
+<div  class="rnr-brickcontents style2 rnr-b-srchbuttons {$brickclass_srchbuttons}">{BEGIN search_button}
+<a href="#" class="rnr-button main" {$searchbutton_attrs}>{mlang_message SEARCH}</a>
+{END search_button} 
+{BEGIN reset_button}
+<a href="#" class="rnr-button" {$resetbutton_attrs}>{mlang_message RESET}</a>
+{END reset_button}
+{BEGIN back_button}
+<a href="#" class="rnr-button" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</a>
+{END back_button}</div>{END searchbuttons}
+
+
+</div>
+{END container_fields}
+
+
+		</div>
+		<div class="rnr-middle">
+			<div class="rnr-left {$blockclass_left}">
+				
+			</div>
+			<div class="rnr-center {$blockclass_center}">
+				
+			</div>
+			<div class="rnr-right {$blockclass_right}">
+				
+			</div>
+		</div>
+		<div class="rnr-bottom {$blockclass_bottom}">
+			
+		</div>
+	</div>
+		
+		{$footer}
+	{END body}
+	</body>
+</html>

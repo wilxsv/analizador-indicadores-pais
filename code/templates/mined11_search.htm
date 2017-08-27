@@ -1,0 +1,836 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel mined11 search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN idderespuesta_fieldblock}		
+	<div class="container {$fielddispclass_idderespuesta}" data-fieldname="idderespuesta">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 idderespuesta}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_idderespuesta}
+			</div>
+			<div class="col-md-4" >
+				{$idderespuesta_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$idderespuesta_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END idderespuesta_fieldblock}
+	{BEGIN codigo_fieldblock}		
+	<div class="container {$fielddispclass_codigo}" data-fieldname="codigo">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 codigo}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_codigo}
+			</div>
+			<div class="col-md-4" >
+				{$codigo_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$codigo_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END codigo_fieldblock}
+	{BEGIN depto_fieldblock}		
+	<div class="container {$fielddispclass_depto}" data-fieldname="depto">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 depto}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_depto}
+			</div>
+			<div class="col-md-4" >
+				{$depto_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$depto_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END depto_fieldblock}
+	{BEGIN departamento_fieldblock}		
+	<div class="container {$fielddispclass_departamento}" data-fieldname="departamento">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 departamento}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_departamento}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$departamento_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END departamento_fieldblock}
+	{BEGIN mun_fieldblock}		
+	<div class="container {$fielddispclass_mun}" data-fieldname="mun">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 mun}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_mun}
+			</div>
+			<div class="col-md-4" >
+				{$mun_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$mun_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END mun_fieldblock}
+	{BEGIN municipio_fieldblock}		
+	<div class="container {$fielddispclass_municipio}" data-fieldname="municipio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 municipio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_municipio}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$municipio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END municipio_fieldblock}
+	{BEGIN nombre_c_e_fieldblock}		
+	<div class="container {$fielddispclass_nombre_c_e}" data-fieldname="nombre_c_e">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 nombre_c_e}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_nombre_c_e}
+			</div>
+			<div class="col-md-4" >
+				{$nombre_c_e_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$nombre_c_e_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END nombre_c_e_fieldblock}
+	{BEGIN x_fieldblock}		
+	<div class="container {$fielddispclass_x}" data-fieldname="x">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 x}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_x}
+			</div>
+			<div class="col-md-4" >
+				{$x_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$x_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END x_fieldblock}
+	{BEGIN y_fieldblock}		
+	<div class="container {$fielddispclass_y}" data-fieldname="y">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 y}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_y}
+			</div>
+			<div class="col-md-4" >
+				{$y_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$y_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END y_fieldblock}
+	{BEGIN sector_ppd_fieldblock}		
+	<div class="container {$fielddispclass_sector_ppd}" data-fieldname="sector_ppd">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 sector_ppd}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sector_ppd}
+			</div>
+			<div class="col-md-4" >
+				{$sector_ppd_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sector_ppd_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sector_ppd_fieldblock}
+	{BEGIN matricula_inicial_fieldblock}		
+	<div class="container {$fielddispclass_matricula_inicial}" data-fieldname="matricula_inicial">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 matricula_inicial}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_matricula_inicial}
+			</div>
+			<div class="col-md-4" >
+				{$matricula_inicial_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$matricula_inicial_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END matricula_inicial_fieldblock}
+	{BEGIN matricula_final_fieldblock}		
+	<div class="container {$fielddispclass_matricula_final}" data-fieldname="matricula_final">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 matricula_final}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_matricula_final}
+			</div>
+			<div class="col-md-4" >
+				{$matricula_final_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$matricula_final_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END matricula_final_fieldblock}
+	{BEGIN maras_fieldblock}		
+	<div class="container {$fielddispclass_maras}" data-fieldname="maras">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 maras}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_maras}
+			</div>
+			<div class="col-md-4" >
+				{$maras_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$maras_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END maras_fieldblock}
+	{BEGIN robos_fieldblock}		
+	<div class="container {$fielddispclass_robos}" data-fieldname="robos">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 robos}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_robos}
+			</div>
+			<div class="col-md-4" >
+				{$robos_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$robos_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END robos_fieldblock}
+	{BEGIN hurtos_fieldblock}		
+	<div class="container {$fielddispclass_hurtos}" data-fieldname="hurtos">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 hurtos}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_hurtos}
+			</div>
+			<div class="col-md-4" >
+				{$hurtos_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$hurtos_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END hurtos_fieldblock}
+	{BEGIN drogas_fieldblock}		
+	<div class="container {$fielddispclass_drogas}" data-fieldname="drogas">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 drogas}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_drogas}
+			</div>
+			<div class="col-md-4" >
+				{$drogas_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$drogas_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END drogas_fieldblock}
+	{BEGIN violaciones_fieldblock}		
+	<div class="container {$fielddispclass_violaciones}" data-fieldname="violaciones">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 violaciones}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_violaciones}
+			</div>
+			<div class="col-md-4" >
+				{$violaciones_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$violaciones_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END violaciones_fieldblock}
+	{BEGIN pab_fieldblock}		
+	<div class="container {$fielddispclass_pab}" data-fieldname="pab">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 pab}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_pab}
+			</div>
+			<div class="col-md-4" >
+				{$pab_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$pab_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END pab_fieldblock}
+	{BEGIN paf_fieldblock}		
+	<div class="container {$fielddispclass_paf}" data-fieldname="paf">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 paf}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_paf}
+			</div>
+			<div class="col-md-4" >
+				{$paf_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$paf_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END paf_fieldblock}
+	{BEGIN escasos_recursos_fieldblock}		
+	<div class="container {$fielddispclass_escasos_recursos}" data-fieldname="escasos_recursos">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 escasos_recursos}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_escasos_recursos}
+			</div>
+			<div class="col-md-4" >
+				{$escasos_recursos_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$escasos_recursos_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END escasos_recursos_fieldblock}
+	{BEGIN incorpo_actividades_prod_fieldblock}		
+	<div class="container {$fielddispclass_incorpo_actividades_prod}" data-fieldname="incorpo_actividades_prod">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 incorpo_actividades_prod}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_incorpo_actividades_prod}
+			</div>
+			<div class="col-md-4" >
+				{$incorpo_actividades_prod_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$incorpo_actividades_prod_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END incorpo_actividades_prod_fieldblock}
+	{BEGIN lejania_ce_fieldblock}		
+	<div class="container {$fielddispclass_lejania_ce}" data-fieldname="lejania_ce">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 lejania_ce}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_lejania_ce}
+			</div>
+			<div class="col-md-4" >
+				{$lejania_ce_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$lejania_ce_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END lejania_ce_fieldblock}
+	{BEGIN violencia_pandilleril_fieldblock}		
+	<div class="container {$fielddispclass_violencia_pandilleril}" data-fieldname="violencia_pandilleril">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 violencia_pandilleril}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_violencia_pandilleril}
+			</div>
+			<div class="col-md-4" >
+				{$violencia_pandilleril_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$violencia_pandilleril_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END violencia_pandilleril_fieldblock}
+	{BEGIN embarazo_fieldblock}		
+	<div class="container {$fielddispclass_embarazo}" data-fieldname="embarazo">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 embarazo}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_embarazo}
+			</div>
+			<div class="col-md-4" >
+				{$embarazo_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$embarazo_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END embarazo_fieldblock}
+	{BEGIN acoso_fieldblock}		
+	<div class="container {$fielddispclass_acoso}" data-fieldname="acoso">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 acoso}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_acoso}
+			</div>
+			<div class="col-md-4" >
+				{$acoso_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$acoso_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END acoso_fieldblock}
+	{BEGIN violacion_sexual_fieldblock}		
+	<div class="container {$fielddispclass_violacion_sexual}" data-fieldname="violacion_sexual">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 violacion_sexual}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_violacion_sexual}
+			</div>
+			<div class="col-md-4" >
+				{$violacion_sexual_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$violacion_sexual_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END violacion_sexual_fieldblock}
+	{BEGIN cambio_domicilio_fieldblock}		
+	<div class="container {$fielddispclass_cambio_domicilio}" data-fieldname="cambio_domicilio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 cambio_domicilio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_cambio_domicilio}
+			</div>
+			<div class="col-md-4" >
+				{$cambio_domicilio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$cambio_domicilio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END cambio_domicilio_fieldblock}
+	{BEGIN migracion_fieldblock}		
+	<div class="container {$fielddispclass_migracion}" data-fieldname="migracion">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 migracion}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_migracion}
+			</div>
+			<div class="col-md-4" >
+				{$migracion_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$migracion_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END migracion_fieldblock}
+	{BEGIN bajo_rendimiento_fieldblock}		
+	<div class="container {$fielddispclass_bajo_rendimiento}" data-fieldname="bajo_rendimiento">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 bajo_rendimiento}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_bajo_rendimiento}
+			</div>
+			<div class="col-md-4" >
+				{$bajo_rendimiento_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$bajo_rendimiento_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END bajo_rendimiento_fieldblock}
+	{BEGIN enfermedad_fieldblock}		
+	<div class="container {$fielddispclass_enfermedad}" data-fieldname="enfermedad">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 enfermedad}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_enfermedad}
+			</div>
+			<div class="col-md-4" >
+				{$enfermedad_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$enfermedad_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END enfermedad_fieldblock}
+	{BEGIN prostitucion_fieldblock}		
+	<div class="container {$fielddispclass_prostitucion}" data-fieldname="prostitucion">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 prostitucion}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_prostitucion}
+			</div>
+			<div class="col-md-4" >
+				{$prostitucion_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$prostitucion_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END prostitucion_fieldblock}
+	{BEGIN dep_mun_fieldblock}		
+	<div class="container {$fielddispclass_dep_mun}" data-fieldname="dep_mun">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 dep_mun}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_dep_mun}
+			</div>
+			<div class="col-md-4" >
+				{$dep_mun_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$dep_mun_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END dep_mun_fieldblock}
+	{BEGIN max_matric2016_fieldblock}		
+	<div class="container {$fielddispclass_max_matric2016}" data-fieldname="max_matric2016">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 max_matric2016}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_max_matric2016}
+			</div>
+			<div class="col-md-4" >
+				{$max_matric2016_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$max_matric2016_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END max_matric2016_fieldblock}
+	{BEGIN mrf2016_fieldblock}		
+	<div class="container {$fielddispclass_mrf2016}" data-fieldname="mrf2016">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 mrf2016}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_mrf2016}
+			</div>
+			<div class="col-md-4" >
+				{$mrf2016_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$mrf2016_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END mrf2016_fieldblock}
+	{BEGIN pab_af_fieldblock}		
+	<div class="container {$fielddispclass_pab_af}" data-fieldname="pab_af">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 pab_af}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_pab_af}
+			</div>
+			<div class="col-md-4" >
+				{$pab_af_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$pab_af_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END pab_af_fieldblock}
+	{BEGIN r_h_fieldblock}		
+	<div class="container {$fielddispclass_r_h}" data-fieldname="r_h">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 r_h}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_r_h}
+			</div>
+			<div class="col-md-4" >
+				{$r_h_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$r_h_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END r_h_fieldblock}
+	{BEGIN ipce_naive_fieldblock}		
+	<div class="container {$fielddispclass_ipce_naive}" data-fieldname="ipce_naive">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 ipce_naive}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_ipce_naive}
+			</div>
+			<div class="col-md-4" >
+				{$ipce_naive_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$ipce_naive_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END ipce_naive_fieldblock}
+	{BEGIN ipce_0_1_fieldblock}		
+	<div class="container {$fielddispclass_ipce_0_1}" data-fieldname="ipce_0_1">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 ipce_0_1}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_ipce_0_1}
+			</div>
+			<div class="col-md-4" >
+				{$ipce_0_1_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$ipce_0_1_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END ipce_0_1_fieldblock}
+	{BEGIN a_o_fieldblock}		
+	<div class="container {$fielddispclass_a_o}" data-fieldname="a_o">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label mined11 a_o}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_a_o}
+			</div>
+			<div class="col-md-4" >
+				{$a_o_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$a_o_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END a_o_fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

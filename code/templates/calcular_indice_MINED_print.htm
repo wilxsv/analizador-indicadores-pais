@@ -1,0 +1,512 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-print" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel calcular_indice_MINED print}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+	<table class="table table-bordered rp-maintable" {$printgrid_hiddenattr} data-pageid="{$pageid}" data-brick="printgrid" >
+	<thead>
+	{BEGIN grid_header}
+		<tr class="{$gridHeader_class}" >
+		{BEGIN record_header}
+			{BEGIN idderespuesta_fieldheadercolumn}
+			<th class="{$idderespuesta_class}" {$idderespuesta_style}  data-field="idderespuesta">
+				{$label calcular_indice_MINED idderespuesta}
+			</th>
+			{END idderespuesta_fieldheadercolumn}
+			{BEGIN codigo_fieldheadercolumn}
+			<th class="{$codigo_class}" {$codigo_style}  data-field="codigo">
+				{$label calcular_indice_MINED codigo}
+			</th>
+			{END codigo_fieldheadercolumn}
+			{BEGIN depto_fieldheadercolumn}
+			<th class="{$depto_class}" {$depto_style}  data-field="depto">
+				{$label calcular_indice_MINED depto}
+			</th>
+			{END depto_fieldheadercolumn}
+			{BEGIN departamento_fieldheadercolumn}
+			<th class="{$departamento_class}" {$departamento_style}  data-field="departamento">
+				{$label calcular_indice_MINED departamento}
+			</th>
+			{END departamento_fieldheadercolumn}
+			{BEGIN mun_fieldheadercolumn}
+			<th class="{$mun_class}" {$mun_style}  data-field="mun">
+				{$label calcular_indice_MINED mun}
+			</th>
+			{END mun_fieldheadercolumn}
+			{BEGIN municipio_fieldheadercolumn}
+			<th class="{$municipio_class}" {$municipio_style}  data-field="municipio">
+				{$label calcular_indice_MINED municipio}
+			</th>
+			{END municipio_fieldheadercolumn}
+			{BEGIN nombre_c_e_fieldheadercolumn}
+			<th class="{$nombre_c_e_class}" {$nombre_c_e_style}  data-field="nombre_c_e">
+				{$label calcular_indice_MINED nombre_c_e}
+			</th>
+			{END nombre_c_e_fieldheadercolumn}
+			{BEGIN x_fieldheadercolumn}
+			<th class="{$x_class}" {$x_style}  data-field="x">
+				{$label calcular_indice_MINED x}
+			</th>
+			{END x_fieldheadercolumn}
+			{BEGIN y_fieldheadercolumn}
+			<th class="{$y_class}" {$y_style}  data-field="y">
+				{$label calcular_indice_MINED y}
+			</th>
+			{END y_fieldheadercolumn}
+			{BEGIN sector_ppd_fieldheadercolumn}
+			<th class="{$sector_ppd_class}" {$sector_ppd_style}  data-field="sector_ppd">
+				{$label calcular_indice_MINED sector_ppd}
+			</th>
+			{END sector_ppd_fieldheadercolumn}
+			{BEGIN matricula_inicial_fieldheadercolumn}
+			<th class="{$matricula_inicial_class}" {$matricula_inicial_style}  data-field="matricula_inicial">
+				{$label calcular_indice_MINED matricula_inicial}
+			</th>
+			{END matricula_inicial_fieldheadercolumn}
+			{BEGIN matricula_final_fieldheadercolumn}
+			<th class="{$matricula_final_class}" {$matricula_final_style}  data-field="matricula_final">
+				{$label calcular_indice_MINED matricula_final}
+			</th>
+			{END matricula_final_fieldheadercolumn}
+			{BEGIN maras_fieldheadercolumn}
+			<th class="{$maras_class}" {$maras_style}  data-field="maras">
+				{$label calcular_indice_MINED maras}
+			</th>
+			{END maras_fieldheadercolumn}
+			{BEGIN robos_fieldheadercolumn}
+			<th class="{$robos_class}" {$robos_style}  data-field="robos">
+				{$label calcular_indice_MINED robos}
+			</th>
+			{END robos_fieldheadercolumn}
+			{BEGIN hurtos_fieldheadercolumn}
+			<th class="{$hurtos_class}" {$hurtos_style}  data-field="hurtos">
+				{$label calcular_indice_MINED hurtos}
+			</th>
+			{END hurtos_fieldheadercolumn}
+			{BEGIN drogas_fieldheadercolumn}
+			<th class="{$drogas_class}" {$drogas_style}  data-field="drogas">
+				{$label calcular_indice_MINED drogas}
+			</th>
+			{END drogas_fieldheadercolumn}
+			{BEGIN violaciones_fieldheadercolumn}
+			<th class="{$violaciones_class}" {$violaciones_style}  data-field="violaciones">
+				{$label calcular_indice_MINED violaciones}
+			</th>
+			{END violaciones_fieldheadercolumn}
+			{BEGIN pab_fieldheadercolumn}
+			<th class="{$pab_class}" {$pab_style}  data-field="pab">
+				{$label calcular_indice_MINED pab}
+			</th>
+			{END pab_fieldheadercolumn}
+			{BEGIN paf_fieldheadercolumn}
+			<th class="{$paf_class}" {$paf_style}  data-field="paf">
+				{$label calcular_indice_MINED paf}
+			</th>
+			{END paf_fieldheadercolumn}
+			{BEGIN escasos_recursos_fieldheadercolumn}
+			<th class="{$escasos_recursos_class}" {$escasos_recursos_style}  data-field="escasos_recursos">
+				{$label calcular_indice_MINED escasos_recursos}
+			</th>
+			{END escasos_recursos_fieldheadercolumn}
+			{BEGIN incorpo_actividades_prod_fieldheadercolumn}
+			<th class="{$incorpo_actividades_prod_class}" {$incorpo_actividades_prod_style}  data-field="incorpo_actividades_prod">
+				{$label calcular_indice_MINED incorpo_actividades_prod}
+			</th>
+			{END incorpo_actividades_prod_fieldheadercolumn}
+			{BEGIN lejania_ce_fieldheadercolumn}
+			<th class="{$lejania_ce_class}" {$lejania_ce_style}  data-field="lejania_ce">
+				{$label calcular_indice_MINED lejania_ce}
+			</th>
+			{END lejania_ce_fieldheadercolumn}
+			{BEGIN violencia_pandilleril_fieldheadercolumn}
+			<th class="{$violencia_pandilleril_class}" {$violencia_pandilleril_style}  data-field="violencia_pandilleril">
+				{$label calcular_indice_MINED violencia_pandilleril}
+			</th>
+			{END violencia_pandilleril_fieldheadercolumn}
+			{BEGIN embarazo_fieldheadercolumn}
+			<th class="{$embarazo_class}" {$embarazo_style}  data-field="embarazo">
+				{$label calcular_indice_MINED embarazo}
+			</th>
+			{END embarazo_fieldheadercolumn}
+			{BEGIN acoso_fieldheadercolumn}
+			<th class="{$acoso_class}" {$acoso_style}  data-field="acoso">
+				{$label calcular_indice_MINED acoso}
+			</th>
+			{END acoso_fieldheadercolumn}
+			{BEGIN violacion_sexual_fieldheadercolumn}
+			<th class="{$violacion_sexual_class}" {$violacion_sexual_style}  data-field="violacion_sexual">
+				{$label calcular_indice_MINED violacion_sexual}
+			</th>
+			{END violacion_sexual_fieldheadercolumn}
+			{BEGIN cambio_domicilio_fieldheadercolumn}
+			<th class="{$cambio_domicilio_class}" {$cambio_domicilio_style}  data-field="cambio_domicilio">
+				{$label calcular_indice_MINED cambio_domicilio}
+			</th>
+			{END cambio_domicilio_fieldheadercolumn}
+			{BEGIN migracion_fieldheadercolumn}
+			<th class="{$migracion_class}" {$migracion_style}  data-field="migracion">
+				{$label calcular_indice_MINED migracion}
+			</th>
+			{END migracion_fieldheadercolumn}
+			{BEGIN bajo_rendimiento_fieldheadercolumn}
+			<th class="{$bajo_rendimiento_class}" {$bajo_rendimiento_style}  data-field="bajo_rendimiento">
+				{$label calcular_indice_MINED bajo_rendimiento}
+			</th>
+			{END bajo_rendimiento_fieldheadercolumn}
+			{BEGIN enfermedad_fieldheadercolumn}
+			<th class="{$enfermedad_class}" {$enfermedad_style}  data-field="enfermedad">
+				{$label calcular_indice_MINED enfermedad}
+			</th>
+			{END enfermedad_fieldheadercolumn}
+			{BEGIN prostitucion_fieldheadercolumn}
+			<th class="{$prostitucion_class}" {$prostitucion_style}  data-field="prostitucion">
+				{$label calcular_indice_MINED prostitucion}
+			</th>
+			{END prostitucion_fieldheadercolumn}
+			{BEGIN dep_mun_fieldheadercolumn}
+			<th class="{$dep_mun_class}" {$dep_mun_style}  data-field="dep_mun">
+				{$label calcular_indice_MINED dep_mun}
+			</th>
+			{END dep_mun_fieldheadercolumn}
+			{BEGIN max_matric2016_fieldheadercolumn}
+			<th class="{$max_matric2016_class}" {$max_matric2016_style}  data-field="max_matric2016">
+				{$label calcular_indice_MINED max_matric2016}
+			</th>
+			{END max_matric2016_fieldheadercolumn}
+			{BEGIN mrf2016_fieldheadercolumn}
+			<th class="{$mrf2016_class}" {$mrf2016_style}  data-field="mrf2016">
+				{$label calcular_indice_MINED mrf2016}
+			</th>
+			{END mrf2016_fieldheadercolumn}
+			{BEGIN pab_af_fieldheadercolumn}
+			<th class="{$pab_af_class}" {$pab_af_style}  data-field="pab_af">
+				{$label calcular_indice_MINED pab_af}
+			</th>
+			{END pab_af_fieldheadercolumn}
+			{BEGIN r_h_fieldheadercolumn}
+			<th class="{$r_h_class}" {$r_h_style}  data-field="r_h">
+				{$label calcular_indice_MINED r_h}
+			</th>
+			{END r_h_fieldheadercolumn}
+			{BEGIN ipce_naive_fieldheadercolumn}
+			<th class="{$ipce_naive_class}" {$ipce_naive_style}  data-field="ipce_naive">
+				{$label calcular_indice_MINED ipce_naive}
+			</th>
+			{END ipce_naive_fieldheadercolumn}
+			{BEGIN ipce_0_1_fieldheadercolumn}
+			<th class="{$ipce_0_1_class}" {$ipce_0_1_style}  data-field="ipce_0_1">
+				{$label calcular_indice_MINED ipce_0_1}
+			</th>
+			{END ipce_0_1_fieldheadercolumn}
+			{BEGIN a_o_fieldheadercolumn}
+			<th class="{$a_o_class}" {$a_o_style}  data-field="a_o">
+				{$label calcular_indice_MINED a_o}
+			</th>
+			{END a_o_fieldheadercolumn}
+			{BEGIN endrecordheader_block}
+			<th class="rnr-cs">&nbsp;</th>
+			{END endrecordheader_block}
+		{END record_header}
+		</tr>
+	{END grid_header}
+	</thead>
+	
+	<tbody>	
+	{BEGIN grid_row}
+		<tr class="{$rowclass}" {$rowattrs} {$rowstyle}>
+		{BEGIN grid_record}
+			{BEGIN idderespuesta_fieldcolumn}
+			<td  class="{$idderespuesta_class}" {$idderespuesta_style} {$recordattrs}>
+				{$idderespuesta_value}
+			</td>
+			{END idderespuesta_fieldcolumn}
+			{BEGIN codigo_fieldcolumn}
+			<td  class="{$codigo_class}" {$codigo_style} {$recordattrs}>
+				{$codigo_value}
+			</td>
+			{END codigo_fieldcolumn}
+			{BEGIN depto_fieldcolumn}
+			<td  class="{$depto_class}" {$depto_style} {$recordattrs}>
+				{$depto_value}
+			</td>
+			{END depto_fieldcolumn}
+			{BEGIN departamento_fieldcolumn}
+			<td  class="{$departamento_class}" {$departamento_style} {$recordattrs}>
+				{$departamento_value}
+			</td>
+			{END departamento_fieldcolumn}
+			{BEGIN mun_fieldcolumn}
+			<td  class="{$mun_class}" {$mun_style} {$recordattrs}>
+				{$mun_value}
+			</td>
+			{END mun_fieldcolumn}
+			{BEGIN municipio_fieldcolumn}
+			<td  class="{$municipio_class}" {$municipio_style} {$recordattrs}>
+				{$municipio_value}
+			</td>
+			{END municipio_fieldcolumn}
+			{BEGIN nombre_c_e_fieldcolumn}
+			<td  class="{$nombre_c_e_class}" {$nombre_c_e_style} {$recordattrs}>
+				{$nombre_c_e_value}
+			</td>
+			{END nombre_c_e_fieldcolumn}
+			{BEGIN x_fieldcolumn}
+			<td  class="{$x_class}" {$x_style} {$recordattrs}>
+				{$x_value}
+			</td>
+			{END x_fieldcolumn}
+			{BEGIN y_fieldcolumn}
+			<td  class="{$y_class}" {$y_style} {$recordattrs}>
+				{$y_value}
+			</td>
+			{END y_fieldcolumn}
+			{BEGIN sector_ppd_fieldcolumn}
+			<td  class="{$sector_ppd_class}" {$sector_ppd_style} {$recordattrs}>
+				{$sector_ppd_value}
+			</td>
+			{END sector_ppd_fieldcolumn}
+			{BEGIN matricula_inicial_fieldcolumn}
+			<td  class="{$matricula_inicial_class}" {$matricula_inicial_style} {$recordattrs}>
+				{$matricula_inicial_value}
+			</td>
+			{END matricula_inicial_fieldcolumn}
+			{BEGIN matricula_final_fieldcolumn}
+			<td  class="{$matricula_final_class}" {$matricula_final_style} {$recordattrs}>
+				{$matricula_final_value}
+			</td>
+			{END matricula_final_fieldcolumn}
+			{BEGIN maras_fieldcolumn}
+			<td  class="{$maras_class}" {$maras_style} {$recordattrs}>
+				{$maras_value}
+			</td>
+			{END maras_fieldcolumn}
+			{BEGIN robos_fieldcolumn}
+			<td  class="{$robos_class}" {$robos_style} {$recordattrs}>
+				{$robos_value}
+			</td>
+			{END robos_fieldcolumn}
+			{BEGIN hurtos_fieldcolumn}
+			<td  class="{$hurtos_class}" {$hurtos_style} {$recordattrs}>
+				{$hurtos_value}
+			</td>
+			{END hurtos_fieldcolumn}
+			{BEGIN drogas_fieldcolumn}
+			<td  class="{$drogas_class}" {$drogas_style} {$recordattrs}>
+				{$drogas_value}
+			</td>
+			{END drogas_fieldcolumn}
+			{BEGIN violaciones_fieldcolumn}
+			<td  class="{$violaciones_class}" {$violaciones_style} {$recordattrs}>
+				{$violaciones_value}
+			</td>
+			{END violaciones_fieldcolumn}
+			{BEGIN pab_fieldcolumn}
+			<td  class="{$pab_class}" {$pab_style} {$recordattrs}>
+				{$pab_value}
+			</td>
+			{END pab_fieldcolumn}
+			{BEGIN paf_fieldcolumn}
+			<td  class="{$paf_class}" {$paf_style} {$recordattrs}>
+				{$paf_value}
+			</td>
+			{END paf_fieldcolumn}
+			{BEGIN escasos_recursos_fieldcolumn}
+			<td  class="{$escasos_recursos_class}" {$escasos_recursos_style} {$recordattrs}>
+				{$escasos_recursos_value}
+			</td>
+			{END escasos_recursos_fieldcolumn}
+			{BEGIN incorpo_actividades_prod_fieldcolumn}
+			<td  class="{$incorpo_actividades_prod_class}" {$incorpo_actividades_prod_style} {$recordattrs}>
+				{$incorpo_actividades_prod_value}
+			</td>
+			{END incorpo_actividades_prod_fieldcolumn}
+			{BEGIN lejania_ce_fieldcolumn}
+			<td  class="{$lejania_ce_class}" {$lejania_ce_style} {$recordattrs}>
+				{$lejania_ce_value}
+			</td>
+			{END lejania_ce_fieldcolumn}
+			{BEGIN violencia_pandilleril_fieldcolumn}
+			<td  class="{$violencia_pandilleril_class}" {$violencia_pandilleril_style} {$recordattrs}>
+				{$violencia_pandilleril_value}
+			</td>
+			{END violencia_pandilleril_fieldcolumn}
+			{BEGIN embarazo_fieldcolumn}
+			<td  class="{$embarazo_class}" {$embarazo_style} {$recordattrs}>
+				{$embarazo_value}
+			</td>
+			{END embarazo_fieldcolumn}
+			{BEGIN acoso_fieldcolumn}
+			<td  class="{$acoso_class}" {$acoso_style} {$recordattrs}>
+				{$acoso_value}
+			</td>
+			{END acoso_fieldcolumn}
+			{BEGIN violacion_sexual_fieldcolumn}
+			<td  class="{$violacion_sexual_class}" {$violacion_sexual_style} {$recordattrs}>
+				{$violacion_sexual_value}
+			</td>
+			{END violacion_sexual_fieldcolumn}
+			{BEGIN cambio_domicilio_fieldcolumn}
+			<td  class="{$cambio_domicilio_class}" {$cambio_domicilio_style} {$recordattrs}>
+				{$cambio_domicilio_value}
+			</td>
+			{END cambio_domicilio_fieldcolumn}
+			{BEGIN migracion_fieldcolumn}
+			<td  class="{$migracion_class}" {$migracion_style} {$recordattrs}>
+				{$migracion_value}
+			</td>
+			{END migracion_fieldcolumn}
+			{BEGIN bajo_rendimiento_fieldcolumn}
+			<td  class="{$bajo_rendimiento_class}" {$bajo_rendimiento_style} {$recordattrs}>
+				{$bajo_rendimiento_value}
+			</td>
+			{END bajo_rendimiento_fieldcolumn}
+			{BEGIN enfermedad_fieldcolumn}
+			<td  class="{$enfermedad_class}" {$enfermedad_style} {$recordattrs}>
+				{$enfermedad_value}
+			</td>
+			{END enfermedad_fieldcolumn}
+			{BEGIN prostitucion_fieldcolumn}
+			<td  class="{$prostitucion_class}" {$prostitucion_style} {$recordattrs}>
+				{$prostitucion_value}
+			</td>
+			{END prostitucion_fieldcolumn}
+			{BEGIN dep_mun_fieldcolumn}
+			<td  class="{$dep_mun_class}" {$dep_mun_style} {$recordattrs}>
+				{$dep_mun_value}
+			</td>
+			{END dep_mun_fieldcolumn}
+			{BEGIN max_matric2016_fieldcolumn}
+			<td  class="{$max_matric2016_class}" {$max_matric2016_style} {$recordattrs}>
+				{$max_matric2016_value}
+			</td>
+			{END max_matric2016_fieldcolumn}
+			{BEGIN mrf2016_fieldcolumn}
+			<td  class="{$mrf2016_class}" {$mrf2016_style} {$recordattrs}>
+				{$mrf2016_value}
+			</td>
+			{END mrf2016_fieldcolumn}
+			{BEGIN pab_af_fieldcolumn}
+			<td  class="{$pab_af_class}" {$pab_af_style} {$recordattrs}>
+				{$pab_af_value}
+			</td>
+			{END pab_af_fieldcolumn}
+			{BEGIN r_h_fieldcolumn}
+			<td  class="{$r_h_class}" {$r_h_style} {$recordattrs}>
+				{$r_h_value}
+			</td>
+			{END r_h_fieldcolumn}
+			{BEGIN ipce_naive_fieldcolumn}
+			<td  class="{$ipce_naive_class}" {$ipce_naive_style} {$recordattrs}>
+				{$ipce_naive_value}
+			</td>
+			{END ipce_naive_fieldcolumn}
+			{BEGIN ipce_0_1_fieldcolumn}
+			<td  class="{$ipce_0_1_class}" {$ipce_0_1_style} {$recordattrs}>
+				{$ipce_0_1_value}
+			</td>
+			{END ipce_0_1_fieldcolumn}
+			{BEGIN a_o_fieldcolumn}
+			<td  class="{$a_o_class}" {$a_o_style} {$recordattrs}>
+				{$a_o_value}
+			</td>
+			{END a_o_fieldcolumn}
+			{BEGIN endrecord_block}
+			<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+			{END endrecord_block}
+		{END grid_record}
+		</tr>
+{END grid_row}
+	</tbody>
+
+</table>
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

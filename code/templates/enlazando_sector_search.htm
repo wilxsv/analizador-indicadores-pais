@@ -1,0 +1,782 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel enlazando_sector search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN id_fieldblock}		
+	<div class="container {$fielddispclass_id}" data-fieldname="id">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector id}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_id}
+			</div>
+			<div class="col-md-4" >
+				{$id_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$id_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END id_fieldblock}
+	{BEGIN sipe_fieldblock}		
+	<div class="container {$fielddispclass_sipe}" data-fieldname="sipe">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector sipe}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sipe}
+			</div>
+			<div class="col-md-4" >
+				{$sipe_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sipe_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sipe_fieldblock}
+	{BEGIN afis_fieldblock}		
+	<div class="container {$fielddispclass_afis}" data-fieldname="afis">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector afis}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_afis}
+			</div>
+			<div class="col-md-4" >
+				{$afis_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$afis_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END afis_fieldblock}
+	{BEGIN edad_fieldblock}		
+	<div class="container {$fielddispclass_edad}" data-fieldname="edad">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector edad}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_edad}
+			</div>
+			<div class="col-md-4" >
+				{$edad_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$edad_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END edad_fieldblock}
+	{BEGIN rangoetario_fieldblock}		
+	<div class="container {$fielddispclass_rangoetario}" data-fieldname="rangoetario">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector rangoetario}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_rangoetario}
+			</div>
+			<div class="col-md-4" >
+				{$rangoetario_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$rangoetario_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END rangoetario_fieldblock}
+	{BEGIN genero_fieldblock}		
+	<div class="container {$fielddispclass_genero}" data-fieldname="genero">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector genero}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_genero}
+			</div>
+			<div class="col-md-4" >
+				{$genero_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$genero_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END genero_fieldblock}
+	{BEGIN fecha_nac_fieldblock}		
+	<div class="container {$fielddispclass_fecha_nac}" data-fieldname="fecha_nac">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector fecha_nac}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_fecha_nac}
+			</div>
+			<div class="col-md-4" >
+				{$fecha_nac_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$fecha_nac_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END fecha_nac_fieldblock}
+	{BEGIN edad1_fieldblock}		
+	<div class="container {$fielddispclass_edad1}" data-fieldname="edad1">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector edad1}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_edad1}
+			</div>
+			<div class="col-md-4" >
+				{$edad1_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$edad1_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END edad1_fieldblock}
+	{BEGIN dui_fieldblock}		
+	<div class="container {$fielddispclass_dui}" data-fieldname="dui">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector dui}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_dui}
+			</div>
+			<div class="col-md-4" >
+				{$dui_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$dui_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END dui_fieldblock}
+	{BEGIN nivel_edu_fieldblock}		
+	<div class="container {$fielddispclass_nivel_edu}" data-fieldname="nivel_edu">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector nivel_edu}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_nivel_edu}
+			</div>
+			<div class="col-md-4" >
+				{$nivel_edu_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$nivel_edu_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END nivel_edu_fieldblock}
+	{BEGIN educacionanalisis_fieldblock}		
+	<div class="container {$fielddispclass_educacionanalisis}" data-fieldname="educacionanalisis">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector educacionanalisis}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_educacionanalisis}
+			</div>
+			<div class="col-md-4" >
+				{$educacionanalisis_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$educacionanalisis_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END educacionanalisis_fieldblock}
+	{BEGIN profesion_oficio_fieldblock}		
+	<div class="container {$fielddispclass_profesion_oficio}" data-fieldname="profesion_oficio">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector profesion_oficio}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_profesion_oficio}
+			</div>
+			<div class="col-md-4" >
+				{$profesion_oficio_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$profesion_oficio_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END profesion_oficio_fieldblock}
+	{BEGIN estado_civil_fieldblock}		
+	<div class="container {$fielddispclass_estado_civil}" data-fieldname="estado_civil">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector estado_civil}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_estado_civil}
+			</div>
+			<div class="col-md-4" >
+				{$estado_civil_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$estado_civil_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END estado_civil_fieldblock}
+	{BEGIN ciudadania_fieldblock}		
+	<div class="container {$fielddispclass_ciudadania}" data-fieldname="ciudadania">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector ciudadania}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_ciudadania}
+			</div>
+			<div class="col-md-4" >
+				{$ciudadania_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$ciudadania_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END ciudadania_fieldblock}
+	{BEGIN mun_nacimiento_fieldblock}		
+	<div class="container {$fielddispclass_mun_nacimiento}" data-fieldname="mun_nacimiento">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector mun_nacimiento}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_mun_nacimiento}
+			</div>
+			<div class="col-md-4" >
+				{$mun_nacimiento_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$mun_nacimiento_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END mun_nacimiento_fieldblock}
+	{BEGIN depto_nacim_fieldblock}		
+	<div class="container {$fielddispclass_depto_nacim}" data-fieldname="depto_nacim">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector depto_nacim}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_depto_nacim}
+			</div>
+			<div class="col-md-4" >
+				{$depto_nacim_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$depto_nacim_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END depto_nacim_fieldblock}
+	{BEGIN direccion_fieldblock}		
+	<div class="container {$fielddispclass_direccion}" data-fieldname="direccion">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector direccion}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_direccion}
+			</div>
+			<div class="col-md-4" >
+				{$direccion_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$direccion_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END direccion_fieldblock}
+	{BEGIN mun_resid_fieldblock}		
+	<div class="container {$fielddispclass_mun_resid}" data-fieldname="mun_resid">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector mun_resid}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_mun_resid}
+			</div>
+			<div class="col-md-4" >
+				{$mun_resid_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$mun_resid_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END mun_resid_fieldblock}
+	{BEGIN depart_resid_fieldblock}		
+	<div class="container {$fielddispclass_depart_resid}" data-fieldname="depart_resid">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector depart_resid}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_depart_resid}
+			</div>
+			<div class="col-md-4" >
+				{$depart_resid_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$depart_resid_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END depart_resid_fieldblock}
+	{BEGIN delitosanalisis_fieldblock}		
+	<div class="container {$fielddispclass_delitosanalisis}" data-fieldname="delitosanalisis">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector delitosanalisis}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_delitosanalisis}
+			</div>
+			<div class="col-md-4" >
+				{$delitosanalisis_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$delitosanalisis_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END delitosanalisis_fieldblock}
+	{BEGIN sj_interno_fieldblock}		
+	<div class="container {$fielddispclass_sj_interno}" data-fieldname="sj_interno">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector sj_interno}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sj_interno}
+			</div>
+			<div class="col-md-4" >
+				{$sj_interno_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sj_interno_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sj_interno_fieldblock}
+	{BEGIN fase_fieldblock}		
+	<div class="container {$fielddispclass_fase}" data-fieldname="fase">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector fase}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_fase}
+			</div>
+			<div class="col-md-4" >
+				{$fase_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$fase_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END fase_fieldblock}
+	{BEGIN org_delictiva_fieldblock}		
+	<div class="container {$fielddispclass_org_delictiva}" data-fieldname="org_delictiva">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector org_delictiva}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_org_delictiva}
+			</div>
+			<div class="col-md-4" >
+				{$org_delictiva_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$org_delictiva_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END org_delictiva_fieldblock}
+	{BEGIN tipo_mara_fieldblock}		
+	<div class="container {$fielddispclass_tipo_mara}" data-fieldname="tipo_mara">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector tipo_mara}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_tipo_mara}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_mara_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_mara_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END tipo_mara_fieldblock}
+	{BEGIN reincidente_fieldblock}		
+	<div class="container {$fielddispclass_reincidente}" data-fieldname="reincidente">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector reincidente}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_reincidente}
+			</div>
+			<div class="col-md-4" >
+				{$reincidente_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$reincidente_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END reincidente_fieldblock}
+	{BEGIN deportado_fieldblock}		
+	<div class="container {$fielddispclass_deportado}" data-fieldname="deportado">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector deportado}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_deportado}
+			</div>
+			<div class="col-md-4" >
+				{$deportado_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$deportado_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END deportado_fieldblock}
+	{BEGIN direccion1_fieldblock}		
+	<div class="container {$fielddispclass_direccion1}" data-fieldname="direccion1">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector direccion1}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_direccion1}
+			</div>
+			<div class="col-md-4" >
+				{$direccion1_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$direccion1_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END direccion1_fieldblock}
+	{BEGIN sector_fieldblock}		
+	<div class="container {$fielddispclass_sector}" data-fieldname="sector">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector sector}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sector}
+			</div>
+			<div class="col-md-4" >
+				{$sector_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sector_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sector_fieldblock}
+	{BEGIN celda_fieldblock}		
+	<div class="container {$fielddispclass_celda}" data-fieldname="celda">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector celda}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_celda}
+			</div>
+			<div class="col-md-4" >
+				{$celda_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$celda_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END celda_fieldblock}
+	{BEGIN fecha_ing__sp_fieldblock}		
+	<div class="container {$fielddispclass_fecha_ing__sp}" data-fieldname="fecha_ing__sp">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector fecha_ing__sp}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_fecha_ing__sp}
+			</div>
+			<div class="col-md-4" >
+				{$fecha_ing__sp_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$fecha_ing__sp_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END fecha_ing__sp_fieldblock}
+	{BEGIN libro_fieldblock}		
+	<div class="container {$fielddispclass_libro}" data-fieldname="libro">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector libro}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_libro}
+			</div>
+			<div class="col-md-4" >
+				{$libro_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$libro_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END libro_fieldblock}
+	{BEGIN fecha_ing__cp_fieldblock}		
+	<div class="container {$fielddispclass_fecha_ing__cp}" data-fieldname="fecha_ing__cp">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector fecha_ing__cp}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_fecha_ing__cp}
+			</div>
+			<div class="col-md-4" >
+				{$fecha_ing__cp_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$fecha_ing__cp_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END fecha_ing__cp_fieldblock}
+	{BEGIN total_delitos_fieldblock}		
+	<div class="container {$fielddispclass_total_delitos}" data-fieldname="total_delitos">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector total_delitos}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_total_delitos}
+			</div>
+			<div class="col-md-4" >
+				{$total_delitos_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$total_delitos_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END total_delitos_fieldblock}
+	{BEGIN delitos_fieldblock}		
+	<div class="container {$fielddispclass_delitos}" data-fieldname="delitos">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector delitos}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_delitos}
+			</div>
+			<div class="col-md-4" >
+				{$delitos_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$delitos_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END delitos_fieldblock}
+	{BEGIN delitoanalisis_fieldblock}		
+	<div class="container {$fielddispclass_delitoanalisis}" data-fieldname="delitoanalisis">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector delitoanalisis}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_delitoanalisis}
+			</div>
+			<div class="col-md-4" >
+				{$delitoanalisis_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$delitoanalisis_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END delitoanalisis_fieldblock}
+	{BEGIN sector_ppd_fieldblock}		
+	<div class="container {$fielddispclass_sector_ppd}" data-fieldname="sector_ppd">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label enlazando_sector sector_ppd}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_sector_ppd}
+			</div>
+			<div class="col-md-4" >
+				{$sector_ppd_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$sector_ppd_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END sector_ppd_fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

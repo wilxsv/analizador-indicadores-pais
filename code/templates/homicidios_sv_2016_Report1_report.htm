@@ -1,0 +1,526 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+	</head>
+	
+	<body class="{$stylename} function-report" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+	<div class="rnr-page">
+		<div class="rnr-top {$blockclass_top}">
+			
+
+
+
+{BEGIN container_toplinks}
+<div class="rnr-c rnr-ch rnr-c-toplinks">
+<div class="rnr-hfiller"></div>
+{BEGIN security_block}
+<div  class="style1 rnr-br rnr-b-loggedas {$brickclass_loggedas}"><div id="login_block{$id}">
+	{BEGIN loggedas_message} 
+	<span>{mlang_message LOGGED_AS}&nbsp;<b>{$username}</b>&nbsp;</span> 
+	{END loggedas_message}
+	{BEGIN guestloginbutton}
+	<span>
+		<a href="#" class="rnr-button" {$guestloginlink_attrs}>{mlang_message LOGIN}</a>
+	</span>
+	{END guestloginbutton}
+	{BEGIN logoutbutton}
+	<a href="#" class="rnr-button" {$logoutlink_attrs}>{mlang_message LOG_OUT}</a>
+	{END logoutbutton}
+
+</div></div>
+{END security_block}
+
+
+{BEGIN languages_block}
+<div  class="style1 rnr-br rnr-b-languages {$brickclass_languages}"><span>
+	<b>{BEGIN lang_label}{mlang_message LANGUAGE}:{END lang_label}</b>&nbsp;
+	<select {$langselector_attrs}>
+		<option value="English" {$English_langattrs}>English</option>
+		<option value="Spanish" {$Spanish_langattrs}>Español</option>
+	</select>
+</span>
+
+</div>
+{END languages_block}
+
+
+</div>
+{END container_toplinks}
+
+
+
+{BEGIN container_hmenu}
+<div class="rnr-c rnr-ch rnr-c-hmenu">
+
+{BEGIN menu_block}
+{$menu main horizontal}{END menu_block}
+
+
+{BEGIN searchform_block}
+<div  class="style1 rnr-bl rnr-b-search {$brickclass_search}">	<span>
+		{BEGIN searchform_text}
+		<input type="text" {$searchfor_attrs} size="25">
+		{END searchform_text}
+		{BEGIN searchform_search}
+			<a href="#" class="rnr-button img" data-icon="search" {$searchbutton_attrs}></a>
+		{END searchform_search}
+		{BEGIN searchform_showall}	
+		<a href="#" class="rnr-button" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</a>
+		{END searchform_showall}
+	</span>
+</div>
+{END searchform_block}
+
+
+{BEGIN searchformbuttons_block}
+<div  class="style1 rnr-bl rnr-b-search_buttons {$brickclass_search_buttons}">{BEGIN searchPanelTopButtons}
+<span>
+	<a href="#" class="rnr-button img" id="showSrchWin{$id}" data-icon="panelfloat" {$showHideSearchWin_attrs}></a>
+	<a href="#" class="rnr-button img" id="showOptPanel{$id}" data-icon="paneldown" {$showHideSearchPanel_attrs}></a>
+</span>
+{END searchPanelTopButtons}
+</div>
+{END searchformbuttons_block}
+
+
+{BEGIN searchsaving_block}
+<div  class="style1 rnr-bl rnr-b-search_saving_buttons {$brickclass_search_saving_buttons}"></div>
+{END searchsaving_block}
+
+<div class="rnr-hfiller"></div>
+{BEGIN details_block}
+<div  class="style1 rnr-br rnr-b-details_found {$brickclass_details_found}">	<span {$details_attrs}>
+			{mlang_message DETAILS_FOUND}: <b><span class="rnr-details_found_count">{$records_found}</span></b>
+	</span>
+</div>
+{END details_block}
+
+
+{BEGIN pages_block}
+<div  class="style1 rnr-br rnr-b-page_of {$brickclass_page_of}">	<span {$pages_attrs}>
+		{mlang_message PAGE1} <b>{$page}</b> {mlang_message PAGE2} <b>{$maxpages}</b>
+	</span>
+
+</div>
+{END pages_block}
+
+
+{BEGIN recordspp_block}
+<div  class="style1 rnr-br rnr-b-recsperpage {$brickclass_recsperpage}">	<span id="recordspp_block{$id}" name="recordspp_block{$id}">
+			{mlang_message RECORDS_PP}:&nbsp;{$recsPerPage}
+	</span>	
+</div>
+{END recordspp_block}
+
+
+{BEGIN print_friendly}
+<div  class="style1 rnr-br rnr-b-printpanel {$brickclass_printpanel}"><div class="rnr-printpanelblock" id="printpanelblock{$id}">
+<div class="rnr-printtab">
+<a data-icon="printdown" class="rnr-printicon" id="print_friendly_togger{$id}" title="{mlang_message WR_PRINT_FRIENDLY}"></a>
+</div>
+<div class="rnr-printpanel" >
+<table class="rnr-printscope" id="print_friendly_scope{$id}">
+	<tr>
+		<td class="rnr-printScopeCell">{mlang_message PPANEL_SCOPE}</td>
+		{BEGIN print_friendly_all}
+		<td class="rnr-printScopeCell"><input type="radio" id="printAll{$id}" data-href="homicidios_sv_2016_Report1_print.php?all=1&amp;{$crosstable_attrs}" name="printScope">&nbsp;<label for="printAll{$id}">{mlang_message PPANEL_WHOLE_REPORT}</label></td>
+		{END print_friendly_all}
+
+	</tr>
+	<tr>
+		<td></td>
+		<td class="rnr-printScopeCell"><input type="radio" id="printPage{$id}" data-href="homicidios_sv_2016_Report1_print.php?{$crosstable_attrs}" name="printScope" checked>&nbsp;<label for="printPage{$id}">{mlang_message PPANEL_THIS_PAGE}</label></td>
+	</tr>
+	</table>
+
+
+<div class="rnr-printdetails">
+<label for="printPerPage{$id}">
+	{mlang_message RECORDS_PP}:
+</label>&nbsp;<input type=number id="printPerPage{$id}" value="{$print_recspp}" class="rnr-printrecspp">&nbsp;
+</div>
+
+<div class="rnr-printbutton">
+<a href=# class="rnr-button button" id="print_friendly_button{$id}" >{mlang_message PPANEL_PRINT}</a>
+</div>
+</div>
+</div>
+</div>
+{END print_friendly}
+
+
+</div>
+{END container_hmenu}
+
+
+		</div>
+		<div class="rnr-middle">
+			<div class="rnr-left {$blockclass_left}">
+				
+
+{BEGIN container_left}
+<div class="rnr-c rnr-cv rnr-c-left">
+
+{BEGIN searchPanel}
+<div  class="rnr-brickcontents style1 rnr-b-searchpanel {$brickclass_searchpanel}"><div class="searchPanelContainer">
+<div class="searchOptions bottomPanelBorder" {$srchOpt_attrs}>
+	
+	<!-- Search panel content -->
+	<div class="srchCritTop" style="display: none;">
+		{mlang_message SEARCH_CRITERIA}:&nbsp;
+		<input type="radio" name="srchType{$id}" class="rnr-radio-button" {$all_checkbox}>&nbsp;{BEGIN all_checkbox_label}<span>{mlang_message SEARCH_ALL}</span>{END all_checkbox_label}
+		&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="srchType{$id}" class="rnr-radio-button" {$any_checkbox}>&nbsp;{BEGIN any_checkbox_label}<span>{mlang_message SEARCH_ANY}</span>{END any_checkbox_label}
+	</div>
+	
+	<div class="addOption">
+		<span class="rnr-buttons-group">
+			<a href="#" id="showHideControlChooseMenu{$id}" class="rnr-button" {$showHideCtrls_attrs}>{mlang_message SEARCH_ADD_FIELD}</a>
+		</span>
+		
+		<a href="#" id="showHideSearchType{$id}" class="rnr-button" {$showHideCtrlsOpt_attrs}>{$showHideOpt_mess}</a>
+	</div>
+	
+
+	<table class="controlsBlock {$controls_block_class}">
+				{BEGIN searchCtrlBlock}
+		<tr class="srchPanelRow" {$filterRow_attrs}>
+			<td class="srchPanelCell">{$delCtrlButt}</td>	
+			<td class="srchPanelCell">{$fLabel}:&nbsp;</td>
+			<td class="srchPanelCell srchPanelCell2">
+				<div class="rnr-searchtype">{$searchtype}</div>
+				<div class="rnr-searchcontrol">{$searchcontrol}</div>
+				<div class="rnr-searchcontrol">{$searchcontrol1}</div>
+			</td>	
+		</tr>
+		{END searchCtrlBlock}
+	</table>	
+
+
+	
+	<div class="bottomSearchButt" align="left" {$bottomSearchButt_attrs}>
+		<a href="#" class="rnr-button" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</a>
+	</div>
+</div>
+
+</div></div>{END searchPanel}
+
+
+
+</div>
+{END container_left}
+
+
+			</div>
+			<div class="rnr-center {$blockclass_center}">
+				
+
+{BEGIN container_recordcontrols}
+<div class="rnr-c rnr-ch rnr-c-recordcontrols">
+
+{BEGIN asearch_link}
+<div  class="style1 rnr-bl rnr-b-toplinks_advsearch {$brickclass_toplinks_advsearch}">	<a href="homicidios_sv_2016_Report1_search.php" class="rnr-button" {$advsearchlink_attrs}>{mlang_message ADVANCED_SEARCH}</a>
+</div>
+{END asearch_link}
+
+
+
+
+{BEGIN export_link}
+<div  class="style1 rnr-bl rnr-b-toplinks_export_links {$brickclass_toplinks_export_links}">	<span id="export_links{$id}" class="rnr-exporticons">
+		<a href="homicidios_sv_2016_Report1_export.php?all=1&amp;format=excel" {$excellink_attrs}><img alt="{mlang_message EXPORT_TO_EXCEL}" src="images/excel.gif" border="0"></a>
+		<a href="homicidios_sv_2016_Report1_export.php?all=1&amp;format=word" {$wordlink_attrs}><img alt="{mlang_message EXPORT_TO_WORD}" src="images/word.gif" border="0" ></a>
+		</span>
+</div>
+{END export_link}
+
+<div class="rnr-hfiller"></div>
+</div>
+{END container_recordcontrols}
+
+
+
+{BEGIN container_message}
+<div class="rnr-c rnr-ch rnr-c-message">
+
+{BEGIN message_block}
+<div  class="style1 rnr-bc rnr-b-message {$brickclass_message}"><div class="rnr-message">{$message}</div></div>
+{END message_block}
+
+
+</div>
+{END container_message}
+
+
+
+{BEGIN container_grid}
+
+
+
+<style>
+	td.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary {background-color:#ffffbb;}
+	td.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary {background-color:#ffe0b0;}
+
+</style>
+
+			{BEGIN grid_block}
+<TABLE class="rnr-c rnr-b-report report" CELLPADDING=0>
+<thead>
+<tr class="rnr-toprow table-header style1">
+
+<th>{$label homicidios_sv_2016_Report1 situacion}</th>
+<th>{$label homicidios_sv_2016_Report1 hoja}</th>
+<th>{$label homicidios_sv_2016_Report1 __homicidios}</th>
+<th>{$label homicidios_sv_2016_Report1 __edad}</th>
+<th>{$label homicidios_sv_2016_Report1 __relacion_e}</th>
+<th>{$label homicidios_sv_2016_Report1 __sexo}</th>
+<th>{$label homicidios_sv_2016_Report1 __relacionad}</th>
+<th>{$label homicidios_sv_2016_Report1 __causa_prel}</th>
+<th>{$label homicidios_sv_2016_Report1 __circunstan}</th>
+<th>{$label homicidios_sv_2016_Report1 __movil}</th>
+<th>{$label homicidios_sv_2016_Report1 __tipo_viole}</th>
+<th>{$label homicidios_sv_2016_Report1 __relac_vict}</th>
+<th>{$label homicidios_sv_2016_Report1 __victima_pa}</th>
+<th>{$label homicidios_sv_2016_Report1 __segun}</th>
+<th>{$label homicidios_sv_2016_Report1 __pandilla}</th>
+<th>{$label homicidios_sv_2016_Report1 __ocupacion_}</th>
+<th>{$label homicidios_sv_2016_Report1 __nacionalid}</th>
+<th>{$label homicidios_sv_2016_Report1 __depto}</th>
+<th>{$label homicidios_sv_2016_Report1 __municipio}</th>
+<th>{$label homicidios_sv_2016_Report1 __canton}</th>
+<th>{$label homicidios_sv_2016_Report1 __caserio}</th>
+<th>{$label homicidios_sv_2016_Report1 __barrio}</th>
+<th>{$label homicidios_sv_2016_Report1 __comunidad}</th>
+<th>{$label homicidios_sv_2016_Report1 __reparto}</th>
+<th>{$label homicidios_sv_2016_Report1 __colonia}</th>
+<th>{$label homicidios_sv_2016_Report1 __no}</th>
+<th>{$label homicidios_sv_2016_Report1 __calle}</th>
+<th>{$label homicidios_sv_2016_Report1 __avenida}</th>
+<th>{$label homicidios_sv_2016_Report1 __alameda}</th>
+<th>{$label homicidios_sv_2016_Report1 __boulevard}</th>
+<th>{$label homicidios_sv_2016_Report1 __pasaje}</th>
+<th>{$label homicidios_sv_2016_Report1 __sector_spd}</th>
+<th>{$label homicidios_sv_2016_Report1 __tipo_lugar}</th>
+<th>{$label homicidios_sv_2016_Report1 __area}</th>
+<th>{$label homicidios_sv_2016_Report1 __x}</th>
+<th>{$label homicidios_sv_2016_Report1 __y}</th>
+<th>{$label homicidios_sv_2016_Report1 __fecha_hech}</th>
+<th>{$label homicidios_sv_2016_Report1 __dia}</th>
+<th>{$label homicidios_sv_2016_Report1 __mes}</th>
+<th>{$label homicidios_sv_2016_Report1 __hora_hecho}</th>
+<th>{$label homicidios_sv_2016_Report1 __periodo}</th>
+<th>{$label homicidios_sv_2016_Report1 __tipo_arma}</th>
+<th>{$label homicidios_sv_2016_Report1 __especifica}</th>
+<th>{$label homicidios_sv_2016_Report1 __calibre}</th>
+<th>{$label homicidios_sv_2016_Report1 __tipo_delit}</th>
+<th>{$label homicidios_sv_2016_Report1 __muertos}</th>
+<th>{$label homicidios_sv_2016_Report1 __fecha_leva}</th>
+<th>{$label homicidios_sv_2016_Report1 __hora_de_le}</th>
+<th>{$label homicidios_sv_2016_Report1 __observacio}</th>
+<th>{$label homicidios_sv_2016_Report1 __f50}</th>
+<th>{$label homicidios_sv_2016_Report1 __numforma}</th>
+<th>{$label homicidios_sv_2016_Report1 __edad1}</th>
+<th>{$label homicidios_sv_2016_Report1 __sexo1}</th>
+<th>{$label homicidios_sv_2016_Report1 __departamen}</th>
+<th>{$label homicidios_sv_2016_Report1 __municipio_}</th>
+<th>{$label homicidios_sv_2016_Report1 __canton1}</th>
+<th>{$label homicidios_sv_2016_Report1 __caserio1}</th>
+<th>{$label homicidios_sv_2016_Report1 __colonia1}</th>
+<th>{$label homicidios_sv_2016_Report1 __fechahecho}</th>
+<th>{$label homicidios_sv_2016_Report1 __hora}</th>
+<th>{$label homicidios_sv_2016_Report1 __minutos}</th>
+<th>{$label homicidios_sv_2016_Report1 __tipoarma}</th>
+<th>{$label homicidios_sv_2016_Report1 __especifiqu}</th>
+<th>{$label homicidios_sv_2016_Report1 __calificaci}</th>
+<th>{$label homicidios_sv_2016_Report1 __fecha_de_l}</th>
+<th>{$label homicidios_sv_2016_Report1 __departam_1}</th>
+<th>{$label homicidios_sv_2016_Report1 __municipi_1}</th>
+<th>{$label homicidios_sv_2016_Report1 __conciliaci}</th>
+<th>{$label homicidios_sv_2016_Report1 __levantamie}</th>
+<th>{$label homicidios_sv_2016_Report1 __profesi_n}</th>
+<th>{$label homicidios_sv_2016_Report1 __tipo_halla}</th>
+<th>{$label homicidios_sv_2016_Report1 __victimario}</th>
+<th>{$label homicidios_sv_2016_Report1 __causa_pr_1}</th>
+<th>{$label homicidios_sv_2016_Report1 __dpto}</th>
+<th>{$label homicidios_sv_2016_Report1 __munic}</th>
+<th>{$label homicidios_sv_2016_Report1 __cdpto_cmun}</th>
+<th>{$label homicidios_sv_2016_Report1 __cab_dpto}</th>
+<th>{$label homicidios_sv_2016_Report1 __cdpto}</th>
+<th>{$label homicidios_sv_2016_Report1 __fid}</th>
+<th>{$label homicidios_sv_2016_Report1 __area1}</th>
+<th>{$label homicidios_sv_2016_Report1 __munic25k_}</th>
+<th>{$label homicidios_sv_2016_Report1 __munic25k_i}</th>
+<th>{$label homicidios_sv_2016_Report1 __poly_}</th>
+<th>{$label homicidios_sv_2016_Report1 __subclass}</th>
+<th>{$label homicidios_sv_2016_Report1 __subclass_}</th>
+<th>{$label homicidios_sv_2016_Report1 __rings_ok}</th>
+<th>{$label homicidios_sv_2016_Report1 __rings_nok}</th>
+<th>{$label homicidios_sv_2016_Report1 __dpto1}</th>
+<th>{$label homicidios_sv_2016_Report1 __munic1}</th>
+<th>{$label homicidios_sv_2016_Report1 __cdpto_cmun1}</th>
+<th>{$label homicidios_sv_2016_Report1 __cab_dpto1}</th>
+<th>{$label homicidios_sv_2016_Report1 __cdpto1}</th>
+<th>{$label homicidios_sv_2016_Report1 __acres}</th>
+<th class="rnr-edge"></th>
+</tr>
+</thead>
+<tbody>
+{BEGIN grid_row}
+<!-------------------------------------  data ----------------------------------------->
+{BEGIN row_data}
+<tr class="rnr-row style1" {$rowattrs}>
+	
+	<!-------------------------------------  begin detail links for row ----------------------------------------->
+		<!-------------------------------------  end detail links for row ----------------------------------------->
+
+	<td {$recordattrs}>{$situacion_value}</td>
+	<td {$recordattrs}>{$hoja_value}</td>
+	<td {$recordattrs}>{$__homicidios_value}</td>
+	<td {$recordattrs}>{$__edad_value}</td>
+	<td {$recordattrs}>{$__relacion_e_value}</td>
+	<td {$recordattrs}>{$__sexo_value}</td>
+	<td {$recordattrs}>{$__relacionad_value}</td>
+	<td {$recordattrs}>{$__causa_prel_value}</td>
+	<td {$recordattrs}>{$__circunstan_value}</td>
+	<td {$recordattrs}>{$__movil_value}</td>
+	<td {$recordattrs}>{$__tipo_viole_value}</td>
+	<td {$recordattrs}>{$__relac_vict_value}</td>
+	<td {$recordattrs}>{$__victima_pa_value}</td>
+	<td {$recordattrs}>{$__segun_value}</td>
+	<td {$recordattrs}>{$__pandilla_value}</td>
+	<td {$recordattrs}>{$__ocupacion__value}</td>
+	<td {$recordattrs}>{$__nacionalid_value}</td>
+	<td {$recordattrs}>{$__depto_value}</td>
+	<td {$recordattrs}>{$__municipio_value}</td>
+	<td {$recordattrs}>{$__canton_value}</td>
+	<td {$recordattrs}>{$__caserio_value}</td>
+	<td {$recordattrs}>{$__barrio_value}</td>
+	<td {$recordattrs}>{$__comunidad_value}</td>
+	<td {$recordattrs}>{$__reparto_value}</td>
+	<td {$recordattrs}>{$__colonia_value}</td>
+	<td {$recordattrs}>{$__no_value}</td>
+	<td {$recordattrs}>{$__calle_value}</td>
+	<td {$recordattrs}>{$__avenida_value}</td>
+	<td {$recordattrs}>{$__alameda_value}</td>
+	<td {$recordattrs}>{$__boulevard_value}</td>
+	<td {$recordattrs}>{$__pasaje_value}</td>
+	<td {$recordattrs}>{$__sector_spd_value}</td>
+	<td {$recordattrs}>{$__tipo_lugar_value}</td>
+	<td {$recordattrs}>{$__area_value}</td>
+	<td {$recordattrs}>{$__x_value}</td>
+	<td {$recordattrs}>{$__y_value}</td>
+	<td {$recordattrs}>{$__fecha_hech_value}</td>
+	<td {$recordattrs}>{$__dia_value}</td>
+	<td {$recordattrs}>{$__mes_value}</td>
+	<td {$recordattrs}>{$__hora_hecho_value}</td>
+	<td {$recordattrs}>{$__periodo_value}</td>
+	<td {$recordattrs}>{$__tipo_arma_value}</td>
+	<td {$recordattrs}>{$__especifica_value}</td>
+	<td {$recordattrs}>{$__calibre_value}</td>
+	<td {$recordattrs}>{$__tipo_delit_value}</td>
+	<td {$recordattrs}>{$__muertos_value}</td>
+	<td {$recordattrs}>{$__fecha_leva_value}</td>
+	<td {$recordattrs}>{$__hora_de_le_value}</td>
+	<td {$recordattrs}>{$__observacio_value}</td>
+	<td {$recordattrs}>{$__f50_value}</td>
+	<td {$recordattrs}>{$__numforma_value}</td>
+	<td {$recordattrs}>{$__edad1_value}</td>
+	<td {$recordattrs}>{$__sexo1_value}</td>
+	<td {$recordattrs}>{$__departamen_value}</td>
+	<td {$recordattrs}>{$__municipio__value}</td>
+	<td {$recordattrs}>{$__canton1_value}</td>
+	<td {$recordattrs}>{$__caserio1_value}</td>
+	<td {$recordattrs}>{$__colonia1_value}</td>
+	<td {$recordattrs}>{$__fechahecho_value}</td>
+	<td {$recordattrs}>{$__hora_value}</td>
+	<td {$recordattrs}>{$__minutos_value}</td>
+	<td {$recordattrs}>{$__tipoarma_value}</td>
+	<td {$recordattrs}>{$__especifiqu_value}</td>
+	<td {$recordattrs}>{$__calificaci_value}</td>
+	<td {$recordattrs}>{$__fecha_de_l_value}</td>
+	<td {$recordattrs}>{$__departam_1_value}</td>
+	<td {$recordattrs}>{$__municipi_1_value}</td>
+	<td {$recordattrs}>{$__conciliaci_value}</td>
+	<td {$recordattrs}>{$__levantamie_value}</td>
+	<td {$recordattrs}>{$__profesi_n_value}</td>
+	<td {$recordattrs}>{$__tipo_halla_value}</td>
+	<td {$recordattrs}>{$__victimario_value}</td>
+	<td {$recordattrs}>{$__causa_pr_1_value}</td>
+	<td {$recordattrs}>{$__dpto_value}</td>
+	<td {$recordattrs}>{$__munic_value}</td>
+	<td {$recordattrs}>{$__cdpto_cmun_value}</td>
+	<td {$recordattrs}>{$__cab_dpto_value}</td>
+	<td {$recordattrs}>{$__cdpto_value}</td>
+	<td {$recordattrs}>{$__fid_value}</td>
+	<td {$recordattrs}>{$__area1_value}</td>
+	<td {$recordattrs}>{$__munic25k__value}</td>
+	<td {$recordattrs}>{$__munic25k_i_value}</td>
+	<td {$recordattrs}>{$__poly__value}</td>
+	<td {$recordattrs}>{$__subclass_value}</td>
+	<td {$recordattrs}>{$__subclass__value}</td>
+	<td {$recordattrs}>{$__rings_ok_value}</td>
+	<td {$recordattrs}>{$__rings_nok_value}</td>
+	<td {$recordattrs}>{$__dpto1_value}</td>
+	<td {$recordattrs}>{$__munic1_value}</td>
+	<td {$recordattrs}>{$__cdpto_cmun1_value}</td>
+	<td {$recordattrs}>{$__cab_dpto1_value}</td>
+	<td {$recordattrs}>{$__cdpto1_value}</td>
+	<td {$recordattrs}>{$__acres_value}</td>
+	<td class="rnr-edge" {$recordattrs}></td>
+</tr>
+{END row_data}
+{END grid_row}
+</tbody>
+</table>
+{END grid_block}
+
+
+
+
+
+{END container_grid}
+
+
+
+{BEGIN container_pagination_bottom}
+<div class="rnr-c rnr-ch rnr-c-pagination_bottom">
+
+{BEGIN pagination_block}
+<div  class="style1 rnr-bc rnr-b-pagination {$brickclass_pagination}">{$pagination}</div>
+{END pagination_block}
+
+
+</div>
+{END container_pagination_bottom}
+
+
+			</div>
+			<div class="rnr-right {$blockclass_right}">
+				
+			</div>
+		</div>
+		<div class="rnr-bottom {$blockclass_bottom}">
+			
+		</div>
+	</div>
+		
+		{$footer}
+	{END body}
+	</body>
+</html>

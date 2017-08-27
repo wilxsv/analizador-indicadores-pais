@@ -1,0 +1,252 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-print" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel homicidios_sv_2016 print}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+	<table class="table table-bordered rp-maintable" {$printgrid_hiddenattr} data-pageid="{$pageid}" data-brick="printgrid" >
+	<thead>
+	{BEGIN grid_header}
+		<tr class="{$gridHeader_class}" >
+		{BEGIN record_header}
+			{BEGIN __ocupacion__fieldheadercolumn}
+			<th class="{$__ocupacion__class}" {$__ocupacion__style}  data-field="__ocupacion_">
+				{$label homicidios_sv_2016 __ocupacion_}
+			</th>
+			{END __ocupacion__fieldheadercolumn}
+			{BEGIN __municipio__fieldheadercolumn}
+			<th class="{$__municipio__class}" {$__municipio__style}  data-field="__municipio_">
+				{$label homicidios_sv_2016 __municipio_}
+			</th>
+			{END __municipio__fieldheadercolumn}
+			{BEGIN __dpto1_fieldheadercolumn}
+			<th class="{$__dpto1_class}" {$__dpto1_style}  data-field="__dpto1">
+				{$label homicidios_sv_2016 __dpto1}
+			</th>
+			{END __dpto1_fieldheadercolumn}
+			{BEGIN __tipo_arma_fieldheadercolumn}
+			<th class="{$__tipo_arma_class}" {$__tipo_arma_style}  data-field="__tipo_arma">
+				{$label homicidios_sv_2016 __tipo_arma}
+			</th>
+			{END __tipo_arma_fieldheadercolumn}
+			{BEGIN __cdpto_cmun_fieldheadercolumn}
+			<th class="{$__cdpto_cmun_class}" {$__cdpto_cmun_style}  data-field="__cdpto_cmun">
+				{$label homicidios_sv_2016 __cdpto_cmun}
+			</th>
+			{END __cdpto_cmun_fieldheadercolumn}
+			{BEGIN __ocupacion_1_fieldheadercolumn}
+			<th class="{$__ocupacion_1_class}" {$__ocupacion_1_style}  data-field="__ocupacion_1">
+				{$label homicidios_sv_2016 __ocupacion_1}
+			</th>
+			{END __ocupacion_1_fieldheadercolumn}
+			{BEGIN __municipio_fieldheadercolumn}
+			<th class="{$__municipio_class}" {$__municipio_style}  data-field="__municipio">
+				{$label homicidios_sv_2016 __municipio}
+			</th>
+			{END __municipio_fieldheadercolumn}
+			{BEGIN __movil_fieldheadercolumn}
+			<th class="{$__movil_class}" {$__movil_style}  data-field="__movil">
+				{$label homicidios_sv_2016 __movil}
+			</th>
+			{END __movil_fieldheadercolumn}
+			{BEGIN __circunstan_fieldheadercolumn}
+			<th class="{$__circunstan_class}" {$__circunstan_style}  data-field="__circunstan">
+				{$label homicidios_sv_2016 __circunstan}
+			</th>
+			{END __circunstan_fieldheadercolumn}
+			{BEGIN __causa_prel_fieldheadercolumn}
+			<th class="{$__causa_prel_class}" {$__causa_prel_style}  data-field="__causa_prel">
+				{$label homicidios_sv_2016 __causa_prel}
+			</th>
+			{END __causa_prel_fieldheadercolumn}
+			{BEGIN __causa_pr_1_fieldheadercolumn}
+			<th class="{$__causa_pr_1_class}" {$__causa_pr_1_style}  data-field="__causa_pr_1">
+				{$label homicidios_sv_2016 __causa_pr_1}
+			</th>
+			{END __causa_pr_1_fieldheadercolumn}
+			{BEGIN __observacio_fieldheadercolumn}
+			<th class="{$__observacio_class}" {$__observacio_style}  data-field="__observacio">
+				{$label homicidios_sv_2016 __observacio}
+			</th>
+			{END __observacio_fieldheadercolumn}
+			{BEGIN COUNT___municipio__fieldheadercolumn}
+			<th class="{$COUNT___municipio__class}" {$COUNT___municipio__style}  data-field="COUNT___municipio_">
+				{$label homicidios_sv_2016 COUNT___municipio_}
+			</th>
+			{END COUNT___municipio__fieldheadercolumn}
+			{BEGIN endrecordheader_block}
+			<th class="rnr-cs">&nbsp;</th>
+			{END endrecordheader_block}
+		{END record_header}
+		</tr>
+	{END grid_header}
+	</thead>
+	
+	<tbody>	
+	{BEGIN grid_row}
+		<tr class="{$rowclass}" {$rowattrs} {$rowstyle}>
+		{BEGIN grid_record}
+			{BEGIN __ocupacion__fieldcolumn}
+			<td  class="{$__ocupacion__class}" {$__ocupacion__style} {$recordattrs}>
+				{$__ocupacion__value}
+			</td>
+			{END __ocupacion__fieldcolumn}
+			{BEGIN __municipio__fieldcolumn}
+			<td  class="{$__municipio__class}" {$__municipio__style} {$recordattrs}>
+				{$__municipio__value}
+			</td>
+			{END __municipio__fieldcolumn}
+			{BEGIN __dpto1_fieldcolumn}
+			<td  class="{$__dpto1_class}" {$__dpto1_style} {$recordattrs}>
+				{$__dpto1_value}
+			</td>
+			{END __dpto1_fieldcolumn}
+			{BEGIN __tipo_arma_fieldcolumn}
+			<td  class="{$__tipo_arma_class}" {$__tipo_arma_style} {$recordattrs}>
+				{$__tipo_arma_value}
+			</td>
+			{END __tipo_arma_fieldcolumn}
+			{BEGIN __cdpto_cmun_fieldcolumn}
+			<td  class="{$__cdpto_cmun_class}" {$__cdpto_cmun_style} {$recordattrs}>
+				{$__cdpto_cmun_value}
+			</td>
+			{END __cdpto_cmun_fieldcolumn}
+			{BEGIN __ocupacion_1_fieldcolumn}
+			<td  class="{$__ocupacion_1_class}" {$__ocupacion_1_style} {$recordattrs}>
+				{$__ocupacion_1_value}
+			</td>
+			{END __ocupacion_1_fieldcolumn}
+			{BEGIN __municipio_fieldcolumn}
+			<td  class="{$__municipio_class}" {$__municipio_style} {$recordattrs}>
+				{$__municipio_value}
+			</td>
+			{END __municipio_fieldcolumn}
+			{BEGIN __movil_fieldcolumn}
+			<td  class="{$__movil_class}" {$__movil_style} {$recordattrs}>
+				{$__movil_value}
+			</td>
+			{END __movil_fieldcolumn}
+			{BEGIN __circunstan_fieldcolumn}
+			<td  class="{$__circunstan_class}" {$__circunstan_style} {$recordattrs}>
+				{$__circunstan_value}
+			</td>
+			{END __circunstan_fieldcolumn}
+			{BEGIN __causa_prel_fieldcolumn}
+			<td  class="{$__causa_prel_class}" {$__causa_prel_style} {$recordattrs}>
+				{$__causa_prel_value}
+			</td>
+			{END __causa_prel_fieldcolumn}
+			{BEGIN __causa_pr_1_fieldcolumn}
+			<td  class="{$__causa_pr_1_class}" {$__causa_pr_1_style} {$recordattrs}>
+				{$__causa_pr_1_value}
+			</td>
+			{END __causa_pr_1_fieldcolumn}
+			{BEGIN __observacio_fieldcolumn}
+			<td  class="{$__observacio_class}" {$__observacio_style} {$recordattrs}>
+				{$__observacio_value}
+			</td>
+			{END __observacio_fieldcolumn}
+			{BEGIN COUNT___municipio__fieldcolumn}
+			<td  class="{$COUNT___municipio__class}" {$COUNT___municipio__style} {$recordattrs}>
+				{$COUNT___municipio__value}
+			</td>
+			{END COUNT___municipio__fieldcolumn}
+			{BEGIN endrecord_block}
+			<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+			{END endrecord_block}
+		{END grid_record}
+		</tr>
+{END grid_row}
+	</tbody>
+
+</table>
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

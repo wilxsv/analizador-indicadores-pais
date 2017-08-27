@@ -1,0 +1,44 @@
+<?php
+$dalTablemined = array();
+$dalTablemined["idderespuesta"] = array("type"=>5,"varname"=>"idderespuesta");
+$dalTablemined["codigo"] = array("type"=>5,"varname"=>"codigo");
+$dalTablemined["depto"] = array("type"=>5,"varname"=>"depto");
+$dalTablemined["departamento"] = array("type"=>200,"varname"=>"departamento");
+$dalTablemined["mun"] = array("type"=>200,"varname"=>"mun");
+$dalTablemined["municipio"] = array("type"=>200,"varname"=>"municipio");
+$dalTablemined["nombre_c_e"] = array("type"=>200,"varname"=>"nombre_c_e");
+$dalTablemined["x"] = array("type"=>5,"varname"=>"x");
+$dalTablemined["y"] = array("type"=>5,"varname"=>"y");
+$dalTablemined["sector_ppd"] = array("type"=>200,"varname"=>"sector_ppd");
+$dalTablemined["matricula_inicial"] = array("type"=>5,"varname"=>"matricula_inicial");
+$dalTablemined["matricula_final"] = array("type"=>5,"varname"=>"matricula_final");
+$dalTablemined["maras"] = array("type"=>5,"varname"=>"maras");
+$dalTablemined["robos"] = array("type"=>5,"varname"=>"robos");
+$dalTablemined["hurtos"] = array("type"=>5,"varname"=>"hurtos");
+$dalTablemined["drogas"] = array("type"=>5,"varname"=>"drogas");
+$dalTablemined["violaciones"] = array("type"=>5,"varname"=>"violaciones");
+$dalTablemined["pab"] = array("type"=>5,"varname"=>"pab");
+$dalTablemined["paf"] = array("type"=>5,"varname"=>"paf");
+$dalTablemined["escasos_recursos"] = array("type"=>5,"varname"=>"escasos_recursos");
+$dalTablemined["incorpo_actividades_prod"] = array("type"=>5,"varname"=>"incorpo_actividades_prod");
+$dalTablemined["lejania_ce"] = array("type"=>5,"varname"=>"lejania_ce");
+$dalTablemined["violencia_pandilleril"] = array("type"=>5,"varname"=>"violencia_pandilleril");
+$dalTablemined["embarazo"] = array("type"=>5,"varname"=>"embarazo");
+$dalTablemined["acoso"] = array("type"=>5,"varname"=>"acoso");
+$dalTablemined["violacion_sexual"] = array("type"=>5,"varname"=>"violacion_sexual");
+$dalTablemined["cambio_domicilio"] = array("type"=>5,"varname"=>"cambio_domicilio");
+$dalTablemined["migracion"] = array("type"=>5,"varname"=>"migracion");
+$dalTablemined["bajo_rendimiento"] = array("type"=>5,"varname"=>"bajo_rendimiento");
+$dalTablemined["enfermedad"] = array("type"=>5,"varname"=>"enfermedad");
+$dalTablemined["prostitucion"] = array("type"=>5,"varname"=>"prostitucion");
+$dalTablemined["dep_mun"] = array("type"=>200,"varname"=>"dep_mun");
+$dalTablemined["max_matric2016"] = array("type"=>5,"varname"=>"max_matric2016");
+$dalTablemined["mrf2016"] = array("type"=>5,"varname"=>"mrf2016");
+$dalTablemined["pab_af"] = array("type"=>5,"varname"=>"pab_af");
+$dalTablemined["r_h"] = array("type"=>5,"varname"=>"r_h");
+$dalTablemined["ipce_naive"] = array("type"=>5,"varname"=>"ipce_naive");
+$dalTablemined["ipce_0_1"] = array("type"=>5,"varname"=>"ipce_0_1");
+$dalTablemined["aÑo"] = array("type"=>5,"varname"=>"a_o");
+
+$dal_info["delitos_at_localhost__mined"] = &$dalTablemined;
+?>

@@ -1,0 +1,260 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-search" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_searchpage}
+<div {$searchpage_chiddenattr} data-pageid="{$pageid}" data-container="searchpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN searchheader}
+	<h2 {$bssearchheader_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchheader" >{$pagetitlelabel Municipios_y_delitos search}</h2>
+
+{END searchheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+</div>
+{END container_searchpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$bssearchfields_hiddenattr} data-pageid="{$pageid}" data-brick="bssearchfields" class="form-horizontal" role="form">
+<div class="container">
+	<div class="form-group">
+		<div class="col-md-12" >
+			&nbsp;
+		</div>
+	</div>
+</div>
+	{BEGIN delito_fieldblock}		
+	<div class="container {$fielddispclass_delito}" data-fieldname="delito">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Municipios_y_delitos delito}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_delito}
+			</div>
+			<div class="col-md-4" >
+				{$delito_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$delito_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END delito_fieldblock}
+	{BEGIN tipo_arma_fieldblock}		
+	<div class="container {$fielddispclass_tipo_arma}" data-fieldname="tipo_arma">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Municipios_y_delitos tipo_arma}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_tipo_arma}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_arma_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$tipo_arma_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END tipo_arma_fieldblock}
+	{BEGIN a_o_hecho_fieldblock}		
+	<div class="container {$fielddispclass_a_o_hecho}" data-fieldname="a_o_hecho">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Municipios_y_delitos a_o_hecho}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_a_o_hecho}
+			</div>
+			<div class="col-md-4" >
+				{$a_o_hecho_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$a_o_hecho_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END a_o_hecho_fieldblock}
+	{BEGIN muni_he_fieldblock}		
+	<div class="container {$fielddispclass_muni_he}" data-fieldname="muni_he">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Municipios_y_delitos muni_he}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_muni_he}
+			</div>
+			<div class="col-md-4" >
+				{$muni_he_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$muni_he_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END muni_he_fieldblock}
+	{BEGIN depart_he_fieldblock}		
+	<div class="container {$fielddispclass_depart_he}" data-fieldname="depart_he">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Municipios_y_delitos depart_he}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_depart_he}
+			</div>
+			<div class="col-md-4" >
+				{$depart_he_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$depart_he_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END depart_he_fieldblock}
+	{BEGIN COUNT_muni_he__fieldblock}		
+	<div class="container {$fielddispclass_COUNT_muni_he_}" data-fieldname="COUNT_muni_he_">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Municipios_y_delitos COUNT_muni_he_}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_COUNT_muni_he_}
+			</div>
+			<div class="col-md-4" >
+				{$COUNT_muni_he__editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$COUNT_muni_he__editcontrol1}
+			</div>
+		</div>
+	</div>
+{END COUNT_muni_he__fieldblock}
+	{BEGIN arma_analisis_fieldblock}		
+	<div class="container {$fielddispclass_arma_analisis}" data-fieldname="arma_analisis">
+		<div class="form-group">
+			<div class="col-md-2">
+				{$label Municipios_y_delitos arma_analisis}
+			</div>
+			<div class="col-md-2" >
+				{$searchtype_arma_analisis}
+			</div>
+			<div class="col-md-4" >
+				{$arma_analisis_editcontrol}
+			</div>
+			<div class="col-md-4" >
+				{$arma_analisis_editcontrol1}
+			</div>
+		</div>
+	</div>
+{END arma_analisis_fieldblock}
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-4"> 
+
+{BEGIN searchbuttons}
+{BEGIN search_button}
+<button class="btn btn-primary" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+{END search_button} 
+{BEGIN reset_button}
+<button class="btn btn-default" {$resetbutton_attrs}>{mlang_message RESET}</button>
+{END reset_button}
+{BEGIN back_button}
+<button class="btn btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{END searchbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

@@ -1,0 +1,6 @@
+Import into anexar_carcel
+18/04/2017 23:30:01
+
+270 out of 270 records processed successfully.
+270 records added.
+0 records updated.

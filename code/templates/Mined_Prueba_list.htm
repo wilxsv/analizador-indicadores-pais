@@ -1,0 +1,478 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+	</head>
+	
+	<body class="{$stylename} function-list" {$bodyattrs}>
+	{BEGIN body}{$event Mined_Prueba_map}
+      {$header}
+	<div class="rnr-page">
+		<div class="rnr-top {$blockclass_top}">
+			
+
+{BEGIN container_master}<div class="rnr-c rnr-ch rnr-c-master">
+
+{BEGIN mastertable_block}<div  class="style1 rnr-bl rnr-b-masterinfo {$brickclass_masterinfo}">{$showmasterfile}
+<a class="runner-link" {$backtomasterlink_attrs}>
+	<b>{mlang_message BACK_TO} {$backtomasterlink_caption}</b>
+</a></div>
+{END mastertable_block}
+
+<div class="rnr-hfiller"></div>
+</div>
+{END container_master}
+
+
+
+{BEGIN container_toplinks}<div class="rnr-c rnr-ch rnr-c-toplinks">
+
+{BEGIN security_block}<div  class="style1 rnr-bl rnr-b-loggedas {$brickclass_loggedas}"><div id="login_block{$id}">
+	{BEGIN loggedas_message}<span>{mlang_message LOGGED_AS}&nbsp;<b>{$username}</b>&nbsp;</span> 
+	{END loggedas_message}
+	{BEGIN guestloginbutton}<span>
+		<a href="#" class="rnr-button" {$guestloginlink_attrs}>{mlang_message LOGIN}</a>
+	</span>
+	{END guestloginbutton}
+	{BEGIN logoutbutton}<a href="#" class="rnr-button" {$logoutlink_attrs}>{mlang_message LOG_OUT}</a>
+	{END logoutbutton}
+
+</div></div>
+{END security_block}
+
+<div class="rnr-hfiller"></div>
+{BEGIN languages_block}<div  class="style1 rnr-br rnr-b-languages {$brickclass_languages}"><span>
+	<b>{BEGIN lang_label}{mlang_message LANGUAGE}:{END lang_label}</b>&nbsp;
+	<select {$langselector_attrs}>
+		<option value="English" {$English_langattrs}>English</option>
+		<option value="Spanish" {$Spanish_langattrs}>Español</option>
+	</select>
+</span>
+
+</div>
+{END languages_block}
+
+
+</div>
+{END container_toplinks}
+
+
+		</div>
+		<div class="rnr-middle">
+			<div class="rnr-left {$blockclass_left}">
+				
+
+{BEGIN container_left}<div class="rnr-c rnr-cv rnr-c-left">
+
+{BEGIN menu_block}{$menu main}
+{END menu_block}
+
+
+{BEGIN searchform_block}<div  class="rnr-brickcontents style1 rnr-b-vsearch1 {$brickclass_vsearch1}">	{mlang_message SEARCH_FOR}:
+	{BEGIN searchPanelTopButtons}<span>
+	<a href="#" class="rnr-button img" id="showSrchWin{$id}"  data-icon="panelfloat" {$showHideSearchWin_attrs}></a>
+	&nbsp;		
+	<a href="#" class="rnr-button img" id="showOptPanel{$id}" data-icon="paneldown" {$showHideSearchPanel_attrs}></a>
+	</span>
+	{END searchPanelTopButtons}
+</div>{END searchform_block}
+
+
+{BEGIN searchform_block}<div  class="rnr-brickcontents style1 rnr-b-vsearch2 {$brickclass_vsearch2}"><div>
+	<span>
+		{BEGIN searchform_text}<input type="text" {$searchfor_attrs} size="25">
+		{END searchform_text}
+		&nbsp;
+		{BEGIN searchform_search}<a href="#" class="rnr-button img" data-icon="search" {$searchbutton_attrs}></a>
+		{END searchform_search}
+		&nbsp;
+		{BEGIN searchform_showall}<a class="rnr-button" href="#" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</a>
+		{END searchform_showall}
+	</span>	
+</div></div>{END searchform_block}
+
+
+{BEGIN searchsaving_block}<div  class="rnr-brickcontents style1 rnr-b-search_saving_buttons {$brickclass_search_saving_buttons}"></div>{END searchsaving_block}
+
+
+{BEGIN details_block}<div  class="rnr-brickcontents style2 rnr-b-vdetails_found {$brickclass_vdetails_found}"><span  {$details_attrs}>{mlang_message DETAILS_FOUND}: <span class="rnr-details_found_count">{$records_found}</span></span>
+</div>{END details_block}
+
+
+{BEGIN pages_block}<div  class="rnr-brickcontents style1 rnr-b-vpage_of {$brickclass_vpage_of}"><span id="pages_block{$id}">
+	<span {$pages_attrs}>{mlang_message PAGE1} {$page} {mlang_message PAGE2} {$maxpages}</span>
+</span>
+</div>{END pages_block}
+
+
+{BEGIN recordspp_block}<div  class="rnr-brickcontents style1 rnr-b-vrecsperpage {$brickclass_vrecsperpage}"><span id="recordspp_block{$id}" name="recordspp_block{$id}">
+	{mlang_message RECORDS_PP}:&nbsp;{$recsPerPage}
+</span>
+</div>{END recordspp_block}
+
+
+{BEGIN searchPanel}<div  class="rnr-brickcontents style1 rnr-b-searchpanel {$brickclass_searchpanel}"><div class="searchPanelContainer">
+<div class="searchOptions bottomPanelBorder" {$srchOpt_attrs}>
+	
+	<!-- Search panel content -->
+	<div class="srchCritTop" style="display: none;">
+		{mlang_message SEARCH_CRITERIA}:&nbsp;
+		<input type="radio" name="srchType{$id}" class="rnr-radio-button" {$all_checkbox}>&nbsp;{BEGIN all_checkbox_label}<span>{mlang_message SEARCH_ALL}</span>{END all_checkbox_label}
+		&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="srchType{$id}" class="rnr-radio-button" {$any_checkbox}>&nbsp;{BEGIN any_checkbox_label}<span>{mlang_message SEARCH_ANY}</span>{END any_checkbox_label}
+	</div>
+	
+	<div class="addOption">
+		<span class="rnr-buttons-group">
+			<a href="#" id="showHideControlChooseMenu{$id}" class="rnr-button" {$showHideCtrls_attrs}>{mlang_message SEARCH_ADD_FIELD}</a>
+		</span>
+		
+		<a href="#" id="showHideSearchType{$id}" class="rnr-button" {$showHideCtrlsOpt_attrs}>{$showHideOpt_mess}</a>
+	</div>
+	
+
+	<table class="controlsBlock {$controls_block_class}">
+				{BEGIN searchCtrlBlock}<tr class="srchPanelRow" {$filterRow_attrs}>
+			<td class="srchPanelCell">{$delCtrlButt}</td>	
+			<td class="srchPanelCell">{$fLabel}:&nbsp;</td>
+			<td class="srchPanelCell srchPanelCell2">
+				<div class="rnr-searchtype">{$searchtype}</div>
+				<div class="rnr-searchcontrol">{$searchcontrol}</div>
+				<div class="rnr-searchcontrol">{$searchcontrol1}</div>
+			</td>	
+		</tr>
+		{END searchCtrlBlock}
+	</table>	
+
+
+	
+	<div class="bottomSearchButt" align="left" {$bottomSearchButt_attrs}>
+		<a href="#" class="rnr-button" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</a>
+	</div>
+</div>
+
+</div></div>{END searchPanel}
+
+
+
+</div>
+{END container_left}
+
+
+			</div>
+			<div class="rnr-center {$blockclass_center}">
+				
+
+{BEGIN container_bigblock}<div class="rnr-c rnr-cv rnr-c-bigblock">
+
+
+<div  class="rnr-brickcontents style1 rnr-b-wrapper {$wrapperclass_recordcontrols} rnr-wrapper rnr-cbw-recordcontrols">
+
+{BEGIN container_recordcontrols}<div class="rnr-c rnr-ch rnr-c-recordcontrols">
+
+{BEGIN newrecord_controls_block}<div  class="style1 rnr-bl rnr-b-recordcontrols_new {$brickclass_recordcontrols_new}">		{BEGIN add_link}<a href="Mined_Prueba_add.php{$addlink_getparams}" class="rnr-button" {$addlink_attrs}>{mlang_message ADD_NEW}</a>
+	{END add_link}
+
+		{BEGIN inlineadd_link}<a href="#" class="rnr-button" {$inlineaddlink_attrs}>{mlang_message INLINE_ADD}</a>
+	{END inlineadd_link}
+
+
+</div>
+{END newrecord_controls_block}
+
+
+{BEGIN record_controls_block}<div  class="style1 rnr-bl rnr-b-recordcontrol {$brickclass_recordcontrol}">{BEGIN selectall_link}<a href="#" class="rnr-button" {$selectalllink_span} {$selectalllink_attrs}>{mlang_message SELECT_ALL}</a>
+{END selectall_link}
+{BEGIN withSelected}<span class="rnr-buttons-group">
+<a class="rnr-button {$withSelectedClass}" href="#" id="selectButtonsToggler{$id}">{mlang_message WITH_SELECTED}</a>
+<ul class="rnr-list" id="selectButtonsGroup{$id}">
+
+		{BEGIN editselected_link}<li>
+		<a href="#" class="rnr-button link" {$editselectedlink_attrs} {$editselectedlink_span}>{mlang_message WS_EDIT}</a>
+</li>
+	{END editselected_link}
+
+	
+		{BEGIN exportselected_link}<li>
+		<a href="#" class="rnr-button link" {$exportselectedlink_attrs} {$exportselectedlink_span}>{mlang_message WS_EXPORT}</a>
+</li>
+	{END exportselected_link}
+
+</ul>
+</span>
+{END withSelected}
+		{BEGIN saveall_link}<a href="#" class="rnr-button" {$savealllink_attrs} {$savealllink_span}>{mlang_message SAVE_ALL}</a>
+	{END saveall_link}
+	{BEGIN cancelall_link}<a href="#" class="rnr-button" {$cancelalllink_attrs} {$cancelalllink_span}>{mlang_message CANCEL_ALL}</a>
+	{END cancelall_link}
+</div>
+{END record_controls_block}
+
+
+{BEGIN more_list}<div  class="style1 rnr-bl rnr-b-toplinks {$brickclass_toplinks}"><span class="rnr-buttons-group">
+{BEGIN moreButtons}<a class="rnr-button" id="extraButtonsToggler{$id}" href="#">{mlang_message MORE}...</a>
+<ul class="rnr-list rnr-buttons-group" id="extraButtonsGroup{$id}">
+
+{BEGIN asearch_link}<li>
+	<a href="Mined_Prueba_search.php" class="rnr-button link" {$advsearchlink_attrs}>{mlang_message ADVANCED_SEARCH}</a>
+</li>
+{END asearch_link}
+
+{BEGIN export_link}<li>
+	<a target="_blank" href="Mined_Prueba_export.php" class="rnr-button link" {$exportlink_attrs}>{mlang_message EXPORT_RESULTS}</a>
+</li>
+{END export_link}
+
+{BEGIN import_link}<li>
+	<a href="Mined_Prueba_import.php?{$crosstable_attrs}" class="rnr-button link" {$importlink_attrs}>{mlang_message IMPORT}</a>
+</li>
+{END import_link}
+</ul>
+{END moreButtons}
+</span></div>
+{END more_list}
+
+<div class="rnr-hfiller"></div>
+</div>
+{END container_recordcontrols}
+
+</div>
+
+
+
+<div  class="rnr-brickcontents style1 rnr-b-wrapper {$wrapperclass_message} rnr-wrapper rnr-cbw-message">
+
+{BEGIN container_message}<div class="rnr-c rnr-ch rnr-c-message">
+
+{BEGIN message_block}<div  class="style1 rnr-bc rnr-b-message {$brickclass_message}"><div class="rnr-message">{$message}</div></div>
+{END message_block}
+
+
+</div>
+{END container_message}
+
+</div>
+
+
+
+<div  class="rnr-brickcontents style1 rnr-b-wrapper {$wrapperclass_grid} rnr-wrapper rnr-cbw-grid">
+
+{BEGIN container_grid}{BEGIN grid_block}<table class="rnr-c rnr-cont rnr-c-grid rnr-b-grid rnr-gridtable  hoverable " cellpadding="0" >
+						<thead>
+															{BEGIN grid_header}<tr class="rnr-toprow style1 {$gridHeader_class}" >
+									{BEGIN record_header}{BEGIN listIcons_column}<th iEditCont="all">&nbsp;</th>
+									{END listIcons_column}	
+
+																		{BEGIN checkbox_column}<th class="rnr-bc">
+										<input type="checkbox" {$checkboxheader_attrs}>
+									</th>
+									{END checkbox_column}
+
+																																			{BEGIN x_fieldheadercolumn}<th class="rnr-gridfieldlabel {$x_class}">
+									{BEGIN x_fieldheader}<span {$x_orderlinkattrs}>
+											{$label Mined_Prueba x}
+										</span>
+									{END x_fieldheader}
+									</th>
+									{END x_fieldheadercolumn}
+
+																	{BEGIN y_fieldheadercolumn}<th class="rnr-gridfieldlabel {$y_class}">
+									{BEGIN y_fieldheader}<span {$y_orderlinkattrs}>
+											{$label Mined_Prueba y}
+										</span>
+									{END y_fieldheader}
+									</th>
+									{END y_fieldheadercolumn}
+
+																	{BEGIN departamento_fieldheadercolumn}<th class="rnr-gridfieldlabel {$departamento_class}">
+									{BEGIN departamento_fieldheader}<span {$departamento_orderlinkattrs}>
+											{$label Mined_Prueba departamento}
+										</span>
+									{END departamento_fieldheader}
+									</th>
+									{END departamento_fieldheadercolumn}
+
+																	{BEGIN municipio_fieldheadercolumn}<th class="rnr-gridfieldlabel {$municipio_class}">
+									{BEGIN municipio_fieldheader}<span {$municipio_orderlinkattrs}>
+											{$label Mined_Prueba municipio}
+										</span>
+									{END municipio_fieldheader}
+									</th>
+									{END municipio_fieldheadercolumn}
+
+																	{BEGIN sector_ppd_fieldheadercolumn}<th class="rnr-gridfieldlabel {$sector_ppd_class}">
+									{BEGIN sector_ppd_fieldheader}<span {$sector_ppd_orderlinkattrs}>
+											{$label Mined_Prueba sector_ppd}
+										</span>
+									{END sector_ppd_fieldheader}
+									</th>
+									{END sector_ppd_fieldheadercolumn}
+
+																	{BEGIN nombre_c_e_fieldheadercolumn}<th class="rnr-gridfieldlabel {$nombre_c_e_class}">
+									{BEGIN nombre_c_e_fieldheader}<span {$nombre_c_e_orderlinkattrs}>
+											{$label Mined_Prueba nombre_c_e}
+										</span>
+									{END nombre_c_e_fieldheader}
+									</th>
+									{END nombre_c_e_fieldheadercolumn}
+
+																	{BEGIN ipce_0_1_fieldheadercolumn}<th class="rnr-gridfieldlabel {$ipce_0_1_class}">
+									{BEGIN ipce_0_1_fieldheader}<span {$ipce_0_1_orderlinkattrs}>
+											{$label Mined_Prueba ipce_0_1}
+										</span>
+									{END ipce_0_1_fieldheader}
+									</th>
+									{END ipce_0_1_fieldheadercolumn}
+
+																	{BEGIN DisplayOnMap_fieldheadercolumn}<th class="rnr-gridfieldlabel {$DisplayOnMap_class}">
+									{BEGIN DisplayOnMap_fieldheader}<span {$DisplayOnMap_orderlinkattrs}>
+											{$label Mined_Prueba DisplayOnMap}
+										</span>
+									{END DisplayOnMap_fieldheader}
+									</th>
+									{END DisplayOnMap_fieldheadercolumn}
+
+
+									
+									<th class="rnr-edge">&nbsp;</th>
+									{BEGIN endrecordheader_block}<th class="rnr-cs">&nbsp;</th>
+									
+									{END endrecordheader_block}
+									
+									{END record_header}
+									
+								</tr>
+								{END grid_header}
+
+						</thead>
+						<tbody>	
+															{BEGIN grid_row}<tr class="rnr-row style1 {$rowclass}" {$rowattrs} {$rowstyle}>
+									{BEGIN grid_record}{BEGIN listIcons_column}<td class="rnr-cc rnr-bc rnr-icons" iEditCont="all" {$rowstyle} {$recordattrs}>
+																		{BEGIN edit_column}{BEGIN edit_link}<a class="rnr-button-img" {$editlink_attrs} data-icon="edit" title="{mlang_message EDIT}"></a>
+									{END edit_link}
+									{END edit_column}
+
+																		{BEGIN inlineedit_column}{BEGIN inlineedit_link}<a class="rnr-button-img" {$inlineeditlink_attrs} data-icon="inlineedit" title="{mlang_message INLINE_EDIT}"></a>
+									{END inlineedit_link}
+									{END inlineedit_column}
+
+									
+																		{BEGIN view_column}{BEGIN view_link}<a class="rnr-button-img" {$viewlink_attrs} data-icon="view" title="{mlang_message VIEW}"></a>
+									{END view_link}
+									{END view_column}
+									</td>	
+									{END listIcons_column}	
+
+																		{BEGIN checkbox_column}<td class="rnr-bc" iEditCont="checkBox" {$rowstyle} {$recordattrs}>
+									{BEGIN checkbox}<input type="checkbox" {$checkbox_attrs}>
+									{END checkbox}
+									</td>
+									{END checkbox_column}
+
+									
+										{BEGIN x_fieldcolumn}<td class="{$x_class}" {$x_style} {$recordattrs}>
+		{$x_value}
+	</td>
+{END x_fieldcolumn}
+
+	{BEGIN y_fieldcolumn}<td class="{$y_class}" {$y_style} {$recordattrs}>
+		{$y_value}
+	</td>
+{END y_fieldcolumn}
+
+	{BEGIN departamento_fieldcolumn}<td class="{$departamento_class}" {$departamento_style} {$recordattrs}>
+		{$departamento_value}
+	</td>
+{END departamento_fieldcolumn}
+
+	{BEGIN municipio_fieldcolumn}<td class="{$municipio_class}" {$municipio_style} {$recordattrs}>
+		{$municipio_value}
+	</td>
+{END municipio_fieldcolumn}
+
+	{BEGIN sector_ppd_fieldcolumn}<td class="{$sector_ppd_class}" {$sector_ppd_style} {$recordattrs}>
+		{$sector_ppd_value}
+	</td>
+{END sector_ppd_fieldcolumn}
+
+	{BEGIN nombre_c_e_fieldcolumn}<td class="{$nombre_c_e_class}" {$nombre_c_e_style} {$recordattrs}>
+		{$nombre_c_e_value}
+	</td>
+{END nombre_c_e_fieldcolumn}
+
+	{BEGIN ipce_0_1_fieldcolumn}<td class="{$ipce_0_1_class}" {$ipce_0_1_style} {$recordattrs}>
+		{$ipce_0_1_value}
+	</td>
+{END ipce_0_1_fieldcolumn}
+
+	{BEGIN DisplayOnMap_fieldcolumn}<td class="{$DisplayOnMap_class}" {$DisplayOnMap_style} {$recordattrs}>
+		{$DisplayOnMap_value}
+	</td>
+{END DisplayOnMap_fieldcolumn}
+
+
+									<td class="rnr-edge" {$recordattrs}>&nbsp;</td>
+									{BEGIN endrecord_block}<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+									{END endrecord_block}
+																	
+									{END grid_record}
+
+								</tr>
+								{END grid_row}
+															
+						</tbody>
+					</table>
+					
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+</div>
+
+
+
+<div  class="rnr-brickcontents style1 rnr-b-wrapper {$wrapperclass_pagination} rnr-wrapper rnr-cbw-pagination">
+
+{BEGIN container_pagination}<div class="rnr-c rnr-ch rnr-c-pagination">
+
+{BEGIN pagination_block}<div  class="style1 rnr-bc rnr-b-pagination {$brickclass_pagination}">{$pagination}</div>
+{END pagination_block}
+
+
+</div>
+{END container_pagination}
+
+</div>
+
+
+</div>
+{END container_bigblock}
+
+
+			</div>
+			<div class="rnr-right {$blockclass_right}">
+				
+			</div>
+		</div>
+		<div class="rnr-bottom {$blockclass_bottom}">
+			
+		</div>
+	</div>
+		
+		{$footer}
+	{END body}
+	</body>
+</html>

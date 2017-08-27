@@ -1,0 +1,562 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-print" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel hechosdelictivos_lugaresp print}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+	<table class="table table-bordered rp-maintable" {$printgrid_hiddenattr} data-pageid="{$pageid}" data-brick="printgrid" >
+	<thead>
+	{BEGIN grid_header}
+		<tr class="{$gridHeader_class}" >
+		{BEGIN record_header}
+			{BEGIN id1_fieldheadercolumn}
+			<th class="{$id1_class}" {$id1_style}  data-field="id1">
+				{$label hechosdelictivos_lugaresp id1}
+			</th>
+			{END id1_fieldheadercolumn}
+			{BEGIN correlativo_fieldheadercolumn}
+			<th class="{$correlativo_class}" {$correlativo_style}  data-field="correlativo">
+				{$label hechosdelictivos_lugaresp correlativo}
+			</th>
+			{END correlativo_fieldheadercolumn}
+			{BEGIN numero_fieldheadercolumn}
+			<th class="{$numero_class}" {$numero_style}  data-field="numero">
+				{$label hechosdelictivos_lugaresp numero}
+			</th>
+			{END numero_fieldheadercolumn}
+			{BEGIN id_fieldheadercolumn}
+			<th class="{$id_class}" {$id_style}  data-field="id">
+				{$label hechosdelictivos_lugaresp id}
+			</th>
+			{END id_fieldheadercolumn}
+			{BEGIN codigo_muni_fieldheadercolumn}
+			<th class="{$codigo_muni_class}" {$codigo_muni_style}  data-field="codigo_muni">
+				{$label hechosdelictivos_lugaresp codigo_muni}
+			</th>
+			{END codigo_muni_fieldheadercolumn}
+			{BEGIN numero2_fieldheadercolumn}
+			<th class="{$numero2_class}" {$numero2_style}  data-field="numero2">
+				{$label hechosdelictivos_lugaresp numero2}
+			</th>
+			{END numero2_fieldheadercolumn}
+			{BEGIN depart_he_fieldheadercolumn}
+			<th class="{$depart_he_class}" {$depart_he_style}  data-field="depart_he">
+				{$label hechosdelictivos_lugaresp depart_he}
+			</th>
+			{END depart_he_fieldheadercolumn}
+			{BEGIN muni_he_fieldheadercolumn}
+			<th class="{$muni_he_class}" {$muni_he_style}  data-field="muni_he">
+				{$label hechosdelictivos_lugaresp muni_he}
+			</th>
+			{END muni_he_fieldheadercolumn}
+			{BEGIN dire_hecho_fieldheadercolumn}
+			<th class="{$dire_hecho_class}" {$dire_hecho_style}  data-field="dire_hecho">
+				{$label hechosdelictivos_lugaresp dire_hecho}
+			</th>
+			{END dire_hecho_fieldheadercolumn}
+			{BEGIN lugar_esp_fieldheadercolumn}
+			<th class="{$lugar_esp_class}" {$lugar_esp_style}  data-field="lugar_esp">
+				{$label hechosdelictivos_lugaresp lugar_esp}
+			</th>
+			{END lugar_esp_fieldheadercolumn}
+			{BEGIN lugaranalisis_fieldheadercolumn}
+			<th class="{$lugaranalisis_class}" {$lugaranalisis_style}  data-field="lugaranalisis">
+				{$label hechosdelictivos_lugaresp lugaranalisis}
+			</th>
+			{END lugaranalisis_fieldheadercolumn}
+			{BEGIN area_fieldheadercolumn}
+			<th class="{$area_class}" {$area_style}  data-field="area">
+				{$label hechosdelictivos_lugaresp area}
+			</th>
+			{END area_fieldheadercolumn}
+			{BEGIN forma_cono_fieldheadercolumn}
+			<th class="{$forma_cono_class}" {$forma_cono_style}  data-field="forma_cono">
+				{$label hechosdelictivos_lugaresp forma_cono}
+			</th>
+			{END forma_cono_fieldheadercolumn}
+			{BEGIN delito_fieldheadercolumn}
+			<th class="{$delito_class}" {$delito_style}  data-field="delito">
+				{$label hechosdelictivos_lugaresp delito}
+			</th>
+			{END delito_fieldheadercolumn}
+			{BEGIN delito_espe_fieldheadercolumn}
+			<th class="{$delito_espe_class}" {$delito_espe_style}  data-field="delito_espe">
+				{$label hechosdelictivos_lugaresp delito_espe}
+			</th>
+			{END delito_espe_fieldheadercolumn}
+			{BEGIN dia_hecho_fieldheadercolumn}
+			<th class="{$dia_hecho_class}" {$dia_hecho_style}  data-field="dia_hecho">
+				{$label hechosdelictivos_lugaresp dia_hecho}
+			</th>
+			{END dia_hecho_fieldheadercolumn}
+			{BEGIN hora_hecho_fieldheadercolumn}
+			<th class="{$hora_hecho_class}" {$hora_hecho_style}  data-field="hora_hecho">
+				{$label hechosdelictivos_lugaresp hora_hecho}
+			</th>
+			{END hora_hecho_fieldheadercolumn}
+			{BEGIN rango_hora_fieldheadercolumn}
+			<th class="{$rango_hora_class}" {$rango_hora_style}  data-field="rango_hora">
+				{$label hechosdelictivos_lugaresp rango_hora}
+			</th>
+			{END rango_hora_fieldheadercolumn}
+			{BEGIN fecha_hecho_fieldheadercolumn}
+			<th class="{$fecha_hecho_class}" {$fecha_hecho_style}  data-field="fecha_hecho">
+				{$label hechosdelictivos_lugaresp fecha_hecho}
+			</th>
+			{END fecha_hecho_fieldheadercolumn}
+			{BEGIN a_o_hecho_fieldheadercolumn}
+			<th class="{$a_o_hecho_class}" {$a_o_hecho_style}  data-field="a_o_hecho">
+				{$label hechosdelictivos_lugaresp a_o_hecho}
+			</th>
+			{END a_o_hecho_fieldheadercolumn}
+			{BEGIN edad_victima_fieldheadercolumn}
+			<th class="{$edad_victima_class}" {$edad_victima_style}  data-field="edad_victima">
+				{$label hechosdelictivos_lugaresp edad_victima}
+			</th>
+			{END edad_victima_fieldheadercolumn}
+			{BEGIN ran_eta_vic_fieldheadercolumn}
+			<th class="{$ran_eta_vic_class}" {$ran_eta_vic_style}  data-field="ran_eta_vic">
+				{$label hechosdelictivos_lugaresp ran_eta_vic}
+			</th>
+			{END ran_eta_vic_fieldheadercolumn}
+			{BEGIN s_victima_fieldheadercolumn}
+			<th class="{$s_victima_class}" {$s_victima_style}  data-field="s_victima">
+				{$label hechosdelictivos_lugaresp s_victima}
+			</th>
+			{END s_victima_fieldheadercolumn}
+			{BEGIN oc_victima_fieldheadercolumn}
+			<th class="{$oc_victima_class}" {$oc_victima_style}  data-field="oc_victima">
+				{$label hechosdelictivos_lugaresp oc_victima}
+			</th>
+			{END oc_victima_fieldheadercolumn}
+			{BEGIN relacion_vi_agre_fieldheadercolumn}
+			<th class="{$relacion_vi_agre_class}" {$relacion_vi_agre_style}  data-field="relacion_vi_agre">
+				{$label hechosdelictivos_lugaresp relacion_vi_agre}
+			</th>
+			{END relacion_vi_agre_fieldheadercolumn}
+			{BEGIN edad_agresor_fieldheadercolumn}
+			<th class="{$edad_agresor_class}" {$edad_agresor_style}  data-field="edad_agresor">
+				{$label hechosdelictivos_lugaresp edad_agresor}
+			</th>
+			{END edad_agresor_fieldheadercolumn}
+			{BEGIN sexo__agresor_fieldheadercolumn}
+			<th class="{$sexo__agresor_class}" {$sexo__agresor_style}  data-field="sexo__agresor">
+				{$label hechosdelictivos_lugaresp sexo__agresor}
+			</th>
+			{END sexo__agresor_fieldheadercolumn}
+			{BEGIN ocupa_agresor_fieldheadercolumn}
+			<th class="{$ocupa_agresor_class}" {$ocupa_agresor_style}  data-field="ocupa_agresor">
+				{$label hechosdelictivos_lugaresp ocupa_agresor}
+			</th>
+			{END ocupa_agresor_fieldheadercolumn}
+			{BEGIN movil_fieldheadercolumn}
+			<th class="{$movil_class}" {$movil_style}  data-field="movil">
+				{$label hechosdelictivos_lugaresp movil}
+			</th>
+			{END movil_fieldheadercolumn}
+			{BEGIN tipo_arma_fieldheadercolumn}
+			<th class="{$tipo_arma_class}" {$tipo_arma_style}  data-field="tipo_arma">
+				{$label hechosdelictivos_lugaresp tipo_arma}
+			</th>
+			{END tipo_arma_fieldheadercolumn}
+			{BEGIN canton_hecho_fieldheadercolumn}
+			<th class="{$canton_hecho_class}" {$canton_hecho_style}  data-field="canton_hecho">
+				{$label hechosdelictivos_lugaresp canton_hecho}
+			</th>
+			{END canton_hecho_fieldheadercolumn}
+			{BEGIN colonia_hecho_fieldheadercolumn}
+			<th class="{$colonia_hecho_class}" {$colonia_hecho_style}  data-field="colonia_hecho">
+				{$label hechosdelictivos_lugaresp colonia_hecho}
+			</th>
+			{END colonia_hecho_fieldheadercolumn}
+			{BEGIN caserio_hecho_fieldheadercolumn}
+			<th class="{$caserio_hecho_class}" {$caserio_hecho_style}  data-field="caserio_hecho">
+				{$label hechosdelictivos_lugaresp caserio_hecho}
+			</th>
+			{END caserio_hecho_fieldheadercolumn}
+			{BEGIN calle_hecho_fieldheadercolumn}
+			<th class="{$calle_hecho_class}" {$calle_hecho_style}  data-field="calle_hecho">
+				{$label hechosdelictivos_lugaresp calle_hecho}
+			</th>
+			{END calle_hecho_fieldheadercolumn}
+			{BEGIN avenida_hecho_fieldheadercolumn}
+			<th class="{$avenida_hecho_class}" {$avenida_hecho_style}  data-field="avenida_hecho">
+				{$label hechosdelictivos_lugaresp avenida_hecho}
+			</th>
+			{END avenida_hecho_fieldheadercolumn}
+			{BEGIN casa_hecho_fieldheadercolumn}
+			<th class="{$casa_hecho_class}" {$casa_hecho_style}  data-field="casa_hecho">
+				{$label hechosdelictivos_lugaresp casa_hecho}
+			</th>
+			{END casa_hecho_fieldheadercolumn}
+			{BEGIN comu_hecho_fieldheadercolumn}
+			<th class="{$comu_hecho_class}" {$comu_hecho_style}  data-field="comu_hecho">
+				{$label hechosdelictivos_lugaresp comu_hecho}
+			</th>
+			{END comu_hecho_fieldheadercolumn}
+			{BEGIN barrio_hecho_fieldheadercolumn}
+			<th class="{$barrio_hecho_class}" {$barrio_hecho_style}  data-field="barrio_hecho">
+				{$label hechosdelictivos_lugaresp barrio_hecho}
+			</th>
+			{END barrio_hecho_fieldheadercolumn}
+			{BEGIN comp_hecho_fieldheadercolumn}
+			<th class="{$comp_hecho_class}" {$comp_hecho_style}  data-field="comp_hecho">
+				{$label hechosdelictivos_lugaresp comp_hecho}
+			</th>
+			{END comp_hecho_fieldheadercolumn}
+			{BEGIN sector_ppd_fieldheadercolumn}
+			<th class="{$sector_ppd_class}" {$sector_ppd_style}  data-field="sector_ppd">
+				{$label hechosdelictivos_lugaresp sector_ppd}
+			</th>
+			{END sector_ppd_fieldheadercolumn}
+			{BEGIN tipo_fieldheadercolumn}
+			<th class="{$tipo_class}" {$tipo_style}  data-field="tipo">
+				{$label hechosdelictivos_lugaresp tipo}
+			</th>
+			{END tipo_fieldheadercolumn}
+			{BEGIN nombre_fieldheadercolumn}
+			<th class="{$nombre_class}" {$nombre_style}  data-field="nombre">
+				{$label hechosdelictivos_lugaresp nombre}
+			</th>
+			{END nombre_fieldheadercolumn}
+			{BEGIN x_fieldheadercolumn}
+			<th class="{$x_class}" {$x_style}  data-field="x">
+				{$label hechosdelictivos_lugaresp x}
+			</th>
+			{END x_fieldheadercolumn}
+			{BEGIN y_fieldheadercolumn}
+			<th class="{$y_class}" {$y_style}  data-field="y">
+				{$label hechosdelictivos_lugaresp y}
+			</th>
+			{END y_fieldheadercolumn}
+			{BEGIN endrecordheader_block}
+			<th class="rnr-cs">&nbsp;</th>
+			{END endrecordheader_block}
+		{END record_header}
+		</tr>
+	{END grid_header}
+	</thead>
+	
+	<tbody>	
+	{BEGIN grid_row}
+		<tr class="{$rowclass}" {$rowattrs} {$rowstyle}>
+		{BEGIN grid_record}
+			{BEGIN id1_fieldcolumn}
+			<td  class="{$id1_class}" {$id1_style} {$recordattrs}>
+				{$id1_value}
+			</td>
+			{END id1_fieldcolumn}
+			{BEGIN correlativo_fieldcolumn}
+			<td  class="{$correlativo_class}" {$correlativo_style} {$recordattrs}>
+				{$correlativo_value}
+			</td>
+			{END correlativo_fieldcolumn}
+			{BEGIN numero_fieldcolumn}
+			<td  class="{$numero_class}" {$numero_style} {$recordattrs}>
+				{$numero_value}
+			</td>
+			{END numero_fieldcolumn}
+			{BEGIN id_fieldcolumn}
+			<td  class="{$id_class}" {$id_style} {$recordattrs}>
+				{$id_value}
+			</td>
+			{END id_fieldcolumn}
+			{BEGIN codigo_muni_fieldcolumn}
+			<td  class="{$codigo_muni_class}" {$codigo_muni_style} {$recordattrs}>
+				{$codigo_muni_value}
+			</td>
+			{END codigo_muni_fieldcolumn}
+			{BEGIN numero2_fieldcolumn}
+			<td  class="{$numero2_class}" {$numero2_style} {$recordattrs}>
+				{$numero2_value}
+			</td>
+			{END numero2_fieldcolumn}
+			{BEGIN depart_he_fieldcolumn}
+			<td  class="{$depart_he_class}" {$depart_he_style} {$recordattrs}>
+				{$depart_he_value}
+			</td>
+			{END depart_he_fieldcolumn}
+			{BEGIN muni_he_fieldcolumn}
+			<td  class="{$muni_he_class}" {$muni_he_style} {$recordattrs}>
+				{$muni_he_value}
+			</td>
+			{END muni_he_fieldcolumn}
+			{BEGIN dire_hecho_fieldcolumn}
+			<td  class="{$dire_hecho_class}" {$dire_hecho_style} {$recordattrs}>
+				{$dire_hecho_value}
+			</td>
+			{END dire_hecho_fieldcolumn}
+			{BEGIN lugar_esp_fieldcolumn}
+			<td  class="{$lugar_esp_class}" {$lugar_esp_style} {$recordattrs}>
+				{$lugar_esp_value}
+			</td>
+			{END lugar_esp_fieldcolumn}
+			{BEGIN lugaranalisis_fieldcolumn}
+			<td  class="{$lugaranalisis_class}" {$lugaranalisis_style} {$recordattrs}>
+				{$lugaranalisis_value}
+			</td>
+			{END lugaranalisis_fieldcolumn}
+			{BEGIN area_fieldcolumn}
+			<td  class="{$area_class}" {$area_style} {$recordattrs}>
+				{$area_value}
+			</td>
+			{END area_fieldcolumn}
+			{BEGIN forma_cono_fieldcolumn}
+			<td  class="{$forma_cono_class}" {$forma_cono_style} {$recordattrs}>
+				{$forma_cono_value}
+			</td>
+			{END forma_cono_fieldcolumn}
+			{BEGIN delito_fieldcolumn}
+			<td  class="{$delito_class}" {$delito_style} {$recordattrs}>
+				{$delito_value}
+			</td>
+			{END delito_fieldcolumn}
+			{BEGIN delito_espe_fieldcolumn}
+			<td  class="{$delito_espe_class}" {$delito_espe_style} {$recordattrs}>
+				{$delito_espe_value}
+			</td>
+			{END delito_espe_fieldcolumn}
+			{BEGIN dia_hecho_fieldcolumn}
+			<td  class="{$dia_hecho_class}" {$dia_hecho_style} {$recordattrs}>
+				{$dia_hecho_value}
+			</td>
+			{END dia_hecho_fieldcolumn}
+			{BEGIN hora_hecho_fieldcolumn}
+			<td  class="{$hora_hecho_class}" {$hora_hecho_style} {$recordattrs}>
+				{$hora_hecho_value}
+			</td>
+			{END hora_hecho_fieldcolumn}
+			{BEGIN rango_hora_fieldcolumn}
+			<td  class="{$rango_hora_class}" {$rango_hora_style} {$recordattrs}>
+				{$rango_hora_value}
+			</td>
+			{END rango_hora_fieldcolumn}
+			{BEGIN fecha_hecho_fieldcolumn}
+			<td  class="{$fecha_hecho_class}" {$fecha_hecho_style} {$recordattrs}>
+				{$fecha_hecho_value}
+			</td>
+			{END fecha_hecho_fieldcolumn}
+			{BEGIN a_o_hecho_fieldcolumn}
+			<td  class="{$a_o_hecho_class}" {$a_o_hecho_style} {$recordattrs}>
+				{$a_o_hecho_value}
+			</td>
+			{END a_o_hecho_fieldcolumn}
+			{BEGIN edad_victima_fieldcolumn}
+			<td  class="{$edad_victima_class}" {$edad_victima_style} {$recordattrs}>
+				{$edad_victima_value}
+			</td>
+			{END edad_victima_fieldcolumn}
+			{BEGIN ran_eta_vic_fieldcolumn}
+			<td  class="{$ran_eta_vic_class}" {$ran_eta_vic_style} {$recordattrs}>
+				{$ran_eta_vic_value}
+			</td>
+			{END ran_eta_vic_fieldcolumn}
+			{BEGIN s_victima_fieldcolumn}
+			<td  class="{$s_victima_class}" {$s_victima_style} {$recordattrs}>
+				{$s_victima_value}
+			</td>
+			{END s_victima_fieldcolumn}
+			{BEGIN oc_victima_fieldcolumn}
+			<td  class="{$oc_victima_class}" {$oc_victima_style} {$recordattrs}>
+				{$oc_victima_value}
+			</td>
+			{END oc_victima_fieldcolumn}
+			{BEGIN relacion_vi_agre_fieldcolumn}
+			<td  class="{$relacion_vi_agre_class}" {$relacion_vi_agre_style} {$recordattrs}>
+				{$relacion_vi_agre_value}
+			</td>
+			{END relacion_vi_agre_fieldcolumn}
+			{BEGIN edad_agresor_fieldcolumn}
+			<td  class="{$edad_agresor_class}" {$edad_agresor_style} {$recordattrs}>
+				{$edad_agresor_value}
+			</td>
+			{END edad_agresor_fieldcolumn}
+			{BEGIN sexo__agresor_fieldcolumn}
+			<td  class="{$sexo__agresor_class}" {$sexo__agresor_style} {$recordattrs}>
+				{$sexo__agresor_value}
+			</td>
+			{END sexo__agresor_fieldcolumn}
+			{BEGIN ocupa_agresor_fieldcolumn}
+			<td  class="{$ocupa_agresor_class}" {$ocupa_agresor_style} {$recordattrs}>
+				{$ocupa_agresor_value}
+			</td>
+			{END ocupa_agresor_fieldcolumn}
+			{BEGIN movil_fieldcolumn}
+			<td  class="{$movil_class}" {$movil_style} {$recordattrs}>
+				{$movil_value}
+			</td>
+			{END movil_fieldcolumn}
+			{BEGIN tipo_arma_fieldcolumn}
+			<td  class="{$tipo_arma_class}" {$tipo_arma_style} {$recordattrs}>
+				{$tipo_arma_value}
+			</td>
+			{END tipo_arma_fieldcolumn}
+			{BEGIN canton_hecho_fieldcolumn}
+			<td  class="{$canton_hecho_class}" {$canton_hecho_style} {$recordattrs}>
+				{$canton_hecho_value}
+			</td>
+			{END canton_hecho_fieldcolumn}
+			{BEGIN colonia_hecho_fieldcolumn}
+			<td  class="{$colonia_hecho_class}" {$colonia_hecho_style} {$recordattrs}>
+				{$colonia_hecho_value}
+			</td>
+			{END colonia_hecho_fieldcolumn}
+			{BEGIN caserio_hecho_fieldcolumn}
+			<td  class="{$caserio_hecho_class}" {$caserio_hecho_style} {$recordattrs}>
+				{$caserio_hecho_value}
+			</td>
+			{END caserio_hecho_fieldcolumn}
+			{BEGIN calle_hecho_fieldcolumn}
+			<td  class="{$calle_hecho_class}" {$calle_hecho_style} {$recordattrs}>
+				{$calle_hecho_value}
+			</td>
+			{END calle_hecho_fieldcolumn}
+			{BEGIN avenida_hecho_fieldcolumn}
+			<td  class="{$avenida_hecho_class}" {$avenida_hecho_style} {$recordattrs}>
+				{$avenida_hecho_value}
+			</td>
+			{END avenida_hecho_fieldcolumn}
+			{BEGIN casa_hecho_fieldcolumn}
+			<td  class="{$casa_hecho_class}" {$casa_hecho_style} {$recordattrs}>
+				{$casa_hecho_value}
+			</td>
+			{END casa_hecho_fieldcolumn}
+			{BEGIN comu_hecho_fieldcolumn}
+			<td  class="{$comu_hecho_class}" {$comu_hecho_style} {$recordattrs}>
+				{$comu_hecho_value}
+			</td>
+			{END comu_hecho_fieldcolumn}
+			{BEGIN barrio_hecho_fieldcolumn}
+			<td  class="{$barrio_hecho_class}" {$barrio_hecho_style} {$recordattrs}>
+				{$barrio_hecho_value}
+			</td>
+			{END barrio_hecho_fieldcolumn}
+			{BEGIN comp_hecho_fieldcolumn}
+			<td  class="{$comp_hecho_class}" {$comp_hecho_style} {$recordattrs}>
+				{$comp_hecho_value}
+			</td>
+			{END comp_hecho_fieldcolumn}
+			{BEGIN sector_ppd_fieldcolumn}
+			<td  class="{$sector_ppd_class}" {$sector_ppd_style} {$recordattrs}>
+				{$sector_ppd_value}
+			</td>
+			{END sector_ppd_fieldcolumn}
+			{BEGIN tipo_fieldcolumn}
+			<td  class="{$tipo_class}" {$tipo_style} {$recordattrs}>
+				{$tipo_value}
+			</td>
+			{END tipo_fieldcolumn}
+			{BEGIN nombre_fieldcolumn}
+			<td  class="{$nombre_class}" {$nombre_style} {$recordattrs}>
+				{$nombre_value}
+			</td>
+			{END nombre_fieldcolumn}
+			{BEGIN x_fieldcolumn}
+			<td  class="{$x_class}" {$x_style} {$recordattrs}>
+				{$x_value}
+			</td>
+			{END x_fieldcolumn}
+			{BEGIN y_fieldcolumn}
+			<td  class="{$y_class}" {$y_style} {$recordattrs}>
+				{$y_value}
+			</td>
+			{END y_fieldcolumn}
+			{BEGIN endrecord_block}
+			<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+			{END endrecord_block}
+		{END grid_record}
+		</tr>
+{END grid_row}
+	</tbody>
+
+</table>
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

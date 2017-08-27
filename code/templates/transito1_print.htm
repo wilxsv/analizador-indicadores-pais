@@ -1,0 +1,362 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-print" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel transito1 print}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+	<table class="table table-bordered rp-maintable" {$printgrid_hiddenattr} data-pageid="{$pageid}" data-brick="printgrid" >
+	<thead>
+	{BEGIN grid_header}
+		<tr class="{$gridHeader_class}" >
+		{BEGIN record_header}
+			{BEGIN eid_fieldheadercolumn}
+			<th class="{$eid_class}" {$eid_style}  data-field="eid">
+				{$label transito1 eid}
+			</th>
+			{END eid_fieldheadercolumn}
+			{BEGIN pid_fieldheadercolumn}
+			<th class="{$pid_class}" {$pid_style}  data-field="pid">
+				{$label transito1 pid}
+			</th>
+			{END pid_fieldheadercolumn}
+			{BEGIN unidad_fieldheadercolumn}
+			<th class="{$unidad_class}" {$unidad_style}  data-field="unidad">
+				{$label transito1 unidad}
+			</th>
+			{END unidad_fieldheadercolumn}
+			{BEGIN sexo_fieldheadercolumn}
+			<th class="{$sexo_class}" {$sexo_style}  data-field="sexo">
+				{$label transito1 sexo}
+			</th>
+			{END sexo_fieldheadercolumn}
+			{BEGIN edad_fieldheadercolumn}
+			<th class="{$edad_class}" {$edad_style}  data-field="edad">
+				{$label transito1 edad}
+			</th>
+			{END edad_fieldheadercolumn}
+			{BEGIN resu_fieldheadercolumn}
+			<th class="{$resu_class}" {$resu_style}  data-field="resu">
+				{$label transito1 resu}
+			</th>
+			{END resu_fieldheadercolumn}
+			{BEGIN calidad_fieldheadercolumn}
+			<th class="{$calidad_class}" {$calidad_style}  data-field="calidad">
+				{$label transito1 calidad}
+			</th>
+			{END calidad_fieldheadercolumn}
+			{BEGIN fecacc_fieldheadercolumn}
+			<th class="{$fecacc_class}" {$fecacc_style}  data-field="fecacc">
+				{$label transito1 fecacc}
+			</th>
+			{END fecacc_fieldheadercolumn}
+			{BEGIN horacc_fieldheadercolumn}
+			<th class="{$horacc_class}" {$horacc_style}  data-field="horacc">
+				{$label transito1 horacc}
+			</th>
+			{END horacc_fieldheadercolumn}
+			{BEGIN rangohorario_fieldheadercolumn}
+			<th class="{$rangohorario_class}" {$rangohorario_style}  data-field="rangohorario">
+				{$label transito1 rangohorario}
+			</th>
+			{END rangohorario_fieldheadercolumn}
+			{BEGIN tipacc_fieldheadercolumn}
+			<th class="{$tipacc_class}" {$tipacc_style}  data-field="tipacc">
+				{$label transito1 tipacc}
+			</th>
+			{END tipacc_fieldheadercolumn}
+			{BEGIN cauacc_fieldheadercolumn}
+			<th class="{$cauacc_class}" {$cauacc_style}  data-field="cauacc">
+				{$label transito1 cauacc}
+			</th>
+			{END cauacc_fieldheadercolumn}
+			{BEGIN diracc_fieldheadercolumn}
+			<th class="{$diracc_class}" {$diracc_style}  data-field="diracc">
+				{$label transito1 diracc}
+			</th>
+			{END diracc_fieldheadercolumn}
+			{BEGIN munacc_fieldheadercolumn}
+			<th class="{$munacc_class}" {$munacc_style}  data-field="munacc">
+				{$label transito1 munacc}
+			</th>
+			{END munacc_fieldheadercolumn}
+			{BEGIN clares_fieldheadercolumn}
+			<th class="{$clares_class}" {$clares_style}  data-field="clares">
+				{$label transito1 clares}
+			</th>
+			{END clares_fieldheadercolumn}
+			{BEGIN rutres_fieldheadercolumn}
+			<th class="{$rutres_class}" {$rutres_style}  data-field="rutres">
+				{$label transito1 rutres}
+			</th>
+			{END rutres_fieldheadercolumn}
+			{BEGIN repdet_fieldheadercolumn}
+			<th class="{$repdet_class}" {$repdet_style}  data-field="repdet">
+				{$label transito1 repdet}
+			</th>
+			{END repdet_fieldheadercolumn}
+			{BEGIN departamento_fieldheadercolumn}
+			<th class="{$departamento_class}" {$departamento_style}  data-field="departamento">
+				{$label transito1 departamento}
+			</th>
+			{END departamento_fieldheadercolumn}
+			{BEGIN dia_fieldheadercolumn}
+			<th class="{$dia_class}" {$dia_style}  data-field="dia">
+				{$label transito1 dia}
+			</th>
+			{END dia_fieldheadercolumn}
+			{BEGIN sectorppd_fieldheadercolumn}
+			<th class="{$sectorppd_class}" {$sectorppd_style}  data-field="sectorppd">
+				{$label transito1 sectorppd}
+			</th>
+			{END sectorppd_fieldheadercolumn}
+			{BEGIN rangoetario_fieldheadercolumn}
+			<th class="{$rangoetario_class}" {$rangoetario_style}  data-field="rangoetario">
+				{$label transito1 rangoetario}
+			</th>
+			{END rangoetario_fieldheadercolumn}
+			{BEGIN causa_analisis_fieldheadercolumn}
+			<th class="{$causa_analisis_class}" {$causa_analisis_style}  data-field="causa_analisis">
+				{$label transito1 causa_analisis}
+			</th>
+			{END causa_analisis_fieldheadercolumn}
+			{BEGIN tipo_analisis_fieldheadercolumn}
+			<th class="{$tipo_analisis_class}" {$tipo_analisis_style}  data-field="tipo_analisis">
+				{$label transito1 tipo_analisis}
+			</th>
+			{END tipo_analisis_fieldheadercolumn}
+			{BEGIN mes_analisis_fieldheadercolumn}
+			<th class="{$mes_analisis_class}" {$mes_analisis_style}  data-field="mes_analisis">
+				{$label transito1 mes_analisis}
+			</th>
+			{END mes_analisis_fieldheadercolumn}
+			{BEGIN endrecordheader_block}
+			<th class="rnr-cs">&nbsp;</th>
+			{END endrecordheader_block}
+		{END record_header}
+		</tr>
+	{END grid_header}
+	</thead>
+	
+	<tbody>	
+	{BEGIN grid_row}
+		<tr class="{$rowclass}" {$rowattrs} {$rowstyle}>
+		{BEGIN grid_record}
+			{BEGIN eid_fieldcolumn}
+			<td  class="{$eid_class}" {$eid_style} {$recordattrs}>
+				{$eid_value}
+			</td>
+			{END eid_fieldcolumn}
+			{BEGIN pid_fieldcolumn}
+			<td  class="{$pid_class}" {$pid_style} {$recordattrs}>
+				{$pid_value}
+			</td>
+			{END pid_fieldcolumn}
+			{BEGIN unidad_fieldcolumn}
+			<td  class="{$unidad_class}" {$unidad_style} {$recordattrs}>
+				{$unidad_value}
+			</td>
+			{END unidad_fieldcolumn}
+			{BEGIN sexo_fieldcolumn}
+			<td  class="{$sexo_class}" {$sexo_style} {$recordattrs}>
+				{$sexo_value}
+			</td>
+			{END sexo_fieldcolumn}
+			{BEGIN edad_fieldcolumn}
+			<td  class="{$edad_class}" {$edad_style} {$recordattrs}>
+				{$edad_value}
+			</td>
+			{END edad_fieldcolumn}
+			{BEGIN resu_fieldcolumn}
+			<td  class="{$resu_class}" {$resu_style} {$recordattrs}>
+				{$resu_value}
+			</td>
+			{END resu_fieldcolumn}
+			{BEGIN calidad_fieldcolumn}
+			<td  class="{$calidad_class}" {$calidad_style} {$recordattrs}>
+				{$calidad_value}
+			</td>
+			{END calidad_fieldcolumn}
+			{BEGIN fecacc_fieldcolumn}
+			<td  class="{$fecacc_class}" {$fecacc_style} {$recordattrs}>
+				{$fecacc_value}
+			</td>
+			{END fecacc_fieldcolumn}
+			{BEGIN horacc_fieldcolumn}
+			<td  class="{$horacc_class}" {$horacc_style} {$recordattrs}>
+				{$horacc_value}
+			</td>
+			{END horacc_fieldcolumn}
+			{BEGIN rangohorario_fieldcolumn}
+			<td  class="{$rangohorario_class}" {$rangohorario_style} {$recordattrs}>
+				{$rangohorario_value}
+			</td>
+			{END rangohorario_fieldcolumn}
+			{BEGIN tipacc_fieldcolumn}
+			<td  class="{$tipacc_class}" {$tipacc_style} {$recordattrs}>
+				{$tipacc_value}
+			</td>
+			{END tipacc_fieldcolumn}
+			{BEGIN cauacc_fieldcolumn}
+			<td  class="{$cauacc_class}" {$cauacc_style} {$recordattrs}>
+				{$cauacc_value}
+			</td>
+			{END cauacc_fieldcolumn}
+			{BEGIN diracc_fieldcolumn}
+			<td  class="{$diracc_class}" {$diracc_style} {$recordattrs}>
+				{$diracc_value}
+			</td>
+			{END diracc_fieldcolumn}
+			{BEGIN munacc_fieldcolumn}
+			<td  class="{$munacc_class}" {$munacc_style} {$recordattrs}>
+				{$munacc_value}
+			</td>
+			{END munacc_fieldcolumn}
+			{BEGIN clares_fieldcolumn}
+			<td  class="{$clares_class}" {$clares_style} {$recordattrs}>
+				{$clares_value}
+			</td>
+			{END clares_fieldcolumn}
+			{BEGIN rutres_fieldcolumn}
+			<td  class="{$rutres_class}" {$rutres_style} {$recordattrs}>
+				{$rutres_value}
+			</td>
+			{END rutres_fieldcolumn}
+			{BEGIN repdet_fieldcolumn}
+			<td  class="{$repdet_class}" {$repdet_style} {$recordattrs}>
+				{$repdet_value}
+			</td>
+			{END repdet_fieldcolumn}
+			{BEGIN departamento_fieldcolumn}
+			<td  class="{$departamento_class}" {$departamento_style} {$recordattrs}>
+				{$departamento_value}
+			</td>
+			{END departamento_fieldcolumn}
+			{BEGIN dia_fieldcolumn}
+			<td  class="{$dia_class}" {$dia_style} {$recordattrs}>
+				{$dia_value}
+			</td>
+			{END dia_fieldcolumn}
+			{BEGIN sectorppd_fieldcolumn}
+			<td  class="{$sectorppd_class}" {$sectorppd_style} {$recordattrs}>
+				{$sectorppd_value}
+			</td>
+			{END sectorppd_fieldcolumn}
+			{BEGIN rangoetario_fieldcolumn}
+			<td  class="{$rangoetario_class}" {$rangoetario_style} {$recordattrs}>
+				{$rangoetario_value}
+			</td>
+			{END rangoetario_fieldcolumn}
+			{BEGIN causa_analisis_fieldcolumn}
+			<td  class="{$causa_analisis_class}" {$causa_analisis_style} {$recordattrs}>
+				{$causa_analisis_value}
+			</td>
+			{END causa_analisis_fieldcolumn}
+			{BEGIN tipo_analisis_fieldcolumn}
+			<td  class="{$tipo_analisis_class}" {$tipo_analisis_style} {$recordattrs}>
+				{$tipo_analisis_value}
+			</td>
+			{END tipo_analisis_fieldcolumn}
+			{BEGIN mes_analisis_fieldcolumn}
+			<td  class="{$mes_analisis_class}" {$mes_analisis_style} {$recordattrs}>
+				{$mes_analisis_value}
+			</td>
+			{END mes_analisis_fieldcolumn}
+			{BEGIN endrecord_block}
+			<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+			{END endrecord_block}
+		{END grid_record}
+		</tr>
+{END grid_row}
+	</tbody>
+
+</table>
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

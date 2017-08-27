@@ -1,0 +1,175 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-rprint" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_pdf}
+<div {$pdf_chiddenattr} data-pageid="{$pageid}" data-container="pdf" class="   col-md-12 "> 
+
+{BEGIN printbuttons}
+
+{END printbuttons}
+
+
+
+</div>
+{END container_pdf}
+
+
+
+
+
+{BEGIN container_pageheader}
+<div {$pageheader_chiddenattr} data-pageid="{$pageid}" data-container="pageheader" class="    "> 
+
+{BEGIN printheader}
+	<h2 {$printheader_hiddenattr} data-pageid="{$pageid}" data-brick="printheader" >{$pagetitlelabel BD_Retornados rprint}</h2>
+
+{END printheader}
+
+
+{BEGIN page_number}
+<span>{mlang_message PAGE1} <span class="rp-pageno">{$pageno}</span> {mlang_message PAGE2} <span class="rp-pagecount">{$pagecount}</span></span>
+{END page_number}
+
+
+
+</div>
+{END container_pageheader}
+
+
+
+{BEGIN container_grid}
+
+
+
+<style>
+	td.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary {background-color:#ffffbb;}
+	td.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary {background-color:#ffe0b0;}
+
+</style>
+
+<div id="grid_block{$id}" class="rnr-report-gridblock">
+			{BEGIN grid_block}
+<table {$report_print_hiddenattr} data-pageid="{$pageid}" data-brick="report_print" class="table table-striped table-bordered rnr-b-grid rnr-gridtable" cellpadding="0" >
+<thead>
+<tr class="rnr-toprow table-header style1">
+
+<th>{$label BD_Retornados a_o}</th>
+<th>{$label BD_Retornados mes}</th>
+<th>{$label BD_Retornados fechaentrevista}</th>
+<th>{$label BD_Retornados tipoentrevista}</th>
+<th>{$label BD_Retornados ficha}</th>
+<th>{$label BD_Retornados numalien}</th>
+<th>{$label BD_Retornados fechanacimiento}</th>
+<th>{$label BD_Retornados documentoficha}</th>
+<th>{$label BD_Retornados numerodocumento}</th>
+<th>{$label BD_Retornados nombredocumento}</th>
+<th>{$label BD_Retornados consulado}</th>
+<th>{$label BD_Retornados consulado_analisis}</th>
+<th>{$label BD_Retornados departamento}</th>
+<th>{$label BD_Retornados municipio}</th>
+<th>{$label BD_Retornados sexo}</th>
+<th>{$label BD_Retornados edad}</th>
+<th>{$label BD_Retornados rango_etario}</th>
+<th>{$label BD_Retornados tipoedad}</th>
+<th>{$label BD_Retornados paisrepatriacion}</th>
+<th>{$label BD_Retornados regionrepatriacion}</th>
+<th>{$label BD_Retornados antecedentes_penales}</th>
+<th>{$label BD_Retornados tipo_antecedentes}</th>
+<th>{$label BD_Retornados antecedentes}</th>
+<th>{$label BD_Retornados sectorppd}</th>
+<th>{$label BD_Retornados num_mes}</th>
+<th>{$label BD_Retornados antecedente_analisis}</th>
+</tr>
+</thead>
+<tbody>
+{BEGIN grid_row}
+<!-------------------------------------  data ----------------------------------------->
+{BEGIN row_data}
+<tr class="rnr-row style1" {$rowattrs}>
+	<td {$recordattrs}>{$a_o_value}</td>
+	<td {$recordattrs}>{$mes_value}</td>
+	<td {$recordattrs}>{$fechaentrevista_value}</td>
+	<td {$recordattrs}>{$tipoentrevista_value}</td>
+	<td {$recordattrs}>{$ficha_value}</td>
+	<td {$recordattrs}>{$numalien_value}</td>
+	<td {$recordattrs}>{$fechanacimiento_value}</td>
+	<td {$recordattrs}>{$documentoficha_value}</td>
+	<td {$recordattrs}>{$numerodocumento_value}</td>
+	<td {$recordattrs}>{$nombredocumento_value}</td>
+	<td {$recordattrs}>{$consulado_value}</td>
+	<td {$recordattrs}>{$consulado_analisis_value}</td>
+	<td {$recordattrs}>{$departamento_value}</td>
+	<td {$recordattrs}>{$municipio_value}</td>
+	<td {$recordattrs}>{$sexo_value}</td>
+	<td {$recordattrs}>{$edad_value}</td>
+	<td {$recordattrs}>{$rango_etario_value}</td>
+	<td {$recordattrs}>{$tipoedad_value}</td>
+	<td {$recordattrs}>{$paisrepatriacion_value}</td>
+	<td {$recordattrs}>{$regionrepatriacion_value}</td>
+	<td {$recordattrs}>{$antecedentes_penales_value}</td>
+	<td {$recordattrs}>{$tipo_antecedentes_value}</td>
+	<td {$recordattrs}>{$antecedentes_value}</td>
+	<td {$recordattrs}>{$sectorppd_value}</td>
+	<td {$recordattrs}>{$num_mes_value}</td>
+	<td {$recordattrs}>{$antecedente_analisis_value}</td>
+</tr>
+{END row_data}
+
+{END grid_row}
+</tbody>
+</table>
+{END grid_block}
+</div>
+
+
+
+
+
+{END container_grid}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

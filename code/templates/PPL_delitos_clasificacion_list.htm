@@ -1,0 +1,1420 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-list" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_top}
+<div {$top_chiddenattr} data-pageid="{$pageid}" data-container="top" class="container    "> 
+
+
+{BEGIN container_menu}<nav {$menu_chiddenattr} data-pageid="{$pageid}" data-container="menu" class="navbar navbar-default ">					
+
+
+
+{BEGIN container_hdr}
+<div {$hdr_chiddenattr} data-pageid="{$pageid}" data-container="hdr" class=" navbar-header   "> 
+
+{BEGIN logo_block}
+<a href="{$home_link}" {$logo_hiddenattr} data-pageid="{$pageid}" data-brick="logo" class="navbar-brand" >{$logo}</a>
+{END logo_block}
+
+
+{BEGIN collapse_block}
+<button {$bsnavbarcollapse_hiddenattr} data-pageid="{$pageid}" data-brick="bsnavbarcollapse" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target=".bs-navcontrolled">	
+	<span class="sr-only">Toggle navigation</span>	
+	<span class="icon-bar"></span>					
+</button>												
+
+{END collapse_block}
+
+
+
+</div>
+{END container_hdr}
+
+
+
+
+
+
+{BEGIN container_menu_1}<div {$menu_1_chiddenattr} data-pageid="{$pageid}" data-container="menu_1" class="bs-navform navbar-collapse bs-hidden-xs bs-navcontrolled" aria-expanded="false" >												   
+{BEGIN menu_block}
+{$menu main horizontal}
+
+{END menu_block}
+
+
+
+
+
+{BEGIN container_more}
+<div {$more_chiddenattr} data-pageid="{$pageid}" data-container="more" class=" navbar-right navbar-form   "> 
+
+{BEGIN more_list}
+<div {$morebutton_hiddenattr} data-pageid="{$pageid}" data-brick="morebutton" class="btn-group bs-navsection">
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<span class="glyphicon glyphicon-cog"></span>
+		<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu">
+		
+				
+				
+		
+				{BEGIN asearch_link}
+		<li><a href="PPL_delitos_clasificacion_search.php" {$advsearchlink_attrs}>{mlang_message ADVANCED_SEARCH}</a></li>
+		{END asearch_link}
+
+				{BEGIN searchPanelTopButtons}
+		<li><a href=# id="showOptPanel{$id}">{mlang_message SHOW_SEARCH_PANEL}</a></li>
+		{END searchPanelTopButtons}	
+		
+				
+				<li role="separator" class="divider"></li>	
+		
+				
+				{BEGIN export_link}
+		<li><a target="_blank" href="PPL_delitos_clasificacion_export.php"  {$exportlink_attrs}>{mlang_message EXPORT_RESULTS}</a></li>
+		{END export_link}
+
+				{BEGIN import_link}
+		<li><a href="PPL_delitos_clasificacion_import.php?{$crosstable_attrs}"  {$importlink_attrs}>{mlang_message IMPORT}</a></li>
+		{END import_link}
+
+					<li role="separator" class="divider"></li>
+				{BEGIN EnglishLANGLINK}
+				<li><a href="#" data-lang="English" class="rnr-langlink">
+					{BEGIN EnglishLANGLINK_ACTIVE}<span class="glyphicon glyphicon-ok">&nbsp;</span>{END EnglishLANGLINK_ACTIVE}
+					English</a></li>
+				{END EnglishLANGLINK}
+				{BEGIN SpanishLANGLINK}
+				<li><a href="#" data-lang="Spanish" class="rnr-langlink">
+					{BEGIN SpanishLANGLINK_ACTIVE}<span class="glyphicon glyphicon-ok">&nbsp;</span>{END SpanishLANGLINK_ACTIVE}
+					Español</a></li>
+				{END SpanishLANGLINK}
+		
+	</ul>  
+</div>
+
+{END more_list}
+
+
+{BEGIN security_block}
+<span {$loggedas_hiddenattr} data-pageid="{$pageid}" data-brick="loggedas" id="login_block{$id}" class="bs-navsection">
+	{BEGIN guestloginbutton}
+		<button class="btn btn-info" type="button" {$guestloginlink_attrs}>{mlang_message LOGIN}</button>
+	{END guestloginbutton}
+	{BEGIN loggedas_message} 
+		<span class="dropdown">
+			<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon-user"></span>	{$username}</button>
+			<ul class="dropdown-menu">
+		{BEGIN logoutbutton}
+				<li><a href="#" {$logoutlink_attrs}>{mlang_message LOG_OUT}</a></li>
+		{END logoutbutton}
+		
+
+			</ul>
+		</span>
+	{END loggedas_message}
+</span>
+{END security_block}
+
+
+
+</div>
+{END container_more}
+
+
+
+
+
+
+
+
+{BEGIN container_more_1}
+<div {$more_1_chiddenattr} data-pageid="{$pageid}" data-container="more_1" class=" navbar-right navbar-form   "> 
+
+{BEGIN searchform_block}
+<span {$search_hiddenattr} data-pageid="{$pageid}" data-brick="search" class="form-group">
+
+ <div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+		<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="{mlang_message SHOW_ALL}">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>
+{END searchform_block}
+
+
+
+</div>
+{END container_more_1}
+
+
+
+
+												</div>						{END container_menu_1}
+
+
+									</nav>{END container_menu}
+
+
+
+
+
+
+{BEGIN container_breadcrumbs}
+<div {$breadcrumbs_chiddenattr} data-pageid="{$pageid}" data-container="breadcrumbs" class="    "> 
+
+
+
+
+{BEGIN container_bc}
+<div {$bc_chiddenattr} data-pageid="{$pageid}" data-container="bc" class="    "> 
+
+{BEGIN breadcrumbs}
+<ol class="breadcrumb">
+<li ><a href="{$home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumbs}
+
+
+
+</div>
+{END container_bc}
+
+
+
+
+
+
+</div>
+{END container_breadcrumbs}
+
+
+
+
+
+
+
+
+
+{BEGIN container_messagerow}
+<div {$messagerow_chiddenattr} data-pageid="{$pageid}" data-container="messagerow" class="row rnr-rowcontainer ">
+
+
+
+
+{BEGIN container_message}
+<div {$message_chiddenattr} data-pageid="{$pageid}" data-container="message" class="   col-md-12 "> 
+
+{BEGIN message_block}
+<div {$message_hiddenattr} data-pageid="{$pageid}" data-brick="message" class="alert {$message_class}" role="alert">{$message}</div>
+{END message_block}
+
+
+
+</div>
+{END container_message}
+
+
+
+
+
+
+</div>{END container_messagerow}
+
+
+
+
+
+
+
+
+{BEGIN container_gridcontrols}
+<div {$gridcontrols_chiddenattr} data-pageid="{$pageid}" data-container="gridcontrols" class="row rnr-rowcontainer bs-navcontrolled bs-hidden-xs">
+
+
+
+
+{BEGIN container_add_delete}
+<div {$add_delete_chiddenattr} data-pageid="{$pageid}" data-container="add_delete" class=" bottom-margin  col-md-6 "> 
+
+{BEGIN newrecord_controls_block}
+	
+	
+{END newrecord_controls_block}
+
+
+{BEGIN record_controls_block}
+<span {$recordcontrol_hiddenattr} data-pageid="{$pageid}" data-brick="recordcontrol">
+			</span>
+
+{END record_controls_block}
+
+
+
+</div>
+{END container_add_delete}
+
+
+
+
+
+
+
+
+{BEGIN container_gridinfo}
+<div {$gridinfo_chiddenattr} data-pageid="{$pageid}" data-container="gridinfo" class=" bottom-margin text-right col-md-6 "> 
+
+{BEGIN details_found}
+<span {$details_found_hiddenattr} data-pageid="{$pageid}" data-brick="details_found" class="form-inline form-inline-always">
+	{$records_indicator}
+	<span>
+	{BEGIN recordspp_block}
+			{$recsPerPage}
+	{END recordspp_block}
+	</span>
+</span>
+{END details_found}
+
+
+{BEGIN print_friendly}
+<span {$printpanel_hiddenattr} data-pageid="{$pageid}" data-brick="printpanel" class="bs-printpanel" id="printpanelblock{$id}">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="{mlang_message WR_PRINT_FRIENDLY}">
+		<span class="glyphicon glyphicon-print" ></span>
+		<span class="caret"></span>
+    </button>
+	<ul class="dropdown-menu pull-right" >
+		<li>
+			<div class="container-fluid" id="print_friendly_scope{$id}">
+				<div class="row">
+					<div class="col-md-4">{mlang_message PPANEL_SCOPE}</div>
+										{BEGIN print_friendly_all}
+					<div class="col-md-8">
+						<label for="printAll{$id}">
+							<input type="radio" id="printAll{$id}" data-href="PPL_delitos_clasificacion_print.php?all=1&amp;{$crosstable_attrs}" name="printScope">
+							{mlang_message PPANEL_ALL_PAGES}
+						</label>
+					</div>
+					{END print_friendly_all}
+				</div>
+				<div class="row">
+					<div class="col-md-4">&nbsp;</div>
+					<div class="col-md-8">
+						<label for="printPage{$id}">
+							<input type="radio" id="printPage{$id}" data-href="PPL_delitos_clasificacion_print.php?{$crosstable_attrs}" name="printScope" checked>
+							{mlang_message PPANEL_THIS_PAGE}
+						</label>
+					</div>
+				</div>
+							</div>
+		</li>
+		<li class="divider" role="separator"></li>
+
+		
+				<li>	
+			<div class="rnr-printdetails">
+				<label for="printPerPage{$id}">
+											{mlang_message RECORDS_PP}:
+				</label>
+				<input type="number" id="printPerPage{$id}" value="{$print_recspp}" class="rnr-printrecspp">		
+			</div>
+		</li>
+		<li class="divider" role="separator"></li>
+		<li class="rnr-printbutton">				
+			<button type="button" class="btn btn-primary" id="print_friendly_button{$id}" >{mlang_message PPANEL_PRINT}</button>			
+		</li>
+	</ul>	
+</span>
+
+{END print_friendly}
+
+
+
+
+</div>
+{END container_gridinfo}
+
+
+
+
+
+
+
+
+{BEGIN container_gridinfo_sort}
+<div {$gridinfo_sort_chiddenattr} data-pageid="{$pageid}" data-container="gridinfo_sort" class=" bottom-margin text-right col-md-12 "> 
+
+{BEGIN reorder_records}
+<div {$reorder_records_hiddenattr} data-pageid="{$pageid}" data-brick="reorder_records" class="form-inline sortby-ctrl">
+{mlang_message SORT_BY}&nbsp;{$sortByDropdown}
+</div>
+
+{END reorder_records}
+
+
+
+</div>
+{END container_gridinfo_sort}
+
+
+
+
+
+
+</div>{END container_gridcontrols}
+
+
+
+
+
+
+</div>
+{END container_top}
+
+
+		</div>
+		<div class="bs-middle bs-centered">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+
+{BEGIN container_filt}
+<div {$filt_chiddenattr} data-pageid="{$pageid}" data-container="filt" class="    "> 
+
+{BEGIN searchPanel}
+<div {$searchpanel_hiddenattr} data-pageid="{$pageid}" data-brick="searchpanel" class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} >
+	<!-- Search panel content -->
+	
+	<div class="panel-heading">
+		<div class="btn-group" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{mlang_message SEARCH_IN}
+			<span class="caret"></span>
+			</button>
+		</div>
+
+		
+		<div class="btn-group searchpanel-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>{mlang_message SEARCH_SHOW_OPTIONS_BUTTON}</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ALL_CONDITIONS}</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ANY_CONDITIONS}</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>{mlang_message HIDE}</a></li>
+			</ul>
+		</div>
+	
+		
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+
+
+	</div>
+	
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+		<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</button>
+	</div>
+</div>
+
+
+{END searchPanel}
+
+
+
+
+</div>
+{END container_filt}
+
+
+			</div>
+			<div class="bs-center">
+				
+
+{BEGIN container_grid}
+<div {$grid_chiddenattr} data-pageid="{$pageid}" data-container="grid" class="    "> 
+
+{BEGIN grid_block}
+	<style>
+	.bs-gridcell[data-field=id]:before {
+		content: "{$label PPL_delitos_clasificacion id}";
+	}
+	.bs-gridcell[data-field=sipe]:before {
+		content: "{$label PPL_delitos_clasificacion sipe}";
+	}
+	.bs-gridcell[data-field=afis]:before {
+		content: "{$label PPL_delitos_clasificacion afis}";
+	}
+	.bs-gridcell[data-field=edad]:before {
+		content: "{$label PPL_delitos_clasificacion edad}";
+	}
+	.bs-gridcell[data-field=rangoetario]:before {
+		content: "{$label PPL_delitos_clasificacion rangoetario}";
+	}
+	.bs-gridcell[data-field=genero]:before {
+		content: "{$label PPL_delitos_clasificacion genero}";
+	}
+	.bs-gridcell[data-field=fecha_nac]:before {
+		content: "{$label PPL_delitos_clasificacion fecha_nac}";
+	}
+	.bs-gridcell[data-field=edad1]:before {
+		content: "{$label PPL_delitos_clasificacion edad1}";
+	}
+	.bs-gridcell[data-field=dui]:before {
+		content: "{$label PPL_delitos_clasificacion dui}";
+	}
+	.bs-gridcell[data-field=nivel_edu]:before {
+		content: "{$label PPL_delitos_clasificacion nivel_edu}";
+	}
+	.bs-gridcell[data-field=educacionanalisis]:before {
+		content: "{$label PPL_delitos_clasificacion educacionanalisis}";
+	}
+	.bs-gridcell[data-field=profesion_oficio]:before {
+		content: "{$label PPL_delitos_clasificacion profesion_oficio}";
+	}
+	.bs-gridcell[data-field=estado_civil]:before {
+		content: "{$label PPL_delitos_clasificacion estado_civil}";
+	}
+	.bs-gridcell[data-field=ciudadania]:before {
+		content: "{$label PPL_delitos_clasificacion ciudadania}";
+	}
+	.bs-gridcell[data-field=mun_nacimiento]:before {
+		content: "{$label PPL_delitos_clasificacion mun_nacimiento}";
+	}
+	.bs-gridcell[data-field=depto_nacim]:before {
+		content: "{$label PPL_delitos_clasificacion depto_nacim}";
+	}
+	.bs-gridcell[data-field=direccion]:before {
+		content: "{$label PPL_delitos_clasificacion direccion}";
+	}
+	.bs-gridcell[data-field=mun_resid]:before {
+		content: "{$label PPL_delitos_clasificacion mun_resid}";
+	}
+	.bs-gridcell[data-field=depart_resid]:before {
+		content: "{$label PPL_delitos_clasificacion depart_resid}";
+	}
+	.bs-gridcell[data-field=delitosanalisis]:before {
+		content: "{$label PPL_delitos_clasificacion delitosanalisis}";
+	}
+	.bs-gridcell[data-field=sj_interno]:before {
+		content: "{$label PPL_delitos_clasificacion sj_interno}";
+	}
+	.bs-gridcell[data-field=fase]:before {
+		content: "{$label PPL_delitos_clasificacion fase}";
+	}
+	.bs-gridcell[data-field=org_delictiva]:before {
+		content: "{$label PPL_delitos_clasificacion org_delictiva}";
+	}
+	.bs-gridcell[data-field=tipo_mara]:before {
+		content: "{$label PPL_delitos_clasificacion tipo_mara}";
+	}
+	.bs-gridcell[data-field=reincidente]:before {
+		content: "{$label PPL_delitos_clasificacion reincidente}";
+	}
+	.bs-gridcell[data-field=deportado]:before {
+		content: "{$label PPL_delitos_clasificacion deportado}";
+	}
+	.bs-gridcell[data-field=direccion1]:before {
+		content: "{$label PPL_delitos_clasificacion direccion1}";
+	}
+	.bs-gridcell[data-field=sector]:before {
+		content: "{$label PPL_delitos_clasificacion sector}";
+	}
+	.bs-gridcell[data-field=celda]:before {
+		content: "{$label PPL_delitos_clasificacion celda}";
+	}
+	.bs-gridcell[data-field=fecha_ing__sp]:before {
+		content: "{$label PPL_delitos_clasificacion fecha_ing__sp}";
+	}
+	.bs-gridcell[data-field=libro]:before {
+		content: "{$label PPL_delitos_clasificacion libro}";
+	}
+	.bs-gridcell[data-field=fecha_ing__cp]:before {
+		content: "{$label PPL_delitos_clasificacion fecha_ing__cp}";
+	}
+	.bs-gridcell[data-field=total_delitos]:before {
+		content: "{$label PPL_delitos_clasificacion total_delitos}";
+	}
+	.bs-gridcell[data-field=delitos]:before {
+		content: "{$label PPL_delitos_clasificacion delitos}";
+	}
+	.bs-gridcell[data-field=delitoanalisis]:before {
+		content: "{$label PPL_delitos_clasificacion delitoanalisis}";
+	}
+	.bs-gridcell[data-field=sector_ppd]:before {
+		content: "{$label PPL_delitos_clasificacion sector_ppd}";
+	}
+</style>
+<table {$grid_hiddenattr} data-pageid="{$pageid}" data-brick="grid" class="table {$grid_classes} bs-flexgrid rnr-b-grid rnr-gridtable" cellpadding="0" >
+	<thead>
+										{BEGIN grid_header}
+								<tr class="rnr-toprow {$gridHeader_class}" >
+									{BEGIN record_header}
+									{BEGIN listIcons_column}
+									<th iEditCont="all">&nbsp;</th>
+									{END listIcons_column}	
+
+									
+																		
+									{BEGIN id_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$id_class}" data-field=id>
+									{BEGIN id_fieldheader}
+																				<span {$id_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion id}
+										</span>
+									{END id_fieldheader}
+									</th>
+									{END id_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN sipe_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$sipe_class}" data-field=sipe>
+									{BEGIN sipe_fieldheader}
+																				<span {$sipe_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion sipe}
+										</span>
+									{END sipe_fieldheader}
+									</th>
+									{END sipe_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN afis_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$afis_class}" data-field=afis>
+									{BEGIN afis_fieldheader}
+																				<span {$afis_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion afis}
+										</span>
+									{END afis_fieldheader}
+									</th>
+									{END afis_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN edad_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$edad_class}" data-field=edad>
+									{BEGIN edad_fieldheader}
+																				<span {$edad_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion edad}
+										</span>
+									{END edad_fieldheader}
+									</th>
+									{END edad_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN rangoetario_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$rangoetario_class}" data-field=rangoetario>
+									{BEGIN rangoetario_fieldheader}
+																				<span {$rangoetario_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion rangoetario}
+										</span>
+									{END rangoetario_fieldheader}
+									</th>
+									{END rangoetario_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN genero_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$genero_class}" data-field=genero>
+									{BEGIN genero_fieldheader}
+																				<span {$genero_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion genero}
+										</span>
+									{END genero_fieldheader}
+									</th>
+									{END genero_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN fecha_nac_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$fecha_nac_class}" data-field=fecha_nac>
+									{BEGIN fecha_nac_fieldheader}
+																				<span {$fecha_nac_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion fecha_nac}
+										</span>
+									{END fecha_nac_fieldheader}
+									</th>
+									{END fecha_nac_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN edad1_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$edad1_class}" data-field=edad1>
+									{BEGIN edad1_fieldheader}
+																				<span {$edad1_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion edad1}
+										</span>
+									{END edad1_fieldheader}
+									</th>
+									{END edad1_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN dui_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$dui_class}" data-field=dui>
+									{BEGIN dui_fieldheader}
+																				<span {$dui_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion dui}
+										</span>
+									{END dui_fieldheader}
+									</th>
+									{END dui_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN nivel_edu_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$nivel_edu_class}" data-field=nivel_edu>
+									{BEGIN nivel_edu_fieldheader}
+																				<span {$nivel_edu_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion nivel_edu}
+										</span>
+									{END nivel_edu_fieldheader}
+									</th>
+									{END nivel_edu_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN educacionanalisis_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$educacionanalisis_class}" data-field=educacionanalisis>
+									{BEGIN educacionanalisis_fieldheader}
+																				<span {$educacionanalisis_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion educacionanalisis}
+										</span>
+									{END educacionanalisis_fieldheader}
+									</th>
+									{END educacionanalisis_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN profesion_oficio_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$profesion_oficio_class}" data-field=profesion_oficio>
+									{BEGIN profesion_oficio_fieldheader}
+																				<span {$profesion_oficio_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion profesion_oficio}
+										</span>
+									{END profesion_oficio_fieldheader}
+									</th>
+									{END profesion_oficio_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN estado_civil_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$estado_civil_class}" data-field=estado_civil>
+									{BEGIN estado_civil_fieldheader}
+																				<span {$estado_civil_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion estado_civil}
+										</span>
+									{END estado_civil_fieldheader}
+									</th>
+									{END estado_civil_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN ciudadania_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$ciudadania_class}" data-field=ciudadania>
+									{BEGIN ciudadania_fieldheader}
+																				<span {$ciudadania_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion ciudadania}
+										</span>
+									{END ciudadania_fieldheader}
+									</th>
+									{END ciudadania_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN mun_nacimiento_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$mun_nacimiento_class}" data-field=mun_nacimiento>
+									{BEGIN mun_nacimiento_fieldheader}
+																				<span {$mun_nacimiento_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion mun_nacimiento}
+										</span>
+									{END mun_nacimiento_fieldheader}
+									</th>
+									{END mun_nacimiento_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN depto_nacim_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$depto_nacim_class}" data-field=depto_nacim>
+									{BEGIN depto_nacim_fieldheader}
+																				<span {$depto_nacim_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion depto_nacim}
+										</span>
+									{END depto_nacim_fieldheader}
+									</th>
+									{END depto_nacim_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN direccion_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$direccion_class}" data-field=direccion>
+									{BEGIN direccion_fieldheader}
+																				<span {$direccion_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion direccion}
+										</span>
+									{END direccion_fieldheader}
+									</th>
+									{END direccion_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN mun_resid_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$mun_resid_class}" data-field=mun_resid>
+									{BEGIN mun_resid_fieldheader}
+																				<span {$mun_resid_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion mun_resid}
+										</span>
+									{END mun_resid_fieldheader}
+									</th>
+									{END mun_resid_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN depart_resid_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$depart_resid_class}" data-field=depart_resid>
+									{BEGIN depart_resid_fieldheader}
+																				<span {$depart_resid_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion depart_resid}
+										</span>
+									{END depart_resid_fieldheader}
+									</th>
+									{END depart_resid_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN delitosanalisis_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$delitosanalisis_class}" data-field=delitosanalisis>
+									{BEGIN delitosanalisis_fieldheader}
+																				<span {$delitosanalisis_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion delitosanalisis}
+										</span>
+									{END delitosanalisis_fieldheader}
+									</th>
+									{END delitosanalisis_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN sj_interno_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$sj_interno_class}" data-field=sj_interno>
+									{BEGIN sj_interno_fieldheader}
+																				<span {$sj_interno_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion sj_interno}
+										</span>
+									{END sj_interno_fieldheader}
+									</th>
+									{END sj_interno_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN fase_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$fase_class}" data-field=fase>
+									{BEGIN fase_fieldheader}
+																				<span {$fase_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion fase}
+										</span>
+									{END fase_fieldheader}
+									</th>
+									{END fase_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN org_delictiva_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$org_delictiva_class}" data-field=org_delictiva>
+									{BEGIN org_delictiva_fieldheader}
+																				<span {$org_delictiva_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion org_delictiva}
+										</span>
+									{END org_delictiva_fieldheader}
+									</th>
+									{END org_delictiva_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN tipo_mara_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$tipo_mara_class}" data-field=tipo_mara>
+									{BEGIN tipo_mara_fieldheader}
+																				<span {$tipo_mara_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion tipo_mara}
+										</span>
+									{END tipo_mara_fieldheader}
+									</th>
+									{END tipo_mara_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN reincidente_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$reincidente_class}" data-field=reincidente>
+									{BEGIN reincidente_fieldheader}
+																				<span {$reincidente_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion reincidente}
+										</span>
+									{END reincidente_fieldheader}
+									</th>
+									{END reincidente_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN deportado_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$deportado_class}" data-field=deportado>
+									{BEGIN deportado_fieldheader}
+																				<span {$deportado_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion deportado}
+										</span>
+									{END deportado_fieldheader}
+									</th>
+									{END deportado_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN direccion1_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$direccion1_class}" data-field=direccion1>
+									{BEGIN direccion1_fieldheader}
+																				<span {$direccion1_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion direccion1}
+										</span>
+									{END direccion1_fieldheader}
+									</th>
+									{END direccion1_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN sector_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$sector_class}" data-field=sector>
+									{BEGIN sector_fieldheader}
+																				<span {$sector_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion sector}
+										</span>
+									{END sector_fieldheader}
+									</th>
+									{END sector_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN celda_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$celda_class}" data-field=celda>
+									{BEGIN celda_fieldheader}
+																				<span {$celda_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion celda}
+										</span>
+									{END celda_fieldheader}
+									</th>
+									{END celda_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN fecha_ing__sp_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$fecha_ing__sp_class}" data-field=fecha_ing__sp>
+									{BEGIN fecha_ing__sp_fieldheader}
+																				<span {$fecha_ing__sp_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion fecha_ing__sp}
+										</span>
+									{END fecha_ing__sp_fieldheader}
+									</th>
+									{END fecha_ing__sp_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN libro_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$libro_class}" data-field=libro>
+									{BEGIN libro_fieldheader}
+																				<span {$libro_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion libro}
+										</span>
+									{END libro_fieldheader}
+									</th>
+									{END libro_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN fecha_ing__cp_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$fecha_ing__cp_class}" data-field=fecha_ing__cp>
+									{BEGIN fecha_ing__cp_fieldheader}
+																				<span {$fecha_ing__cp_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion fecha_ing__cp}
+										</span>
+									{END fecha_ing__cp_fieldheader}
+									</th>
+									{END fecha_ing__cp_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN total_delitos_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$total_delitos_class}" data-field=total_delitos>
+									{BEGIN total_delitos_fieldheader}
+																				<span {$total_delitos_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion total_delitos}
+										</span>
+									{END total_delitos_fieldheader}
+									</th>
+									{END total_delitos_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN delitos_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$delitos_class}" data-field=delitos>
+									{BEGIN delitos_fieldheader}
+																				<span {$delitos_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion delitos}
+										</span>
+									{END delitos_fieldheader}
+									</th>
+									{END delitos_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN delitoanalisis_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$delitoanalisis_class}" data-field=delitoanalisis>
+									{BEGIN delitoanalisis_fieldheader}
+																				<span {$delitoanalisis_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion delitoanalisis}
+										</span>
+									{END delitoanalisis_fieldheader}
+									</th>
+									{END delitoanalisis_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN sector_ppd_fieldheadercolumn}
+									<th class="rnr-gridfieldlabel {$sector_ppd_class}" data-field=sector_ppd>
+									{BEGIN sector_ppd_fieldheader}
+																				<span {$sector_ppd_orderlinkattrs}>
+											{$label PPL_delitos_clasificacion sector_ppd}
+										</span>
+									{END sector_ppd_fieldheader}
+									</th>
+									{END sector_ppd_fieldheadercolumn}
+									
+									
+									
+									
+									{BEGIN endrecordheader_block}
+									<th class="rnr-cs">&nbsp;</th>
+									
+									{END endrecordheader_block}
+									
+									{END record_header}
+									
+								</tr>
+								{END grid_header}
+
+	</thead>
+	<tbody>	
+		{BEGIN grid_row}
+<tr class="{$rowclass} bs-gridrow" {$rowattrs} {$rowstyle}>
+	{BEGIN grid_record}
+	{BEGIN listIcons_column}
+	<td class="bs-gridicons" iEditCont="all" {$rowstyle} {$recordattrs}>
+	
+	
+	
+		</td>	
+	{END listIcons_column}	
+
+	
+	
+
+	{BEGIN id_fieldcolumn}
+	<td class="bs-gridcell {$id_class}"  data-field=id {$rowstyle} {$recordattrs}>
+		{$id_value}
+	</td>
+{END id_fieldcolumn}
+
+
+	{BEGIN sipe_fieldcolumn}
+	<td class="bs-gridcell {$sipe_class}"  data-field=sipe {$rowstyle} {$recordattrs}>
+		{$sipe_value}
+	</td>
+{END sipe_fieldcolumn}
+
+
+	{BEGIN afis_fieldcolumn}
+	<td class="bs-gridcell {$afis_class}"  data-field=afis {$rowstyle} {$recordattrs}>
+		{$afis_value}
+	</td>
+{END afis_fieldcolumn}
+
+
+	{BEGIN edad_fieldcolumn}
+	<td class="bs-gridcell {$edad_class}"  data-field=edad {$rowstyle} {$recordattrs}>
+		{$edad_value}
+	</td>
+{END edad_fieldcolumn}
+
+
+	{BEGIN rangoetario_fieldcolumn}
+	<td class="bs-gridcell {$rangoetario_class}"  data-field=rangoetario {$rowstyle} {$recordattrs}>
+		{$rangoetario_value}
+	</td>
+{END rangoetario_fieldcolumn}
+
+
+	{BEGIN genero_fieldcolumn}
+	<td class="bs-gridcell {$genero_class}"  data-field=genero {$rowstyle} {$recordattrs}>
+		{$genero_value}
+	</td>
+{END genero_fieldcolumn}
+
+
+	{BEGIN fecha_nac_fieldcolumn}
+	<td class="bs-gridcell {$fecha_nac_class}"  data-field=fecha_nac {$rowstyle} {$recordattrs}>
+		{$fecha_nac_value}
+	</td>
+{END fecha_nac_fieldcolumn}
+
+
+	{BEGIN edad1_fieldcolumn}
+	<td class="bs-gridcell {$edad1_class}"  data-field=edad1 {$rowstyle} {$recordattrs}>
+		{$edad1_value}
+	</td>
+{END edad1_fieldcolumn}
+
+
+	{BEGIN dui_fieldcolumn}
+	<td class="bs-gridcell {$dui_class}"  data-field=dui {$rowstyle} {$recordattrs}>
+		{$dui_value}
+	</td>
+{END dui_fieldcolumn}
+
+
+	{BEGIN nivel_edu_fieldcolumn}
+	<td class="bs-gridcell {$nivel_edu_class}"  data-field=nivel_edu {$rowstyle} {$recordattrs}>
+		{$nivel_edu_value}
+	</td>
+{END nivel_edu_fieldcolumn}
+
+
+	{BEGIN educacionanalisis_fieldcolumn}
+	<td class="bs-gridcell {$educacionanalisis_class}"  data-field=educacionanalisis {$rowstyle} {$recordattrs}>
+		{$educacionanalisis_value}
+	</td>
+{END educacionanalisis_fieldcolumn}
+
+
+	{BEGIN profesion_oficio_fieldcolumn}
+	<td class="bs-gridcell {$profesion_oficio_class}"  data-field=profesion_oficio {$rowstyle} {$recordattrs}>
+		{$profesion_oficio_value}
+	</td>
+{END profesion_oficio_fieldcolumn}
+
+
+	{BEGIN estado_civil_fieldcolumn}
+	<td class="bs-gridcell {$estado_civil_class}"  data-field=estado_civil {$rowstyle} {$recordattrs}>
+		{$estado_civil_value}
+	</td>
+{END estado_civil_fieldcolumn}
+
+
+	{BEGIN ciudadania_fieldcolumn}
+	<td class="bs-gridcell {$ciudadania_class}"  data-field=ciudadania {$rowstyle} {$recordattrs}>
+		{$ciudadania_value}
+	</td>
+{END ciudadania_fieldcolumn}
+
+
+	{BEGIN mun_nacimiento_fieldcolumn}
+	<td class="bs-gridcell {$mun_nacimiento_class}"  data-field=mun_nacimiento {$rowstyle} {$recordattrs}>
+		{$mun_nacimiento_value}
+	</td>
+{END mun_nacimiento_fieldcolumn}
+
+
+	{BEGIN depto_nacim_fieldcolumn}
+	<td class="bs-gridcell {$depto_nacim_class}"  data-field=depto_nacim {$rowstyle} {$recordattrs}>
+		{$depto_nacim_value}
+	</td>
+{END depto_nacim_fieldcolumn}
+
+
+	{BEGIN direccion_fieldcolumn}
+	<td class="bs-gridcell {$direccion_class}"  data-field=direccion {$rowstyle} {$recordattrs}>
+		{$direccion_value}
+	</td>
+{END direccion_fieldcolumn}
+
+
+	{BEGIN mun_resid_fieldcolumn}
+	<td class="bs-gridcell {$mun_resid_class}"  data-field=mun_resid {$rowstyle} {$recordattrs}>
+		{$mun_resid_value}
+	</td>
+{END mun_resid_fieldcolumn}
+
+
+	{BEGIN depart_resid_fieldcolumn}
+	<td class="bs-gridcell {$depart_resid_class}"  data-field=depart_resid {$rowstyle} {$recordattrs}>
+		{$depart_resid_value}
+	</td>
+{END depart_resid_fieldcolumn}
+
+
+	{BEGIN delitosanalisis_fieldcolumn}
+	<td class="bs-gridcell {$delitosanalisis_class}"  data-field=delitosanalisis {$rowstyle} {$recordattrs}>
+		{$delitosanalisis_value}
+	</td>
+{END delitosanalisis_fieldcolumn}
+
+
+	{BEGIN sj_interno_fieldcolumn}
+	<td class="bs-gridcell {$sj_interno_class}"  data-field=sj_interno {$rowstyle} {$recordattrs}>
+		{$sj_interno_value}
+	</td>
+{END sj_interno_fieldcolumn}
+
+
+	{BEGIN fase_fieldcolumn}
+	<td class="bs-gridcell {$fase_class}"  data-field=fase {$rowstyle} {$recordattrs}>
+		{$fase_value}
+	</td>
+{END fase_fieldcolumn}
+
+
+	{BEGIN org_delictiva_fieldcolumn}
+	<td class="bs-gridcell {$org_delictiva_class}"  data-field=org_delictiva {$rowstyle} {$recordattrs}>
+		{$org_delictiva_value}
+	</td>
+{END org_delictiva_fieldcolumn}
+
+
+	{BEGIN tipo_mara_fieldcolumn}
+	<td class="bs-gridcell {$tipo_mara_class}"  data-field=tipo_mara {$rowstyle} {$recordattrs}>
+		{$tipo_mara_value}
+	</td>
+{END tipo_mara_fieldcolumn}
+
+
+	{BEGIN reincidente_fieldcolumn}
+	<td class="bs-gridcell {$reincidente_class}"  data-field=reincidente {$rowstyle} {$recordattrs}>
+		{$reincidente_value}
+	</td>
+{END reincidente_fieldcolumn}
+
+
+	{BEGIN deportado_fieldcolumn}
+	<td class="bs-gridcell {$deportado_class}"  data-field=deportado {$rowstyle} {$recordattrs}>
+		{$deportado_value}
+	</td>
+{END deportado_fieldcolumn}
+
+
+	{BEGIN direccion1_fieldcolumn}
+	<td class="bs-gridcell {$direccion1_class}"  data-field=direccion1 {$rowstyle} {$recordattrs}>
+		{$direccion1_value}
+	</td>
+{END direccion1_fieldcolumn}
+
+
+	{BEGIN sector_fieldcolumn}
+	<td class="bs-gridcell {$sector_class}"  data-field=sector {$rowstyle} {$recordattrs}>
+		{$sector_value}
+	</td>
+{END sector_fieldcolumn}
+
+
+	{BEGIN celda_fieldcolumn}
+	<td class="bs-gridcell {$celda_class}"  data-field=celda {$rowstyle} {$recordattrs}>
+		{$celda_value}
+	</td>
+{END celda_fieldcolumn}
+
+
+	{BEGIN fecha_ing__sp_fieldcolumn}
+	<td class="bs-gridcell {$fecha_ing__sp_class}"  data-field=fecha_ing__sp {$rowstyle} {$recordattrs}>
+		{$fecha_ing__sp_value}
+	</td>
+{END fecha_ing__sp_fieldcolumn}
+
+
+	{BEGIN libro_fieldcolumn}
+	<td class="bs-gridcell {$libro_class}"  data-field=libro {$rowstyle} {$recordattrs}>
+		{$libro_value}
+	</td>
+{END libro_fieldcolumn}
+
+
+	{BEGIN fecha_ing__cp_fieldcolumn}
+	<td class="bs-gridcell {$fecha_ing__cp_class}"  data-field=fecha_ing__cp {$rowstyle} {$recordattrs}>
+		{$fecha_ing__cp_value}
+	</td>
+{END fecha_ing__cp_fieldcolumn}
+
+
+	{BEGIN total_delitos_fieldcolumn}
+	<td class="bs-gridcell {$total_delitos_class}"  data-field=total_delitos {$rowstyle} {$recordattrs}>
+		{$total_delitos_value}
+	</td>
+{END total_delitos_fieldcolumn}
+
+
+	{BEGIN delitos_fieldcolumn}
+	<td class="bs-gridcell {$delitos_class}"  data-field=delitos {$rowstyle} {$recordattrs}>
+		{$delitos_value}
+	</td>
+{END delitos_fieldcolumn}
+
+
+	{BEGIN delitoanalisis_fieldcolumn}
+	<td class="bs-gridcell {$delitoanalisis_class}"  data-field=delitoanalisis {$rowstyle} {$recordattrs}>
+		{$delitoanalisis_value}
+	</td>
+{END delitoanalisis_fieldcolumn}
+
+
+	{BEGIN sector_ppd_fieldcolumn}
+	<td class="bs-gridcell {$sector_ppd_class}"  data-field=sector_ppd {$rowstyle} {$recordattrs}>
+		{$sector_ppd_value}
+	</td>
+{END sector_ppd_fieldcolumn}
+
+	{BEGIN endrecord_block}
+	<td class="rnr-cs" {$endrecordblock_attrs}>&nbsp;</td>
+	{END endrecord_block}
+									
+	{END grid_record}
+
+</tr>
+{END grid_row}
+	</tbody>
+	<tfoot>
+										
+	</tfoot>
+</table>
+
+
+
+{END grid_block}
+
+
+
+</div>
+{END container_grid}
+
+
+
+{BEGIN container_pagination}
+<div {$pagination_chiddenattr} data-pageid="{$pageid}" data-container="pagination" class="  text-center col-md-12 "> 
+
+{BEGIN pagination_block}
+<div {$pagination_hiddenattr} data-pageid="{$pageid}" data-brick="pagination">
+{$pagination}
+</div>
+{END pagination_block}
+
+
+
+</div>
+{END container_pagination}
+
+
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

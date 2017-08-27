@@ -1,0 +1,62 @@
+body.page-masterreport
+{
+padding-top:10px; padding-left:10px;
+}
+.page-masterreport .rnr-c-masterlistheader,
+  .rnr-pagewrapper .page-masterreport .rnr-c-masterlistheader,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-c-masterlistheader
+{
+margin-bottom:5px;
+}
+.page-masterreport .rnr-b-masterlistheader,
+  .rnr-pagewrapper .page-masterreport .rnr-b-masterlistheader,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-b-masterlistheader
+{
+white-space: nowrap;
+}
+.page-masterreport .rnr-b-masterlistheader,
+  .rnr-pagewrapper .page-masterreport .rnr-b-masterlistheader,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-b-masterlistheader
+{
+text-align: right;
+}
+.page-masterreport .rnr-b-masterlistheader > *,
+  .rnr-pagewrapper .page-masterreport .rnr-b-masterlistheader > *,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-b-masterlistheader > *
+{
+
+}
+.page-masterreport .rnr-c-mastergrid,
+  .rnr-pagewrapper .page-masterreport .rnr-c-mastergrid,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-c-mastergrid
+{
+margin-bottom:5px;
+}
+.page-masterreport .rnr-c-mastergrid,
+  .rnr-pagewrapper .page-masterreport .rnr-c-mastergrid,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-c-mastergrid
+{
+min-width: 100px;
+}
+.page-masterreport .rnr-b-masterlistgrid,
+  .rnr-pagewrapper .page-masterreport .rnr-b-masterlistgrid,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-b-masterlistgrid
+{
+white-space: normal;
+}
+.page-masterreport .rnr-b-masterlistgrid,
+  .rnr-pagewrapper .page-masterreport .rnr-b-masterlistgrid,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-b-masterlistgrid
+{
+text-align: right;
+}
+.page-masterreport .rnr-b-masterlistgrid > *,
+  .rnr-pagewrapper .page-masterreport .rnr-b-masterlistgrid > *,
+  .rnr-pagewrapper .rnr-pagewrapper .page-masterreport .rnr-b-masterlistgrid > *
+{
+
+}
+body.page-masterreport .rnr-bare
+{
+padding-right: 5px;
+}

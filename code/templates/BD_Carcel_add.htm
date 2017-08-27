@@ -1,0 +1,774 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{$pagetitle}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+	</head>
+
+	<body class="{$stylename} function-add" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		<DIV class="bs-top">
+        
+
+{BEGIN container_editpage}
+<div {$editpage_chiddenattr} data-pageid="{$pageid}" data-container="editpage" class="container    "> 
+
+
+
+
+{BEGIN container_header}
+<div {$header_chiddenattr} data-pageid="{$pageid}" data-container="header" class="   col-md-9 col-md-offset-3"> 
+
+{BEGIN addheader}
+	<h2 {$addheader_hiddenattr} data-pageid="{$pageid}" data-brick="addheader" >{$pagetitlelabel BD_Carcel add}</h2>
+
+{END addheader}
+
+
+
+</div>
+{END container_header}
+
+
+
+
+
+
+
+
+{BEGIN container_message}
+<div {$message_chiddenattr} data-pageid="{$pageid}" data-container="message" class="   col-md-6 col-md-offset-3"> 
+
+{BEGIN message_block}
+<div {$message_hiddenattr} data-pageid="{$pageid}" data-brick="message" class="alert {$message_class}" role="alert">
+<h5>{$message}</h5>
+<div>
+{BEGIN back_button}
+		<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+{END back_button}
+{BEGIN view_page_button}
+	<button class="btn btn-sm btn-default" {$view_page_button_attrs}>{mlang_message VIEW}</button>
+{END view_page_button}
+{BEGIN edit_page_button}
+	<button class="btn btn-sm btn-default" {$edit_page_button_attrs}>{mlang_message EDIT}</button>
+{END edit_page_button}
+</div>
+</div>
+
+{END message_block}
+
+
+
+</div>
+{END container_message}
+
+
+
+
+
+
+
+</div>
+{END container_editpage}
+
+
+
+{BEGIN container_fields}
+<div {$fields_chiddenattr} data-pageid="{$pageid}" data-container="fields" class="   col-md-12 "> 
+
+
+<div {$addfields_hiddenattr} data-pageid="{$pageid}" data-brick="addfields" class="form-horizontal" role="form">
+			{BEGIN id_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_id}" data-fieldname="id" data-signal-error-for="id{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_id}">
+		{BEGIN id_label}{$label BD_Carcel id}{END id_label}
+	</label>
+	<div class="col-md-6" >
+		{$id_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="id">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel id}
+		</div>
+	</div>
+</div>
+</div>
+{END id_fieldblock}
+
+			{BEGIN sipe_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_sipe}" data-fieldname="sipe" data-signal-error-for="sipe{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_sipe}">
+		{BEGIN sipe_label}{$label BD_Carcel sipe}{END sipe_label}
+	</label>
+	<div class="col-md-6" >
+		{$sipe_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="sipe">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel sipe}
+		</div>
+	</div>
+</div>
+</div>
+{END sipe_fieldblock}
+
+			{BEGIN afis_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_afis}" data-fieldname="afis" data-signal-error-for="afis{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_afis}">
+		{BEGIN afis_label}{$label BD_Carcel afis}{END afis_label}
+	</label>
+	<div class="col-md-6" >
+		{$afis_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="afis">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel afis}
+		</div>
+	</div>
+</div>
+</div>
+{END afis_fieldblock}
+
+			{BEGIN edad_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_edad}" data-fieldname="edad" data-signal-error-for="edad{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_edad}">
+		{BEGIN edad_label}{$label BD_Carcel edad}{END edad_label}
+	</label>
+	<div class="col-md-6" >
+		{$edad_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="edad">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel edad}
+		</div>
+	</div>
+</div>
+</div>
+{END edad_fieldblock}
+
+			{BEGIN rangoetario_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_rangoetario}" data-fieldname="rangoetario" data-signal-error-for="rangoetario{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_rangoetario}">
+		{BEGIN rangoetario_label}{$label BD_Carcel rangoetario}{END rangoetario_label}
+	</label>
+	<div class="col-md-6" >
+		{$rangoetario_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="rangoetario">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel rangoetario}
+		</div>
+	</div>
+</div>
+</div>
+{END rangoetario_fieldblock}
+
+			{BEGIN genero_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_genero}" data-fieldname="genero" data-signal-error-for="genero{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_genero}">
+		{BEGIN genero_label}{$label BD_Carcel genero}{END genero_label}
+	</label>
+	<div class="col-md-6" >
+		{$genero_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="genero">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel genero}
+		</div>
+	</div>
+</div>
+</div>
+{END genero_fieldblock}
+
+			{BEGIN fecha_nac_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_fecha_nac}" data-fieldname="fecha_nac" data-signal-error-for="fecha_nac{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_fecha_nac}">
+		{BEGIN fecha_nac_label}{$label BD_Carcel fecha_nac}{END fecha_nac_label}
+	</label>
+	<div class="col-md-6" >
+		{$fecha_nac_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="fecha_nac">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel fecha_nac}
+		</div>
+	</div>
+</div>
+</div>
+{END fecha_nac_fieldblock}
+
+			{BEGIN edad1_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_edad1}" data-fieldname="edad1" data-signal-error-for="edad1{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_edad1}">
+		{BEGIN edad1_label}{$label BD_Carcel edad1}{END edad1_label}
+	</label>
+	<div class="col-md-6" >
+		{$edad1_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="edad1">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel edad1}
+		</div>
+	</div>
+</div>
+</div>
+{END edad1_fieldblock}
+
+			{BEGIN dui_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_dui}" data-fieldname="dui" data-signal-error-for="dui{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_dui}">
+		{BEGIN dui_label}{$label BD_Carcel dui}{END dui_label}
+	</label>
+	<div class="col-md-6" >
+		{$dui_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="dui">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel dui}
+		</div>
+	</div>
+</div>
+</div>
+{END dui_fieldblock}
+
+			{BEGIN profesion_oficio_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_profesion_oficio}" data-fieldname="profesion_oficio" data-signal-error-for="profesion_oficio{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_profesion_oficio}">
+		{BEGIN profesion_oficio_label}{$label BD_Carcel profesion_oficio}{END profesion_oficio_label}
+	</label>
+	<div class="col-md-6" >
+		{$profesion_oficio_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="profesion_oficio">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel profesion_oficio}
+		</div>
+	</div>
+</div>
+</div>
+{END profesion_oficio_fieldblock}
+
+			{BEGIN estado_civil_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_estado_civil}" data-fieldname="estado_civil" data-signal-error-for="estado_civil{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_estado_civil}">
+		{BEGIN estado_civil_label}{$label BD_Carcel estado_civil}{END estado_civil_label}
+	</label>
+	<div class="col-md-6" >
+		{$estado_civil_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="estado_civil">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel estado_civil}
+		</div>
+	</div>
+</div>
+</div>
+{END estado_civil_fieldblock}
+
+			{BEGIN ciudadania_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_ciudadania}" data-fieldname="ciudadania" data-signal-error-for="ciudadania{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_ciudadania}">
+		{BEGIN ciudadania_label}{$label BD_Carcel ciudadania}{END ciudadania_label}
+	</label>
+	<div class="col-md-6" >
+		{$ciudadania_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="ciudadania">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel ciudadania}
+		</div>
+	</div>
+</div>
+</div>
+{END ciudadania_fieldblock}
+
+			{BEGIN mun_nacimiento_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_mun_nacimiento}" data-fieldname="mun_nacimiento" data-signal-error-for="mun_nacimiento{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_mun_nacimiento}">
+		{BEGIN mun_nacimiento_label}{$label BD_Carcel mun_nacimiento}{END mun_nacimiento_label}
+	</label>
+	<div class="col-md-6" >
+		{$mun_nacimiento_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="mun_nacimiento">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel mun_nacimiento}
+		</div>
+	</div>
+</div>
+</div>
+{END mun_nacimiento_fieldblock}
+
+			{BEGIN depto_nacim_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_depto_nacim}" data-fieldname="depto_nacim" data-signal-error-for="depto_nacim{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_depto_nacim}">
+		{BEGIN depto_nacim_label}{$label BD_Carcel depto_nacim}{END depto_nacim_label}
+	</label>
+	<div class="col-md-6" >
+		{$depto_nacim_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="depto_nacim">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel depto_nacim}
+		</div>
+	</div>
+</div>
+</div>
+{END depto_nacim_fieldblock}
+
+			{BEGIN direccion_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_direccion}" data-fieldname="direccion" data-signal-error-for="direccion{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_direccion}">
+		{BEGIN direccion_label}{$label BD_Carcel direccion}{END direccion_label}
+	</label>
+	<div class="col-md-6" >
+		{$direccion_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="direccion">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel direccion}
+		</div>
+	</div>
+</div>
+</div>
+{END direccion_fieldblock}
+
+			{BEGIN mun_resid_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_mun_resid}" data-fieldname="mun_resid" data-signal-error-for="mun_resid{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_mun_resid}">
+		{BEGIN mun_resid_label}{$label BD_Carcel mun_resid}{END mun_resid_label}
+	</label>
+	<div class="col-md-6" >
+		{$mun_resid_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="mun_resid">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel mun_resid}
+		</div>
+	</div>
+</div>
+</div>
+{END mun_resid_fieldblock}
+
+			{BEGIN depart_resid_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_depart_resid}" data-fieldname="depart_resid" data-signal-error-for="depart_resid{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_depart_resid}">
+		{BEGIN depart_resid_label}{$label BD_Carcel depart_resid}{END depart_resid_label}
+	</label>
+	<div class="col-md-6" >
+		{$depart_resid_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="depart_resid">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel depart_resid}
+		</div>
+	</div>
+</div>
+</div>
+{END depart_resid_fieldblock}
+
+			{BEGIN sj_interno_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_sj_interno}" data-fieldname="sj_interno" data-signal-error-for="sj_interno{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_sj_interno}">
+		{BEGIN sj_interno_label}{$label BD_Carcel sj_interno}{END sj_interno_label}
+	</label>
+	<div class="col-md-6" >
+		{$sj_interno_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="sj_interno">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel sj_interno}
+		</div>
+	</div>
+</div>
+</div>
+{END sj_interno_fieldblock}
+
+			{BEGIN fase_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_fase}" data-fieldname="fase" data-signal-error-for="fase{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_fase}">
+		{BEGIN fase_label}{$label BD_Carcel fase}{END fase_label}
+	</label>
+	<div class="col-md-6" >
+		{$fase_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="fase">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel fase}
+		</div>
+	</div>
+</div>
+</div>
+{END fase_fieldblock}
+
+			{BEGIN org_delictiva_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_org_delictiva}" data-fieldname="org_delictiva" data-signal-error-for="org_delictiva{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_org_delictiva}">
+		{BEGIN org_delictiva_label}{$label BD_Carcel org_delictiva}{END org_delictiva_label}
+	</label>
+	<div class="col-md-6" >
+		{$org_delictiva_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="org_delictiva">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel org_delictiva}
+		</div>
+	</div>
+</div>
+</div>
+{END org_delictiva_fieldblock}
+
+			{BEGIN tipo_mara_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_tipo_mara}" data-fieldname="tipo_mara" data-signal-error-for="tipo_mara{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_tipo_mara}">
+		{BEGIN tipo_mara_label}{$label BD_Carcel tipo_mara}{END tipo_mara_label}
+	</label>
+	<div class="col-md-6" >
+		{$tipo_mara_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="tipo_mara">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel tipo_mara}
+		</div>
+	</div>
+</div>
+</div>
+{END tipo_mara_fieldblock}
+
+			{BEGIN reincidente_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_reincidente}" data-fieldname="reincidente" data-signal-error-for="reincidente{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_reincidente}">
+		{BEGIN reincidente_label}{$label BD_Carcel reincidente}{END reincidente_label}
+	</label>
+	<div class="col-md-6" >
+		{$reincidente_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="reincidente">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel reincidente}
+		</div>
+	</div>
+</div>
+</div>
+{END reincidente_fieldblock}
+
+			{BEGIN deportado_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_deportado}" data-fieldname="deportado" data-signal-error-for="deportado{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_deportado}">
+		{BEGIN deportado_label}{$label BD_Carcel deportado}{END deportado_label}
+	</label>
+	<div class="col-md-6" >
+		{$deportado_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="deportado">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel deportado}
+		</div>
+	</div>
+</div>
+</div>
+{END deportado_fieldblock}
+
+			{BEGIN direccion1_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_direccion1}" data-fieldname="direccion1" data-signal-error-for="direccion1{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_direccion1}">
+		{BEGIN direccion1_label}{$label BD_Carcel direccion1}{END direccion1_label}
+	</label>
+	<div class="col-md-6" >
+		{$direccion1_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="direccion1">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel direccion1}
+		</div>
+	</div>
+</div>
+</div>
+{END direccion1_fieldblock}
+
+			{BEGIN sector_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_sector}" data-fieldname="sector" data-signal-error-for="sector{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_sector}">
+		{BEGIN sector_label}{$label BD_Carcel sector}{END sector_label}
+	</label>
+	<div class="col-md-6" >
+		{$sector_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="sector">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel sector}
+		</div>
+	</div>
+</div>
+</div>
+{END sector_fieldblock}
+
+			{BEGIN celda_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_celda}" data-fieldname="celda" data-signal-error-for="celda{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_celda}">
+		{BEGIN celda_label}{$label BD_Carcel celda}{END celda_label}
+	</label>
+	<div class="col-md-6" >
+		{$celda_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="celda">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel celda}
+		</div>
+	</div>
+</div>
+</div>
+{END celda_fieldblock}
+
+			{BEGIN fecha_ing__sp_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_fecha_ing__sp}" data-fieldname="fecha_ing__sp" data-signal-error-for="fecha_ing__sp{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_fecha_ing__sp}">
+		{BEGIN fecha_ing__sp_label}{$label BD_Carcel fecha_ing__sp}{END fecha_ing__sp_label}
+	</label>
+	<div class="col-md-6" >
+		{$fecha_ing__sp_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="fecha_ing__sp">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel fecha_ing__sp}
+		</div>
+	</div>
+</div>
+</div>
+{END fecha_ing__sp_fieldblock}
+
+			{BEGIN libro_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_libro}" data-fieldname="libro" data-signal-error-for="libro{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_libro}">
+		{BEGIN libro_label}{$label BD_Carcel libro}{END libro_label}
+	</label>
+	<div class="col-md-6" >
+		{$libro_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="libro">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel libro}
+		</div>
+	</div>
+</div>
+</div>
+{END libro_fieldblock}
+
+			{BEGIN fecha_ing__cp_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_fecha_ing__cp}" data-fieldname="fecha_ing__cp" data-signal-error-for="fecha_ing__cp{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_fecha_ing__cp}">
+		{BEGIN fecha_ing__cp_label}{$label BD_Carcel fecha_ing__cp}{END fecha_ing__cp_label}
+	</label>
+	<div class="col-md-6" >
+		{$fecha_ing__cp_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="fecha_ing__cp">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel fecha_ing__cp}
+		</div>
+	</div>
+</div>
+</div>
+{END fecha_ing__cp_fieldblock}
+
+			{BEGIN total_delitos_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_total_delitos}" data-fieldname="total_delitos" data-signal-error-for="total_delitos{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_total_delitos}">
+		{BEGIN total_delitos_label}{$label BD_Carcel total_delitos}{END total_delitos_label}
+	</label>
+	<div class="col-md-6" >
+		{$total_delitos_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="total_delitos">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel total_delitos}
+		</div>
+	</div>
+</div>
+</div>
+{END total_delitos_fieldblock}
+
+			{BEGIN delitos_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_delitos}" data-fieldname="delitos" data-signal-error-for="delitos{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_delitos}">
+		{BEGIN delitos_label}{$label BD_Carcel delitos}{END delitos_label}
+	</label>
+	<div class="col-md-6" >
+		{$delitos_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="delitos">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel delitos}
+		</div>
+	</div>
+</div>
+</div>
+{END delitos_fieldblock}
+
+			{BEGIN delitoanalisis_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_delitoanalisis}" data-fieldname="delitoanalisis" data-signal-error-for="delitoanalisis{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_delitoanalisis}">
+		{BEGIN delitoanalisis_label}{$label BD_Carcel delitoanalisis}{END delitoanalisis_label}
+	</label>
+	<div class="col-md-6" >
+		{$delitoanalisis_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="delitoanalisis">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel delitoanalisis}
+		</div>
+	</div>
+</div>
+</div>
+{END delitoanalisis_fieldblock}
+
+			{BEGIN sector_ppd_fieldblock}
+<div class=container>
+<div class="form-group {$fielddispclass_sector_ppd}" data-fieldname="sector_ppd" data-signal-error-for="sector_ppd{$id}" >
+	<label class="col-md-3 control-label" for="{$labelfor_sector_ppd}">
+		{BEGIN sector_ppd_label}{$label BD_Carcel sector_ppd}{END sector_ppd_label}
+	</label>
+	<div class="col-md-6" >
+		{$sector_ppd_editcontrol}
+	</div>
+	<div class="col-md-3 help-block" data-helpfor="sector_ppd">
+		<div class="text-muted" >
+		{$tooltip BD_Carcel sector_ppd}
+		</div>
+	</div>
+</div>
+</div>
+{END sector_ppd_fieldblock}
+
+
+</div>
+
+
+
+
+</div>
+{END container_fields}
+
+
+
+{BEGIN container_bottombuttons}
+<div {$bottombuttons_chiddenattr} data-pageid="{$pageid}" data-container="bottombuttons" class="container    "> 
+
+
+
+
+{BEGIN container_buttons}
+<div {$buttons_chiddenattr} data-pageid="{$pageid}" data-container="buttons" class=" form-group   "> 
+
+
+
+
+{BEGIN container_leftbuttons}
+<div {$leftbuttons_chiddenattr} data-pageid="{$pageid}" data-container="leftbuttons" class="   col-md-3 col-md-offset-3"> 
+
+{BEGIN addbuttons}
+	{BEGIN save_button}
+	<button class="btn btn-primary" {$savebutton_attrs}>{mlang_message SAVE}</button>
+	{END save_button}
+	{BEGIN reset_button}
+	<button class="btn btn-default" id="resetButton{$id}">{mlang_message RESET}</button>
+	{END reset_button}
+	{BEGIN back_button}
+		<button class="btn btn-default" id="backButton{$id}">{mlang_message BACK_TO_LIST}</button>
+	{END back_button}
+	{BEGIN cancel_button}
+	<a href="#" class="btn btn-default" id="cancelButton{$id}">{mlang_message CANCEL}</a>
+	{END cancel_button}
+
+{END addbuttons}
+
+
+
+</div>
+{END container_leftbuttons}
+
+
+
+
+
+
+</div>
+{END container_buttons}
+
+
+
+
+
+
+</div>
+{END container_bottombuttons}
+
+
+		</div>
+		<div class="bs-middle ">
+			<div class="bs-topmiddle">
+				
+			</div>
+			<div class="bs-left" {$blockattr_left}>
+				
+			</div>
+			<div class="bs-center">
+				
+			</div>
+			<div class="bs-right">
+				
+			</div>
+		</div>
+		<DIV class="bs-bottom">
+        
+		</div>
+		{$footer}
+	{END body}
+	</body>
+</html>
