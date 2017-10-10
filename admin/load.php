@@ -5,11 +5,12 @@ if(count($user_count)==0){
   try {
     $con = new PDO("mysql:host=".$wpdb->dbhost.";dbname=".$wpdb->dbname,$wpdb->dbuser,$wpdb->dbpassword);
     $con->query("
+-- Adminer 4.2.1 MySQL dump
+
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
-
 
 DROP TABLE IF EXISTS `ind_municipio`;
 CREATE TABLE `ind_municipio` (
@@ -43,9 +44,14 @@ CREATE TABLE `ind_municipio` (
   `ip` varchar(15) COLLATE utf8_bin NOT NULL,
   `hash` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `departamento_municipio_anyo` (`departamento`,`municipio`,`anyo`),
   KEY `usuario` (`usuario`),
   CONSTRAINT `ind_municipio_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `wp_users` (`ID`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='indice de municipalidad';
+) ENGINE=InnoDB AUTO_INCREMENT=525 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='indice de municipalidad';
+
+
+-- 2017-10-10 17:27:19
+
 
     ");
     $con = null;
