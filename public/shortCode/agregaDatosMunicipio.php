@@ -100,14 +100,27 @@ autor
 	</div>
 </div>
 <div class="row">
- <table class="table table-bordered">
+ <table class="table table-bordered display" id="datos">
   <thead>
                     <tr>
                       <th>Departamento</th>
                       <th>Municipio</th>
                       <th>Homocidio</th>
-                      <th>Suicidio</th>
-                      <th>A. Transito</th>
+                      <th>Homicidios mujeres</th>
+                      <th>Desaparecidos</th>
+                      <th>Lesiones</th>
+                      <th>viff</th>
+                      <th>extorciones</th>
+                      <th>robo</th>
+                      <th>hurto</th>
+                      <th>Robo de vehiculos</th>
+                      <th>Hurto vehiculos</th>
+                      <th>r_h_conmercio</th>
+                      <th>ppl</th>
+                      <th>ppurb</th>
+                      <th>epp</th>
+                      <th>Desaparecidos</th>
+                      <th>ipn</th>
                     </tr>
   </thead>
   <tbody>
@@ -119,8 +132,21 @@ autor
 	     <td>$object->departamento</td>
 	     <td>$object->municipio</td>
 	     <td>$object->homicidio</td>
-	     <td>$object->suicidio</td>
-	     <td>$object->accidentes_transito</td> 
+	     <td>$object->total_homicidio_mujer</td>
+	     <td>$object->desaparecidos</td> 
+	     <td>$object->lesiones</td>
+	     <td>$object->vif</td>
+	     <td>$object->extorciones</td>
+	     <td>$object->robo</td>
+	     <td>$object->hurto</td> 
+	     <td>$object->robo_vehiculo</td>
+	     <td>$object->hurto_vehiculo</td>
+	     <td>$object->r_h_conmercio</td>
+	     <td>$object->ppl</td>
+	     <td>$object->ppurb</td> 
+	     <td>$object->epp</td>
+	     <td>$object->veh</td>
+	     <td>$object->ipn</td>
 	    </tr>";
 	 }
    ?>
@@ -130,3 +156,14 @@ autor
 <?php
  include(plugin_dir_path( __FILE__ )."../footer_public.php");
 ?>
+
+<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>../plugins/bower_components/datatables/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready( function () {
+    $.noConflict();
+    $('#datos').DataTable();
+} );
+</script>

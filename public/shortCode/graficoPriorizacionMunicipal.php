@@ -128,8 +128,21 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 	     <td>$object->departamento</td>
 	     <td>$object->municipio</td>
 	     <td>$object->homicidio</td>
-	     <td>$object->suicidio</td>
-	     <td>$object->accidentes_transito</td> 
+	     <td>$object->total_homicidio_mujer</td>
+	     <td>$object->desaparecidos</td> 
+	     <td>$object->lesiones</td>
+	     <td>$object->vif</td>
+	     <td>$object->extorciones</td>
+	     <td>$object->robo</td>
+	     <td>$object->hurto</td> 
+	     <td>$object->robo_vehiculo</td>
+	     <td>$object->hurto_vehiculo</td>
+	     <td>$object->r_h_conmercio</td>
+	     <td>$object->ppl</td>
+	     <td>$object->ppurb</td> 
+	     <td>$object->epp</td>
+	     <td>$object->veh</td>
+	     <td>$object->ipn</td>
 	    </tr>";
 	 }
    ?>
