@@ -96,7 +96,7 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 </script>
 
 <div class="row">
- <table class="table table-bordered display" id="datos">
+ <table class="table table-bordered display" id="datosgrafico">
   <thead>
                     <tr>
                       <th>Departamento</th>
@@ -157,9 +157,13 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<script>
-$(document).ready( function () {
-    $.noConflict();
-    $('#datos').DataTable();
-} );
+<script type="text/javascript">
+(function($){
+	$.noConflict();
+    $('#datosgrafico').DataTable({
+		buttons: [
+        'copy', 'excel', 'pdf'
+		]
+	});
+}(jQuery));
 </script>

@@ -100,7 +100,7 @@ autor
 	</div>
 </div>
 <div class="row">
- <table class="table table-bordered display" id="datos">
+ <table class="table table-bordered display" id="datosregistro">
   <thead>
                     <tr>
                       <th>Departamento</th>
@@ -161,9 +161,9 @@ autor
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<script>
-$(document).ready( function () {
-    $.noConflict();
-    $('#datos').DataTable();
-} );
+<script type="text/javascript">
+(function($){
+	$.noConflict();
+    $('#datosregistro').DataTable();
+}(jQuery));
 </script>

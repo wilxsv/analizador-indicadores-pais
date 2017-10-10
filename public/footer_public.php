@@ -4,8 +4,8 @@
     <script src="<?php echo plugin_dir_url( __FILE__ ); ?>js/jasny-bootstrap.js"></script>
     <!-- jQuery file upload -->
     <script src="<?php echo plugin_dir_url( __FILE__ ); ?>plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
-    <script>
-    $(document).ready(function() {
+	<script type="text/javascript">
+	(function($){
         // Basic
         $('.dropify').dropify();
         // Translated
@@ -38,6 +38,12 @@
                 drDestroy.init();
             }
         })
+	}(jQuery));
+	</script>
+
+    <script>
+    $(document).ready(function() {
+
     });
     </script>
     <!--Style Switcher -->
