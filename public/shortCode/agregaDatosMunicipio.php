@@ -33,7 +33,9 @@ if(isset($_POST['importSubmit'])){
 			switch($_FILES['input-file-now']['name']){
 				case 'municipal.csv':
 					while(($line = fgetcsv($csvFile)) !== FALSE){
-						$sql = "INSERT INTO `ind_municipio` (`codigo`,`departamento`, `municipio`, `homicidio`, `total_homicidio_hombre`, `total_homicidio_mujer`, `suicidio`, `accidentes_transito`, `sin_cobertura_primaria`, `pobresa`, `desagrega`, `anyo`, `hash`, `ip`, `usuario`) VALUES ('$line[0]', '$line[1]', '$line[2]', $line[3], $line[4], $line[5], $line[6], $line[7], $line[8], $line[9], $line[10], 2017, '$hash', '$ip', $user)";
+						//$sql = "INSERT INTO `ind_municipio` (`codigo`,`departamento`, `municipio`, `homicidio`, `total_homicidio_hombre`, `total_homicidio_mujer`, `suicidio`, `accidentes_transito`, `sin_cobertura_primaria`, `pobresa`, `desagrega`, `anyo`, `hash`, `ip`, `usuario`) VALUES ('$line[0]', '$line[1]', '$line[2]', $line[3], $line[4], $line[5], $line[6], $line[7], $line[8], $line[9], $line[10], 2017, '$hash', '$ip', $user)";
+						$sql =  "INSERT INTO `ind_municipio` (`departamento`,`municipio`,`homicidio`,`total_homicidio_mujer`,`desaparecidos`,`lesiones`,`vif`,`extorciones`,`robo`,`hurto`,`robo_vehiculo`,`hurto_vehiculo`,`r_h_conmercio`,`ppl`,`ppurb`,`epp`,`veh`,`anyo`,`usuario`,`ip`,`hash`) VALUES ";
+						$sql .= "('$line[0]', '$line[1]', $line[2], $line[3], $line[4], $line[5], $line[6], $line[7], $line[8], $line[9], $line[10], $line[11], $line[12], $line[13], $line[14], $line[15], $line[16], $line[17], $user, '$ip', '$hash')";
 						$wpdb->query($sql);
 						$total+=1;
 					}

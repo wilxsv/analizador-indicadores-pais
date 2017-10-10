@@ -10,6 +10,18 @@
 
 
 global $wpdb;
+/*
+$municipios = "SELECT arma, COUNT(*) as total FROM delitos WHERE delito = '".$delito."' AND anyo = '".$datos_atts['anyo']."' GROUP BY arma ORDER BY arma";
+ 
+ $qArma=$wpdb->get_results( $queryArma );
+ 
+ $series = '';
+ $series.= "{ name:'$delito', type:'pie', radius : '55%', center: ['50%', '60%'], data:[";
+ foreach ($qArma as $l) {
+  $categoria.= "'$l->arma',";
+  $series.= "{value:$l->total, name:'$l->arma'},"; 
+ }
+*/
 ?>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
@@ -20,25 +32,42 @@ global $wpdb;
 }
 </style>
 
+<div class="row">
+	<div class="pad group">
+		<div class="grid one-third ">
+			  <p>Municipio:
+				<select>
+					  <option value="volvo">San Salvador</option>
+					  <option value="saab">San Miguel</option>
+					  <option value="mercedes">Soyapango</option>
+					  <option value="audi">Mejicanos</option>
+				</select> 
+			  </p>
+			  <p>Fase del PESS:
+				<select>
+				</select> 
+			  </p>
+			  <p>Valor del indice entre:
+				Min: </>
+				Max: </>  
+			  </p>
+		</div>
+		<div class="grid one-third last">
+			<div id='map'></div>	
+		</div>
+	</div>
+</div>
 
 <div class="row">
  <div class="col-md-12">
-  <p>
-	  Municipio: 
-	   <select>
-  <option value="volvo">Choloma</option>
-  <option value="saab">La Ceiba</option>
-  <option value="mercedes">Distrito Central</option>
-  <option value="audi">Siguatepeque</option>
-</select> 
-  </p>
+
  </div>
  <div class="col-md-4">
 	 <div class="col-md-6">Estadisticas</div>
 	 <div class="col-md-6">Mapas</div>
  </div>
  <div class="col-md-8">
-	 <div id='map'></div>
+	 
  </div>
 </div>
 <script>
