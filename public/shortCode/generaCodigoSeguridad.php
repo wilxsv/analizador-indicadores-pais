@@ -31,7 +31,6 @@ $secret = '3MLFYYMVH6HTFAQ4';
 $qrCodeUrl = $ga->getQRCodeGoogleUrl('Estadisticas - DIA', $secret);
 ?>
 
-
 <div class="row">
 	<h4>Por favor escanee el siguiente codigo para poder acceder al sitio de estadisticas</h4>
 	<div class="text-center">
