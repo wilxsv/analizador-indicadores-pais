@@ -8,6 +8,8 @@
  * Author URI: http://pnud.org.sv/
 */
 register_activation_hook( __FILE__, 'createDB' );
+/* shortCode */
+add_shortcode('generaCodigoSeguridad', 'generaCodigoSeguridad_shortcode' );
 add_shortcode('agregaDatosMunicipalidad', 'agregaDatosMunicipio_shortcode' );
 add_shortcode('agregaDatosMined', '' );
 add_shortcode('agregaDatos911', '' );
@@ -36,6 +38,9 @@ if ( is_admin() ) {
  *  Shortcode
  * *******************************************************************/
 
+function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
+	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/generaCodigoSeguridad.php";
+}
 function agregaDatosMunicipio_shortcode($atts, $mensaje = null) {
 	//require_once( dirname( __FILE__ ) . '/admin/load.php' );
 	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosMunicipio.php";
