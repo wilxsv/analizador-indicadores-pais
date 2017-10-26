@@ -19,9 +19,9 @@ add_shortcode('agregaDatosCentroPenal', '' );
 add_shortcode('agregaDatosCEscolar', '' );
 /* Visualizadores */
 add_shortcode('graficoPriorizacionMunicipal', 'graficoPriorizacionMunicipal_shortcode' );
-add_shortcode('graficoAnalisisSituacional', '' );
-add_shortcode('graficoFocalizacion', '' );
-add_shortcode('graficoCEscolar', '' );
+add_shortcode('graficoAnalisisSituacional', 'graficoAnalisisSituacional_shortcode' );
+add_shortcode('graficoFocalizacion', 'graficoFocalizacion_shortcode' );
+add_shortcode('graficoCEscolar', 'graficoCEscolar_shortcode' );
 
 if ( is_admin() ) {
 	function createDB() {
@@ -48,5 +48,23 @@ function agregaDatosMunicipio_shortcode($atts, $mensaje = null) {
 function graficoPriorizacionMunicipal_shortcode($atts, $mensaje = null) {
 	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoPriorizacionMunicipal.php";
 }
+function graficoAnalisisSituacional_shortcode($atts, $mensaje = null) {
+	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoAnalisisSituacional.php";
+}
+function graficoFocalizacion_shortcode($atts, $mensaje = null) {
+	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoFocalizacion.php";
+}
+function graficoCEscolar_shortcode($atts, $mensaje = null) {
+	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoCEscolar.php";
+}
+
+/* Acciones */
+function files_head_action() {
+	$files = '';
+	$files .= '<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />';
+	$files .= '';
+	echo $files;
+}
+add_action('wp_head', 'files_head_action');
 
 ?>

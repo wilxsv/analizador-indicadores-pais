@@ -9,19 +9,9 @@
 */
 
 
-global $wpdb;
+ global $wpdb;
 
-$url = 'https://www.gnu.org/software/make/manual/make.pdf';
-
-$municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
- 
- $qArma=$wpdb->get_results( $municipios );
- 
- $series = '';
- $series.= "{ name:'$delito', type:'pie', radius : '55%', center: ['50%', '60%'], data:[";
- foreach ($qArma as $l) {
-  $categoria.= "<option value=''>$l->departamento - $l->municipio</option>";
- }
+ $url = 'https://www.gnu.org/software/make/manual/make.pdf';
  
  $site = site_url();
 ?>
@@ -46,15 +36,7 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 <div class="row">
 	<div class="pad group">
 		<div class="grid one-third ">
-			  <p>Municipio:
-				<select name="smunicipio" id="smunicipio"><?php echo $categoria; ?>
-				</select> 
-			  </p>
-			  </p>
-			  <p>Valor del indice entre:
-				Min: <input id="min" type="number" min="0" max="1"><br/>
-				Max: <input id="max" type="number" min="0" max="1"><br/>  
-			  </p>
+			<p>Parametros de busqueda</p>
 		</div>
 		<div class="grid one-third last">
 			<div id='map'></div>	
@@ -76,9 +58,6 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 <script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/leaflet-hash.js"></script>
 <script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/Autolinker.min.js"></script>
 
-<script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/data/exp_IPN2015Municipiosshpcopiar.js"></script>
-<script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/data/exp_IPN2014Municipiosshp.js"></script>
-<script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/data/exp_MUNICIPIOS.js"></script>
 		<script>
 		var map = L.map('map', {
 			zoomControl:true, maxZoom:19
@@ -95,10 +74,6 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		id: 'mapbox.light'
 	}).addTo(map);
-		/*
-		var basemap_0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
-			attribution: additional_attrib + '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-		});*/	
 		basemap_0.addTo(map);	
 		var layerOrder=new Array();
 		function pop_MUNICIPIOS(feature, layer) {					
@@ -132,118 +107,6 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 			layer.bindPopup(popupContent);
 		}
 
-		function doStyleIPN2014Municipiosshp(feature) {
-			if (feature.properties.IPN2014 >= 0.0533 && feature.properties.IPN2014 <= 0.18) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#badd69',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2014 >= 0.18 && feature.properties.IPN2014 <= 0.31) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#f1f4c7',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2014 >= 0.31 && feature.properties.IPN2014 <= 0.48) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#fd9243',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2014 >= 0.48 && feature.properties.IPN2014 <= 0.68) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#de4f05',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2014 >= 0.68 && feature.properties.IPN2014 <= 0.84866) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#7f2704',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-		}
-		var exp_IPN2014MunicipiosshpJSON = new L.geoJson(exp_IPN2014Municipiosshp,{
-			onEachFeature: pop_IPN2014Municipiosshp,
-			style: doStyleIPN2014Municipiosshp
-		});
-		//add comment sign to hide this layer on the map in the initial view.
-		feature_group.addLayer(exp_IPN2014MunicipiosshpJSON);
-		function pop_IPN2015Municipiosshpcopiar(feature, layer) {					
-			var popupContent = '<table><tr><th scope="row">Municipio</th><td>' + Autolinker.link(String(feature.properties['MPIO'])) + '</td></tr><tr><th scope="row">Departamento</th><td>' + Autolinker.link(String(feature.properties['departamen'])) + '</td></tr><tr><th scope="row">Homicidios</th><td>' + Autolinker.link(String(feature.properties['homicidios'])) + '</td></tr><tr><th scope="row">Homicidios Mujeres</th><td>' + Autolinker.link(String(feature.properties['homicidio2'])) + '</td></tr><tr><th scope="row">Desaparecidos</th><td>' + Autolinker.link(String(feature.properties['desapareci'])) + '</td></tr><tr><th scope="row">Lesiones</th><td>' + Autolinker.link(String(feature.properties['lesiones'])) + '</td></tr><tr><th scope="row">Viol Intrafamiliar</th><td>' + Autolinker.link(String(feature.properties['vif'])) + '</td></tr><tr><th scope="row">Extorsiones</th><td>' + Autolinker.link(String(feature.properties['extorsione'])) + '</td></tr><tr><th scope="row">Robos</th><td>' + Autolinker.link(String(feature.properties['robo'])) + '</td></tr><tr><th scope="row">Hurtos</th><td>' + Autolinker.link(String(feature.properties['hurto'])) + '</td></tr><tr><th scope="row">Robo Vehiculos</th><td>' + Autolinker.link(String(feature.properties['robodevehi'])) + '</td></tr><tr><th scope="row">Hurto Vehiculos</th><td>' + Autolinker.link(String(feature.properties['hurtodeveh'])) + '</td></tr><tr><th scope="row">RH con Mercaderia</th><td>' + Autolinker.link(String(feature.properties['r_h_conmer'])) + '</td></tr><tr><th scope="row">Privados Libertad</th><td>' + Autolinker.link(String(feature.properties['ppl'])) + '</td></tr><tr><th scope="row">% Urbano</th><td>' + Autolinker.link(String(feature.properties['ppurb'])) + '</td></tr><tr><th scope="row">CE con Pandillas</th><td>' + Autolinker.link(String(feature.properties['epp'])) + '</td></tr><tr><th scope="row">Total RHV</th><td>' + Autolinker.link(String(feature.properties['Veh'])) + '</td></tr><tr><th scope="row">IPN2015</th><td>' + Autolinker.link(String(feature.properties['IPN2015'])) + '</td></tr></table>';
-			layer.bindPopup(popupContent);
-		}
-
-		function doStyleIPN2015Municipiosshpcopiar(feature) {
-			if (feature.properties.IPN2015 >= 0.0492 && feature.properties.IPN2015 <= 0.18) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#badd69',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2015 >= 0.18 && feature.properties.IPN2015 <= 0.31) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#f1f4c7',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2015 >= 0.31 && feature.properties.IPN2015 <= 0.48) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#fd9243',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2015 >= 0.48 && feature.properties.IPN2015 <= 0.68) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#de4f05',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.IPN2015 >= 0.68 && feature.properties.IPN2015 <= 0.8337) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#7f2704',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-		}
-		var exp_IPN2015MunicipiosshpcopiarJSON = new L.geoJson(exp_IPN2015Municipiosshpcopiar,{
-			onEachFeature: pop_IPN2015Municipiosshpcopiar,
-			style: doStyleIPN2015Municipiosshpcopiar
-		});
-		//add comment sign to hide this layer on the map in the initial view.
-		feature_group.addLayer(exp_IPN2015MunicipiosshpcopiarJSON);
-
 		feature_group.addTo(map);
 		var title = new L.Control();
 		title.onAdd = function (map) {
@@ -258,13 +121,13 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 	var baseMaps = {
 		'OSM Standard': basemap_0
 	};
-		L.control.layers(baseMaps,{"IPN2015 Municipios": exp_IPN2015MunicipiosshpcopiarJSON,"IPN2014 Municipios": exp_IPN2014MunicipiosshpJSON,"MUNICIPIOS": exp_MUNICIPIOSJSON},{collapsed:false}).addTo(map);
+		L.control.layers(baseMaps,{"MUNICIPIOS": exp_MUNICIPIOSJSON},{collapsed:false}).addTo(map);
 		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
 		
 		var legend = L.control({position: 'bottomleft'});
 		legend.onAdd = function (map) {
 			var div = L.DomUtil.create('div', 'info legend'); 
-			div.innerHTML = "<img src='<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/pictures/ipn.png' width=200 height=200>";
+			div.innerHTML = "";
 			
     		return div;
 		};
@@ -277,53 +140,9 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
  <table class="table table-bordered display" id="datosgrafico">
   <thead>
                     <tr>
-                      <th>Departamento</th>
-                      <th>Municipio</th>
-                      <th>Homocidio</th>
-                      <th>Homicidios mujeres</th>
-                      <th>Desaparecidos</th>
-                      <th>Lesiones</th>
-                      <th>viff</th>
-                      <th>extorciones</th>
-                      <th>robo</th>
-                      <th>hurto</th>
-                      <th>Robo de vehiculos</th>
-                      <th>Hurto vehiculos</th>
-                      <th>r_h_conmercio</th>
-                      <th>ppl</th>
-                      <th>ppurb</th>
-                      <th>epp</th>
-                      <th>Desaparecidos</th>
-                      <th>ipn</th>
                     </tr>
   </thead>
   <tbody>
-   <?php
-     $sql = "SELECT * FROM ind_municipio ORDER BY registro DESC";//LIMIT 3
- 	 $hechos = $wpdb->get_results( $sql);
-	 foreach ($hechos as $key => $object) { 
-	   echo "<tr>
-	     <td>$object->departamento</td>
-	     <td>$object->municipio</td>
-	     <td>$object->homicidio</td>
-	     <td>$object->total_homicidio_mujer</td>
-	     <td>$object->desaparecidos</td> 
-	     <td>$object->lesiones</td>
-	     <td>$object->vif</td>
-	     <td>$object->extorciones</td>
-	     <td>$object->robo</td>
-	     <td>$object->hurto</td> 
-	     <td>$object->robo_vehiculo</td>
-	     <td>$object->hurto_vehiculo</td>
-	     <td>$object->r_h_conmercio</td>
-	     <td>$object->ppl</td>
-	     <td>$object->ppurb</td> 
-	     <td>$object->epp</td>
-	     <td>$object->veh</td>
-	     <td>$object->ipn</td>
-	    </tr>";
-	 }
-   ?>
   </tbody>
  </table>
 </div>
