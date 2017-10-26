@@ -9,16 +9,14 @@
 */
 
 
-global $wpdb;
+ global $wpdb;
 
-$url = 'https://www.gnu.org/software/make/manual/make.pdf';
+ $url = 'https://www.gnu.org/software/make/manual/make.pdf';
 
-$municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
+ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
  
  $qArma=$wpdb->get_results( $municipios );
  
- $series = '';
- $series.= "{ name:'$delito', type:'pie', radius : '55%', center: ['50%', '60%'], data:[";
  foreach ($qArma as $l) {
   $categoria.= "<option value=''>$l->departamento - $l->municipio</option>";
  }
@@ -76,6 +74,101 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 <script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/leaflet-hash.js"></script>
 <script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/Autolinker.min.js"></script>
 
+
+
+<div class="row">
+ <table class="table table-bordered display" id="datosgrafico">
+  <thead>
+                    <tr>
+                      <th>Departamento</th>
+                      <th>Municipio</th>
+                      <th>Homocidio</th>
+                      <th>Homicidios mujeres</th>
+                      <th>Desaparecidos</th>
+                      <th>Lesiones</th>
+                      <th>viff</th>
+                      <th>extorciones</th>
+                      <th>robo</th>
+                      <th>hurto</th>
+                      <th>Robo de vehiculos</th>
+                      <th>Hurto vehiculos</th>
+                      <th>r_h_conmercio</th>
+                      <th>ppl</th>
+                      <th>ppurb</th>
+                      <th>epp</th>
+                      <th>Desaparecidos</th>
+                      <th>ipn</th>
+                    </tr>
+  </thead>
+  <tbody>
+   <?php
+     $sql = "SELECT * FROM ind_municipio ORDER BY registro DESC";//LIMIT 3
+ 	 $hechos = $wpdb->get_results( $sql);
+	 foreach ($hechos as $key => $object) { 
+	   echo "<tr>
+	     <td>$object->departamento</td>
+	     <td>$object->municipio</td>
+	     <td>$object->homicidio</td>
+	     <td>$object->total_homicidio_mujer</td>
+	     <td>$object->desaparecidos</td> 
+	     <td>$object->lesiones</td>
+	     <td>$object->vif</td>
+	     <td>$object->extorciones</td>
+	     <td>$object->robo</td>
+	     <td>$object->hurto</td> 
+	     <td>$object->robo_vehiculo</td>
+	     <td>$object->hurto_vehiculo</td>
+	     <td>$object->r_h_conmercio</td>
+	     <td>$object->ppl</td>
+	     <td>$object->ppurb</td> 
+	     <td>$object->epp</td>
+	     <td>$object->veh</td>
+	     <td>$object->ipn</td>
+	    </tr>";
+	 }
+   ?>
+  </tbody>
+ </table>
+</div>
+<?php
+ include(plugin_dir_path( __FILE__ )."../footer_public.php");
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>../plugins/bower_components/datatables/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"> 
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+
+<script type="text/javascript">
+(function($){
+	$.noConflict();
+    $('#datosgrafico').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    } );
+    $('#smunicipio').select2({
+		language: {
+			noResults: function (params) {
+				return "Sin registros para ese termino.";
+			}
+		}
+	});
+}(jQuery));
+</script>
 <script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/data/exp_IPN2015Municipiosshpcopiar.js"></script>
 <script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/data/exp_IPN2014Municipiosshp.js"></script>
 <script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/data/exp_MUNICIPIOS.js"></script>
@@ -272,97 +365,3 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 		
 		
 	</script>
-
-<div class="row">
- <table class="table table-bordered display" id="datosgrafico">
-  <thead>
-                    <tr>
-                      <th>Departamento</th>
-                      <th>Municipio</th>
-                      <th>Homocidio</th>
-                      <th>Homicidios mujeres</th>
-                      <th>Desaparecidos</th>
-                      <th>Lesiones</th>
-                      <th>viff</th>
-                      <th>extorciones</th>
-                      <th>robo</th>
-                      <th>hurto</th>
-                      <th>Robo de vehiculos</th>
-                      <th>Hurto vehiculos</th>
-                      <th>r_h_conmercio</th>
-                      <th>ppl</th>
-                      <th>ppurb</th>
-                      <th>epp</th>
-                      <th>Desaparecidos</th>
-                      <th>ipn</th>
-                    </tr>
-  </thead>
-  <tbody>
-   <?php
-     $sql = "SELECT * FROM ind_municipio ORDER BY registro DESC";//LIMIT 3
- 	 $hechos = $wpdb->get_results( $sql);
-	 foreach ($hechos as $key => $object) { 
-	   echo "<tr>
-	     <td>$object->departamento</td>
-	     <td>$object->municipio</td>
-	     <td>$object->homicidio</td>
-	     <td>$object->total_homicidio_mujer</td>
-	     <td>$object->desaparecidos</td> 
-	     <td>$object->lesiones</td>
-	     <td>$object->vif</td>
-	     <td>$object->extorciones</td>
-	     <td>$object->robo</td>
-	     <td>$object->hurto</td> 
-	     <td>$object->robo_vehiculo</td>
-	     <td>$object->hurto_vehiculo</td>
-	     <td>$object->r_h_conmercio</td>
-	     <td>$object->ppl</td>
-	     <td>$object->ppurb</td> 
-	     <td>$object->epp</td>
-	     <td>$object->veh</td>
-	     <td>$object->ipn</td>
-	    </tr>";
-	 }
-   ?>
-  </tbody>
- </table>
-</div>
-<?php
- include(plugin_dir_path( __FILE__ )."../footer_public.php");
-?>
-<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>../plugins/bower_components/datatables/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"> 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
-
-<script type="text/javascript">
-(function($){
-	$.noConflict();
-    $('#datosgrafico').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
-    } );
-    $('#smunicipio').select2({
-		language: {
-			noResults: function (params) {
-				return "Sin registros para ese termino.";
-			}
-		}
-	});
-}(jQuery));
-</script>

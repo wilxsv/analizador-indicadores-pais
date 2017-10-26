@@ -139,10 +139,10 @@
 <div class="row">
  <table class="table table-bordered display" id="datosgrafico">
   <thead>
-                    <tr>
-                    </tr>
+   <tr><th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sectores SPD</th><th>Priorización</th></tr>
   </thead>
   <tbody>
+   <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   </tbody>
  </table>
 </div>

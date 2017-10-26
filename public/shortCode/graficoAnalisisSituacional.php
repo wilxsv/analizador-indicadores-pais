@@ -12,7 +12,15 @@
  global $wpdb;
 
  $url = 'https://www.gnu.org/software/make/manual/make.pdf';
+
+ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
  
+ $qArma=$wpdb->get_results( $municipios );
+ 
+ foreach ($qArma as $l) {
+  $categoria.= "<option value=''>$l->departamento - $l->municipio</option>";
+ }
+
  $site = site_url();
 ?>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
@@ -37,6 +45,70 @@
 	<div class="pad group">
 		<div class="grid one-third ">
 			<p>Parametros de busqueda</p>
+			<p>Municipio:
+				<select name="smunicipio" id="smunicipio"><?php echo $categoria; ?>
+				</select> 
+			</p>
+            <div class="row">
+ <table>
+	 <tr>
+		 <td  align="right">
+								<h4 class="box-title m-b-0">Delitos</h4>
+									<div class="checkbox checkbox-success">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Delitos </label>
+                                        </div>
+									<div class="checkbox checkbox-success">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Personas retornadas </label>
+                                        </div>
+									<div class="checkbox checkbox-success">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Accidendes de transito </label>
+                                        </div>
+									<div class="checkbox checkbox-success">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Avisos 911 </label>
+                                        </div>
+									<div class="checkbox checkbox-success">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Sectorizadas </label>
+                                        </div>
+		 </td>
+		 <td  align="right">
+								<h4 class="box-title m-b-0">Mapas</h4>
+									<div class="checkbox checkbox-info">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Vida </label>
+                                        </div>
+									<div class="checkbox checkbox-info">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Patrimonio </label>
+                                        </div>
+									<div class="checkbox checkbox-info">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Sexual </label>
+                                        </div>
+									<div class="checkbox checkbox-info">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Personas privadas de libertad </label>
+                                        </div>
+									<div class="checkbox checkbox-info">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Autonomía </label>
+                                        </div>
+									<div class="checkbox checkbox-info">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Integridad </label>
+                                        </div>
+									<div class="checkbox checkbox-info">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3"> Exclusión social </label>
+                                        </div>
+		 </td>
+     </tr>
+ </table>				
+            </div>
 		</div>
 		<div class="grid one-third last">
 			<div id='map'></div>	
@@ -139,10 +211,10 @@
 <div class="row">
  <table class="table table-bordered display" id="datosgrafico">
   <thead>
-                    <tr>
-                    </tr>
+   <tr><th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sectores SPD</th><th>Priorización</th></tr>
   </thead>
   <tbody>
+   <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   </tbody>
  </table>
 </div>

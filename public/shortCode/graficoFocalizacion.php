@@ -54,10 +54,10 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 				<select name="policial" id="policial"></select> 
 			  </p>
 			  <p>N° de Centros Escolares:
-				N°: <input id="min" type="number" min="0" max="1">  
+				<input id="min" type="number" min="0" max="1">  
 			  </p>
 			  <p>Nombre del Centro Escolar:
-				Min: <input id="centro" type="text">  
+				<input id="centro" type="text">  
 			  </p>
 		</div>
 		<div class="grid one-third last">
@@ -160,9 +160,10 @@ $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by depa
 <div class="row">
  <table class="table table-bordered display" id="datosgrafico">
   <thead>
-   <tr><th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sectores SPD</th></tr>
+   <tr><th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sectores SPD</th><th>Priorización</th></tr>
   </thead>
   <tbody>
+   <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   </tbody>
  </table>
 </div>
