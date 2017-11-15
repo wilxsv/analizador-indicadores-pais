@@ -13,7 +13,7 @@
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
 
- $url = 'https://www.gnu.org/software/make/manual/make.pdf';
+ $url = plugin_dir_url( __FILE__ ).'../docs/indice_de_priorizacion_de_municipios.pdf';
 
  $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
 
@@ -36,13 +36,6 @@
  $site = site_url();
  if ( $anyo_ultimo ):
 ?>
-
-<style>
-#map {
-	width: 600px;
-	height: 400px;
-}
-</style>
 <div class="row">
 	<div class="isa_info">
 		<a href="<?php echo $url; ?>">
@@ -55,7 +48,7 @@
 <div class="row">
 	<div class="pad group">
 		<div class="grid one-third ">
-			  **El año mostrado es <?php echo $anyo_ultimo; ?>
+			  **Año mas reciente: <?php echo $anyo_ultimo; ?>
 			  <p>Año:
 				<select name="sanyo" id="sanyo"><?php echo $anyo; ?>
 				</select>
@@ -91,11 +84,6 @@
  include(plugin_dir_path( __FILE__ )."../footer_public.php");
 ?>
 
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
-<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
-<script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/leaflet-hash.js"></script>
-<script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/Autolinker.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
 <script type="text/javascript">
@@ -109,9 +97,14 @@
 		}
 	});
 	$('#sanyo').on('change', function() {
-		alert( this.value );
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
         $('#datatable').html(resp);
+    });
+    //document.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
+    map.off();
+map.remove();
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo='+this.value, { data:'map' }, function(resp) {
+        $('#macromap').html(resp);
     });
 	})
 }(jQuery));
