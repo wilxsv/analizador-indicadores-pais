@@ -13,8 +13,6 @@
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
 
- $url = plugin_dir_url( __FILE__ ).'../docs/indice_de_priorizacion_de_municipios.pdf';
-
  $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
 
  $municipios=$wpdb->get_results( "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio" );
@@ -33,18 +31,8 @@
   $categoria.= "<option value=''>$l->departamento - $l->municipio</option>";
  }
 
- $site = site_url();
  if ( $anyo_ultimo ):
 ?>
-<div class="row">
-	<div class="isa_info">
-		<a href="<?php echo $url; ?>">
-			<strong><i class="fa fa-bar-chart"></i>Conozca la metodología!</strong>
-			<img src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/pdf-24x24.png" alt="Documento metodologico" width="" height="">
-		 </a>
-	</div>
-</div>
-
 <div class="row">
 	<div class="pad group">
 		<div class="grid one-third ">

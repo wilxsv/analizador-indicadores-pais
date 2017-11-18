@@ -11,35 +11,17 @@
 
  global $wpdb;
 
- $url = 'https://www.gnu.org/software/make/manual/make.pdf';
- 
- $site = site_url();
 ?>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
 
-<style>
-#map {
-	width: 600px;
-	height: 400px;
-}
-</style>
-<div class="row">
-	<div class="alert alert-info">
-		<strong>Conozca la metodología!</strong>
-		 <a href="<?php echo $url; ?>">
-			<img src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/pdf-24x24.png" alt="Documento metodologico" width="" height="">
-		 </a> 
-	</div>
-</div>
-	
 <div class="row">
 	<div class="pad group">
 		<div class="grid one-third ">
 			<p>Parametros de busqueda</p>
 		</div>
 		<div class="grid one-third last">
-			<div id='map'></div>	
+			<div id='map'></div>
 		</div>
 	</div>
 </div>
@@ -66,7 +48,7 @@
 		var additional_attrib = 'created w. <a href="https://github.com/geolicious/qgis2leaf" target ="_blank">qgis2leaf</a> by <a href="http://www.geolicious.de" target ="_blank">Geolicious</a> & contributors<br>';
 		var feature_group = new L.featureGroup([]);
 		var raster_group = new L.LayerGroup([]);
-		
+
 		var basemap_0 =	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 19,
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -74,9 +56,9 @@
 			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		id: 'mapbox.light'
 	}).addTo(map);
-		basemap_0.addTo(map);	
+		basemap_0.addTo(map);
 		var layerOrder=new Array();
-		function pop_MUNICIPIOS(feature, layer) {					
+		function pop_MUNICIPIOS(feature, layer) {
 			var popupContent = '<table><tr><th scope="row">MPIO</th><td>' + Autolinker.link(String(feature.properties['MPIO'])) + '</td></tr></table>';
 			layer.bindPopup(popupContent);
 		}
@@ -102,7 +84,7 @@
 		}
 		//add comment sign to hide this layer on the map in the initial view.
 		feature_group.addLayer(exp_MUNICIPIOSJSON);
-		function pop_IPN2014Municipiosshp(feature, layer) {					
+		function pop_IPN2014Municipiosshp(feature, layer) {
 			var popupContent = '<table><tr><th scope="row">Municipio</th><td>' + Autolinker.link(String(feature.properties['MPIO'])) + '</td></tr><tr><th scope="row">Departamento</th><td>' + Autolinker.link(String(feature.properties['Departamen'])) + '</td></tr><tr><th scope="row">Homicidios Mujeres</th><td>' + Autolinker.link(String(feature.properties['HomM2014'])) + '</td></tr><tr><th scope="row">Homicidios</th><td>' + Autolinker.link(String(feature.properties['Hom2014'])) + '</td></tr><tr><th scope="row">Lesiones</th><td>' + Autolinker.link(String(feature.properties['Lesiones'])) + '</td></tr><tr><th scope="row">Viol Intrafamiliar</th><td>' + Autolinker.link(String(feature.properties['VIF'])) + '</td></tr><tr><th scope="row">Desaparecidos</th><td>' + Autolinker.link(String(feature.properties['Desapareci'])) + '</td></tr><tr><th scope="row">Extorsiones</th><td>' + Autolinker.link(String(feature.properties['Extorsione'])) + '</td></tr><tr><th scope="row">Robo</th><td>' + Autolinker.link(String(feature.properties['Robo'])) + '</td></tr><tr><th scope="row">Hurto</th><td>' + Autolinker.link(String(feature.properties['Hurto'])) + '</td></tr><tr><th scope="row">Robo Vehiculos</th><td>' + Autolinker.link(String(feature.properties['RoboVeh'])) + '</td></tr><tr><th scope="row">Hurto Vehiculos</th><td>' + Autolinker.link(String(feature.properties['HurtoVeh'])) + '</td></tr><tr><th scope="row">RV Mercaderia</th><td>' + Autolinker.link(String(feature.properties['RoboVehMer'])) + '</td></tr><tr><th scope="row">Privados Libertad</th><td>' + Autolinker.link(String(feature.properties['Privados'])) + '</td></tr><tr><th scope="row">% Urbano</th><td>' + Autolinker.link(String(feature.properties['pcturb'])) + '</td></tr><tr><th scope="row">CE con Pandillas</th><td>' + Autolinker.link(String(feature.properties['EPP'])) + '</td></tr><tr><th scope="row">Total RHV</th><td>' + Autolinker.link(String(feature.properties['Veh'])) + '</td></tr><tr><th scope="row">IPN2014</th><td>' + Autolinker.link(String(feature.properties['IPN2014'])) + '</td></tr></table>';
 			layer.bindPopup(popupContent);
 		}
@@ -123,17 +105,17 @@
 	};
 		L.control.layers(baseMaps,{"MUNICIPIOS": exp_MUNICIPIOSJSON},{collapsed:false}).addTo(map);
 		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
-		
+
 		var legend = L.control({position: 'bottomleft'});
 		legend.onAdd = function (map) {
-			var div = L.DomUtil.create('div', 'info legend'); 
+			var div = L.DomUtil.create('div', 'info legend');
 			div.innerHTML = "";
-			
+
     		return div;
 		};
 		legend.addTo(map);
-		
-		
+
+
 	</script>
 
 <div class="row">
@@ -150,9 +132,9 @@
  include(plugin_dir_path( __FILE__ )."../footer_public.php");
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>../plugins/bower_components/datatables/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"> 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-  
+
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
