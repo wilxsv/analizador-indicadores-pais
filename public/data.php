@@ -42,7 +42,7 @@ function getTable($type, $anyo, $wpdb){
                        <th>Homicidios mujeres</th>
                        <th>Desaparecidos</th>
                        <th>Lesiones</th>
-                       <th>viff</th>
+                       <th>VIF</th>
                        <th>extorciones</th>
                        <th>robo</th>
                        <th>hurto</th>
@@ -81,10 +81,10 @@ function get_mapa($type, $anyo, $wpdb, $centro){
   ;
   $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
   return "$datos
-<script type=\"text/javascript\">	var map = L.map('map').setView([$centro], 8);
-	L.tileLayer('https://api.tiles.mpbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-    attribution: 'Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\" http://creativecommons.org/licenses/by-sa/2.0/ \">CC-BY-SA</a>, Imagery © <a href=\"http://mapbox.com\">Mapbox</a>',
+<script type=\"text/javascript\">	var map = L.map('map').setView([$centro], 9);
+	L.tileLayer('', {
+		maxZoom: 18,minZoom: 9,
+    attribution: 'Dirección de Información y Análisis',
 		id: 'mapbox.light'
 	}).addTo(map);
 	// control that shows state info on hover
@@ -101,12 +101,12 @@ function get_mapa($type, $anyo, $wpdb, $centro){
 	};
 	info.addTo(map);
 	function getColor(d) {
-		return d >= 1 ? '#800026' :
-				d >= 0.8  ? '#BD0026' :
-				d >= 0.6  ? '#E31A1C' :
-				d >= 0.4  ? '#FC4E2A' :
-				d >= 0.2   ? '#FD8D3C' : '#FED976';
-				//d < 0.1   ? '#FED976' : '#FFEDA0';
+		return d > 0.8 ? '#E94190' :
+				d > 0.6  ? '#F39200' :
+				//d >= 0.4  ? '#E31A1C' :
+				d >= 0.4  ? '#FCEA12' :
+				//d <= 0.2   ? '#FD8D3C' :
+				d >= 0.2   ? '#94C11F' : '#009FE3';
 	}
 	function style(feature) {
 		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor(feature.properties.indice) };
@@ -124,18 +124,18 @@ function get_mapa($type, $anyo, $wpdb, $centro){
 		layer.on({mouseover: highlightFeature,mouseout: resetHighlight,click: zoomToFeature});
 	}
 	geojson = L.geoJson(municipiosData, {	style: style,	onEachFeature: onEachFeature	}).addTo(map);
-  map.attributionControl.addAttribution('Script <a href=\"http://leafletjs.com/examples/choropleth/\">basado en \"Interactive Choropleth Map\"</a>');
+  map.attributionControl.addAttribution('');
 	var legend = L.control({position: 'bottomright'});
 	legend.onAdd = function (map) {
 		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [0, 0.1, 0.2, 0.4, 0.6, 0.8, 1],
+			grades = [0, 0.2, 0.4, 0.6, 0.8],
 			labels = [],
 			from, to;
 		for (var i = 0; i < grades.length; i++) {
 			from = grades[i];
 			to = grades[i + 1];
 			labels.push(
-				'<i style=\"background:' + getColor(from + 1) + '\"></i> ' +
+				'<i style=\"background:' + getColor(from + 0.05) + '\"></i> ' +
 				from + (to ? '&ndash;' + to : '+'));
 		}
 		div.innerHTML = labels.join('<br>');

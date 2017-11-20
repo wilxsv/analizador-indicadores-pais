@@ -17,47 +17,56 @@
 
  $municipios=$wpdb->get_results( "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
- $query_depto=$wpdb->get_results( "SELECT departamento FROM `ind_municipio` GROUP BY departamento ORDER BY departamento" );
+ $query_depto=$wpdb->get_results( "SELECT departamento FROM `ind_municipio` GROUP BY departamento ORDER BY departamento, municipio" );
 
  $anyo_ultimo = NULL;
  foreach ($query_anyo as $l) {
   $anyo.= "<option value='$l->anyo'>$l->anyo</option>";
   $anyo_ultimo = $l->anyo;
  }
+ $dep = NULL;
  foreach ($query_depto as $l) {
-  $depto.= "<option value='$l->departamento'>$l->departamento</option>";
  }
  foreach ($municipios as $l) {
-  $categoria.= "<option value=''>$l->departamento - $l->municipio</option>";
+     if ($dep == NULL){
+       $categoria.= "<optgroup label=\"$l->departamento\">";
+       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+     } elseif ($dep != $l->departamento) {
+       $categoria.= "<optgroup>";
+       $categoria.= "<optgroup label=\"$l->departamento\">";
+       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+     }else {
+       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+     }
+     $dep = $l->departamento;
  }
+ $categoria.= "<optgroup>";
 
  if ( $anyo_ultimo ):
 ?>
 <div class="row">
+ <div class="col-md-12">
+   <div id='map'></div>
+   <div id='macromap'></div>
+ </div>
+</div>
+
+
+<div class="row">
 	<div class="pad group">
 		<div class="grid one-third ">
-			  **Año mas reciente: <?php echo $anyo_ultimo; ?>
-			  <p>Año:
-				<select name="sanyo" id="sanyo"><?php echo $anyo; ?>
-				</select>
-			  </p>
+			  <p>Año: <select name="sanyo" id="sanyo"><?php echo $anyo; ?></select></p>
 			  <!--<p>Departamento:
 				<select name="sdepartamento" id="sdepartamento"><?php echo $depto; ?>
 				</select>
       </p>-->
-			  <p>Municipio:
-				<select name="smunicipio" id="smunicipio"><?php echo $categoria; ?>
-				</select>
-			  </p>
 			  <!--<p>Valor del indice entre:
 				Min: <input id="min" type="number" min="0" max="1"><br/>
 				Max: <input id="max" type="number" min="0" max="1"><br/>
       </p>-->
 		</div>
 		<div class="grid one-third last">
-        <div id='map'></div>
-      <div id='macromap'>
-      </div>
+      <p>Municipio: <select name="smunicipio" id="smunicipio" ><?php echo $categoria; ?></select></p>
 		</div>
 	</div>
 </div>
@@ -77,7 +86,14 @@
 <script type="text/javascript">
 (function($){
 	$.noConflict();
-    $('#smunicipio').select2({
+  $('#smunicipio').select2({
+		language: {
+			noResults: function (params) {
+				return "Sin registros para ese termino.";
+			}
+		}
+	});
+  $('#sanyo').select2({
 		language: {
 			noResults: function (params) {
 				return "Sin registros para ese termino.";
@@ -88,13 +104,16 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
         $('#datatable').html(resp);
     });
-    //document.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
+    //datosgrafico_filterdocument.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
     map.off();
-map.remove();
+    map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo='+this.value, { data:'map' }, function(resp) {
         $('#macromap').html(resp);
     });
-	})
+	});
+	$('#smunicipio').on('change', function() {
+    //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
+	});
 }(jQuery));
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
     //console.log(resp);
