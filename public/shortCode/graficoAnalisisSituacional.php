@@ -8,95 +8,81 @@
  * Author URI: http://pnud.org.sv/
 */
 
-
  global $wpdb;
 
- $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
+ include(plugin_dir_path( __FILE__ )."../head_public.php");
 
- $qArma=$wpdb->get_results( $municipios );
+ $municipios=$wpdb->get_results( "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio" );
+ $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
 
- foreach ($qArma as $l) {
-  $categoria.= "<option value=''>$l->departamento - $l->municipio</option>";
+ $anyo_ultimo = NULL;
+ foreach ($query_anyo as $l) {
+  $anyo.= "<option value='$l->anyo'>$l->anyo</option>";
+  $anyo_ultimo = $l->anyo;
  }
+ $dep = NULL;
+ foreach ($query_depto as $l) {
+ }
+ foreach ($municipios as $l) {
+     if ($dep == NULL){
+       $categoria.= "<optgroup label=\"$l->departamento\">";
+       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+     } elseif ($dep != $l->departamento) {
+       $categoria.= "<optgroup>";
+       $categoria.= "<optgroup label=\"$l->departamento\">";
+       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+     }else {
+       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+     }
+     $dep = $l->departamento;
+ }
+ $categoria.= "<optgroup>";
 
+ if ( $anyo_ultimo ):
 ?>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-	
+
 <div class="row">
-	<div class="pad group">
-		<div class="grid one-third ">
-			<p>Parametros de busqueda</p>
-			<p>Municipio:
-				<select name="smunicipio" id="smunicipio"><?php echo $categoria; ?>
-				</select>
-			</p>
-            <div class="row">
- <table>
-	 <tr>
-		 <td  align="right">
-								<h4 class="box-title m-b-0">Delitos</h4>
-									<div class="checkbox checkbox-success">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Delitos </label>
-                                        </div>
-									<div class="checkbox checkbox-success">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Personas retornadas </label>
-                                        </div>
-									<div class="checkbox checkbox-success">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Accidendes de transito </label>
-                                        </div>
-									<div class="checkbox checkbox-success">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Avisos 911 </label>
-                                        </div>
-									<div class="checkbox checkbox-success">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Sectorizadas </label>
-                                        </div>
-		 </td>
-		 <td  align="right">
-								<h4 class="box-title m-b-0">Mapas</h4>
-									<div class="checkbox checkbox-info">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Vida </label>
-                                        </div>
-									<div class="checkbox checkbox-info">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Patrimonio </label>
-                                        </div>
-									<div class="checkbox checkbox-info">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Sexual </label>
-                                        </div>
-									<div class="checkbox checkbox-info">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Personas privadas de libertad </label>
-                                        </div>
-									<div class="checkbox checkbox-info">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Autonomía </label>
-                                        </div>
-									<div class="checkbox checkbox-info">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Integridad </label>
-                                        </div>
-									<div class="checkbox checkbox-info">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"> Exclusión social </label>
-                                        </div>
-		 </td>
-     </tr>
- </table>
-            </div>
-		</div>
-		<div class="grid one-third last">
-			<div id='map'></div>
-		</div>
-	</div>
+ <div class="pad group">
+  <div class="grid one-third ">
+   <p>Año: <br /><select name="sanyo" id="sanyo"><?php echo $anyo; ?></select></p>
+  </div>
+  <div class="grid one-third last">
+   <p>Municipio: <select name="smunicipio" id="smunicipio" ><?php echo $categoria; ?></select></p>
+  </div>
+  <div class="grid one-third last">
+   <p>Variable: 
+	<select name="variable" id="variable" >
+		<option value="0">Autonomía</option>
+		<option value="1">Exclusión  social</option>
+		<option value="2">Integridad</option>
+		<option value="3">Patrimonio</option>
+		<option value="4">Personas privadas de libertad</option>
+		<option value="5">Sexual</option>
+		<option value="6">Vida</option>
+	</select>
+   </p>
+  </div>
+ </div>
 </div>
+
+<div class="row">
+ <div class="col-md-12">
+   <div id='map'></div>
+   <div id='macromap'></div>
+ </div>
+</div>
+
+
+<div class="row">
+ <div class="col-md-12">
+ </div>
+</div>
+<div class="row" id="datatable">
+</div>
+<?php
+ include(plugin_dir_path( __FILE__ )."../footer_public.php");
+?>
+
 
 <div class="row">
  <div class="col-md-12">
@@ -216,26 +202,60 @@
 <script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
 <script type="text/javascript">
 (function($){
 	$.noConflict();
-    $('#datosgrafico').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
-    } );
-    $('#smunicipio').select2({
+  $('#smunicipio').select2({
 		language: {
 			noResults: function (params) {
 				return "Sin registros para ese termino.";
 			}
 		}
 	});
+  $('#variable').select2({
+		language: {
+			noResults: function (params) {
+				return "Sin registros para ese termino.";
+			}
+		}
+	});
+  $('#sanyo').select2({
+		language: {
+			noResults: function (params) {
+				return "Sin registros para ese termino.";
+			}
+		}
+	});
+	$('#sanyo').on('change', function() {
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
+        $('#datatable').html(resp);
+    });
+    //datosgrafico_filterdocument.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
+    map.off();
+    map.remove();
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo='+this.value, { data:'map' }, function(resp) {
+        $('#macromap').html(resp);
+    });
+	});
+	$('#smunicipio').on('change', function() {
+    //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
+	});
 }(jQuery));
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+    //console.log(resp);
+    $('#datatable').html(resp);
+});
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+    //console.log(resp);
+    $('#macromap').html(resp);
+});
 </script>
+
+<?php else: ?>
+
+No hay información para mostrar en este momento.
+
+<?php endif ?>

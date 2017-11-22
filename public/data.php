@@ -17,8 +17,7 @@ if ( isset( $_GET['data'] ) ) $data = $_GET['data'];
 if ( isset( $_GET['anyo'] ) && is_numeric($_GET['anyo']) ) $anyo = $_GET['anyo'];
 if ( isset( $_GET['type'] ) ) $type = $_GET['type'];
 if ( isset( $_GET['centro'] ) ) $centro = $_GET['centro'];
-else $centro = "13.69111, -89.19112";
-
+else $centro = "13.79111, -89.00012";
 if ($data == 'table' && $anyo && $type == 'm') {
   echo getTable($_GET['type'], $_GET['anyo'], $wpdb);
 }
@@ -82,7 +81,7 @@ function get_mapa($type, $anyo, $wpdb, $centro){
   $zoom = 9;
   $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
   return "$datos
-<script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
+<script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false }).setView([$centro], $zoom);
 	L.tileLayer('', {
 		maxZoom: 18,minZoom: $zoom,
     attribution: 'Dirección de Información y Análisis',
@@ -129,7 +128,7 @@ function get_mapa($type, $anyo, $wpdb, $centro){
 	var legend = L.control({position: 'bottomright'});
 	legend.onAdd = function (map) {
 		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [0, 0.2, 0.4, 0.6, 0.8],
+			grades = [0.0, 0.2, 0.4, 0.6, 0.8],
 			labels = [],
 			from, to;
 		for (var i = 0; i < grades.length; i++) {
@@ -137,7 +136,7 @@ function get_mapa($type, $anyo, $wpdb, $centro){
 			to = grades[i + 1];
 			labels.push(
 				'<i style=\"background:' + getColor(from + 0.05) + '\"></i> ' +
-				from + (to ? '&ndash;' + to : '+'));
+				from + (to ? ' &ndash; ' + to : ' &ndash; 1'));
 		}
 		div.innerHTML = labels.join('<br>');
 		return div;
