@@ -79,11 +79,12 @@ function get_mapa($type, $anyo, $wpdb, $centro){
     $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->municipio\",\"indice\":$object->indice },\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
   }
   ;
+  $zoom = 9;
   $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
   return "$datos
-<script type=\"text/javascript\">	var map = L.map('map').setView([$centro], 9);
+<script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
 	L.tileLayer('', {
-		maxZoom: 18,minZoom: 9,
+		maxZoom: 18,minZoom: $zoom,
     attribution: 'Dirección de Información y Análisis',
 		id: 'mapbox.light'
 	}).addTo(map);
