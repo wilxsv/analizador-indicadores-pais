@@ -13,11 +13,8 @@
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
 
- $municipios = "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio";
-
  $municipios=$wpdb->get_results( "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
- $query_depto=$wpdb->get_results( "SELECT departamento FROM `ind_municipio` GROUP BY departamento ORDER BY departamento, municipio" );
 
  $anyo_ultimo = NULL;
  foreach ($query_anyo as $l) {
@@ -25,8 +22,6 @@
   $anyo_ultimo = $l->anyo;
  }
  $dep = NULL;
- foreach ($query_depto as $l) {
- }
  foreach ($municipios as $l) {
      if ($dep == NULL){
        $categoria.= "<optgroup label=\"$l->departamento\">";
