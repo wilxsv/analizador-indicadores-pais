@@ -37,13 +37,13 @@
  foreach ($sector as $l) {
      if ($dep == NULL){
        $policial.= "<optgroup label=\"$l->municipio\">";
-       $policial.= "<option value=\"$l->municipio\">$l->sector_policial</option>";
+       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
      } elseif ($dep != $l->municipio) {
        $policial.= "<optgroup>";
        $policial.= "<optgroup label=\"$l->municipio\">";
-       $policial.= "<option value=\"$l->municipio\">$l->sector_policial</option>";
+       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
      }else {
-       $policial.= "<option value=\"$l->municipio\">$l->sector_policial</option>";
+       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
      }
      $dep = $l->municipio;
  }
@@ -53,13 +53,13 @@
  foreach ($centro as $l) {
      if ($dep == NULL){
        $ce.= "<optgroup label=\"$l->municipio\">";
-       $ce.= "<option value=\"$l->municipio\">$l->nombre_ce</option>";
+       $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
      } elseif ($dep != $l->municipio) {
        $ce.= "<optgroup>";
        $ce.= "<optgroup label=\"$l->municipio\">";
-       $ce.= "<option value=\"$l->municipio\">$l->nombre_ce</option>";
+       $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
      }else {
-       $ce.= "<option value=\"$l->municipio\">$l->nombre_ce</option>";
+       $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
      }
      $dep = $l->municipio;
  }
@@ -124,9 +124,15 @@
     });
 	});
 	$('#policial').on('change', function() {
+		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+			$('#datatable').html(resp);
+		});
     //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
 	});
 	$('#ce').on('change', function() {
+		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+			$('#datatable').html(resp);
+		});
     //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
 	});
 }(jQuery));
