@@ -83,16 +83,15 @@
 
 <div class="row">
  <div class="col-md-12">
-   <div id='map'></div>
+   <div id="map"></div>
    <div id='macromap'></div>
  </div>
 </div>
 
 <div class="row">
  <div class="col-md-12">
+   <div class="row" id="datatable"></div>
  </div>
-</div>
-<div class="row" id="datatable">
 </div>
 <?php
  include(plugin_dir_path( __FILE__ )."../footer_public.php");
@@ -116,10 +115,9 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
         $('#datatable').html(resp);
     });
-    //datosgrafico_filterdocument.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
     map.off();
     map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f&anyo='+this.value, { data:'map' }, function(resp) {
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { data:'table' }, function(resp) {
         $('#macromap').html(resp);
     });
 	});
@@ -139,8 +137,7 @@
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=f', {  }, function(resp) {
     $('#datatable').html(resp);
 });
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-    //console.log(resp);
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f', { data:'table' }, function(resp) {
     $('#macromap').html(resp);
 });
 </script>

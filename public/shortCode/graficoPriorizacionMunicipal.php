@@ -39,6 +39,20 @@
 
  if ( $anyo_ultimo ):
 ?>
+
+<div class="row">
+ <div class="pad group">
+  <div class="grid one-third ">
+   Año:<br/><select name="sanyo" id="sanyo"><?php echo $anyo; ?></select>
+  </div>
+  <div class="grid one-third last">
+   Municipio:<br/><select name="smunicipio" id="smunicipio" ><?php echo $categoria; ?></select>
+  </div>
+  <div class="grid one-third last">
+  </div>
+ </div>
+</div>
+
 <div class="row">
  <div class="col-md-12">
    <div id='map'></div>
@@ -50,7 +64,7 @@
 <div class="row">
 	<div class="pad group">
 		<div class="grid one-third ">
-			  <p>Año: <select name="sanyo" id="sanyo"><?php echo $anyo; ?></select></p>
+
 			  <!--<p>Departamento:
 				<select name="sdepartamento" id="sdepartamento"><?php echo $depto; ?>
 				</select>
@@ -61,8 +75,7 @@
       </p>-->
 		</div>
 		<div class="grid one-third last">
-      <p>Municipio: <select name="smunicipio" id="smunicipio" ><?php echo $categoria; ?></select></p>
-		</div>
+    </div>
 	</div>
 </div>
 
