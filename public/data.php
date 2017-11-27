@@ -28,7 +28,7 @@ if ($data == 'table' && $anyo && $type == 'm') {
   echo getTablePrioridad($code, $wpdb);
 }
 elseif ($data == 'map' && $anyo && $type == 'm') {
-  echo get_mapa($type, $anyo, $wpdb, $centro);
+  echo get_mapa($type, $anyo, $wpdb, get_centro($wpdb, NULL));
 }
 elseif ($data == 'map' && $type == 'f') {
   if (!$vars) {

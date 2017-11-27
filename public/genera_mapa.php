@@ -9,7 +9,6 @@ ini_set('memory_limit', '256M');
  * Author URI: http://pnud.org.sv/
 */
 
-
 function get_mapa($type, $anyo, $wpdb, $centro){
   if ($type == 'm' && $anyo >= 2014 ){
     $sql = "SELECT i.id AS id, i.municipio AS municipio , i.ipn AS indice, m.geojson_municipio AS coordenada FROM ind_municipio i, ind_ctl_departamento d, ind_ctl_municipio m WHERE i.departamento = d.nombre_departamento AND d.id = m.ctl_departamento_id AND i.municipio = m.nombre_municipio AND i.anyo = $anyo ";
