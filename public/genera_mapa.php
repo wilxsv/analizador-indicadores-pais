@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '256M');
 /**
  * Plugin Name: indicadores-pais-El-Salvador-seguro
  * Plugin URI: http://wordpress.org/plugins/
@@ -93,23 +94,17 @@ function get_mapa($type, $anyo, $wpdb, $centro){
 </script>";
 }
 
-function get_sv($type, $vars, $wpdb, $centro){
-  $zoom = 9;
-  if ( $vars == 0 ){//Se carga por defecto ya que vars no posee ningun valor
+function get_sv($type, $vars, $wpdb, $centro, $zoom){
+  if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-    $hechos = $wpdb->get_results( $sql);
-    $sql = "SELECT  nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL";
-    $ce = $wpdb->get_results( $sql);
-    $escuelas = "";
-    foreach ($ce as $key => $object) {
-      $escuelas .= "L.marker([$object->lat, $object->lon]).addTo(map).bindPopup(\"<b>$object->nombre</b>\");\n";
-    }
+    $escuelas = get_centros_escolares($wpdb, NULL);
+    $sector = get_sector_ppd($wpdb, NULL);
   } else {//cuando se solicita un departamento, municipio, codigo, etc
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-    $hechos = $wpdb->get_results( $sql);
-    $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento limit 1";
-    $ce = $wpdb->get_results( $sql);
+    $escuelas = get_centros_escolares($wpdb, $vars);
+    $sector = get_sector_ppd($wpdb, $vars);
   }
+  $hechos = $wpdb->get_results( $sql);
   $json = NULL;
   foreach ($hechos as $key => $object) {
     if ($json != NULL){
@@ -118,7 +113,7 @@ function get_sv($type, $vars, $wpdb, $centro){
     $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->nombre\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
   }
   $datos = "<script type=\"text/javascript\">var departamentosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
- return "$datos
+ return " $sector\n$datos
  <script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false }).setView([$centro], $zoom);
 L.tileLayer('', {
   maxZoom: $zoom,minZoom: $zoom,
@@ -126,5 +121,65 @@ L.tileLayer('', {
 }).addTo(map);
 $escuelas
 L.geoJson(departamentosData).addTo(map);
+function style(feature) {
+    return {
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: 'gray'
+    }
+}
+L.geoJson(sectoresData, { style: style } ).addTo(map);
 </script>";
+}
+
+function get_centros_escolares($wpdb, $centro){
+  if (!$centro){
+    $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL";
+  }  elseif (1 === preg_match('~[0-9]~', $centro)) {
+    $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND sector = '$centro'";
+  }else{
+    $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND municipio = '$centro'";
+  }
+  $ce = $wpdb->get_results( $sql);
+  $escuelas = "";
+  foreach ($ce as $key => $object) {
+    $escuelas .= "L.marker([$object->lat, $object->lon]).addTo(map).bindPopup(\"<b>$object->nombre</b>\");\n";
+  }
+  return $escuelas;
+}
+
+function get_sector_ppd($wpdb, $sector){
+  if (!$sector){
+    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector";
+  }  elseif (1 === preg_match('~[0-9]~', $sector)) {
+    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector AND f.lon IS NOT NULL AND f.lat IS NOT NULL AND f.sector = '$sector'";
+  }else{
+    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector AND f.lon IS NOT NULL AND f.lat IS NOT NULL AND f.municipio = '$sector'";
+  }
+  $sppd = $wpdb->get_results( $sql);
+  $json = '';
+  foreach ($sppd as $key => $object) {
+    if ($json != NULL){
+      $json.= ",";
+    }
+    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->nombre\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
+  }
+  return "<script type=\"text/javascript\">var sectoresData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
+}
+
+function get_centro($wpdb, $sector){
+  $punto = "13.79111, -89.00012";
+  if (1 === preg_match('~[0-9]~', $sector)) {
+    $sql = "SELECT d.lat_departamento, d.lon_departamento FROM ind_ctl_departamento AS d, ind_focalizacion as f WHERE d.nombre_departamento = f.departamento AND f.sector = '$sector' LIMIT 1";
+  }else{
+    $sql = "SELECT d.lat_departamento, d.lon_departamento FROM ind_ctl_departamento AS d, ind_focalizacion as f WHERE d.nombre_departamento = f.departamento AND f.municipio = '$sector' LIMIT 1";
+  }
+  $data = $wpdb->get_results( $sql);
+  foreach ($data as $key => $object) {
+    $punto = "$object->lat_departamento, $object->lon_departamento";
+  }
+  return $punto;
 }

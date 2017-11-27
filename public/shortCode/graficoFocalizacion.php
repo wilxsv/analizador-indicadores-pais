@@ -14,7 +14,7 @@
 
  $municipios = "SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio";
  $municipios=$wpdb->get_results("$municipios");
- $sector = $wpdb->get_results("SELECT municipio, sector_policial FROM `ind_focalizacion` WHERE sector_policial != '0' group by municipio, sector_policial");
+ $sector = $wpdb->get_results("SELECT municipio, sector AS sector_policial FROM `ind_focalizacion` WHERE sector IS NOT NULL group by municipio, sector");
  $centro = $wpdb->get_results("SELECT municipio, nombre_ce FROM `ind_focalizacion` WHERE codigo_ce > 0 group by municipio, codigo_ce");
 
  $dep = NULL;
@@ -117,7 +117,7 @@
     });
     map.off();
     map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { data:'table' }, function(resp) {
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { }, function(resp) {
         $('#macromap').html(resp);
     });
 	});
@@ -125,13 +125,16 @@
 		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
 			$('#datatable').html(resp);
 		});
-    //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
+    map.off();
+    map.remove();
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { }, function(resp) {
+        $('#macromap').html(resp);
+    });
 	});
 	$('#ce').on('change', function() {
 		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
 			$('#datatable').html(resp);
 		});
-    //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
 	});
 }(jQuery));
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=f', {  }, function(resp) {
