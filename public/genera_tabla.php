@@ -37,6 +37,42 @@ $table .="(function($){ $('#datosgrafico').DataTable({pageLength: 4, language: {
 </script>";
   return $table;
 }
+
+function getTableCentroEscolar($wpdb, $code){
+  $sql = "SELECT * FROM ind_centro_escolar";
+  if ($code == 'all' ){
+    $sql = "SELECT * FROM ind_centro_escolar";
+  } else {
+    $sql = "SELECT * FROM ind_centro_escolar WHERE municipio = '$code' OR sector = '$code' OR nombre_ce = '$code' OR anyo = '$code'";
+  }
+  $hechos = $wpdb->get_results( $sql);
+  $table = '
+  <table class="table table-bordered display" id="datosgrafico">
+   <thead>
+    <tr>
+     <th>Año</th>
+      <th>Departamento</th>
+     <th>Municipio</th>
+     <th>Centro Escolar</th>
+     <th>Sector</th>
+     <th>Presencia de maras</th>
+     <th>Drogas</th>
+     <th>Violaciones</th>
+     <th>Portacion de armas blancas y fuego</th>
+     <th>Robos y hurtos</th>
+     <th>Matricula relativa</th>
+     <th>Indice</th>
+    </tr>
+   </thead>
+   <tbody>';
+   foreach ($hechos as $key => $object) {
+ 	   $table.= "<tr><td>$object->anyo</td><td>$object->departamento</td><td>$object->municipio</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>$object->matricula</td><td>$object->ipce</td></tr>";
+ 	 }
+$table .='</tbody></table><script type="text/javascript">';
+$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 4, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));</script>";
+  return $table;
+}
+
 function getTable($type, $anyo, $wpdb){
   if ($type == 'm' && $anyo >= 2014 ){
     $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo";

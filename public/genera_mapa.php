@@ -96,11 +96,11 @@ function get_mapa($type, $anyo, $wpdb, $centro){
 function get_sv($type, $vars, $wpdb, $centro, $zoom){
   if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-    $escuelas = get_centros_escolares($wpdb, NULL);
+    $escuelas = get_centros_escolares($wpdb, NULL, NULL);
     $sector = get_sector_ppd($wpdb, NULL);
   } else {//cuando se solicita un departamento, municipio, codigo, etc
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-    $escuelas = get_centros_escolares($wpdb, $vars);
+    $escuelas = get_centros_escolares($wpdb, $vars, NULL);
     $sector = get_sector_ppd($wpdb, $vars);
   }
   $hechos = $wpdb->get_results( $sql);
@@ -134,7 +134,7 @@ L.geoJson(sectoresData, { style: style } ).addTo(map);
 </script>";
 }
 
-function get_centros_escolares($wpdb, $centro){
+function get_centros_escolares($wpdb, $centro, $escala){
   if (!$centro){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL";
   }  elseif (1 === preg_match('~[0-9]~', $centro)) {
@@ -181,4 +181,51 @@ function get_centro($wpdb, $sector){
     $punto = "$object->lat_departamento, $object->lon_departamento";
   }
   return $punto;
+}
+
+function get_mapa_ce($wpdb, $vars, $centro, $zoom){
+  if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
+    $escuelas = get_centros_escolares($wpdb, FALSE, TRUE);
+  } else {//cuando se solicita un departamento, municipio, codigo, etc
+    $escuelas = get_centros_escolares($wpdb, FALSE, TRUE);
+  }
+  $files = '<style>
+  .info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+  .legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
+  $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
+  $hechos = $wpdb->get_results( $sql);
+  $json = NULL;
+  foreach ($hechos as $key => $object) {
+    if ($json != NULL){
+      $json.= ",";
+    }
+    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->nombre\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
+  }
+  $datos = "<script type=\"text/javascript\">var departamentosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
+ return "$files\n$datos
+ <script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false }).setView([$centro], $zoom);
+  L.tileLayer('', {
+   maxZoom: $zoom,minZoom: $zoom,
+   attribution: 'Dirección de Información y Análisis'
+  }).addTo(map);
+  L.geoJson(departamentosData).addTo(map);
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+      grades = [],
+      labels = [],
+      from, to;
+    labels.push('<i style=\"background:#009FE3\"></i> Inseguridad muy baja (0.00 &ndash; 0.20)');
+    labels.push('<i style=\"background:#94C11F\"></i> Inseguridad baja     (0.21 &ndash; 0.40)');
+    labels.push('<i style=\"background:#FCEA12\"></i> Inseguridad media    (0.41 &ndash; 0.60)');
+    labels.push('<i style=\"background:#F39200\"></i> Inseguridad alta     (0.61 &ndash; 0.80)');
+    labels.push('<i style=\"background:#E94190\"></i> Inseguridad muy alta (0.81 &ndash; 1.00)');
+    div.innerHTML = labels.join('<br>');
+    return div;
+  };
+  legend.addTo(map);
+
+  var greenIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/pdf-24x24.png' });
+  L.marker([$centro], {icon: greenIcon}).addTo(map).bindPopup(\"<b>}ttt</b>\");;
+</script>";
 }

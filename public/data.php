@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '256M');
 /**
  * Plugin Name: indicadores-pais-El-Salvador-seguro
  * Plugin URI: http://wordpress.org/plugins/
@@ -26,6 +27,8 @@ if ($data == 'table' && $anyo && $type == 'm') {
   echo getTable($_GET['type'], $_GET['anyo'], $wpdb);
 }elseif ($data == 'table' && $code && $type == 'f') {
   echo getTablePrioridad($code, $wpdb);
+}elseif ($data == 'table' && $type == 'c') {
+  echo getTableCentroEscolar($wpdb, $code);
 }
 elseif ($data == 'map' && $anyo && $type == 'm') {
   echo get_mapa($type, $anyo, $wpdb, get_centro($wpdb, NULL));
@@ -37,6 +40,9 @@ elseif ($data == 'map' && $type == 'f') {
     $zoom = 10;
   }
   echo get_sv($type, $vars, $wpdb, get_centro($wpdb, $vars), $zoom);
+}
+elseif ($data == 'map' && $type == 'c') {
+  echo get_mapa_ce($wpdb, $vars, "13.79111, -89.00012", 9);
 }
 else {
   echo "";
