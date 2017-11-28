@@ -154,7 +154,7 @@
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#datatable').html(resp);
 });
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#macromap').html(resp);
 });
 </script>

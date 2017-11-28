@@ -41,8 +41,8 @@ elseif ($data == 'map' && $type == 'f') {
   }
   echo get_sv($type, $vars, $wpdb, get_centro($wpdb, $vars), $zoom);
 }
-elseif ($data == 'map' && $type == 'c') {
-  echo get_mapa_ce($wpdb, $vars, "13.79111, -89.00012", 9);
+elseif ($data == 'map' && $type == 'c' && $anyo) {
+  echo get_mapa_ce($wpdb, $vars, "13.79111, -89.00012", 9, $anyo);
 }
 else {
   echo "";

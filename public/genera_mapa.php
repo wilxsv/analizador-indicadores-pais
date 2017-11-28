@@ -96,11 +96,11 @@ function get_mapa($type, $anyo, $wpdb, $centro){
 function get_sv($type, $vars, $wpdb, $centro, $zoom){
   if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-    $escuelas = get_centros_escolares($wpdb, NULL, NULL);
+    $escuelas = get_centros_escolares($wpdb, NULL, FALSE);
     $sector = get_sector_ppd($wpdb, NULL);
   } else {//cuando se solicita un departamento, municipio, codigo, etc
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-    $escuelas = get_centros_escolares($wpdb, $vars, NULL);
+    $escuelas = get_centros_escolares($wpdb, $vars, FALSE);
     $sector = get_sector_ppd($wpdb, $vars);
   }
   $hechos = $wpdb->get_results( $sql);
@@ -134,20 +134,52 @@ L.geoJson(sectoresData, { style: style } ).addTo(map);
 </script>";
 }
 
-function get_centros_escolares($wpdb, $centro, $escala){
-  if (!$centro){
+function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
+  if (!$centro AND !$indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL";
-  }  elseif (1 === preg_match('~[0-9]~', $centro)) {
+  }  elseif (1 === preg_match('~[0-9]~', $centro) AND !$indice) {
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND sector = '$centro'";
-  }else{
+  }elseif (!$indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND municipio = '$centro'";
+  }
+  if (!$centro AND $indice){
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL";
+  }  elseif (1 === preg_match('~[0-9]~', $centro) AND $indice) {
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL AND sector = '$centro'";
+  }elseif ($indice){
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL AND municipio = '$centro'";
   }
   $ce = $wpdb->get_results( $sql);
   $escuelas = "";
-  foreach ($ce as $key => $object) {
-    $escuelas .= "L.marker([$object->lat, $object->lon]).addTo(map).bindPopup(\"<b>$object->nombre</b>\");\n";
+  $style = "";
+  if ($indice) {
+    $style  = "var amarilloIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_amarillo.png' });\n";
+    $style .= "var verdeIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_verde.png' });\n";
+    $style .= "var azulIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_azul.png' });\n";
+    $style .= "var naranjaIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_naranja.png' });\n";
+    $style .= "var rosaIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_rosa.png' });\n";
+    foreach ($ce as $key => $object) {
+      if ( $object->ipce <= 0.2 ){
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: amarilloIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+      }
+      elseif ( $object->ipce <= 0.4 ) {
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: verdeIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+      }
+      elseif ( $object->ipce <= 0.6 ) {
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: azulIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+      }
+      elseif ( $object->ipce <= 0.8 ) {
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: naranjaIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+      }else {
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: rosaIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+      }
+    }
+  } else {
+    foreach ($ce as $key => $object) {
+      $escuelas .= "L.marker([$object->lat, $object->lon]).addTo(map).bindPopup(\"<b>$object->nombre</b>\");\n";
+    }
   }
-  return $escuelas;
+  return "$style \n $escuelas";
 }
 
 function get_sector_ppd($wpdb, $sector){
@@ -183,12 +215,8 @@ function get_centro($wpdb, $sector){
   return $punto;
 }
 
-function get_mapa_ce($wpdb, $vars, $centro, $zoom){
-  if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
-    $escuelas = get_centros_escolares($wpdb, FALSE, TRUE);
-  } else {//cuando se solicita un departamento, municipio, codigo, etc
-    $escuelas = get_centros_escolares($wpdb, FALSE, TRUE);
-  }
+function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
+  $escuelas = get_centros_escolares($wpdb, $vars, TRUE, $anyo);
   $files = '<style>
   .info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
   .legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
@@ -224,7 +252,7 @@ function get_mapa_ce($wpdb, $vars, $centro, $zoom){
     return div;
   };
   legend.addTo(map);
-
+  $escuelas
   var greenIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/pdf-24x24.png' });
   L.marker([$centro], {icon: greenIcon}).addTo(map).bindPopup(\"<b>}ttt</b>\");;
 </script>";
