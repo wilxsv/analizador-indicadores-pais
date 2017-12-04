@@ -23,22 +23,21 @@ if ( isset( $_GET['anyo'] ) && is_numeric($_GET['anyo']) ) $anyo = $_GET['anyo']
 if ( isset( $_GET['type'] ) ) $type = $_GET['type'];
 if ( isset( $_GET['code'] ) ) $code = $_GET['code'];
 if ( isset( $_GET['vars'] ) ) $vars = $_GET['vars'];
+
 if ($data == 'table' && $anyo && $type == 'm') {
-  echo getTable($_GET['type'], $_GET['anyo'], $wpdb);
+  echo getTable($vars, $anyo, $wpdb);
 }elseif ($data == 'table' && $code && $type == 'f') {
   echo getTablePrioridad($code, $wpdb);
 }elseif ($data == 'table' && $type == 'c') {
   echo getTableCentroEscolar($wpdb, $code);
 }
 elseif ($data == 'map' && $anyo && $type == 'm') {
-  echo get_mapa($type, $anyo, $wpdb, get_centro($wpdb, NULL));
+  //echo get_mapa($type, $anyo, $wpdb, );
+  echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL));
 }
 elseif ($data == 'map' && $type == 'f') {
-  if (!$vars) {
-    $zoom = 9;
-  } else {
-    $zoom = 10;
-  }
+  if (!$vars) { $zoom = 9; }
+  else { $zoom = 10; }
   echo get_sv($type, $vars, $wpdb, get_centro($wpdb, $vars), $zoom);
 }
 elseif ($data == 'map' && $type == 'c' && $anyo) {

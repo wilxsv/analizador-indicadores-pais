@@ -70,13 +70,13 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-third ">
-	 Municipio:<br/><select name="smunicipio" id="smunicipio"><?php echo $categoria; ?></select>
+	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 100%;"><?php echo $categoria; ?></select>
   </div>
   <div class="grid one-third last">
-   N° Sector Policial:<br/><select name="policial" id="policial"><?php echo $policial; ?></select>
+   N° Sector Policial:<br/><select name="policial" id="policial" style="width: 100%;"><?php echo $policial; ?></select>
   </div>
   <div class="grid one-third last">
-   Centros Escolares:<br/><select name="ce" id="ce"><?php echo $ce; ?></select>
+   Centros Escolares:<br/><select name="ce" id="ce" style="width: 100%;"><?php echo $ce; ?></select>
   </div>
  </div>
 </div>
