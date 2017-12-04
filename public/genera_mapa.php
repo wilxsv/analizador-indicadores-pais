@@ -10,8 +10,10 @@ ini_set('memory_limit', '256M');
 */
 
 function get_mapa($wpdb, $anyo, $filtro, $centro){
+  $zoom = 9;
   if( (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) ){
     $filtro = " AND i.departamento = '$filtro' ";
+    $zoom = 10;
   } else {
     $filtro = "";
   }
@@ -33,7 +35,6 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
   $files = '<style>
   .info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
   .legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
-  $zoom = 9;
   $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
   return "$files $datos
 <script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false, touchZoom:false }).setView([$centro], $zoom);
@@ -217,11 +218,13 @@ function get_sector_ppd($wpdb, $sector){
   return "<script type=\"text/javascript\">var sectoresData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
 }
 
-function get_centro($wpdb, $sector){
+function get_centro($wpdb, $sector, $depto){
   $punto = "13.79111, -89.00012";
   if (1 === preg_match('~[0-9]~', $sector)) {
     $sql = "SELECT d.lat_departamento, d.lon_departamento FROM ind_ctl_departamento AS d, ind_focalizacion as f WHERE d.nombre_departamento = f.departamento AND f.sector = '$sector' LIMIT 1";
-  }else{
+  }elseif( $depto ){
+    $sql = "SELECT d.lat_departamento, d.lon_departamento FROM ind_ctl_departamento AS d WHERE d.nombre_departamento = '$sector' LIMIT 1";
+  }else {
     $sql = "SELECT d.lat_departamento, d.lon_departamento FROM ind_ctl_departamento AS d, ind_focalizacion as f WHERE d.nombre_departamento = f.departamento AND f.municipio = '$sector' LIMIT 1";
   }
   $data = $wpdb->get_results( $sql);

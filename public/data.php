@@ -32,13 +32,15 @@ if ($data == 'table' && $anyo && $type == 'm') {
   echo getTableCentroEscolar($wpdb, $code);
 }
 elseif ($data == 'map' && $anyo && $type == 'm') {
+  if ($vars){ echo get_mapa($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE)); }
+  else { echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL, FALSE)); }
   //echo get_mapa($type, $anyo, $wpdb, );
-  echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL));
+  //echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL));
 }
 elseif ($data == 'map' && $type == 'f') {
   if (!$vars) { $zoom = 9; }
   else { $zoom = 10; }
-  echo get_sv($type, $vars, $wpdb, get_centro($wpdb, $vars), $zoom);
+  echo get_sv($type, $vars, $wpdb, get_centro($wpdb, $vars, FALSE), $zoom);
 }
 elseif ($data == 'map' && $type == 'c' && $anyo) {
   echo get_mapa_ce($wpdb, $vars, "13.79111, -89.00012", 9, $anyo);
