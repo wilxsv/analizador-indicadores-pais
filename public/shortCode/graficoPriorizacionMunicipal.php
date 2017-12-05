@@ -31,13 +31,20 @@
 
 <div class="row">
  <div class="pad group">
-  <div class="grid one-third ">
+  <div class="grid one-fifth ">
    Año:<br/><select name="sanyo" id="sanyo" style="width: 100%;"><?php echo $anyo; ?></select>
   </div>
-  <div class="grid one-third last">
+  <div class="grid one-fifth last">
    Departamento:<br/><select name="smunicipio" id="smunicipio" style="width: 100%;"><?php echo $categoria; ?></select>
   </div>
-  <div class="grid one-third last">
+  <div class="grid one-fifth last"><br/>
+  </div>
+  <div class="grid one-fifth last"><br/>
+  </div>
+  <div class="grid one-fifth last">
+    <p id="restabecer" onclick="restabecer()">
+      Restabecer <input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+    </p>
   </div>
  </div>
 </div>
@@ -107,6 +114,16 @@ $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&t
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
     $('#macromap').html(resp);
 });
+function restabecer() {
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+      $('#datatable').html(resp);
+  });
+  map.off();
+  map.remove();
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+      $('#macromap').html(resp);
+  });
+}
 </script>
 
 <?php else: ?>
