@@ -43,7 +43,7 @@ function getTableCentroEscolar($wpdb, $code){
   if ($code == 'all' ){
     $sql = "SELECT * FROM ind_centro_escolar";
   } else {
-    $sql = "SELECT * FROM ind_centro_escolar WHERE municipio = '$code' OR sector = '$code' OR nombre_ce = '$code' OR anyo = '$code'";
+    $sql = "SELECT * FROM ind_centro_escolar WHERE municipio = '$code' OR codigo = '$code' OR nombre_ce = '$code' OR anyo = '$code'";
   }
   $hechos = $wpdb->get_results( $sql);
   $table = '

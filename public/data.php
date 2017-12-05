@@ -34,8 +34,6 @@ if ($data == 'table' && $anyo && $type == 'm') {
 elseif ($data == 'map' && $anyo && $type == 'm') {
   if ($vars){ echo get_mapa($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE)); }
   else { echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL, FALSE)); }
-  //echo get_mapa($type, $anyo, $wpdb, );
-  //echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL));
 }
 elseif ($data == 'map' && $type == 'f') {
   if (!$vars) { $zoom = 9; }

@@ -42,7 +42,7 @@
   <div class="grid one-fifth last"><br/>
   </div>
   <div class="grid one-fifth last">
-    <p id="restabecer" onclick="restabecer()">
+    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
     </p>
   </div>

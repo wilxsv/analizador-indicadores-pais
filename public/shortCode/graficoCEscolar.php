@@ -14,7 +14,7 @@
 
  $municipios = "SELECT departamento, municipio FROM `ind_centro_escolar` group by departamento, municipio order by departamento, municipio";
  $municipios=$wpdb->get_results("$municipios");
- $sector = $wpdb->get_results("SELECT municipio, sector AS sector_policial FROM `ind_centro_escolar` WHERE sector != '0' group by municipio, sector");
+ $codigo = $wpdb->get_results("SELECT municipio, codigo FROM `ind_centro_escolar`group by municipio, codigo");
  $centro = $wpdb->get_results("SELECT municipio, nombre_ce FROM `ind_centro_escolar` group by municipio, nombre_ce");
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_centro_escolar GROUP BY anyo" );
 
@@ -39,21 +39,21 @@
  }
  $categoria.= "<optgroup>";
  $dep = NULL;
- $policial = NULL;
- foreach ($sector as $l) {
+ $codigos = NULL;
+ foreach ($codigo as $l) {
      if ($dep == NULL){
-       $policial.= "<optgroup label=\"$l->municipio\">";
-       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
+       $codigos.= "<optgroup label=\"$l->municipio\">";
+       $codigos.= "<option value=\"$l->codigo\">$l->codigo</option>";
      } elseif ($dep != $l->municipio) {
-       $policial.= "<optgroup>";
-       $policial.= "<optgroup label=\"$l->municipio\">";
-       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
+       $codigos.= "<optgroup>";
+       $codigos.= "<optgroup label=\"$l->municipio\">";
+       $codigos.= "<option value=\"$l->codigo\">$l->codigo</option>";
      }else {
-       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
+       $codigos.= "<option value=\"$l->codigo\">$l->codigo</option>";
      }
      $dep = $l->municipio;
  }
- $policial.= "<optgroup>";
+ $codigos.= "<optgroup>";
  $dep = NULL;
  $ce = NULL;
  foreach ($centro as $l) {
@@ -76,17 +76,22 @@
 
 <div class="row">
  <div class="pad group">
-  <div class="grid one-fourth ">
+  <div class="grid one-fifth">
    Año:<br/><select name="sanyo" id="sanyo"><?php echo $anyo; ?></select>
   </div>
-  <div class="grid one-fourth last">
+  <div class="grid one-fifth last">
   Municipio:<br/><select name="smunicipio" id="smunicipio"><?php echo $categoria; ?></select>
   </div>
-  <div class="grid one-fourth last">
-   Sector Policial:<br/><select name="policial" id="policial"><?php echo $policial; ?></select>
+  <div class="grid one-fifth last">
+   Codigo de Centro:<br/><select name="codigo" id="codigo"><?php echo $codigos; ?></select>
   </div>
-  <div class="grid one-fourth last">
-   Centros Escolares:<br/><select name="ce" id="ce"><?php echo $ce; ?></select>
+  <div class="grid one-fifth last">
+   Centro Educativo:<br/><select name="ce" id="ce"><?php echo $ce; ?></select>
+  </div>
+  <div class="grid one-fifth last">
+    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
+      Restabecer <input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+    </p>
   </div>
  </div>
 </div>
@@ -116,7 +121,7 @@
   $('#smunicipio').select2({
 		language: { noResults: function (params) { return "Sin registros para ese municipio."; } }
 	});
-  $('#policial').select2({
+  $('#codigo').select2({
 		language: { noResults: function (params) { return "Sin registros para ese sector."; } }
 	});
   $('#ce').select2({
@@ -124,6 +129,16 @@
 	});
   $('#sanyo').select2({
 		language: { noResults: function (params) { return "Sin registros para ese centro escolar."; } }
+	});
+	$('#sanyo').on('change', function() {
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
+        $('#datatable').html(resp);
+    });
+    map.off();
+    map.remove();
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value, { }, function(resp) {
+        $('#macromap').html(resp);
+    });
 	});
 	$('#smunicipio').on('change', function() {
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
@@ -135,7 +150,7 @@
         $('#macromap').html(resp);
     });
 	});
-	$('#policial').on('change', function() {
+	$('#codigo').on('change', function() {
 		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
 			$('#datatable').html(resp);
 		});
@@ -157,6 +172,16 @@ $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=<?p
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#macromap').html(resp);
 });
+function restabecer() {
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+    $('#datatable').html(resp);
+  });
+  map.off();
+  map.remove();
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+    $('#macromap').html(resp);
+  });
+}
 </script>
 <?php else: ?>
 
