@@ -69,14 +69,21 @@
 ?>
 <div class="row">
  <div class="pad group">
-  <div class="grid one-third ">
+  <div class="grid one-fifth ">
 	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 100%;"><?php echo $categoria; ?></select>
   </div>
-  <div class="grid one-third last">
+  <div class="grid one-fifth last">
    N° Sector Policial:<br/><select name="policial" id="policial" style="width: 100%;"><?php echo $policial; ?></select>
   </div>
-  <div class="grid one-third last">
+  <div class="grid one-fifth last">
    Centros Escolares:<br/><select name="ce" id="ce" style="width: 100%;"><?php echo $ce; ?></select>
+  </div>
+  <div class="grid one-fifth last"><br/>
+  </div>
+  <div class="grid one-fifth last">
+    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
+      Restabecer <input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+    </p>
   </div>
  </div>
 </div>
@@ -143,6 +150,16 @@ $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f', { data:'table' }, function(resp) {
     $('#macromap').html(resp);
 });
+function restabecer() {
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=f', {  }, function(resp) {
+    $('#datatable').html(resp);
+  });
+  map.off();
+  map.remove();
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f', { data:'table' }, function(resp) {
+    $('#macromap').html(resp);
+  });
+}
 </script>
 
 <?php else: ?>
