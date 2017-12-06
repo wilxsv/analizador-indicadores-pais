@@ -42,16 +42,6 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
 		maxZoom: $zoom,minZoom: $zoom,
     attribution: 'Dirección de Información y Análisis'
 	}).addTo(map);
-
-  map.dragging.disable();
-map.touchZoom.disable();
-map.doubleClickZoom.disable();
-map.scrollWheelZoom.disable();
-map.boxZoom.disable();
-map.keyboard.disable();
-if (map.tap) map.tap.disable();
-document.getElementById('map').style.cursor='default';
-
 	// control that shows state info on hover
 	var info = L.control();
 	info.onAdd = function (map) {
@@ -68,9 +58,7 @@ document.getElementById('map').style.cursor='default';
 	function getColor(d) {
 		return d > 0.8 ? '#E94190' :
 				d > 0.6  ? '#F39200' :
-				//d >= 0.4  ? '#E31A1C' :
 				d >= 0.4  ? '#FCEA12' :
-				//d <= 0.2   ? '#FD8D3C' :
 				d >= 0.2   ? '#94C11F' : '#009FE3';
 	}
 	function style(feature) {
@@ -156,15 +144,12 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL";
   }  elseif (1 === preg_match('~[0-9]~', $centro) AND !$indice) {
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND sector = '$centro'";
-  }elseif (!$indice){
+  } elseif (!$indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND municipio = '$centro'";
-  }
-  if (!$centro AND $indice){
+  } elseif (!$centro AND $indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL";
-  }  elseif (1 === preg_match('~[0-9]~', $centro) AND $indice) {
-    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL AND sector = '$centro'";
-  }elseif ($indice){
-    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL AND municipio = '$centro'";
+  } else {
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE municipio = '$centro' OR codigo = '$centro' OR nombre_ce = '$centro' AND anyo = $anyo";
   }
   $ce = $wpdb->get_results( $sql);
   $escuelas = "";
@@ -234,27 +219,42 @@ function get_centro($wpdb, $sector, $depto){
   return $punto;
 }
 
+function get_centro_municipio($wpdb, $id){
+  $punto = "13.79111, -89.00012";
+  if( $id > 0 ){
+    $sql = "SELECT lat_municipio, lon_municipio FROM ind_ctl_municipio WHERE id = $id LIMIT 1";
+    $data = $wpdb->get_results( $sql);
+    foreach ($data as $key => $object) {
+      $punto = "$object->lat_municipio, $object->lon_municipio";
+    }
+  }
+  return $punto;
+}
+
 function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
-  $escuelas = get_centros_escolares($wpdb, $vars, TRUE, $anyo);
+  $escuelas = get_centros_escolares($wpdb, 'SAN SALVADOR', TRUE, $anyo);
   $files = '<style>
   .info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
   .legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
-  $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-  $hechos = $wpdb->get_results( $sql);
-  $json = NULL;
-  foreach ($hechos as $key => $object) {
-    if ($json != NULL){
-      $json.= ",";
-    }
-    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->nombre\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
-  }
-  $datos = "<script type=\"text/javascript\">var departamentosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
+  $datos = get_mapa_base($wpdb, 'departamentosData', 243, FALSE);
  return "$files\n$datos
  <script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
   L.tileLayer('', {
    attribution: 'Dirección de Información y Análisis'
   }).addTo(map);
   L.geoJson(departamentosData).addTo(map);
+	var info = L.control();
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+    L.DomEvent.disableClickPropagation(this._div);
+		this.update();
+		return this._div;
+	};
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>Centro Educativo</h4>' +  (props ?
+			'<b>' + props.name + '</b><br />' + props.indice : 'Pase el cursor sobre un punto de interes');
+	};
+	info.addTo(map);
   var legend = L.control({position: 'bottomright'});
   legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend'),
@@ -271,16 +271,18 @@ function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
   };
   legend.addTo(map);
   $escuelas
-  var greenIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/pdf-24x24.png' });
-  L.marker([$centro], {icon: greenIcon}).addTo(map).bindPopup(\"<b>}ttt</b>\");;
 </script>";
 }
 
-function get_mapa_base($wpdb, $var_nombre, $filtro){
-  if( isset($filtro) && (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) ){
+function get_mapa_base($wpdb, $var_nombre, $filtro, $depto){
+  if( isset($filtro) && (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) && $depto ){
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento WHERE nombre_departamento = '$filtro'";
-  } else {
+  } elseif( $depto ) {
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
+  }elseif ($filtro > 0) {
+    $sql = "SELECT id, nombre_municipio AS nombre, geojson_municipio AS coordenada FROM ind_ctl_municipio WHERE id = $filtro";
+  } else {
+    $sql = "SELECT id, nombre_municipio AS nombre, geojson_municipio AS coordenada FROM ind_ctl_municipio";
   }
   $hechos = $wpdb->get_results( $sql);
   $json = NULL;
