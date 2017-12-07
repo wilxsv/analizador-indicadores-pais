@@ -32,10 +32,10 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
-   Año:<br/><select name="sanyo" id="sanyo" style="width: 100%;"><?php echo $anyo; ?></select>
+   Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option selected>Seleccione el año</option></select>
   </div>
   <div class="grid one-fifth last">
-   Departamento:<br/><select name="smunicipio" id="smunicipio" style="width: 100%;"><?php echo $categoria; ?></select>
+   Departamento:<br/><select name="smunicipio" id="smunicipio" style="width:90%;"><?php echo $categoria; ?><option selected>Seleccione el departamento</option></select>
   </div>
   <div class="grid one-fifth last"><br/>
   </div>
@@ -43,7 +43,7 @@
   </div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
-      Restabecer <input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+      Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
     </p>
   </div>
  </div>
@@ -55,6 +55,13 @@
    <div id='macromap'></div>
  </div>
 </div>
+
+<div class="row">
+ <div class="col-md-12">
+  <hr><hr>
+ </div>
+</div>
+
 <div class="row">
  <div class="col-md-12">
   <div class="row" id="datatable">

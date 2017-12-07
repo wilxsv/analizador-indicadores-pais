@@ -77,20 +77,20 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth">
-   Año:<br/><select name="sanyo" id="sanyo"><?php echo $anyo; ?></select>
+   Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option selected>Seleccione el año</option></select>
   </div>
   <div class="grid one-fifth last">
-  Municipio:<br/><select name="smunicipio" id="smunicipio"><?php echo $categoria; ?></select>
+  Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
   </div>
   <div class="grid one-fifth last">
-   Codigo de Centro:<br/><select name="codigo" id="codigo"><?php echo $codigos; ?></select>
+   Codigo de Centro:<br/><select name="codigo" id="codigo" style="width: 90%;"><?php echo $codigos; ?><option selected>Seleccione el codigo de centro educativo</option></select>
   </div>
   <div class="grid one-fifth last">
-   Centro Educativo:<br/><select name="ce" id="ce"><?php echo $ce; ?></select>
+   Centro Educativo:<br/><select name="ce" id="ce" style="width: 90%;"><?php echo $ce; ?><option selected>Seleccione el centro educativo</option></select>
   </div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
-      Restabecer <input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+      Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
     </p>
   </div>
  </div>
@@ -100,6 +100,12 @@
  <div class="col-md-12">
    <div id="map"></div>
    <div id='macromap'></div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="col-md-12">
+  <hr><hr>
  </div>
 </div>
 
