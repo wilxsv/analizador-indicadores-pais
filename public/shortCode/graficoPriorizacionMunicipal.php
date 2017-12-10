@@ -95,8 +95,6 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
         $('#datatable').html(resp);
     });
-    //datosgrafico_filterdocument.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
-    map.off();
     map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
         $('#macromap').html(resp);
@@ -108,7 +106,6 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&vars='+this.value+'&anyo='+anyo, { }, function(resp) {
         $('#datatable').html(resp);
     });
-    map.off();
     map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&vars='+this.value+'&anyo='+anyo, { data:'map' }, function(resp) {
         $('#macromap').html(resp);
@@ -125,7 +122,6 @@ function restabecer() {
   $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
       $('#datatable').html(resp);
   });
-  map.off();
   map.remove();
   $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
       $('#macromap').html(resp);

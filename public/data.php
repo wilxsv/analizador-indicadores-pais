@@ -29,7 +29,7 @@ if ($data == 'table' && $anyo && $type == 'm') {
 }elseif ($data == 'table' && $code && $type == 'f') {
   echo getTablePrioridad($code, $wpdb);
 }elseif ($data == 'table' && $type == 'c') {
-  echo getTableCentroEscolar($wpdb, $code);
+  echo getTableCentroEscolar($wpdb, $anyo);
 }
 elseif ($data == 'map' && $anyo && $type == 'm') {
   if ($vars){ echo get_mapa($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE)); }
@@ -41,7 +41,7 @@ elseif ($data == 'map' && $type == 'f') {
   echo get_sv($type, $vars, $wpdb, get_centro($wpdb, $vars, FALSE), $zoom);
 }
 elseif ($data == 'map' && $type == 'c' && $anyo) {
-  echo get_mapa_ce($wpdb, "SAN SALVADOR", get_centro_municipio($wpdb, 243), 12, $anyo);
+  echo get_mapa_ce($wpdb, $code, get_centro_municipio($wpdb, $code), 12, $anyo);
 }
 else {
   echo "";

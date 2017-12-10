@@ -24,18 +24,25 @@
   $anyo_ultimo = $l->anyo;
  }
  $dep = NULL;
+ $aleatorio = rand(1, 262);
+ $idx = 1;
  foreach ($municipios as $l) {
-     if ($dep == NULL){
-       $categoria.= "<optgroup label=\"$l->departamento\">";
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     } elseif ($dep != $l->departamento) {
-       $categoria.= "<optgroup>";
-       $categoria.= "<optgroup label=\"$l->departamento\">";
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     }else {
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     }
-     $dep = $l->departamento;
+   //Creacion de opciones para select de municipios
+   if ($dep == NULL){
+     $categoria.= "<optgroup label=\"$l->departamento\">";
+     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+   } elseif ($dep != $l->departamento) {
+     $categoria.= "<optgroup>";
+     $categoria.= "<optgroup label=\"$l->departamento\">";
+     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+   }else {
+     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+   }
+   $dep = $l->departamento;
+   if ( (is_numeric($aleatorio)) && ($idx == $aleatorio) ){
+     $aleatorio = $l->municipio;
+   }
+   $idx++;
  }
  $categoria.= "<optgroup>";
  $dep = NULL;
@@ -175,7 +182,7 @@
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#datatable').html(resp);
 });
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&code=<?php echo $aleatorio; ?>&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#macromap').html(resp);
 });
 function restabecer() {
@@ -184,7 +191,7 @@ function restabecer() {
   });
   map.off();
   map.remove();
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&code=<?php echo $aleatorio; ?>&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#macromap').html(resp);
   });
 }
