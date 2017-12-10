@@ -15,7 +15,7 @@
  $municipios = "SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio";
  $municipios=$wpdb->get_results("$municipios");
  $sector = $wpdb->get_results("SELECT municipio, sector AS sector_policial FROM `ind_focalizacion` WHERE sector IS NOT NULL group by municipio, sector");
- $centro = $wpdb->get_results("SELECT municipio, nombre_ce FROM `ind_focalizacion` WHERE codigo_ce > 0 group by municipio, codigo_ce");
+ $centro = $wpdb->get_results("SELECT municipio, nombre_ce, codigo_ce FROM `ind_focalizacion` WHERE codigo_ce > 0 group by municipio, codigo_ce");
 
  $dep = NULL;
  foreach ($municipios as $l) {
@@ -50,35 +50,44 @@
  $policial.= "<optgroup>";
  $dep = NULL;
  $ce = NULL;
+ $cod = NULL;
  foreach ($centro as $l) {
      if ($dep == NULL){
        $ce.= "<optgroup label=\"$l->municipio\">";
        $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
+       $cod.= "<optgroup label=\"$l->municipio\">";
+       $cod.= "<option value=\"$l->codigo_ce\">$l->codigo_ce</option>";
      } elseif ($dep != $l->municipio) {
        $ce.= "<optgroup>";
        $ce.= "<optgroup label=\"$l->municipio\">";
        $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
+       $cod.= "<optgroup>";
+       $cod.= "<optgroup label=\"$l->municipio\">";
+       $cod.= "<option value=\"$l->codigo_ce\">$l->codigo_ce</option>";
      }else {
        $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
+       $cod.= "<option value=\"$l->codigo_ce\">$l->codigo_ce</option>";
      }
      $dep = $l->municipio;
  }
  $ce.= "<optgroup>";
+ $cod.= "<optgroup>";
 
  if ( $dep ):
 ?>
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
-	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?></select>
+	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
   </div>
   <div class="grid one-fifth last">
-   N° Sector Policial:<br/><select name="policial" id="policial" style="width: 90%;"><?php echo $policial; ?></select>
+   N° Sector Policial:<br/><select name="policial" id="policial" style="width: 90%;"><?php echo $policial; ?><option selected>Seleccione el sector policial</option></select>
   </div>
   <div class="grid one-fifth last">
-   Centros Escolares:<br/><select name="ce" id="ce" style="width: 90%;"><?php echo $ce; ?></select>
+    Codigo de Centro:<br/><select name="codigo" id="codigo" style="width: 90%;"><?php echo $cod; ?><option selected>Seleccione el codigo de centro educativo</option></select>
   </div>
-  <div class="grid one-fifth last"><br/>
+  <div class="grid one-fifth last">
+    Centros Educativo:<br/><select name="ce" id="ce" style="width: 90%;"><?php echo $ce; ?><option selected>Seleccione el centro educativo</option></select>
   </div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
@@ -121,6 +130,9 @@
   $('#policial').select2({
 		language: { noResults: function (params) { return "Sin registros para ese sector."; } }
 	});
+  $('#codigo').select2({
+		language: { noResults: function (params) { return "Sin registros para ese centro escolar."; } }
+	});
   $('#ce').select2({
 		language: { noResults: function (params) { return "Sin registros para ese centro escolar."; } }
 	});
@@ -144,7 +156,12 @@
         $('#macromap').html(resp);
     });
 	});
-	$('#ce').on('change', function() {
+  $('#codigo').on('change', function() {
+		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+			$('#datatable').html(resp);
+		});
+	});
+  $('#ce').on('change', function() {
 		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
 			$('#datatable').html(resp);
 		});

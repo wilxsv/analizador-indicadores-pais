@@ -13,7 +13,7 @@ function getTablePrioridad($code, $wpdb){
   if ($code == 'all' ){
     $sql = "SELECT * FROM ind_focalizacion";
   } else {
-    $sql = "SELECT * FROM ind_focalizacion WHERE municipio = '$code' OR sector_policial = '$code' OR nombre_ce = '$code'";
+    $sql = "SELECT * FROM ind_focalizacion WHERE municipio = '$code' OR sector_policial = '$code' OR nombre_ce = '$code' OR codigo_ce = '$code'";
   }
   $hechos = $wpdb->get_results( $sql);
   $table = '

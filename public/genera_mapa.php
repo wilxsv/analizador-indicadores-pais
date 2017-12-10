@@ -103,21 +103,19 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
     $escuelas = get_centros_escolares($wpdb, NULL, FALSE);
     $sector = get_sector_ppd($wpdb, NULL);
+    $datos = get_mapa_base($wpdb, 'departamentosData', FALSE, TRUE);
   } else {//cuando se solicita un departamento, municipio, codigo, etc
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
     $escuelas = get_centros_escolares($wpdb, $vars, FALSE);
     $sector = get_sector_ppd($wpdb, $vars);
-  }
-  $hechos = $wpdb->get_results( $sql);
-  $json = NULL;
-  foreach ($hechos as $key => $object) {
-    if ($json != NULL){
-      $json.= ",";
+    if ( 1 === preg_match('~[0-9]~', $vars) ) {
+      $datos = get_mapa_base($wpdb, 'departamentosData', FALSE, TRUE);
+    } else {
+      $datos = get_mapa_base($wpdb, 'departamentosData', $vars, FALSE);
     }
-    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->nombre\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
+    $zoom = 12;
   }
-  $datos = "<script type=\"text/javascript\">var departamentosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
- return " $sector\n$datos
+  return " $sector\n$datos
  <script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false }).setView([$centro], $zoom);
 L.tileLayer('', {
   maxZoom: $zoom,minZoom: $zoom,
@@ -221,8 +219,8 @@ function get_centro($wpdb, $sector, $depto){
 
 function get_centro_municipio($wpdb, $id){
   $punto = "13.79111, -89.00012";
-  if( $id > 0 ){
-    $sql = "SELECT lat_municipio, lon_municipio FROM ind_ctl_municipio WHERE id = $id LIMIT 1";
+  if( $id ){
+    $sql = "SELECT lat_municipio, lon_municipio FROM ind_ctl_municipio WHERE nombre_municipio = '$id' LIMIT 1";
     $data = $wpdb->get_results( $sql);
     foreach ($data as $key => $object) {
       $punto = "$object->lat_municipio, $object->lon_municipio";
@@ -279,8 +277,8 @@ function get_mapa_base($wpdb, $var_nombre, $filtro, $depto){
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento WHERE nombre_departamento = '$filtro'";
   } elseif( $depto ) {
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
-  }elseif ($filtro > 0) {
-    $sql = "SELECT id, nombre_municipio AS nombre, geojson_municipio AS coordenada FROM ind_ctl_municipio WHERE id = $filtro";
+  }elseif ($filtro && !$depto) {
+    $sql = "SELECT id, nombre_municipio AS nombre, geojson_municipio AS coordenada FROM ind_ctl_municipio WHERE nombre_municipio = '$filtro'";
   } else {
     $sql = "SELECT id, nombre_municipio AS nombre, geojson_municipio AS coordenada FROM ind_ctl_municipio";
   }

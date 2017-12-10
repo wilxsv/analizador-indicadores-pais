@@ -147,7 +147,6 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
         $('#datatable').html(resp);
     });
-    map.off();
     map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value, { }, function(resp) {
         $('#macromap').html(resp);
@@ -157,7 +156,6 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
         $('#datatable').html(resp);
     });
-    map.off();
     map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&vars='+this.value, { }, function(resp) {
         $('#macromap').html(resp);
