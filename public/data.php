@@ -36,9 +36,18 @@ elseif ($data == 'map' && $anyo && $type == 'm') {
   else { echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL, FALSE)); }
 }
 elseif ($data == 'map' && $type == 'f') {
-  if (!$vars) { $zoom = 9; }
-  else { $zoom = 10; }
-  echo get_sv($type, $vars, $wpdb, get_centro_municipio($wpdb, $vars), $zoom);
+  if (!$vars) {
+    $zoom = 9;
+    $centro = get_centro($wpdb, NULL, FALSE);
+  }
+  elseif (1 === preg_match('~[0-9]~', $vars)) {
+    $zoom = 10;
+    $centro = get_centro_sector($wpdb, $vars);
+  } else {
+    $zoom = 10;
+    $centro = get_centro_municipio($wpdb, $vars);
+  }
+  echo get_sv($type, $vars, $wpdb, $centro, $zoom);
 }
 elseif ($data == 'map' && $type == 'c' && $anyo) {
   echo get_mapa_ce($wpdb, $code, get_centro_municipio($wpdb, $code), 12, $anyo);

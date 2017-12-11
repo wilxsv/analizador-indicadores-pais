@@ -99,6 +99,12 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
 }
 
 function get_sv($type, $vars, $wpdb, $centro, $zoom){
+  $label = "
+  L.geoJson(departamentosData, {
+    onEachFeature: function(feature, layer) {
+      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+    }
+   });";
   if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
     $escuelas = get_centros_escolares($wpdb, NULL, FALSE);
@@ -108,8 +114,13 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
     $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
     $escuelas = get_centros_escolares($wpdb, $vars, FALSE);
     $sector = get_sector_ppd($wpdb, $vars);
+    $label .= "L.geoJson(sectoresData, {
+      onEachFeature: function(feature, layer) {
+        var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+      }
+     });";
     if ( 1 === preg_match('~[0-9]~', $vars) ) {
-      $datos = get_mapa_base($wpdb, 'departamentosData', FALSE, TRUE);
+      $datos = get_mapa_base($wpdb, 'departamentosData', get_municipio_by_sector($wpdb, $vars), FALSE);
     } else {
       $datos = get_mapa_base($wpdb, 'departamentosData', $vars, FALSE);
     }
@@ -134,6 +145,7 @@ function style(feature) {
     }
 }
 L.geoJson(sectoresData, { style: style } ).addTo(map);
+$label
 </script>";
 }
 
@@ -160,23 +172,23 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
     $style .= "var rosaIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_rosa.png' });\n";
     foreach ($ce as $key => $object) {
       if ( $object->ipce <= 0.2 ){
-        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: amarilloIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: amarilloIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }
       elseif ( $object->ipce <= 0.4 ) {
-        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: verdeIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: verdeIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }
       elseif ( $object->ipce <= 0.6 ) {
-        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: azulIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: azulIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }
       elseif ( $object->ipce <= 0.8 ) {
-        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: naranjaIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: naranjaIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }else {
-        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: rosaIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: rosaIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }
     }
   } else {
     foreach ($ce as $key => $object) {
-      $escuelas .= "L.marker([$object->lat, $object->lon]).addTo(map).bindPopup(\"<b>$object->nombre</b>\");\n";
+      $escuelas .= "L.marker([$object->lat, $object->lon]).addTo(map).bindPopup(\"<b>$object->nombre</b>\").bindTooltip(\"<b>$object->nombre</b>\");\n";
     }
   }
   return "$style \n $escuelas";
@@ -213,6 +225,16 @@ function get_centro($wpdb, $sector, $depto){
   $data = $wpdb->get_results( $sql);
   foreach ($data as $key => $object) {
     $punto = "$object->lat_departamento, $object->lon_departamento";
+  }
+  return $punto;
+}
+
+function get_centro_sector($wpdb, $sector){
+  $punto = "13.79111, -89.00012";
+  $sql = "SELECT d.lat_municipio, d.lon_municipio FROM ind_ctl_municipio AS m, ind_centro_escolar AS c WHERE m.nombre_municipio = c.municipio AND c.sector = '$sector' GROUP BY c.sector  LIMIT 1";
+  $data = $wpdb->get_results( $sql);
+  foreach ($data as $key => $object) {
+    $punto = "$object->lat_municipio, $object->lon_municipio";
   }
   return $punto;
 }
@@ -296,4 +318,12 @@ function get_mapa_base($wpdb, $var_nombre, $filtro, $depto){
     $nombreVar = "departamentosData";
   }
  return "<script type=\"text/javascript\">var $nombreVar = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
+}
+
+function get_municipio_by_sector($wpdb, $filtro){
+  $sql = "SELECT municipio FROM ind_focalizacion WHERE sector_policial = '$filtro' LIMIT 1";
+  $data = $wpdb->get_results( $sql);
+  foreach ($data as $key => $object) {
+    return $object->municipio;
+  }
 }
