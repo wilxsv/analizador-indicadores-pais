@@ -50,7 +50,12 @@ elseif ($data == 'map' && $type == 'f') {
   echo get_sv($type, $vars, $wpdb, $centro, $zoom);
 }
 elseif ($data == 'map' && $type == 'c' && $anyo) {
-  echo get_mapa_ce($wpdb, $code, get_centro_municipio($wpdb, $code), 12, $anyo);
+  if ($code){
+    $zoom = 12;
+  }else {
+    $zoom = 9;
+  }
+  echo get_mapa_ce($wpdb, $code, get_centro_municipio($wpdb, $code), $zoom, $anyo);
 }
 else {
   echo "";

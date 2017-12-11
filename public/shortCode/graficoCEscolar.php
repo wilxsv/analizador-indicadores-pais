@@ -153,11 +153,15 @@
     });
 	});
 	$('#smunicipio').on('change', function() {
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
+    var selects = document.getElementById("sanyo");
+    var anyo = selects.options[selects.selectedIndex].value;
+    if (anyo > 0){ anyo = anyo; }
+    else { anyo = <?php echo $anyo_ultimo; ?>; }
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
         $('#datatable').html(resp);
     });
     map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&vars='+this.value, { }, function(resp) {
+    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
         $('#macromap').html(resp);
     });
 	});
@@ -177,14 +181,14 @@
 		});
 	});
 }(jQuery));
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#datatable').html(resp);
 });
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&code=<?php echo $aleatorio; ?>&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&code=<?php echo $aleatorio; ?>&anyo=<?php echo $anyo_ultimo; ?>&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#macromap').html(resp);
 });
 function restabecer() {
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#datatable').html(resp);
   });
   map.off();

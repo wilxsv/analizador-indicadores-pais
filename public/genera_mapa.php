@@ -252,29 +252,37 @@ function get_centro_municipio($wpdb, $id){
 }
 
 function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
-  $escuelas = get_centros_escolares($wpdb, 'SAN SALVADOR', TRUE, $anyo);
-  $files = '<style>
-  .info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
-  .legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
-  $datos = get_mapa_base($wpdb, 'departamentosData', 243, FALSE);
- return "$files\n$datos
- <script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
-  L.tileLayer('', {
-   attribution: 'Dirección de Información y Análisis'
-  }).addTo(map);
+  $label = "
+  L.geoJson(departamentosData, {
+    onEachFeature: function(feature, layer) {
+      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+    }
+  });";
+  $sector = get_sector_ppd($wpdb, $vars);
+  $label .= "L.geoJson(sectoresData, {
+    onEachFeature: function(feature, layer) {
+      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+    }
+   });";
+  $escuelas = get_centros_escolares($wpdb, $vars, TRUE, $anyo);
+  $files = '<style>.info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }.legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
+  $datos = get_mapa_base($wpdb, 'departamentosData', $vars, FALSE);
+ return "$files\n$datos\n$sector
+ <script type=\"text/javascript\">
+  var map = L.map('map').setView([$centro], $zoom);
+  L.tileLayer('', { attribution: 'Dirección de Información y Análisis' }).addTo(map);
   L.geoJson(departamentosData).addTo(map);
-	var info = L.control();
-	info.onAdd = function (map) {
-		this._div = L.DomUtil.create('div', 'info');
-    L.DomEvent.disableClickPropagation(this._div);
-		this.update();
-		return this._div;
-	};
-	info.update = function (props) {
-		this._div.innerHTML = '<h4>Centro Educativo</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + props.indice : 'Pase el cursor sobre un punto de interes');
-	};
-	info.addTo(map);
+  function style(feature) {
+      return {
+          weight: 2,
+          opacity: 1,
+          color: 'white',
+          dashArray: '3',
+          fillOpacity: 0.7,
+          fillColor: 'gray'
+      }
+  }
+  L.geoJson(sectoresData, { style: style } ).addTo(map);
   var legend = L.control({position: 'bottomright'});
   legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend'),
@@ -291,6 +299,8 @@ function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
   };
   legend.addTo(map);
   $escuelas
+
+  $label
 </script>";
 }
 
