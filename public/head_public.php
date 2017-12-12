@@ -31,7 +31,22 @@ padding:0px;
 
 <?php
 
-$labels_municipios = "";
+$labels_municipios = "
+var legend = L.control({position: 'bottomright'});
+legend.onAdd = function (map) {
+	var div = L.DomUtil.create('div', 'info legend'),
+		grades = [],
+		labels = [],
+		from, to;
+	labels.push('<i style=\"background:#009FE3\"></i> Inseguridad muy baja (00 &ndash; 18)');
+	labels.push('<i style=\"background:#94C11F\"></i> Inseguridad baja     (18 &ndash; 31)');
+	labels.push('<i style=\"background:#FCEA12\"></i> Inseguridad media    (31 &ndash; 48)');
+	labels.push('<i style=\"background:#F39200\"></i> Inseguridad alta     (48 &ndash; 68)');
+	labels.push('<i style=\"background:#E94190\"></i> Inseguridad muy alta (68 &ndash; 100)');
+	div.innerHTML = labels.join('<br>');
+	return div;
+};
+legend.addTo(map);";
  /*
 <!-- Bootstrap Core CSS -->
 <link href="'.plugin_dir_url( __FILE__ ).'bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

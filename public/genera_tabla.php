@@ -76,35 +76,22 @@ $table .="(function($){ $('#datosgrafico').DataTable({ /*searching: false,*/ pag
 function getTable($vars, $anyo, $wpdb ){
   if (!$vars && $anyo >= 2014 ){
     $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo";
+    $titulo = "<tr><th>Departamento</th><th>Municipio</th><th>Homicidios Totales</th><th>Homicidios Mujeres</th><th>Desaparecidos</th><th>Lesiones</th><th>VIF</th><th>Extorsiones</th><th>Robos</th><th>Hurtos</th><th>Robos de Vehículos</th><th>Hurtos Vehículos</th><th>R/H Vehículos con Mercaderia</th><th>Pob. Privada Libertad</th><th>Proporción Pob. Urbana</th><th>Escuela con Amenaza Pandilla</th><th>Indice IPM</th></tr>";
   }elseif ($vars && $anyo >= 2014 ){
-      $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo AND departamento = '$vars'";
+    $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo AND departamento = '$vars'";
+    $titulo = "<tr><th>Municipio</th><th>Homicidios Totales</th><th>Homicidios Mujeres</th><th>Desaparecidos</th><th>Lesiones</th><th>VIF</th><th>Extorsiones</th><th>Robos</th><th>Hurtos</th><th>Robos de Vehículos</th><th>Hurtos Vehículos</th><th>R/H Vehículos con Mercaderia</th><th>Pob. Privada Libertad</th><th>Proporción Pob. Urbana</th><th>Escuela con Amenaza Pandilla</th><th>Indice IPM</th></tr>";
   }else { return ""; }
   $hechos = $wpdb->get_results( $sql);
   $table = '
   <table class="table table-bordered display" id="datosgrafico">
-   <thead><tr><th>Departamento</th>
-                       <th>Municipio</th>
-                       <th>Homocidio</th>
-                       <th>Homicidios mujeres</th>
-                       <th>Desaparecidos</th>
-                       <th>Lesiones</th>
-                       <th>VIF</th>
-                       <th>extorciones</th>
-                       <th>robo</th>
-                       <th>hurto</th>
-                       <th>Robo de vehiculos</th>
-                       <th>Hurto vehiculos</th>
-                       <th>r_h_conmercio</th>
-                       <th>ppl</th>
-                       <th>ppurb</th>
-                       <th>epp</th>
-                       <th>Desaparecidos</th>
-                       <th>ipn</th>
-                     </tr>
-   </thead>
+   <thead>'.$titulo.'</thead>
    <tbody>';
    foreach ($hechos as $key => $object) {
- 	   $table.= "<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>$object->veh</td><td>$object->ipn</td></tr>";
+    if ($vars && $anyo >= 2014){
+     $table.="<tr><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>$object->ipn</td></tr>";
+    } else {
+     $table.="<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>$object->ipn</td></tr>";
+    }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
 $table .="(function($){ $('#datosgrafico').DataTable({ /*searching: false,*/ pageLength: 4, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));

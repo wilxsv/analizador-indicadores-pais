@@ -10,6 +10,24 @@ ini_set('memory_limit', '256M');
 */
 
 function get_mapa($wpdb, $anyo, $filtro, $centro){
+
+  $labels_municipios = "
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function (map) {
+  	var div = L.DomUtil.create('div', 'info legend'),
+  		grades = [],
+  		labels = [],
+  		from, to;
+  	labels.push('<i style=\"background:#009FE3\"></i> Inseguridad muy baja (00 &ndash; 18)');
+  	labels.push('<i style=\"background:#94C11F\"></i> Inseguridad baja     (18 &ndash; 31)');
+  	labels.push('<i style=\"background:#FCEA12\"></i> Inseguridad media    (31 &ndash; 48)');
+  	labels.push('<i style=\"background:#F39200\"></i> Inseguridad alta     (48 &ndash; 68)');
+  	labels.push('<i style=\"background:#E94190\"></i> Inseguridad muy alta (68 &ndash; 100)');
+  	div.innerHTML = labels.join('<br>');
+  	return div;
+  };
+  legend.addTo(map);";
+
   $zoom = 9;
   if( (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) ){
     $filtro = " AND i.departamento = '$filtro' ";
@@ -33,8 +51,8 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
   }
   ;
   $files = '<style>
-  .info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
-  .legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
+  .info { padding: 6px 8px; font: 13px/15px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 12px; color: #777; }
+  .legend { text-align: left; line-height: 16px; color: #555; } .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.7; }</style>';
   $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
   return "$files $datos
 <script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false, touchZoom:false }).setView([$centro], $zoom);
@@ -52,17 +70,17 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
 	};
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Municipio</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + props.indice : 'Pase el cursor sobre un municipio');
+			'<b>' + props.name + '</b><br />' + parseInt(props.indice*100) : 'Pase el cursor sobre un municipio');
 	};
 	info.addTo(map);
 	function getColor(d) {
-		return d > 0.8 ? '#E94190' :
-				d > 0.6  ? '#F39200' :
-				d >= 0.4  ? '#FCEA12' :
-				d >= 0.2   ? '#94C11F' : '#009FE3';
+		return d > 68 ? '#E94190' :
+				d > 48  ? '#F39200' :
+				d >= 31  ? '#FCEA12' :
+				d >= 18   ? '#94C11F' : '#009FE3';
 	}
 	function style(feature) {
-		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor(feature.properties.indice) };
+		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor(feature.properties.indice*100) };
 	}
 	function highlightFeature(e) {
 		var layer = e.target;
@@ -77,24 +95,7 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
 		layer.on({mouseover: highlightFeature,mouseout: resetHighlight,click: zoomToFeature});
 	}
 	geojson = L.geoJson(municipiosData, {	style: style,	onEachFeature: onEachFeature	}).addTo(map);
-  map.attributionControl.addAttribution('');
-	var legend = L.control({position: 'bottomright'});
-	legend.onAdd = function (map) {
-		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [0.0, 0.2, 0.4, 0.6, 0.8],
-			labels = [],
-			from, to;
-		for (var i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
-			labels.push(
-				'<i style=\"background:' + getColor(from + 0.05) + '\"></i> ' +
-				from + (to ? ' &ndash; ' + to : ' &ndash; 1'));
-		}
-		div.innerHTML = labels.join('<br>');
-		return div;
-	};
-	legend.addTo(map);
+  $labels_municipios
 </script>";
 }
 

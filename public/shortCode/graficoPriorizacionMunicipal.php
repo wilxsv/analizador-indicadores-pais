@@ -103,6 +103,12 @@
 	$('#smunicipio').on('change', function() {
     var selects = document.getElementById("sanyo");
     var anyo = selects.options[selects.selectedIndex].value;
+    if (anyo >= 0){
+      anyo = anyo;
+    } else {
+      anyo = <?php echo $anyo_ultimo; ?>;
+//      alert("No a seleccionado un año!!");
+    }
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&vars='+this.value+'&anyo='+anyo, { }, function(resp) {
         $('#datatable').html(resp);
     });
