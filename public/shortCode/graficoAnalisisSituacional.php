@@ -43,15 +43,14 @@
 
 <div class="row">
  <div class="pad group">
-  <div class="grid one-third ">
-   <p>Año: <br /><select name="sanyo" id="sanyo"><?php echo $anyo; ?></select></p>
+  <div class="grid one-fifth ">
+   <p>Año: <br /><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?></select></p>
   </div>
-  <div class="grid one-third last">
-   <p>Municipio: <select name="smunicipio" id="smunicipio" ><?php echo $categoria; ?></select></p>
+  <div class="grid one-fifth last">
+   <p>Municipio: <br /><select name="smunicipio" id="smunicipio"  style="width: 90%;"><?php echo $categoria; ?></select></p>
   </div>
-  <div class="grid one-third last">
-   <p>Variable: 
-	<select name="variable" id="variable" >
+  <div class="grid one-fifth last">Banco de datos: <br />
+	<select name="variable" id="variable"  style="width: 90%;">
 		<option value="0">Autonomía</option>
 		<option value="1">Exclusión  social</option>
 		<option value="2">Integridad</option>
@@ -60,7 +59,13 @@
 		<option value="5">Sexual</option>
 		<option value="6">Vida</option>
 	</select>
-   </p>
+  </div>
+  <div class="grid one-fifth last">Generar Estadisticas del banco de datos
+  </div>
+  <div class="grid one-fifth last">
+    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
+      Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+    </p>
   </div>
  </div>
 </div>
@@ -72,136 +77,21 @@
  </div>
 </div>
 
-
 <div class="row">
  <div class="col-md-12">
- </div>
-</div>
-<div class="row" id="datatable">
-</div>
-<?php
- include(plugin_dir_path( __FILE__ )."../footer_public.php");
-?>
-
-
-<div class="row">
- <div class="col-md-12">
-
+  <hr><hr>
  </div>
 </div>
 
-
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
-<link rel="stylesheet" type="text/css" href="css/own_style.css">
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
-<script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/leaflet-hash.js"></script>
-<script src="<?php echo site_url(); ?>/mapas/2016/INP_2014_2015/js/Autolinker.min.js"></script>
-
-		<script>
-		var map = L.map('map', {
-			zoomControl:true, maxZoom:19
-		}).fitBounds([[12.8611580377,-90.7549835047],[14.7543800977,-87.0070933707]]);
-		var hash = new L.Hash(map);
-		var additional_attrib = 'created w. <a href="https://github.com/geolicious/qgis2leaf" target ="_blank">qgis2leaf</a> by <a href="http://www.geolicious.de" target ="_blank">Geolicious</a> & contributors<br>';
-		var feature_group = new L.featureGroup([]);
-		var raster_group = new L.LayerGroup([]);
-
-		var basemap_0 =	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 19,
-		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		id: 'mapbox.light'
-	}).addTo(map);
-		basemap_0.addTo(map);
-		var layerOrder=new Array();
-		function pop_MUNICIPIOS(feature, layer) {
-			var popupContent = '<table><tr><th scope="row">MPIO</th><td>' + Autolinker.link(String(feature.properties['MPIO'])) + '</td></tr></table>';
-			layer.bindPopup(popupContent);
-		}
-
-		function doStyleMUNICIPIOS(feature) {
-				return {
-					color: '#000000',
-					fillColor: '#d6cd68',
-					weight: 1.3,
-					dashArray: '',
-					opacity: 1.0,
-					fillOpacity: 1.0
-				};
-
-		}
-		var exp_MUNICIPIOSJSON = new L.geoJson(exp_MUNICIPIOS,{
-			onEachFeature: pop_MUNICIPIOS,
-			style: doStyleMUNICIPIOS
-		});
-		layerOrder[layerOrder.length] = exp_MUNICIPIOSJSON;
-		for (index = 0; index < layerOrder.length; index++) {
-			feature_group.removeLayer(layerOrder[index]);feature_group.addLayer(layerOrder[index]);
-		}
-		//add comment sign to hide this layer on the map in the initial view.
-		feature_group.addLayer(exp_MUNICIPIOSJSON);
-		function pop_IPN2014Municipiosshp(feature, layer) {
-			var popupContent = '<table><tr><th scope="row">Municipio</th><td>' + Autolinker.link(String(feature.properties['MPIO'])) + '</td></tr><tr><th scope="row">Departamento</th><td>' + Autolinker.link(String(feature.properties['Departamen'])) + '</td></tr><tr><th scope="row">Homicidios Mujeres</th><td>' + Autolinker.link(String(feature.properties['HomM2014'])) + '</td></tr><tr><th scope="row">Homicidios</th><td>' + Autolinker.link(String(feature.properties['Hom2014'])) + '</td></tr><tr><th scope="row">Lesiones</th><td>' + Autolinker.link(String(feature.properties['Lesiones'])) + '</td></tr><tr><th scope="row">Viol Intrafamiliar</th><td>' + Autolinker.link(String(feature.properties['VIF'])) + '</td></tr><tr><th scope="row">Desaparecidos</th><td>' + Autolinker.link(String(feature.properties['Desapareci'])) + '</td></tr><tr><th scope="row">Extorsiones</th><td>' + Autolinker.link(String(feature.properties['Extorsione'])) + '</td></tr><tr><th scope="row">Robo</th><td>' + Autolinker.link(String(feature.properties['Robo'])) + '</td></tr><tr><th scope="row">Hurto</th><td>' + Autolinker.link(String(feature.properties['Hurto'])) + '</td></tr><tr><th scope="row">Robo Vehiculos</th><td>' + Autolinker.link(String(feature.properties['RoboVeh'])) + '</td></tr><tr><th scope="row">Hurto Vehiculos</th><td>' + Autolinker.link(String(feature.properties['HurtoVeh'])) + '</td></tr><tr><th scope="row">RV Mercaderia</th><td>' + Autolinker.link(String(feature.properties['RoboVehMer'])) + '</td></tr><tr><th scope="row">Privados Libertad</th><td>' + Autolinker.link(String(feature.properties['Privados'])) + '</td></tr><tr><th scope="row">% Urbano</th><td>' + Autolinker.link(String(feature.properties['pcturb'])) + '</td></tr><tr><th scope="row">CE con Pandillas</th><td>' + Autolinker.link(String(feature.properties['EPP'])) + '</td></tr><tr><th scope="row">Total RHV</th><td>' + Autolinker.link(String(feature.properties['Veh'])) + '</td></tr><tr><th scope="row">IPN2014</th><td>' + Autolinker.link(String(feature.properties['IPN2014'])) + '</td></tr></table>';
-			layer.bindPopup(popupContent);
-		}
-
-		feature_group.addTo(map);
-		var title = new L.Control();
-		title.onAdd = function (map) {
-			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-			this.update();
-			return this._div;
-		};
-		title.update = function () {
-			this._div.innerHTML = ''
-		};
-		title.addTo(map);
-	var baseMaps = {
-		'OSM Standard': basemap_0
-	};
-		L.control.layers(baseMaps,{"MUNICIPIOS": exp_MUNICIPIOSJSON},{collapsed:false}).addTo(map);
-		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
-
-		var legend = L.control({position: 'bottomleft'});
-		legend.onAdd = function (map) {
-			var div = L.DomUtil.create('div', 'info legend');
-			div.innerHTML = "";
-
-    		return div;
-		};
-		legend.addTo(map);
-
-
-	</script>
-
 <div class="row">
- <table class="table table-bordered display" id="datosgrafico">
-  <thead>
-   <tr><th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sectores SPD</th><th>Priorización</th></tr>
-  </thead>
-  <tbody>
-   <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  </tbody>
- </table>
+ <div class="col-md-12">
+  <div class="row" id="datatable"></div>
+ </div>
 </div>
+
 <?php
  include(plugin_dir_path( __FILE__ )."../footer_public.php");
 ?>
-<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>../plugins/bower_components/datatables/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
@@ -244,10 +134,6 @@
     //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
 	});
 }(jQuery));
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-    //console.log(resp);
-    $('#datatable').html(resp);
-});
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
     //console.log(resp);
     $('#macromap').html(resp);

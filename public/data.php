@@ -41,10 +41,10 @@ elseif ($data == 'map' && $type == 'f') {
     $centro = get_centro($wpdb, NULL, FALSE);
   }
   elseif (1 === preg_match('~[0-9]~', $vars)) {
-    $zoom = 10;
+    $zoom = 9;
     $centro = get_centro_sector($wpdb, $vars);
   } else {
-    $zoom = 10;
+    $zoom = 9;
     $centro = get_centro_municipio($wpdb, $vars);
   }
   echo get_sv($type, $vars, $wpdb, $centro, $zoom);

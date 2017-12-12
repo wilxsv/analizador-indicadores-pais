@@ -196,11 +196,12 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
 
 function get_sector_ppd($wpdb, $sector){
   if (!$sector){
+    //$sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd";
     $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector";
   }  elseif (1 === preg_match('~[0-9]~', $sector)) {
-    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector AND f.lon IS NOT NULL AND f.lat IS NOT NULL AND f.sector = '$sector'";
+    $sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd WHERE sector = '$sector'";
   }else{
-    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector AND f.lon IS NOT NULL AND f.lat IS NOT NULL AND f.municipio = '$sector'";
+    $sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd WHERE nombre_municipio_ppd = '$sector'";
   }
   $sppd = $wpdb->get_results( $sql);
   $json = '';
