@@ -30,6 +30,8 @@ padding:0px;
 </style>
 
 <?php
+
+$labels_municipios = "";
  /*
 <!-- Bootstrap Core CSS -->
 <link href="'.plugin_dir_url( __FILE__ ).'bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
