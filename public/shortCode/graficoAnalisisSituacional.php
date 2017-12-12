@@ -44,12 +44,12 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
-   <p>Año: <br /><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?></select></p>
+   <p>Año: <br /><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option selected>Seleccione el año</option></select></p>
   </div>
   <div class="grid one-fifth last">
-   <p>Municipio: <br /><select name="smunicipio" id="smunicipio"  style="width: 90%;"><?php echo $categoria; ?></select></p>
+   <p>Municipio: <br /><select name="smunicipio" id="smunicipio"  style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select></p>
   </div>
-  <div class="grid one-fifth last">Banco de datos: <br />
+  <div class="grid one-fifth last">Indicador: <br />
 	<select name="variable" id="variable"  style="width: 90%;">
 		<option value="0">Autonomía</option>
 		<option value="1">Exclusión  social</option>
@@ -58,9 +58,13 @@
 		<option value="4">Personas privadas de libertad</option>
 		<option value="5">Sexual</option>
 		<option value="6">Vida</option>
+    <option selected>Seleccione el indicador</option>
 	</select>
   </div>
-  <div class="grid one-fifth last">Generar Estadisticas del banco de datos
+  <div class="grid one-fifth last">
+    <p id="estadistica" onclick="generar_estadistica()"  style="text-align:right">
+      Generar Estadisticas del indicador seleccionado
+    </p>
   </div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
@@ -138,6 +142,26 @@ $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&typ
     //console.log(resp);
     $('#macromap').html(resp);
 });
+//funcion para restablecer al mapa y tabla inicial
+function restabecer() {
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+      $('#datatable').html(resp);
+  });
+  map.remove();
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+      $('#macromap').html(resp);
+  });
+}
+//funcion para generar la Estadisticas del indicador seleccionado
+function generar_estadistica() {
+  var selects = document.getElementById("variable");
+  var variable = selects.options[selects.selectedIndex].value;
+  if (variable >= 0 && variable <= 6){
+     alert("Generando estadistica para : "+selects.options[selects.selectedIndex].text);
+  } else {
+     alert("No a seleccionado un indicador!!");
+  }
+}
 </script>
 
 <?php else: ?>
