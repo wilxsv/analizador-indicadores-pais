@@ -27,7 +27,7 @@ if ( isset( $_GET['vars'] ) ) $vars = $_GET['vars'];
 if ($data == 'table' && $anyo && $type == 'm') {
   echo getTable($vars, $anyo, $wpdb);
 }elseif ($data == 'table' && $code && $type == 'f') {
-  echo getTablePrioridad($code, $wpdb);
+  echo getTablePrioridad($wpdb, $code);
 }elseif ($data == 'table' && $type == 'c') {
   echo getTableCentroEscolar($wpdb, $anyo);
 }
