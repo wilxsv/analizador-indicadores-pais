@@ -103,36 +103,35 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
   $label = "
   L.geoJson(departamentosData, {
     onEachFeature: function(feature, layer) {
-      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html:feature.properties.name}) }).addTo(map);
     }
    });";
+  $priorizado = get_sector_ppd_priorizado($wpdb, 'XXXX', 'priorizadoData', TRUE);
   if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
-    $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
     $escuelas = get_centros_escolares($wpdb, NULL, FALSE);
     $sector = get_sector_ppd($wpdb, NULL);
     $datos = get_mapa_base($wpdb, 'departamentosData', FALSE, TRUE);
+    $label .= "
+    L.geoJson(priorizadoData).addTo(map);";
   } else {//cuando se solicita un departamento, municipio, codigo, etc
-    $sql = "SELECT id, nombre_departamento AS nombre, geojson_departamento AS coordenada FROM ind_ctl_departamento";
     $escuelas = get_centros_escolares($wpdb, $vars, FALSE);
     $sector = get_sector_ppd($wpdb, $vars);
     $label .= "L.geoJson(sectoresData, {
       onEachFeature: function(feature, layer) {
-        var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+        var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"white\">'+feature.properties.name+'</font>' }) }).addTo(map);
       }
-     });";
-    if ( 1 === preg_match('~[0-9]~', $vars) ) {
-      $datos = get_mapa_base($wpdb, 'departamentosData', get_municipio_by_sector($wpdb, $vars), FALSE);
-    } else {
-      $datos = get_mapa_base($wpdb, 'departamentosData', $vars, FALSE);
-    }
+     });
+     function style2(feature) {
+         return { weight: 2, opacity: 1, color: 'black', dashArray: '3', fillOpacity: 0.7, fillColor: 'yellow' }
+     }
+     L.geoJson(priorizadoData, { style: style2 } ).addTo(map);";
+    $datos = get_mapa_base($wpdb, 'departamentosData', 'XXXX', TRUE);
     $zoom = 12;
+      $priorizado = get_sector_ppd_priorizado($wpdb, $vars, 'priorizadoData', TRUE);
   }
-  return " $sector\n$datos
- <script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false }).setView([$centro], $zoom);
-L.tileLayer('', {
-  maxZoom: $zoom,minZoom: $zoom,
-  attribution: 'Dirección de Información y Análisis'
-}).addTo(map);
+  return " $sector\n$datos\n$priorizado
+ <script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
+L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
 $escuelas
 L.geoJson(departamentosData).addTo(map);
 function style(feature) {
@@ -193,6 +192,30 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
     }
   }
   return "$style \n $escuelas";
+}
+
+function get_sector_ppd_priorizado($wpdb, $sector, $nombreVar, $priorizado){
+  if ($priorizado AND $sector) {
+    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector AND s.nombre_municipio_ppd = '$sector'";
+  }else {
+    if (!$sector){
+      //$sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd";
+      $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector";
+    }  elseif (1 === preg_match('~[0-9]~', $sector)) {
+      $sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd WHERE sector = '$sector'";
+    }else{
+      $sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd WHERE nombre_municipio_ppd = '$sector'";
+    }
+  }
+  $sppd = $wpdb->get_results( $sql);
+  $json = '';
+  foreach ($sppd as $key => $object) {
+    if ($json != NULL){
+      $json.= ",";
+    }
+    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->nombre\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
+  }
+  return "<script type=\"text/javascript\">var $nombreVar = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
 }
 
 function get_sector_ppd($wpdb, $sector){
@@ -268,7 +291,7 @@ function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
    });";
   $escuelas = get_centros_escolares($wpdb, $vars, TRUE, $anyo);
   $files = '<style>.info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }.legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
-  $datos = get_mapa_base($wpdb, 'departamentosData', $vars, FALSE);
+  $datos = get_mapa_base($wpdb, 'departamentosData', 'XXXX', FALSE);
  return "$files\n$datos\n$sector
  <script type=\"text/javascript\">
   var map = L.map('map').setView([$centro], $zoom);

@@ -80,15 +80,9 @@
   <div class="grid one-fifth ">
 	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
   </div>
-  <div class="grid one-fifth last">
-   N° Sector Policial:<br/><select name="policial" id="policial" style="width: 90%;"><?php echo $policial; ?><option selected>Seleccione el sector policial</option></select>
-  </div>
-  <div class="grid one-fifth last">
-    Codigo de Centro:<br/><select name="codigo" id="codigo" style="width: 90%;"><?php echo $cod; ?><option selected>Seleccione el codigo de centro educativo</option></select>
-  </div>
-  <div class="grid one-fifth last">
-    Centros Educativo:<br/><select name="ce" id="ce" style="width: 90%;"><?php echo $ce; ?><option selected>Seleccione el centro educativo</option></select>
-  </div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
