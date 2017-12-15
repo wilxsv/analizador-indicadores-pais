@@ -118,11 +118,11 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
     $sector = get_sector_ppd($wpdb, $vars);
     $label .= "L.geoJson(sectoresData, {
       onEachFeature: function(feature, layer) {
-        var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"white\">'+feature.properties.name+'</font>' }) }).addTo(map);
+        var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"black\">'+feature.properties.name+'</font>' }) }).addTo(map);
       }
      });
      function style2(feature) {
-         return { weight: 2, opacity: 1, color: 'black', dashArray: '3', fillOpacity: 0.7, fillColor: 'yellow' }
+         return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: 'yellow' }
      }
      L.geoJson(priorizadoData, { style: style2 } ).addTo(map);";
     $datos = get_mapa_base($wpdb, 'departamentosData', 'XXXX', TRUE);

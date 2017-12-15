@@ -51,9 +51,9 @@
   </div>
   <div class="grid one-fifth last">Indicador: <br />
 	<select name="variable" id="variable"  style="width: 90%;">
-		<option value="0">Autonomía</option>
+		<option value="0">Amenaza</option>
 		<option value="1">Exclusión  social</option>
-		<option value="2">Integridad</option>
+		<option value="2">Lesiones</option>
 		<option value="3">Patrimonio</option>
 		<option value="4">Personas privadas de libertad</option>
 		<option value="5">Sexual</option>
