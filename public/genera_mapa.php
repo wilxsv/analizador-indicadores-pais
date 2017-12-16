@@ -127,7 +127,7 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
      L.geoJson(priorizadoData, { style: style2 } ).addTo(map);";
     $datos = get_mapa_base($wpdb, 'departamentosData', 'XXXX', TRUE);
     $zoom = 12;
-      $priorizado = get_sector_ppd_priorizado($wpdb, $vars, 'priorizadoData', TRUE);
+    $priorizado = get_sector_ppd_priorizado($wpdb, $vars, 'priorizadoData', TRUE);
   }
   return " $sector\n$datos\n$priorizado
  <script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
@@ -196,7 +196,7 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
 
 function get_sector_ppd_priorizado($wpdb, $sector, $nombreVar, $priorizado){
   if ($priorizado AND $sector) {
-    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector AND s.nombre_municipio_ppd = '$sector'";
+    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector_policial AND s.nombre_municipio_ppd = '$sector'";
   }else {
     if (!$sector){
       //$sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd";
