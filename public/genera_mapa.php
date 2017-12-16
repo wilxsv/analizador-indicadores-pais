@@ -105,7 +105,19 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
     onEachFeature: function(feature, layer) {
       var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html:feature.properties.name}) }).addTo(map);
     }
-   });";
+   });
+   var legend = L.control({position: 'bottomright'});
+   legend.onAdd = function (map) {
+   	var div = L.DomUtil.create('div', 'info legend'),
+   		grades = [],
+   		labels = [],
+   		from, to;
+   	labels.push('<i style=\"background:#989898\"></i> Sector policial');
+   	labels.push('<i style=\"background:#E0E02D\"></i> Sector policial priorizado');
+   	div.innerHTML = labels.join('<br>');
+   	return div;
+   };
+   legend.addTo(map);";
   $priorizado = get_sector_ppd_priorizado($wpdb, 'XXXX', 'priorizadoData', TRUE);
   if ( !$vars ){//Se carga por defecto ya que vars no posee ningun valor
     $escuelas = get_centros_escolares($wpdb, NULL, FALSE);
@@ -129,7 +141,10 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
     $zoom = 12;
     $priorizado = get_sector_ppd_priorizado($wpdb, $vars, 'priorizadoData', TRUE);
   }
-  return " $sector\n$datos\n$priorizado
+  $files = '<style>
+  .info { padding: 6px 8px; font: 13px/15px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 12px; color: #777; }
+  .legend { text-align: left; line-height: 16px; color: #555; } .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.7; }</style>';
+  return "$files \n $sector\n$datos\n$priorizado
  <script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
 L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
 $escuelas
