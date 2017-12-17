@@ -10,7 +10,6 @@ ini_set('memory_limit', '256M');
 */
 
 function get_mapa($wpdb, $anyo, $filtro, $centro){
-
   $labels_municipios = "
   var legend = L.control({position: 'bottomright'});
   legend.onAdd = function (map) {
@@ -103,7 +102,7 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
   $label = "
   L.geoJson(departamentosData, {
     onEachFeature: function(feature, layer) {
-      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html:feature.properties.name}) }).addTo(map);
+      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html:'<font color=\"black\">'+feature.properties.name+'</font>' }) }).addTo(map);
     }
    });
    var legend = L.control({position: 'bottomright'});
@@ -295,13 +294,13 @@ function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
   $label = "
   L.geoJson(departamentosData, {
     onEachFeature: function(feature, layer) {
-      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"black\">'+feature.properties.name+'</font>'}) }).addTo(map);
     }
   });";
   $sector = get_sector_ppd($wpdb, $vars);
   $label .= "L.geoJson(sectoresData, {
     onEachFeature: function(feature, layer) {
-      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: feature.properties.name}) }).addTo(map);
+      var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"black\">'+feature.properties.name+'</font>'}) }).addTo(map);
     }
    });";
   $escuelas = get_centros_escolares($wpdb, $vars, TRUE, $anyo);
@@ -339,7 +338,6 @@ function get_mapa_ce($wpdb, $vars, $centro, $zoom, $anyo){
   };
   legend.addTo(map);
   $escuelas
-
   $label
 </script>";
 }
@@ -377,3 +375,126 @@ function get_municipio_by_sector($wpdb, $filtro){
     return $object->municipio;
   }
 }
+
+function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
+  $zoom = 12;
+  $max = 0;
+  if ($filtro == 4){
+    $max = get_max_dgcp($wpdb, $anyo, $filtro);
+    $datos = get_indicador_situacional($wpdb, 'municipiosData', $anyo, $vars, $filtro);
+  }
+  $l0 = intval($max*0.2);
+  $l1 = intval($max*0.4);
+  $l2 = intval($max*0.6);
+  $l3 = intval($max*0.8);
+  $labels_municipios = get_leyenda_municipio($wpdb, $anyo, $filtro);
+  $sector = get_sector_ppd($wpdb, $vars);
+  $files = '<style>.info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }.legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
+  return "$files\n$datos\n$sector
+<script type=\"text/javascript\">	var map = L.map('map', { scrollWheelZoom: false, touchZoom:false } ).setView([$centro], $zoom );
+	L.tileLayer('', { attribution: 'Dirección de Información y Análisis' }).addTo(map);
+  function styleS(feature) {
+      return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: 'gray' }
+  }
+  //L.geoJson(sectoresData, { style: styleS } ).addTo(map);
+  L.geoJson(sectoresData, { onEachFeature: function(feature, layer) { var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"black\">'+feature.properties.name+'</font>' }) }).addTo(map); } });
+	var info = L.control();
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+    L.DomEvent.disableClickPropagation(this._div);
+		this.update();
+		return this._div;
+	};
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>Sector</h4>' +  (props ?
+			'<b>' + props.nombre + '</b><br />' + parseInt(props.cantidad) : 'Pase el cursor sobre un sector');
+	};
+	info.addTo(map);
+	function getColor(d) {
+		return d > $l3 ? '#E94190' :
+				d > $l2  ? '#F39200' :
+				d >= $l1  ? '#FCEA12' :
+				d >= $l0   ? '#94C11F' : '#009FE3';
+	}
+	function style(feature) {
+		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor(feature.properties.cantidad) };
+	}
+	function highlightFeature(e) {
+		var layer = e.target;
+		layer.setStyle({weight: 5,color: '#666',dashArray: '',fillOpacity: 0.7});
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {	layer.bringToFront();	}
+		info.update(layer.feature.properties);
+	}
+	var geojson;
+	function resetHighlight(e) {geojson.resetStyle(e.target);	info.update();}
+	function zoomToFeature(e) {map.fitBounds(e.target.getBounds());}
+	function onEachFeature(feature, layer) {
+		layer.on({mouseover: highlightFeature,mouseout: resetHighlight,click: zoomToFeature});
+	}
+  geojson = L.geoJson(municipiosData, {	style: style,	onEachFeature: onEachFeature	}).addTo(map);
+  $labels_municipios
+ </script>";
+}
+
+function get_leyenda_municipio($wpdb, $anyo, $filtro){
+  $max = 0;
+  if ($filtro == 4){
+    $max = get_max_dgcp($wpdb, $anyo, $filtro);
+  }
+  $l0 = intval($max*0.2);
+  $l1 = intval($max*0.4);
+  $l2 = intval($max*0.6);
+  $l3 = intval($max*0.8);
+  return "
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function (map) {
+  	var div = L.DomUtil.create('div', 'info legend'),
+  		grades = [],
+  		labels = [],
+  		from, to;
+  	labels.push('<i style=\"background:#009FE3\"></i> Inseguridad muy baja (00 &ndash; $l0)');
+  	labels.push('<i style=\"background:#94C11F\"></i> Inseguridad baja     ($l0 &ndash; $l1)');
+  	labels.push('<i style=\"background:#FCEA12\"></i> Inseguridad media    ($l1 &ndash; $l2)');
+  	labels.push('<i style=\"background:#F39200\"></i> Inseguridad alta     ($l2 &ndash; $l3)');
+  	labels.push('<i style=\"background:#E94190\"></i> Inseguridad muy alta ($l3 &ndash; $max)');
+  	div.innerHTML = labels.join('<br>');
+  	return div;
+  };
+  legend.addTo(map);";
+}
+
+function get_max_dgcp($wpdb, $anyo, $filtro){
+  if ($filtro == 4){
+    $query=$wpdb->get_results( "SELECT count(*) AS total FROM ind_bnc_dgcp WHERE anyo = $anyo GROUP BY municipio ORDER BY total DESC LIMIT 1" );
+  }
+  foreach ($query as $l) {
+   return $l->total;
+  }
+  return 0;
+ }
+
+ function get_indicador_situacional($wpdb, $nombre_var, $anyo, $vars, $indicador){
+   if ($indicador == 4){
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_dgcp WHERE anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial ";
+   }
+   $hechos = $wpdb->get_results( $sql);
+   $json = NULL;
+   foreach ($hechos as $key => $object) {
+     if ($json != NULL){
+       $json.= ",";
+     }
+     $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"nombre\":\"$object->nombre\",\"cantidad\":$object->cantidad },\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[ ".get_geojson_por_sector($wpdb, $object->nombre)." ]]]}}";
+   }
+   return "<script type=\"text/javascript\">var $nombre_var = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
+ }
+
+ function get_geojson_por_sector($wpdb, $sector){
+   if ($sector !== "ND"){
+     $sql = "SELECT geojson_ppd AS coordenada FROM ind_ctl_sector_ppd WHERE dsc_ppd = '$sector'";
+     $sppd = $wpdb->get_results( $sql);
+     foreach ($sppd as $key => $object) {
+         return $object->coordenada;
+     }
+   }
+   return "";
+ }

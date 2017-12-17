@@ -12,17 +12,39 @@
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
 
- $municipios=$wpdb->get_results( "SELECT departamento, municipio FROM `ind_municipio` group by departamento, municipio order by departamento, municipio" );
- $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
+ $municipios=$wpdb->get_results( "SELECT departamento, municipio FROM ind_bnc_dgcp group by departamento, municipio order by departamento, municipio" );
+ $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_bnc_dgcp GROUP BY anyo" );
 
  $anyo_ultimo = NULL;
  foreach ($query_anyo as $l) {
   $anyo.= "<option value='$l->anyo'>$l->anyo</option>";
   $anyo_ultimo = $l->anyo;
  }
+
+
  $dep = NULL;
- foreach ($query_depto as $l) {
+ $aleatorio = rand(1, 262);
+ $idx = 1;
+ foreach ($municipios as $l) {
+   //Creacion de opciones para select de municipios
+   if ($dep == NULL){
+     $categoria.= "<optgroup label=\"$l->departamento\">";
+     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+   } elseif ($dep != $l->departamento) {
+     $categoria.= "<optgroup>";
+     $categoria.= "<optgroup label=\"$l->departamento\">";
+     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+   }else {
+     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
+   }
+   $dep = $l->departamento;
+   if ( (is_numeric($aleatorio)) && ($idx == $aleatorio) ){
+     $aleatorio = $l->municipio;
+   }
+   $idx++;
  }
+ $categoria.= "<optgroup>";
+
  foreach ($municipios as $l) {
      if ($dep == NULL){
        $categoria.= "<optgroup label=\"$l->departamento\">";
@@ -51,13 +73,13 @@
   </div>
   <div class="grid one-fifth last">Indicador: <br />
 	<select name="variable" id="variable"  style="width: 90%;">
-		<option value="0">Amenaza</option>
-		<option value="1">Exclusión  social</option>
-		<option value="2">Lesiones</option>
-		<option value="3">Patrimonio</option>
+		<option value="0" disabled>Amenaza</option>
+		<option value="1" disabled>Exclusión  social</option>
+		<option value="2" disabled>Lesiones</option>
+		<option value="3" disabled>Patrimonio</option>
 		<option value="4">Personas privadas de libertad</option>
-		<option value="5">Sexual</option>
-		<option value="6">Vida</option>
+		<option value="5" disabled>Sexual</option>
+		<option value="6" disabled>Vida</option>
     <option selected>Seleccione el indicador</option>
 	</select>
   </div>
@@ -123,22 +145,32 @@
 			}
 		}
 	});
-	$('#sanyo').on('change', function() {
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
-        $('#datatable').html(resp);
-    });
-    //datosgrafico_filterdocument.getElementById('map').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
-    map.off();
-    map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo='+this.value, { data:'map' }, function(resp) {
-        $('#macromap').html(resp);
-    });
-	});
 	$('#smunicipio').on('change', function() {
-    //document.getElementById('datosgrafico_filter').innerHTML = "<label>Buscar:<input value=\""+this.value+"\" aria-controls=\"datosgrafico\" type=\"search\"></label>";
+    //Verificacion de año seleccionado
+    var selects = document.getElementById("sanyo");
+    var variable = selects.options[selects.selectedIndex].value;
+    if (variable >= 2014 && variable <= <?php echo date("Y"); ?>){
+    } else {
+       alert("Variable año sin seleccionar!!");
+    }
+	});
+	$('#variable').on('change', function() {
+    //Verificacion de municipio seleccionado
+    var selects = document.getElementById("smunicipio");
+    var variable = selects.options[selects.selectedIndex].value;
+    if (variable.length > 3 && variable !== 'Seleccione el municipio'){
+      var selects = document.getElementById("sanyo");
+      var anyo = selects.options[selects.selectedIndex].value;
+      map.remove();
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars='+variable+'&type=s&anyo='+anyo+'&code='+this.value, { data:'' }, function(resp) {
+         $('#macromap').html(resp);
+      });
+    } else {
+       alert("No a seleccionado un municipio!!");
+    }
 	});
 }(jQuery));
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&code=4&type=s&anyo=<?php echo $anyo_ultimo; ?>&vars=<?php echo $aleatorio; ?>', { data:'table' }, function(resp) {
     //console.log(resp);
     $('#macromap').html(resp);
 });
@@ -148,7 +180,7 @@ function restabecer() {
       $('#datatable').html(resp);
   });
   map.remove();
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=s&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
       $('#macromap').html(resp);
   });
 }

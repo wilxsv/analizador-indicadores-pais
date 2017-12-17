@@ -57,6 +57,14 @@ elseif ($data == 'map' && $type == 'c' && $anyo) {
   }
   echo get_mapa_ce($wpdb, $code, get_centro_municipio($wpdb, $code), $zoom, $anyo);
 }
+elseif ($data == 'map' && $anyo && $type == 's') {
+  if ($vars){
+    echo get_mapa_situacional($wpdb, $anyo, $vars, $code, get_centro_municipio($wpdb, $vars));
+  }
+  else {
+    echo 'alert("No a seleccionado un todas las variables requeridas!!");';
+  }
+}
 else {
   echo "";
 }
