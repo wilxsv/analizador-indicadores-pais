@@ -396,6 +396,7 @@ function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
   function styleS(feature) {
       return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: 'gray' }
   }
+  
   //L.geoJson(sectoresData, { style: styleS } ).addTo(map);
   L.geoJson(sectoresData, { onEachFeature: function(feature, layer) { var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"black\">'+feature.properties.name+'</font>' }) }).addTo(map); } });
 	var info = L.control();
