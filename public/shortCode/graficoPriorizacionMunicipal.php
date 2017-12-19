@@ -28,6 +28,7 @@
 
  if ( $anyo_ultimo ):
 ?>
+<div class="row"> <h5>Mapa interactivo</h5> </div>
 
 <div class="row">
  <div class="pad group">
@@ -42,16 +43,15 @@
   <div class="grid one-fifth last"><br/>
   </div>
   <div class="grid one-fifth last">
-    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
+    <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
-    </p>
+    </p>-->
   </div>
  </div>
 </div>
 
 <div class="row">
  <div class="col-md-12">
-   <div id='map'></div>
    <div id='macromap'></div>
  </div>
 </div>
@@ -61,6 +61,8 @@
   <hr><hr>
  </div>
 </div>
+
+<div class="row"> <h5>Tabla de despliegue de datos</h5> </div>
 
 <div class="row">
  <div class="col-md-12">
@@ -95,7 +97,6 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
         $('#datatable').html(resp);
     });
-    map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
         $('#macromap').html(resp);
     });
@@ -112,18 +113,18 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&vars='+this.value+'&anyo='+anyo, { }, function(resp) {
         $('#datatable').html(resp);
     });
-    map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&vars='+this.value+'&anyo='+anyo, { data:'map' }, function(resp) {
         $('#macromap').html(resp);
     });
 	});
 }(jQuery));
+/*
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
     $('#datatable').html(resp);
 });
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
     $('#macromap').html(resp);
-});
+});*/
 function restabecer() {
   $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
       $('#datatable').html(resp);

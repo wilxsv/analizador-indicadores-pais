@@ -62,6 +62,7 @@
 
  if ( $anyo_ultimo ):
 ?>
+<div class="row"> <h5>Mapa interactivo</h5> </div>
 
 <div class="row">
  <div class="pad group">
@@ -108,6 +109,8 @@
   <hr><hr>
  </div>
 </div>
+
+<div class="row"> <h5>Tabla de despliegue de datos</h5> </div>
 
 <div class="row">
  <div class="col-md-12">

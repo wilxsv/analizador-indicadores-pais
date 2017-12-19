@@ -48,13 +48,16 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
     }
     $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->municipio\",\"indice\":$object->indice },\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[$object->coordenada]]]}}";
   }
-  ;
+  $map = uniqid();
   $files = '<style>
   .info { padding: 6px 8px; font: 13px/15px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 12px; color: #777; }
   .legend { text-align: left; line-height: 16px; color: #555; } .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.7; }</style>';
   $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
-  return "$files $datos
-<script type=\"text/javascript\">	var map = L.map('map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false, touchZoom:false }).setView([$centro], $zoom);
+  return "
+  <div id='$map' style='width: 100%; height: 900px;'></div>
+  $files $datos
+<script type=\"text/javascript\">
+  var map = new L.map('$map', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false, touchZoom:false }).setView([$centro], $zoom);
 	L.tileLayer('', {
 		maxZoom: $zoom,minZoom: $zoom,
     attribution: 'Dirección de Información y Análisis'

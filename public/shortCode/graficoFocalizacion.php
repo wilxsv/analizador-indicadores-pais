@@ -75,6 +75,7 @@
 
  if ( $dep ):
 ?>
+<div class="row"> <h5>Mapa interactivo</h5> </div>
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
@@ -103,6 +104,8 @@
   <hr><hr>
  </div>
 </div>
+
+<div class="row"> <h5>Tabla de despliegue de datos</h5> </div>
 
 <div class="row">
  <div class="col-md-12">
