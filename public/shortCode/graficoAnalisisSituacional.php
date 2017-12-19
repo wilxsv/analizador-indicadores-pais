@@ -12,7 +12,7 @@
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
 
- $municipios=$wpdb->get_results( "SELECT departamento, municipio FROM ind_bnc_dgcp group by departamento, municipio order by departamento, municipio" );
+ $municipios=$wpdb->get_results( "SELECT d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id group by d.nombre_departamento, m.nombre_municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_bnc_dgcp GROUP BY anyo" );
 
  $anyo_ultimo = NULL;
@@ -73,13 +73,13 @@
   </div>
   <div class="grid one-fifth last">Indicador: <br />
 	<select name="variable" id="variable"  style="width: 90%;">
-		<option value="0" disabled>Amenaza</option>
+		<option value="0" >Amenaza</option>
 		<option value="1" disabled>Exclusión  social</option>
-		<option value="2" disabled>Lesiones</option>
-		<option value="3" disabled>Patrimonio</option>
-		<option value="4">Personas privadas de libertad</option>
-		<option value="5" disabled>Sexual</option>
-		<option value="6" disabled>Vida</option>
+		<option value="2" >Lesiones</option>
+		<option value="3" >Patrimonio</option>
+		<option value="4" >Personas privadas de libertad</option>
+		<option value="5" >Sexual</option>
+		<option value="6" >Vida</option>
     <option selected>Seleccione el indicador</option>
 	</select>
   </div>

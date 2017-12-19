@@ -379,15 +379,17 @@ function get_municipio_by_sector($wpdb, $filtro){
 function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
   $zoom = 12;
   $max = 0;
-  if ($filtro == 4){
-    $max = get_max_dgcp($wpdb, $anyo, $filtro);
-    $datos = get_indicador_situacional($wpdb, 'municipiosData', $anyo, $vars, $filtro);
+  if ($filtro == 6 | $filtro == 5  | $filtro == 3  | $filtro == 2  | $filtro == 0){
+    $max = get_max_delito($wpdb, $anyo, $vars, $filtro);
+  } elseif ($filtro == 4){
+    $max = get_max_dgcp($wpdb, $anyo, $vars, $filtro);
   }
+  $datos = get_indicador_situacional($wpdb, 'municipiosData', $anyo, $vars, $filtro);
   $l0 = intval($max*0.2);
   $l1 = intval($max*0.4);
   $l2 = intval($max*0.6);
   $l3 = intval($max*0.8);
-  $labels_municipios = get_leyenda_municipio($wpdb, $anyo, $filtro);
+  $labels_municipios = get_leyenda_municipio($wpdb, $anyo, $vars, $filtro);
   $sector = get_sector_ppd($wpdb, $vars);
   $files = '<style>.info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }.legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
   return "$files\n$datos\n$sector
@@ -396,8 +398,8 @@ function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
   function styleS(feature) {
       return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: 'gray' }
   }
-  
-  //L.geoJson(sectoresData, { style: styleS } ).addTo(map);
+
+  L.geoJson(sectoresData, { style: styleS } ).addTo(map);
   L.geoJson(sectoresData, { onEachFeature: function(feature, layer) { var label = L.marker(layer.getBounds().getCenter(), { icon: L.divIcon({className: 'label',html: '<font color=\"black\">'+feature.properties.name+'</font>' }) }).addTo(map); } });
 	var info = L.control();
 	info.onAdd = function (map) {
@@ -407,7 +409,7 @@ function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
 		return this._div;
 	};
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>Sector</h4>' +  (props ?
+		this._div.innerHTML = '<h4>Sector policial</h4>' +  (props ?
 			'<b>' + props.nombre + '</b><br />' + parseInt(props.cantidad) : 'Pase el cursor sobre un sector');
 	};
 	info.addTo(map);
@@ -437,10 +439,12 @@ function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
  </script>";
 }
 
-function get_leyenda_municipio($wpdb, $anyo, $filtro){
+function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
   $max = 0;
-  if ($filtro == 4){
-    $max = get_max_dgcp($wpdb, $anyo, $filtro);
+  if ($filtro == 6 | $filtro == 5  | $filtro == 3  | $filtro == 2  | $filtro == 0){
+    $max = get_max_delito($wpdb, $anyo, $vars, $filtro);
+  } elseif ($filtro == 4){
+    $max = get_max_dgcp($wpdb, $anyo, $vars, $filtro);
   }
   $l0 = intval($max*0.2);
   $l1 = intval($max*0.4);
@@ -464,9 +468,9 @@ function get_leyenda_municipio($wpdb, $anyo, $filtro){
   legend.addTo(map);";
 }
 
-function get_max_dgcp($wpdb, $anyo, $filtro){
+function get_max_dgcp($wpdb, $anyo, $vars, $filtro){
   if ($filtro == 4){
-    $query=$wpdb->get_results( "SELECT count(*) AS total FROM ind_bnc_dgcp WHERE anyo = $anyo GROUP BY municipio ORDER BY total DESC LIMIT 1" );
+    $query=$wpdb->get_results( "SELECT count(*) AS total FROM ind_bnc_dgcp WHERE sector_policial != 'ND' AND anyo = $anyo AND municipio = '$vars' GROUP BY sector_policial ORDER BY total DESC LIMIT 1" );
   }
   foreach ($query as $l) {
    return $l->total;
@@ -474,9 +478,42 @@ function get_max_dgcp($wpdb, $anyo, $filtro){
   return 0;
  }
 
+ function get_max_delito($wpdb, $anyo, $vars, $filtro){
+   if ($filtro == 6) {
+     $where = " delito LIKE '%FEMENICIDIO%' OR delito LIKE '%HOMICIDIO%' AND ";
+   } elseif ($filtro == 5){
+     $where = " delito LIKE '%VIOLACION%' AND ";
+   } elseif ($filtro == 3){
+     $where = " delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND ";
+   } elseif ($filtro == 2){
+     $where = " delito LIKE '%LESIONES%' AND ";
+   } elseif ($filtro == 0){
+     $where = " delito LIKE '%AMENAZAS%' AND ";
+   } else {
+     $where = "";
+   }
+   $query=$wpdb->get_results( "SELECT count(*) AS total FROM ind_bnc_delito WHERE $where anyo = $anyo AND sector_policial != 'ND' AND municipio = '$vars' GROUP BY sector_policial ORDER BY total DESC LIMIT 1" );
+   foreach ($query as $l) {
+    return $l->total;
+   }
+   return 0;
+  }
+
  function get_indicador_situacional($wpdb, $nombre_var, $anyo, $vars, $indicador){
    if ($indicador == 4){
      $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_dgcp WHERE anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial ";
+   } elseif ($indicador == 6) {
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%FEMENICIDIO%' OR delito LIKE '%HOMICIDIO%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+   } elseif ($indicador == 5) {
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+   } elseif ($indicador == 3) {
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+   } elseif ($indicador == 2) {
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%LESIONES%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+   } elseif ($indicador == 0) {
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%AMENAZAS%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+   } else {
+     $sql = "SELECT * FROM ind_bnc_delito WHERE municipio = 'XXXX' GROUP BY sector_policial;";
    }
    $hechos = $wpdb->get_results( $sql);
    $json = NULL;
