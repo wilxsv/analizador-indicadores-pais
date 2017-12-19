@@ -111,6 +111,7 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
    		grades = [],
    		labels = [],
    		from, to;
+    labels.push('<i style=\"background:#45657C\"></i> Centro escolar');
    	labels.push('<i style=\"background:#989898\"></i> Sector policial');
    	labels.push('<i style=\"background:#E0E02D\"></i> Sector policial priorizado');
    	div.innerHTML = labels.join('<br>');
