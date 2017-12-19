@@ -234,7 +234,6 @@ function get_sector_ppd_priorizado($wpdb, $sector, $nombreVar, $priorizado){
 
 function get_sector_ppd($wpdb, $sector){
   if (!$sector){
-    //$sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd";
     $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.geojson_ppd AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector";
   }  elseif (1 === preg_match('~[0-9]~', $sector)) {
     $sql = "SELECT id, dsc_ppd AS nombre, geojson_ppd AS coordenada FROM ind_ctl_sector_ppd WHERE sector = '$sector'";
