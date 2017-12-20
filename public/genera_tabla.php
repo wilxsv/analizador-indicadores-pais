@@ -30,18 +30,18 @@ function getTablePrioridad($wpdb, $code){
      }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
-$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 4, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
+$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
 </script>";
   return $table;
 }
 
-function getTableCentroEscolar($wpdb, $code){
+function getTableCentroEscolar($wpdb, $anyo, $code){
   $sql = "SELECT * FROM ind_centro_escolar";
   if ($code == 'all' ){
     $sql = "SELECT * FROM ind_centro_escolar";
     $titulo = "<th>Año</th><th>Departamento</th><th>Municipio</th><th>Codigo</th><th>Centro Escolar</th><th>Sector</th><th>Presencia de maras</th><th>Drogas</th><th>Violaciones</th><th>Portacion de armas blancas y fuego</th><th>Robos y hurtos</th><th>Matricula relativa</th><th>Indice</th>";
   } else {
-    $sql = "SELECT * FROM ind_centro_escolar WHERE municipio = '$code' OR codigo = '$code' OR nombre_ce = '$code' OR anyo = '$code'";
+    $sql = "SELECT * FROM ind_centro_escolar WHERE municipio = '$code' and anyo = $anyo";
     $titulo = "<th>Año</th><th>Municipio</th><th>Codigo</th><th>Centro Escolar</th><th>Sector</th><th>Presencia de maras</th><th>Drogas</th><th>Violaciones</th><th>Portacion de armas blancas y fuego</th><th>Robos y hurtos</th><th>Matricula relativa</th><th>Indice</th>";
   }
   $hechos = $wpdb->get_results( $sql);
@@ -57,7 +57,7 @@ function getTableCentroEscolar($wpdb, $code){
     }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
-$table .="(function($){ $('#datosgrafico').DataTable({ /*searching: false,*/ pageLength: 4, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));</script>";
+$table .="(function($){ $('#datosgrafico').DataTable({ /*searching: false,*/ pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));</script>";
   return $table;
 }
 

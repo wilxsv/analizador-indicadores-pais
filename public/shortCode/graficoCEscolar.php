@@ -93,16 +93,15 @@
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last">
-    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
+    <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
-    </p>
+    </p>-->
   </div>
  </div>
 </div>
 
 <div class="row">
  <div class="col-md-12">
-   <div id="map"></div>
    <div id='macromap'></div>
  </div>
 </div>
@@ -142,27 +141,29 @@
   $('#sanyo').select2({
 		language: { noResults: function (params) { return "Sin registros para ese centro escolar."; } }
 	});
-	$('#sanyo').on('change', function() {
+	$('#sanyo').on('change', function() {/*
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
         $('#datatable').html(resp);
     });
     map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value, { }, function(resp) {
         $('#macromap').html(resp);
-    });
+    });*/
 	});
 	$('#smunicipio').on('change', function() {
     var selects = document.getElementById("sanyo");
     var anyo = selects.options[selects.selectedIndex].value;
-    if (anyo > 0){ anyo = anyo; }
-    else { anyo = <?php echo $anyo_ultimo; ?>; }
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
+    if (anyo > 0){
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
         $('#datatable').html(resp);
-    });
-    map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
+      });
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
         $('#macromap').html(resp);
-    });
+      });
+    }
+    else {
+      alert("Variable año sin seleccionar!!");
+    }
 	});
 	$('#codigo').on('change', function() {
 		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
@@ -180,12 +181,13 @@
 		});
 	});
 }(jQuery));
+/*
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#datatable').html(resp);
 });
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&code=<?php echo $aleatorio; ?>&anyo=<?php echo $anyo_ultimo; ?>&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#macromap').html(resp);
-});
+});*/
 function restabecer() {
   $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&anyo=<?php echo $anyo_ultimo; ?>&type=c', { }, function(resp) {
     $('#datatable').html(resp);
