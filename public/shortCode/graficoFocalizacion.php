@@ -12,9 +12,8 @@
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
 
- $municipios = "SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio";
- $municipios=$wpdb->get_results("$municipios");
- $sector = $wpdb->get_results("SELECT municipio, sector AS sector_policial FROM `ind_focalizacion` WHERE sector IS NOT NULL group by municipio, sector");
+ $municipios=$wpdb->get_results("SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio");
+ $fase = $wpdb->get_results("SELECT fase_pess FROM `ind_focalizacion` WHERE sector IS NOT NULL group by fase_pess");
  $centro = $wpdb->get_results("SELECT municipio, nombre_ce, codigo_ce FROM `ind_focalizacion` WHERE codigo_ce > 0 group by municipio, codigo_ce");
 
  $dep = NULL;
@@ -32,22 +31,10 @@
      $dep = $l->departamento;
  }
  $categoria.= "<optgroup>";
- $dep = NULL;
  $policial = NULL;
- foreach ($sector as $l) {
-     if ($dep == NULL){
-       $policial.= "<optgroup label=\"$l->municipio\">";
-       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
-     } elseif ($dep != $l->municipio) {
-       $policial.= "<optgroup>";
-       $policial.= "<optgroup label=\"$l->municipio\">";
-       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
-     }else {
-       $policial.= "<option value=\"$l->sector_policial\">$l->sector_policial</option>";
-     }
-     $dep = $l->municipio;
+ foreach ($fase as $l) {
+   $policial.= "<option value=\"$l->fase_pess\">$l->fase_pess</option>";
  }
- $policial.= "<optgroup>";
  $dep = NULL;
  $ce = NULL;
  $cod = NULL;
@@ -81,20 +68,21 @@
   <div class="grid one-fifth ">
 	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
   </div>
-  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last">
+    Fase PESS:<br/><select name="fase" id="fase" style="width: 90%;"><?php echo $policial; ?><option selected>Seleccione la fase</option></select>
+  </div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last">
-    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
+    <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
-    </p>
+    </p>-->
   </div>
  </div>
 </div>
 
 <div class="row">
  <div class="col-md-12">
-   <div id="map"></div>
    <div id='macromap'></div>
  </div>
 </div>
@@ -124,8 +112,8 @@
   $('#smunicipio').select2({
 		language: { noResults: function (params) { return "Sin registros para ese municipio."; } }
 	});
-  $('#policial').select2({
-		language: { noResults: function (params) { return "Sin registros para ese sector."; } }
+  $('#fase').select2({
+		language: { noResults: function (params) { return "Sin registros para esa fase."; } }
 	});
   $('#codigo').select2({
 		language: { noResults: function (params) { return "Sin registros para ese centro escolar."; } }
@@ -137,8 +125,6 @@
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
         $('#datatable').html(resp);
     });
-    map.off();
-    map.remove();
     $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { }, function(resp) {
         $('#macromap').html(resp);
     });
@@ -163,13 +149,13 @@
 			$('#datatable').html(resp);
 		});
 	});
-}(jQuery));
+}(jQuery));/*
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=f', {  }, function(resp) {
     $('#datatable').html(resp);
 });
 $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f', { data:'table' }, function(resp) {
     $('#macromap').html(resp);
-});
+});*/
 function restabecer() {
   $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=f', {  }, function(resp) {
     $('#datatable').html(resp);

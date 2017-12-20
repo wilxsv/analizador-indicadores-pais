@@ -102,6 +102,11 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
 }
 
 function get_sv($type, $vars, $wpdb, $centro, $zoom){
+  $map = uniqid();
+  /*
+//  ; ?>plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
+*/
+  $img = plugin_dir_url( __FILE__ )."js/leaflet/images/marker-icon.png";
   $label = "
   L.geoJson(departamentosData, {
     onEachFeature: function(feature, layer) {
@@ -114,7 +119,8 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
    		grades = [],
    		labels = [],
    		from, to;
-    labels.push('<i style=\"background:#45657C\"></i> Centro escolar');
+    labels.push('<img src=\"$img\" width=\"15\" height=\"15\"> Centro escolar');
+  //labels.push('<i style=\"background:#45657C\"></i> Centro escolar');
    	labels.push('<i style=\"background:#989898\"></i> Sector policial');
    	labels.push('<i style=\"background:#E0E02D\"></i> Sector policial priorizado');
    	div.innerHTML = labels.join('<br>');
@@ -147,8 +153,10 @@ function get_sv($type, $vars, $wpdb, $centro, $zoom){
   $files = '<style>
   .info { padding: 6px 8px; font: 13px/15px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 12px; color: #777; }
   .legend { text-align: left; line-height: 16px; color: #555; } .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.7; }</style>';
-  return "$files \n $sector\n$datos\n$priorizado
- <script type=\"text/javascript\">	var map = L.map('map').setView([$centro], $zoom);
+  return "
+  <div id='$map' style='width: 100%; height: 900px;'></div>
+  $files \n $sector\n$datos\n$priorizado
+ <script type=\"text/javascript\">	var map = L.map('$map').setView([$centro], $zoom);
 L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
 $escuelas
 L.geoJson(departamentosData).addTo(map);
@@ -399,7 +407,6 @@ function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
   $sector = get_sector_ppd($wpdb, $vars);
   $files = '<style>.info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }.legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
   return "
-  
   $files\n$datos\n$sector
   <script type=\"text/javascript\">	var map = L.map('map', { scrollWheelZoom: false, touchZoom:false } ).setView([$centro], $zoom );
 	L.tileLayer('', { attribution: 'Dirección de Información y Análisis' }).addTo(map);
