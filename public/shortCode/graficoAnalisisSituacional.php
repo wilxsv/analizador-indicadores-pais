@@ -114,7 +114,8 @@
 
 <div class="row">
  <div class="col-md-12">
-  <div class="row" id="datatable"></div>
+  <div class="row" id="datatable">
+  </div>
  </div>
 </div>
 
@@ -173,10 +174,6 @@
     }
 	});
 }(jQuery));
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&code=4&type=s&anyo=<?php echo $anyo_ultimo; ?>&vars=<?php echo $aleatorio; ?>', { data:'table' }, function(resp) {
-    //console.log(resp);
-    $('#macromap').html(resp);
-});
 //funcion para restablecer al mapa y tabla inicial
 function restabecer() {
   $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
