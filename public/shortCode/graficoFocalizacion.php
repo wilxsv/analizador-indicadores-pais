@@ -62,7 +62,6 @@
 
  if ( $dep ):
 ?>
-<div class="row"> <h5>Mapa interactivo</h5> </div>
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
