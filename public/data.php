@@ -30,6 +30,10 @@ if ($data == 'table' && $anyo && $type == 'm') {
   echo getTablePrioridad($wpdb, $code);
 }elseif ($data == 'table' && $type == 'c') {
   echo getTableCentroEscolar($wpdb, $anyo, $code);
+}elseif ($data == 'table' && $type == 's') {
+  if ($vars){
+    echo getTableSiatuacional($wpdb, $anyo, $vars, $code);
+  }
 }
 elseif ($data == 'map' && $anyo && $type == 'm') {
   if ($vars){ echo get_mapa($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE)); }

@@ -90,16 +90,15 @@
     </p>
   </div>
   <div class="grid one-fifth last">
-    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
+    <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
-    </p>
+    </p>-->
   </div>
  </div>
 </div>
 
 <div class="row">
  <div class="col-md-12">
-   <div id='map'></div>
    <div id='macromap'></div>
  </div>
 </div>
@@ -165,9 +164,11 @@
     if (variable.length > 3 && variable !== 'Seleccione el municipio'){
       var selects = document.getElementById("sanyo");
       var anyo = selects.options[selects.selectedIndex].value;
-      map.remove();
       $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars='+variable+'&type=s&anyo='+anyo+'&code='+this.value, { data:'' }, function(resp) {
          $('#macromap').html(resp);
+      });
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars='+variable+'&type=s&anyo='+anyo+'&code='+this.value, { data:'' }, function(resp) {
+          $('#datatable').html(resp);
       });
     } else {
        alert("No a seleccionado un municipio!!");

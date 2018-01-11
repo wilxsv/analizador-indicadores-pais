@@ -86,3 +86,44 @@ $table .="(function($){ $('#datosgrafico').DataTable({ /*searching: false,*/ pag
 </script>";
 return $table;
 }
+
+function getTableSiatuacional($wpdb, $anyo, $vars, $code){
+  $sql = "SELECT * FROM ind_focalizacion";
+  if ($code == 'all' ){
+    $sql = "SELECT * FROM ind_focalizacion";
+    $titulo = "<th>Departamento</th><th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sector SPD</th>";
+  } else {
+    $sql = "SELECT * FROM ind_focalizacion WHERE municipio = '$code' OR sector_policial = '$code' OR nombre_ce = '$code' OR codigo_ce = '$code'";
+    $titulo = "<th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sector SPD</th>";
+  }
+  $hechos = $wpdb->get_results( $sql);
+  $table = '
+  <style>
+  div.vertical
+{
+ margin-left: -85px;
+ position: absolute;
+ width: 215px;
+ transform: rotate(-90deg);
+ -webkit-transform: rotate(-90deg); /* Safari/Chrome */
+ -moz-transform: rotate(-90deg); /* Firefox */
+ -o-transform: rotate(-90deg); /* Opera */
+ -ms-transform: rotate(-90deg); /* IE 9 */
+}
+  th.vertical{ height: 220px;line-height: 14px;padding-bottom: 20px;text-align: left;}
+  </style>
+  <table >
+   <thead><tr>'.$titulo.'</tr></thead>
+   <tbody>';
+   foreach ($hechos as $key => $object) {
+     if ($code == 'all' ){
+       $table.= "<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->fase_pess</td><td>$object->codigo_ce</td><td>$object->nombre_ce</td><td>$object->sector_policial</td></tr>";
+     } else {
+       $table.= "<tr><td>$object->municipio</td><td>$object->fase_pess</td><td>$object->codigo_ce</td><td>$object->nombre_ce</td><td>$object->sector_policial</td></tr>";
+     }
+ 	 }
+$table .='</tbody></table><script type="text/javascript">';
+$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
+</script>";
+  return $table;
+}
