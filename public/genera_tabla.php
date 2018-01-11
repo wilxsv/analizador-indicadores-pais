@@ -97,31 +97,52 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
     $titulo = "<th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sector SPD</th>";
   }
   $hechos = $wpdb->get_results( $sql);
+  $titulo = '<th>SECTOR POLICIAL</th>';
+  $titulo .= '<th class="vTH"><p>HOMICIDIO</p></th><th class="vTH"><p>FEMENICIDIO</p></th><th class="vTH"><p>VIDA</p></th>';
+  $titulo .= '<th class="vTH"><p>VIOLACION</p></th><th class="vTH"><p>SEXUAL</p></th>';
+  $titulo .= '<th class="vTH"><p>LESIONES</p></th><th class="vTH"><p>INTEGRIDAD</p></th>';
+  $titulo .= '<th class="vTH"><p>ROBO</p></th><th class="vTH"><p>ROBO DE VEHICULOS</p></th><th class="vTH"><p>HURTO Y ROBO VEH/CM</p></th><th class="vTH"><p>HURTO DE VEHICULOS</p></th><th class="vTH"><p>HURTO</p></th><th class="vTH"><p>EXTORSION</p></th><th class="vTH"><p>PATRIMONIO</p></th>';
+  $titulo .= '<th class="vTH"><p>AMENASAS</p></th><th class="vTH"><p>AUTONOMIA</p></th>';
+  $titulo .= '<th class="vTH"><p>EXPRESIONES DE VIOLENCIA CONTRA LA MUJER</p></th><th class="vTH"><p>VIOLENCIA INTRAFAMILIAR</p></th><th class="vTH"><p>MALTRATO INFANTIL</p></th><th class="vTH"><p>DELITOS COMETIDOS CON ARMAS DE FUEGO</p></th><th class="vTH"><p>DISPARO DE ARMA DE FUEGO</p></th><th class="vTH"><p>PROBLEMAS ARMAS/FUEGO</p></th><th class="vTH"><p>PUNTO DE ASALTO</p></th><th class="vTH"><p>PRESENCIA DE MARAS</p></th><th class="vTH"><p>PROBLEMA DE DROGAS</p></th><th class="vTH"><p>CONFLITOS INTERPERSONALES</p></th><th class="vTH"><p>MARA 18 R</p></th><th class="vTH"><p>MARA 18 S</p></th><th class="vTH"><p>MARA 18</p></th><th class="vTH"><p>MAO MAO</p></th><th class="vTH"><p>MD</p></th><th class="vTH"><p>MIRADA LOCA</p></th><th class="vTH"><p>BANDA LA RAZA</p></th><th class="vTH"><p>MS13</p></th><th class="vTH"><p>MAQUINA</p></th><th class="vTH"><p>OTRAS BANDAS</p></th><th class="vTH"><p>NINGUNO</p></th><th class="vTH"><p>SIN ESPECIFICAR</p></th><th class="vTH"><p>PERSONAS PRIVADAS DE LIBERTAD</p></th>';
   $table = '
   <style>
-  div.vertical
-{
- margin-left: -85px;
- position: absolute;
- width: 215px;
- transform: rotate(-90deg);
- -webkit-transform: rotate(-90deg); /* Safari/Chrome */
- -moz-transform: rotate(-90deg); /* Firefox */
- -o-transform: rotate(-90deg); /* Opera */
- -ms-transform: rotate(-90deg); /* IE 9 */
+  .vTH {
+   text-align:center;
+   white-space:nowrap;
+   g-origin:50% 50%;
+   -webkit-transform: rotate(90deg);
+   -moz-transform: rotate(90deg);
+   -ms-transform: rotate(90deg);
+   -o-transform: rotate(90deg);
+   transform: rotate(90deg);
+    }
+.vTH p {
+   margin:0 -100% ;
+   display:inline-block;
 }
-  th.vertical{ height: 220px;line-height: 14px;padding-bottom: 20px;text-align: left;}
+.vTH p:before{
+   content:\'\';
+   width:0;
+   padding-top:110%;/* takes width as reference, + 10% for faking some extra padding */
+   display:inline-block;
+   vertical-align:middle;
+}
+table {
+   text-align:center;
+   table-layout : fixed;
+}
   </style>
-  <table >
+  <table border="1" class="table table-bordered display" id="datosgrafic">
    <thead><tr>'.$titulo.'</tr></thead>
    <tbody>';
+   /*
    foreach ($hechos as $key => $object) {
      if ($code == 'all' ){
        $table.= "<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->fase_pess</td><td>$object->codigo_ce</td><td>$object->nombre_ce</td><td>$object->sector_policial</td></tr>";
      } else {
        $table.= "<tr><td>$object->municipio</td><td>$object->fase_pess</td><td>$object->codigo_ce</td><td>$object->nombre_ce</td><td>$object->sector_policial</td></tr>";
      }
- 	 }
+ 	 }*/
 $table .='</tbody></table><script type="text/javascript">';
 $table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
 </script>";
