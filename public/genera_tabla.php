@@ -96,14 +96,27 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
     $sql = "SELECT * FROM ind_focalizacion WHERE municipio = '$code' OR sector_policial = '$code' OR nombre_ce = '$code' OR codigo_ce = '$code'";
     $titulo = "<th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sector SPD</th>";
   }
-  $hechos = $wpdb->get_results( $sql);
+  $sql = "SELECT * FROM ind_ctl_sector_ppd WHERE nombre_municipio_ppd = '$vars'";
+  $ppd = $wpdb->get_results( $sql);
+  $data = '';
+  foreach ($ppd as $key => $object) {
+    $data.= "<tr><td>$object->dsc_ppd</td></tr>";
+  }
   $titulo = '<th>SECTOR POLICIAL</th>';
-  $titulo .= '<th class="vTH"><p>HOMICIDIO</p></th><th class="vTH"><p>FEMENICIDIO</p></th><th class="vTH"><p>VIDA</p></th>';
-  $titulo .= '<th class="vTH"><p>VIOLACION</p></th><th class="vTH"><p>SEXUAL</p></th>';
-  $titulo .= '<th class="vTH"><p>LESIONES</p></th><th class="vTH"><p>INTEGRIDAD</p></th>';
-  $titulo .= '<th class="vTH"><p>ROBO</p></th><th class="vTH"><p>ROBO DE VEHICULOS</p></th><th class="vTH"><p>HURTO Y ROBO VEH/CM</p></th><th class="vTH"><p>HURTO DE VEHICULOS</p></th><th class="vTH"><p>HURTO</p></th><th class="vTH"><p>EXTORSION</p></th><th class="vTH"><p>PATRIMONIO</p></th>';
-  $titulo .= '<th class="vTH"><p>AMENASAS</p></th><th class="vTH"><p>AUTONOMIA</p></th>';
-  $titulo .= '<th class="vTH"><p>EXPRESIONES DE VIOLENCIA CONTRA LA MUJER</p></th><th class="vTH"><p>VIOLENCIA INTRAFAMILIAR</p></th><th class="vTH"><p>MALTRATO INFANTIL</p></th><th class="vTH"><p>DELITOS COMETIDOS CON ARMAS DE FUEGO</p></th><th class="vTH"><p>DISPARO DE ARMA DE FUEGO</p></th><th class="vTH"><p>PROBLEMAS ARMAS/FUEGO</p></th><th class="vTH"><p>PUNTO DE ASALTO</p></th><th class="vTH"><p>PRESENCIA DE MARAS</p></th><th class="vTH"><p>PROBLEMA DE DROGAS</p></th><th class="vTH"><p>CONFLITOS INTERPERSONALES</p></th><th class="vTH"><p>MARA 18 R</p></th><th class="vTH"><p>MARA 18 S</p></th><th class="vTH"><p>MARA 18</p></th><th class="vTH"><p>MAO MAO</p></th><th class="vTH"><p>MD</p></th><th class="vTH"><p>MIRADA LOCA</p></th><th class="vTH"><p>BANDA LA RAZA</p></th><th class="vTH"><p>MS13</p></th><th class="vTH"><p>MAQUINA</p></th><th class="vTH"><p>OTRAS BANDAS</p></th><th class="vTH"><p>NINGUNO</p></th><th class="vTH"><p>SIN ESPECIFICAR</p></th><th class="vTH"><p>PERSONAS PRIVADAS DE LIBERTAD</p></th>';
+  if ($code == 0) {
+    $titulo .= '<th class="vTH"><p>AMENASAS</p></th><th class="vTH"><p>AUTONOMIA</p></th>';
+  }elseif ($code == 1) {
+  }elseif ($code == 2) {
+    $titulo .= '<th class="vTH"><p>LESIONES</p></th><th class="vTH"><p>INTEGRIDAD</p></th>';
+  }elseif ($code == 3) {
+    $titulo .= '<th class="vTH"><p>ROBO</p></th><th class="vTH"><p>ROBO DE VEHICULOS</p></th><th class="vTH"><p>HURTO Y ROBO VEH/CM</p></th><th class="vTH"><p>HURTO DE VEHICULOS</p></th><th class="vTH"><p>HURTO</p></th><th class="vTH"><p>EXTORSION</p></th><th class="vTH"><p>PATRIMONIO</p></th>';
+  }elseif ($code == 4) {
+    $titulo .= '<th class="vTH"><p>MARA 18 R</p></th><th class="vTH"><p>MARA 18 S</p></th><th class="vTH"><p>MARA 18</p></th><th class="vTH"><p>MAO MAO</p></th><th class="vTH"><p>MD</p></th><th class="vTH"><p>MIRADA LOCA</p></th><th class="vTH"><p>BANDA LA RAZA</p></th><th class="vTH"><p>MS13</p></th><th class="vTH"><p>MAQUINA</p></th><th class="vTH"><p>OTRAS BANDAS</p></th><th class="vTH"><p>NINGUNO</p></th><th class="vTH"><p>SIN ESPECIFICAR</p></th><th class="vTH"><p>PERSONAS PRIVADAS DE LIBERTAD</p></th>';
+  }elseif ($code == 5) {
+    $titulo .= '<th class="vTH"><p>VIOLACION</p></th><th class="vTH"><p>SEXUAL</p></th>';
+  }elseif ($code == 6) {
+    $titulo .= '<th class="vTH"><p>HOMICIDIO</p></th><th class="vTH"><p>FEMENICIDIO</p></th><th class="vTH"><p>VIDA</p></th>';
+  }
   $table = '
   <style>
   .vTH {
@@ -133,7 +146,8 @@ table {
 }
   </style>
   <table border="1" class="table table-bordered display" id="datosgrafic">
-   <thead><tr>'.$titulo.'</tr></thead>
+   <thead><tr>'.$titulo.'</tr></thead>'.$data.'
+    <tfooter><tr>'.$titulo.'</tr></tfooter>
    <tbody>';
    /*
    foreach ($hechos as $key => $object) {
