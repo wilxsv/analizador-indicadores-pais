@@ -101,21 +101,70 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
   $data = '';
   foreach ($ppd as $key => $object) {
     $data.= "<tr><td>$object->dsc_ppd</td></tr>";
-  }
+  }/*
+  if ($indicador == 4){
+
+  } elseif ($indicador == 6) {
+  } elseif ($indicador == 5) {
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+  } elseif ($indicador == 3) {
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+  } elseif ($indicador == 2) {
+
+  } elseif ($indicador == 0) {
+  } else {
+    $sql = "SELECT * FROM ind_bnc_delito WHERE municipio = 'XXXX' GROUP BY sector_policial;";
+  }*/
   $titulo = '<th>SECTOR POLICIAL</th>';
   if ($code == 0) {
-    $titulo .= '<th class="vTH"><p>AMENASAS</p></th><th class="vTH"><p>AUTONOMIA</p></th>';
+    $titulo .= '<th class="vTH"><p>AMENAZAS</p></th><th class="vTH"><p>AUTONOMIA</p></th>';
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%AMENAZAS%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+    $ppd = $wpdb->get_results( $sql);
+    $data = '';
+    foreach ($ppd as $key => $object) {
+      $data.= "<tr><td>$object->dsc_ppd</td><td>$object->cantidad</td><td>$object->cantidad</td></tr>";
+    }
   }elseif ($code == 1) {
   }elseif ($code == 2) {
     $titulo .= '<th class="vTH"><p>LESIONES</p></th><th class="vTH"><p>INTEGRIDAD</p></th>';
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%LESIONES%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+    $ppd = $wpdb->get_results( $sql);
+    $data = '';
+    foreach ($ppd as $key => $object) {
+      $data.= "<tr><td>$object->dsc_ppd</td><td>$object->cantidad</td><td>$object->cantidad</td></tr>";
+    }
   }elseif ($code == 3) {
     $titulo .= '<th class="vTH"><p>ROBO</p></th><th class="vTH"><p>ROBO DE VEHICULOS</p></th><th class="vTH"><p>HURTO Y ROBO VEH/CM</p></th><th class="vTH"><p>HURTO DE VEHICULOS</p></th><th class="vTH"><p>HURTO</p></th><th class="vTH"><p>EXTORSION</p></th><th class="vTH"><p>PATRIMONIO</p></th>';
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd, municipio, IF(delito = 'ROBO', COUNT(*) ,'0') AS R, IF(delito = 'ROBO DE VEHICULOS', COUNT(*) ,'0') AS RV, IF(delito = 'HURTO Y ROBO VEH/CM', COUNT(*) ,'0') AS RH, IF(delito = 'HURTO DE VEHICULOS', COUNT(*) ,'0') AS HV, IF(delito = 'HURTO', COUNT(*) ,'0') AS H, IF(delito = 'EXTORSION', COUNT(*) ,'0') AS E FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' AND delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' GROUP BY sector_policial HAVING municipio = '$vars';";
+    $ppd = $wpdb->get_results( $sql);
+    $data = '';
+    foreach ($ppd as $key => $object) {
+      $data.= "<tr><td>$object->dsc_ppd</td><td>$object->R</td><td>$object->RV</td><td>$object->RH</td><td>$object->HV</td><td>$object->H</td><td>$object->E</td><td>$object->cantidad</td></tr>";
+    }
   }elseif ($code == 4) {
     $titulo .= '<th class="vTH"><p>MARA 18 R</p></th><th class="vTH"><p>MARA 18 S</p></th><th class="vTH"><p>MARA 18</p></th><th class="vTH"><p>MAO MAO</p></th><th class="vTH"><p>MD</p></th><th class="vTH"><p>MIRADA LOCA</p></th><th class="vTH"><p>BANDA LA RAZA</p></th><th class="vTH"><p>MS13</p></th><th class="vTH"><p>MAQUINA</p></th><th class="vTH"><p>OTRAS BANDAS</p></th><th class="vTH"><p>NINGUNO</p></th><th class="vTH"><p>SIN ESPECIFICAR</p></th><th class="vTH"><p>PERSONAS PRIVADAS DE LIBERTAD</p></th>';
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd, municipio, IF(organizacion_delictiva = 'BANDA LA RAZA', COUNT(*) ,'0') AS BR, IF(organizacion_delictiva = 'MAO MAO', COUNT(*) ,'0') AS MM, IF(organizacion_delictiva = 'MAQUINA', COUNT(*) ,'0') AS BM, IF(organizacion_delictiva = 'MARA 18', COUNT(*) ,'0') AS MN, IF(organizacion_delictiva = 'MARA 18 R', COUNT(*) ,'0') AS MNR, IF(organizacion_delictiva = 'MARA 18 S', COUNT(*) ,'0') AS MNS, IF(organizacion_delictiva = 'MD', COUNT(*) ,'0') AS MD, IF(organizacion_delictiva = 'MIRADA LOCA', COUNT(*) ,'0') AS ML, IF(organizacion_delictiva = 'MS13', COUNT(*) ,'0') AS MS, IF(organizacion_delictiva = 'NINGUNO', COUNT(*) ,'0') AS NO, IF(organizacion_delictiva = 'OTRAS BANDAS', COUNT(*) ,'0') AS OB, IF(organizacion_delictiva = 'SIN ESPECIFICAR', COUNT(*) ,'0') AS SE FROM ind_bnc_dgcp WHERE anyo = $anyo  AND municipio = '$vars' AND sector_policial != 'ND' GROUP BY sector_policial HAVING municipio = '$vars';";
+    $ppd = $wpdb->get_results( $sql);
+    $data = '';
+    foreach ($ppd as $key => $object) {
+      $data.= "<tr><td>$object->dsc_ppd</td><td>$object->MNR</td><td>$object->MNS</td><td>$object->MN</td><td>$object->MM</td><td>$object->MD</td><td>$object->ML</td><td>$object->BR</td><td>$object->MS</td><td>$object->BM</td><td>$object->OB</td><td>$object->NO</td><td>$object->SE</td><td>$object->cantidad</td></tr>";
+    }
   }elseif ($code == 5) {
     $titulo .= '<th class="vTH"><p>VIOLACION</p></th><th class="vTH"><p>SEXUAL</p></th>';
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+    $ppd = $wpdb->get_results( $sql);
+    $data = '';
+    foreach ($ppd as $key => $object) {
+      $data.= "<tr><td>$object->dsc_ppd</td><td>$object->cantidad</td><td>$object->cantidad</td></tr>";
+    }
   }elseif ($code == 6) {
     $titulo .= '<th class="vTH"><p>HOMICIDIO</p></th><th class="vTH"><p>FEMENICIDIO</p></th><th class="vTH"><p>VIDA</p></th>';
+    $sql = "SELECT id, IF(delito = 'FEMENICIDIO', COUNT(*) ,'0') AS F, IF(delito = 'HOMICIDIO', COUNT(*) ,'0') AS H, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%FEMENICIDIO%' OR delito LIKE '%HOMICIDIO%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+    $ppd = $wpdb->get_results( $sql);
+    $data = '';
+    foreach ($ppd as $key => $object) {
+      $data.= "<tr><td>$object->dsc_ppd</td><td>$object->H</td><td>$object->F</td><td>$object->cantidad</td></tr>";
+    }
   }
   $table = '
   <style>
@@ -123,11 +172,11 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
    text-align:center;
    white-space:nowrap;
    g-origin:50% 50%;
-   -webkit-transform: rotate(90deg);
-   -moz-transform: rotate(90deg);
-   -ms-transform: rotate(90deg);
-   -o-transform: rotate(90deg);
-   transform: rotate(90deg);
+   -webkit-transform: rotate(270deg);
+   -moz-transform: rotate(270deg);
+   -ms-transform: rotate(270deg);
+   -o-transform: rotate(270deg);
+   transform: rotate(270deg);
     }
 .vTH p {
    margin:0 -100% ;
@@ -149,14 +198,6 @@ table {
    <thead><tr>'.$titulo.'</tr></thead>'.$data.'
     <tfooter><tr>'.$titulo.'</tr></tfooter>
    <tbody>';
-   /*
-   foreach ($hechos as $key => $object) {
-     if ($code == 'all' ){
-       $table.= "<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->fase_pess</td><td>$object->codigo_ce</td><td>$object->nombre_ce</td><td>$object->sector_policial</td></tr>";
-     } else {
-       $table.= "<tr><td>$object->municipio</td><td>$object->fase_pess</td><td>$object->codigo_ce</td><td>$object->nombre_ce</td><td>$object->sector_policial</td></tr>";
-     }
- 	 }*/
 $table .='</tbody></table><script type="text/javascript">';
 $table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
 </script>";

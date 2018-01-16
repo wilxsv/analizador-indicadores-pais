@@ -508,7 +508,7 @@ function get_max_dgcp($wpdb, $anyo, $vars, $filtro){
    } else {
      $where = "";
    }
-   $query=$wpdb->get_results( "SELECT count(*) AS total FROM ind_bnc_delito WHERE $where anyo = $anyo AND sector_policial != 'ND' AND municipio = '$vars' GROUP BY sector_policial ORDER BY total DESC LIMIT 1" );
+   $query=$wpdb->get_results( "SELECT count(*) AS total, municipio FROM ind_bnc_delito WHERE $where anyo = $anyo AND sector_policial != 'ND' AND municipio = '$vars' GROUP BY sector_policial HAVING municipio = '$vars' ORDER BY total DESC LIMIT 1" );
    foreach ($query as $l) {
     return $l->total;
    }
@@ -523,7 +523,7 @@ function get_max_dgcp($wpdb, $anyo, $vars, $filtro){
    } elseif ($indicador == 5) {
      $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
    } elseif ($indicador == 3) {
-     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre, municipio FROM ind_bnc_delito WHERE delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial HAVING municipio = '$vars';";
    } elseif ($indicador == 2) {
      $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%LESIONES%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
    } elseif ($indicador == 0) {
