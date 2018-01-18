@@ -66,9 +66,9 @@
  <div class="pad group">
   <div class="grid one-fifth ">
 	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
-  </div>
+ </div><!--
   <div class="grid one-fifth last"><br/></div>
-  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>-->
   <div class="grid one-fifth last">
     <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
