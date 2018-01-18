@@ -101,20 +101,7 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
   $data = '';
   foreach ($ppd as $key => $object) {
     $data.= "<tr><td>$object->dsc_ppd</td></tr>";
-  }/*
-  if ($indicador == 4){
-
-  } elseif ($indicador == 6) {
-  } elseif ($indicador == 5) {
-    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
-  } elseif ($indicador == 3) {
-    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND municipio = '$vars' GROUP BY sector_policial;";
-  } elseif ($indicador == 2) {
-
-  } elseif ($indicador == 0) {
-  } else {
-    $sql = "SELECT * FROM ind_bnc_delito WHERE municipio = 'XXXX' GROUP BY sector_policial;";
-  }*/
+  }
   $titulo = '<th>SECTOR POLICIAL</th>';
   if ($code == 0) {
     $titulo .= '<th class="vTH"><p>AMENAZAS</p></th><th class="vTH"><p>AUTONOMIA</p></th>';
@@ -168,38 +155,21 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
   }
   $table = '
   <style>
-  .vTH {
-   text-align:center;
-   white-space:nowrap;
-   g-origin:50% 50%;
-   -webkit-transform: rotate(270deg);
-   -moz-transform: rotate(270deg);
-   -ms-transform: rotate(270deg);
-   -o-transform: rotate(270deg);
-   transform: rotate(270deg);
+  table thead the {
+      transform: rotate(-90deg);
     }
-.vTH p {
-   margin:0 -100% ;
-   display:inline-block;
-}
-.vTH p:before{
-   content:\'\';
-   width:0;
-   padding-top:110%;/* takes width as reference, + 10% for faking some extra padding */
-   display:inline-block;
-   vertical-align:middle;
-}
-table {
-   text-align:center;
-   table-layout : fixed;
-}
   </style>
-  <table border="1" class="table table-bordered display" id="datosgrafic">
+  <table border="1" class="table table-bordered display" id="datosgrafico">
    <thead><tr>'.$titulo.'</tr></thead>'.$data.'
-    <tfooter><tr>'.$titulo.'</tr></tfooter>
    <tbody>';
 $table .='</tbody></table><script type="text/javascript">';
-$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
+$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5',{
+    text: 'Generar Estadisticas',
+            action: function ( e, dt, node, config ) {
+                window.open('estadisticas', '_blank');
+            }
+          }
+] } ); }(jQuery));
 </script>";
   return $table;
 }

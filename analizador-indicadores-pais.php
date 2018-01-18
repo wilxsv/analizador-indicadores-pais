@@ -22,6 +22,7 @@ add_shortcode('graficoPriorizacionMunicipal', 'graficoPriorizacionMunicipal_shor
 add_shortcode('graficoAnalisisSituacional', 'graficoAnalisisSituacional_shortcode' );
 add_shortcode('graficoFocalizacion', 'graficoFocalizacion_shortcode' );
 add_shortcode('graficoCEscolar', 'graficoCEscolar_shortcode' );
+add_shortcode('estadisticasBasicas', 'estadisticasBasicas_shortcode' );
 
 if ( is_admin() ) {
 	function createDB() {
@@ -56,6 +57,9 @@ function graficoFocalizacion_shortcode($atts, $mensaje = null) {
 }
 function graficoCEscolar_shortcode($atts, $mensaje = null) {
 	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoCEscolar.php";
+}
+function estadisticasBasicas_shortcode($atts, $mensaje = null) {
+	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/estadisticasBasicas.php";
 }
 
 /* Acciones */

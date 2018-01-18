@@ -13,6 +13,7 @@ ini_set('memory_limit', '256M');
 //require_once( ABSPATH . '/wp-config.php' );
 require_once( '../../../../wp-load.php' );
 require_once( 'genera_mapa.php' );
+require_once( 'genera_estadistica.php' );
 require_once( 'genera_tabla.php' );
 
 global $wpdb;
@@ -30,6 +31,25 @@ if ($data == 'table' && $anyo && $type == 'm') {
   echo getTablePrioridad($wpdb, $code);
 }elseif ($data == 'table' && $type == 'c') {
   echo getTableCentroEscolar($wpdb, $anyo, $code);
+}elseif ($data == 'table' && $type == 'e') {
+  switch ($code) {
+    case "r":
+        echo getEstadisticaRetornados($wpdb, 2017, $vars);
+        break;
+    case "p":
+        echo getEstadisticaPrivadosLibertad($wpdb, 2017, $vars);
+        break;
+    case "t":
+        echo getEstadisticaTransito($wpdb, 2017, $vars);
+        break;
+    case "d":
+        echo getEstadisticaDelito($wpdb, 2017, $vars);
+        break;
+  }
+
+  if ($code == 'r'){
+  }
+//
 }elseif ($data == 'table' && $type == 's') {
   if ($vars){
     echo getTableSiatuacional($wpdb, $anyo, $vars, $code);

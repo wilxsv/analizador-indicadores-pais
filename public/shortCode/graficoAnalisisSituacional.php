@@ -85,9 +85,9 @@
 	</select>
   </div>
   <div class="grid one-fifth last">
-    <p id="estadistica" onclick="generar_estadistica()"  style="text-align:right">
+    <!-- <p id="estadistica" onclick="generar_estadistica()"  style="text-align:right">
       Generar Estadisticas del indicador seleccionado
-    </p>
+    </p> -->
   </div>
   <div class="grid one-fifth last">
     <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
