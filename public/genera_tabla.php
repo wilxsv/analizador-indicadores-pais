@@ -166,7 +166,7 @@ $table .='</tbody></table><script type="text/javascript">';
 $table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5',{
     text: 'Generar Estadisticas',
             action: function ( e, dt, node, config ) {
-                window.open('estadisticas', '_blank');
+                window.open('?p=1031', '_blank');
             }
           }
 ] } ); }(jQuery));
