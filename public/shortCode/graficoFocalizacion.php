@@ -67,9 +67,6 @@
   <div class="grid one-fifth ">
 	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
   </div>
-  <div class="grid one-fifth last">
-    Fase PESS:<br/><select name="fase" id="fase" style="width: 90%;"><?php echo $policial; ?><option selected>Seleccione la fase</option></select>
-  </div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last">
