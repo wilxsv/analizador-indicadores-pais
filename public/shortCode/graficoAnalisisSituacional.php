@@ -118,6 +118,44 @@
  </div>
 </div>
 
+<div class="row">
+ <div class="col-md-12">
+  <hr><hr>
+ </div>
+</div>
+
+<div class="row"> <h5>Estadisticas</h5> </div>
+<div class="row">
+ <div class="pad group">
+  <div class="grid one-fifth ">
+    <p>Banco de datos: <br />
+      <select name="banco" id="banco"  style="width: 90%;">
+        <option value="1">Banco de accidentes de transito</option>
+        <option value="2">Banco de delitos</option>
+        <option value="3">Banco de personas privadas de libertad</option>
+        <option value="4">Banco de retornados</option>
+        <option selected>Seleccione el banco de datos</option>
+      </select>
+    </p>
+  </div>
+  <div class="grid one-fifth last">
+  </div>
+  <div class="grid one-fifth last">
+  </div>
+  <div class="grid one-fifth last">
+  </div>
+  <div class="grid one-fifth last">
+  </div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="col-md-12">
+  <div class="row" id="more">
+  </div>
+ </div>
+</div>
+
 <?php
  include(plugin_dir_path( __FILE__ )."../footer_public.php");
 ?>
@@ -142,11 +180,21 @@
 		}
 	});
   $('#sanyo').select2({
-		language: {
-			noResults: function (params) {
-				return "Sin registros para ese termino.";
-			}
-		}
+    language: {
+      noResults: function (params) {
+        return "Sin registros para ese termino.";
+      }
+    }
+  });
+  $('#banco').select2({
+    language: {
+      noResults: function (params) {
+        return "Sin registros para ese termino.";
+      }
+    }
+  });
+	$('#banco').on('change', function() {
+       alert("Variable año sin seleccionar!!");
 	});
 	$('#smunicipio').on('change', function() {
     //Verificacion de año seleccionado
@@ -170,6 +218,7 @@
       $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars='+variable+'&type=s&anyo='+anyo+'&code='+this.value, { data:'' }, function(resp) {
           $('#datatable').html(resp);
       });
+      //document.getElementById('more').scrollIntoView();
     } else {
        alert("No a seleccionado un municipio!!");
     }
