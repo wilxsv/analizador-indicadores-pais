@@ -70,9 +70,9 @@
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last"><br/></div>-->
   <div class="grid one-fifth last">
-    <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
+    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
-    </p>-->
+    </p>
   </div>
  </div>
 </div>
@@ -145,27 +145,18 @@
 			$('#datatable').html(resp);
 		});
 	});
-}(jQuery));/*
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=f', {  }, function(resp) {
-    $('#datatable').html(resp);
-});
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f', { data:'table' }, function(resp) {
-    $('#macromap').html(resp);
-});*/
+}(jQuery));
 function restabecer() {
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&code=all&type=f', {  }, function(resp) {
-    $('#datatable').html(resp);
-  });
-  map.off();
-  map.remove();
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=f', { data:'table' }, function(resp) {
-    $('#macromap').html(resp);
-  });
+  (function($){
+  	$.noConflict();
+    $('#datatable').html('');
+    $('#macromap').html('');
+  }(jQuery));
 }
 </script>
 
 <?php else: ?>
 
-No hay datos para mostrar en este momento.
+  Debes ingresar tus credenciales para acceder al contenido.
 
 <?php endif ?>

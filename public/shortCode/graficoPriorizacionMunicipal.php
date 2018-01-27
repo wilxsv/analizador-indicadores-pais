@@ -33,19 +33,19 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
-   Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option selected>Seleccione el año</option></select>
+   Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><option value="0" selected>Seleccione el año</option><?php echo $anyo; ?></select>
   </div>
   <div class="grid one-fifth last">
-   Departamento:<br/><select name="smunicipio" id="smunicipio" style="width:90%;"><?php echo $categoria; ?><option selected>Seleccione el departamento</option></select>
+   Departamento:<br/><select name="smunicipio" id="smunicipio" style="width:90%;"><option value="0" selected > Seleccione el departamento</option><?php echo $categoria; ?></select>
   </div>
   <div class="grid one-fifth last"><br/>
   </div>
   <div class="grid one-fifth last"><br/>
   </div>
   <div class="grid one-fifth last">
-    <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
+    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
-    </p>-->
+    </p>
   </div>
  </div>
 </div>
@@ -118,26 +118,17 @@
     });
 	});
 }(jQuery));
-/*
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-    $('#datatable').html(resp);
-});
-$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-    $('#macromap').html(resp);
-});*/
 function restabecer() {
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-      $('#datatable').html(resp);
-  });
-  map.remove();
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-      $('#macromap').html(resp);
-  });
+  (function($){
+  	$.noConflict();
+    $('#datatable').html('');
+    $('#macromap').html('');
+  }(jQuery));
 }
 </script>
 
 <?php else: ?>
 
-No hay años para mostrar en este momento.
+Debes ingresar tus credenciales para acceder al contenido.
 
 <?php endif ?>

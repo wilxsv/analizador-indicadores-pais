@@ -90,9 +90,9 @@
     </p> -->
   </div>
   <div class="grid one-fifth last">
-    <!--<p id="restabecer" onclick="restabecer()"  style="text-align:right">
+    <p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
-    </p>-->
+    </p>
   </div>
  </div>
 </div>
@@ -226,13 +226,11 @@
 }(jQuery));
 //funcion para restablecer al mapa y tabla inicial
 function restabecer() {
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars=0&type=m&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-      $('#datatable').html(resp);
-  });
-  map.remove();
-  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&vars=0&type=s&anyo=<?php echo $anyo_ultimo; ?>', { data:'table' }, function(resp) {
-      $('#macromap').html(resp);
-  });
+  (function($){
+  	$.noConflict();
+    $('#datatable').html('');
+    $('#macromap').html('');
+  }(jQuery));
 }
 //funcion para generar la Estadisticas del indicador seleccionado
 function generar_estadistica() {
@@ -248,6 +246,6 @@ function generar_estadistica() {
 
 <?php else: ?>
 
-No hay información para mostrar en este momento.
+  Debes ingresar tus credenciales para acceder al contenido.
 
 <?php endif ?>
