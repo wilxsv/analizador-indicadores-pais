@@ -85,10 +85,10 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth">
-   Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option selected>Seleccione el año</option></select>
+   Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option value="0" selected>Seleccione el año</option></select>
   </div>
   <div class="grid one-fifth last">
-  Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
+  Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option value="0" selected>Seleccione el municipio</option></select>
   </div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last"><br/></div>
@@ -151,18 +151,22 @@
     });*/
 	});
 	$('#smunicipio').on('change', function() {
-    var selects = document.getElementById("sanyo");
-    var anyo = selects.options[selects.selectedIndex].value;
-    if (anyo > 0){
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
-        $('#datatable').html(resp);
-      });
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
-        $('#macromap').html(resp);
-      });
-    }
-    else {
-      alert("Variable año sin seleccionar!!");
+    document.getElementById("sanyo").disabled = true;
+    if (this.value !== '0'){
+      var selects = document.getElementById("sanyo");
+      var anyo = selects.options[selects.selectedIndex].value;
+      if (anyo > 0){
+        $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
+          $('#datatable').html(resp);
+        });
+        $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
+          $('#macromap').html(resp);
+        });
+      }
+      else {
+        alert("Variable año sin seleccionar!!");
+        document.getElementById("sanyo").disabled = false;
+      }
     }
 	});
 	$('#codigo').on('change', function() {
@@ -182,10 +186,14 @@
 	});
 }(jQuery));
 function restabecer() {
+  document.getElementById("sanyo").disabled = false;
   (function($){
   	$.noConflict();
+    $('#smunicipio').select2('val', '0');
+    $('#sanyo').select2('val', '0');
     $('#datatable').html('');
     $('#macromap').html('');
+    document.getElementById("sanyo").disabled = false;
   }(jQuery));
 }
 </script>

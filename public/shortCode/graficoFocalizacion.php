@@ -65,10 +65,11 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
-	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option selected>Seleccione el municipio</option></select>
- </div><!--
+	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option value="0" selected >Seleccione el municipio</option></select>
+  </div>
   <div class="grid one-fifth last"><br/></div>
-  <div class="grid one-fifth last"><br/></div>-->
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
       Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
@@ -118,12 +119,14 @@
 		language: { noResults: function (params) { return "Sin registros para ese centro escolar."; } }
 	});
 	$('#smunicipio').on('change', function() {
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
-        $('#datatable').html(resp);
-    });
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { }, function(resp) {
-        $('#macromap').html(resp);
-    });
+    if (this.value !== '0'){
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+          $('#datatable').html(resp);
+      });
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { }, function(resp) {
+          $('#macromap').html(resp);
+      });
+    }
 	});
 	$('#policial').on('change', function() {
 		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
@@ -149,6 +152,7 @@
 function restabecer() {
   (function($){
   	$.noConflict();
+    $('#smunicipio').select2('val', '0');
     $('#datatable').html('');
     $('#macromap').html('');
   }(jQuery));

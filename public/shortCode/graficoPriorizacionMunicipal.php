@@ -94,28 +94,31 @@
 		}
 	});
 	$('#sanyo').on('change', function() {
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
-        $('#datatable').html(resp);
-    });
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
-        $('#macromap').html(resp);
-    });
+    if (this.value !== '0'){
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
+          $('#datatable').html(resp);
+      });
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
+          $('#macromap').html(resp);
+      });
+    }
 	});
 	$('#smunicipio').on('change', function() {
-    var selects = document.getElementById("sanyo");
-    var anyo = selects.options[selects.selectedIndex].value;
-    if (anyo >= 0){
-      anyo = anyo;
-    } else {
-      anyo = <?php echo $anyo_ultimo; ?>;
-//      alert("No a seleccionado un año!!");
+    if (this.value !== '0'){
+      var selects = document.getElementById("sanyo");
+      var anyo = selects.options[selects.selectedIndex].value;
+      if (anyo >= 0){
+        anyo = anyo;
+      } else {
+        anyo = <?php echo $anyo_ultimo; ?>;
+      }
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&vars='+this.value+'&anyo='+anyo, { }, function(resp) {
+          $('#datatable').html(resp);
+      });
+      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&vars='+this.value+'&anyo='+anyo, { data:'map' }, function(resp) {
+          $('#macromap').html(resp);
+      });
     }
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&vars='+this.value+'&anyo='+anyo, { }, function(resp) {
-        $('#datatable').html(resp);
-    });
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&vars='+this.value+'&anyo='+anyo, { data:'map' }, function(resp) {
-        $('#macromap').html(resp);
-    });
 	});
 }(jQuery));
 function restabecer() {
@@ -123,6 +126,8 @@ function restabecer() {
   	$.noConflict();
     $('#datatable').html('');
     $('#macromap').html('');
+    $('#sanyo').select2('val', '0');
+    $('#smunicipio').select2('val', '0');
   }(jQuery));
 }
 </script>
