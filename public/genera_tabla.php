@@ -164,9 +164,10 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
    <tbody>';
 $table .='</tbody></table><script type="text/javascript">';
 $table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5',{
-    text: 'Generar Estadisticas',
+    text: 'información sobre formatos de exportación',
             action: function ( e, dt, node, config ) {
-                document.getElementById('more').scrollIntoView();
+               window.open('https://es.wikipedia.org/wiki/Exportaci%C3%B3n_(inform%C3%A1tica)');
+              //document.getElementById('more').scrollIntoView();
             }
           }
 ] } ); }(jQuery));

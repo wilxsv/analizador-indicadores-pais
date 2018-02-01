@@ -11,6 +11,7 @@
  global $wpdb;
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
+ include(plugin_dir_path( __FILE__ )."../router.php");
 
  $municipios=$wpdb->get_results( "SELECT d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id group by d.nombre_departamento, m.nombre_municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_bnc_dgcp GROUP BY anyo" );
@@ -60,7 +61,8 @@
  }
  $categoria.= "<optgroup>";
 
- if ( $anyo_ultimo ):
+ $acceso = acceso();
+ if ( $acceso === true ):
 ?>
 <div class="row"> <h5>Mapa interactivo</h5> </div>
 
@@ -73,7 +75,7 @@
    <p>Municipio: <br /><select name="smunicipio" id="smunicipio"  style="width: 90%;"><?php echo $categoria; ?><option value="0" selected>Seleccione el municipio</option></select></p>
   </div>
   <div class="grid one-fifth last">Indicador: <br />
-	<select name="variable" id="variable"  style="width: 90%;">
+	<select name="variable" id="variable"  style="width: 90%;" >
 		<option value="0" >Amenaza</option>
 		<option value="1" disabled>Exclusión  social</option>
 		<option value="2" >Lesiones</option>
@@ -86,7 +88,7 @@
   </div>
   <div class="grid one-fifth last">
     <p>Banco de datos: <br />
-      <select name="banco" id="banco"  style="width: 90%;" disabled="disabled">
+      <select name="banco" id="banco"  style="width: 90%;" disabled="disabled" onchange="generar_estadistica(value)">
         <option value="1">Banco de accidentes de transito</option>
         <option value="2">Banco de delitos</option>
         <option value="3">Banco de personas privadas de libertad</option>
@@ -132,7 +134,7 @@
 <div class="row"> <h5>Estadisticas</h5> </div>
 <div class="row">
  <div class="col-md-12">
-  <div class="row" id="">
+  <div class="row" id="more">
   </div>
  </div>
 </div>
@@ -174,8 +176,6 @@
       }
     }
   });
-	$('#banco').on('change', function() {
-	});
 	$('#sanyo').on('change', function() {
     document.getElementById("sanyo").disabled = true;
 	});
@@ -191,6 +191,10 @@
       }
     }
 	});
+  $('#banc').on('change', function() {
+    //alert("generado!!");
+    document.getElementById('more').scrollIntoView();
+  });
 	$('#variable').on('change', function() {
     if (this.value !== '9'){
       //Verificacion de municipio seleccionado
@@ -229,13 +233,17 @@ function restabecer() {
   }(jQuery));
 }
 //funcion para generar la Estadisticas del indicador seleccionado
-function generar_estadistica() {
+function generar_estadistica( $value ) {
+  //alert("generado!!");
   document.getElementById('more').scrollIntoView();
 }
 </script>
 
 <?php else: ?>
 
-  Debes ingresar tus credenciales para acceder al contenido.
+  <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
+  <?php echo $acceso; ?>
+
+
 
 <?php endif ?>

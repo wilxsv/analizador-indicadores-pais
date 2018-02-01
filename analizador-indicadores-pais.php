@@ -8,15 +8,17 @@
  * Author URI: http://pnud.org.sv/
 */
 register_activation_hook( __FILE__, 'createDB' );
+add_action('admin_menu', 'setup_menu');
 /* shortCode */
 add_shortcode('generaCodigoSeguridad', 'generaCodigoSeguridad_shortcode' );
 add_shortcode('agregaDatosMunicipalidad', 'agregaDatosMunicipio_shortcode' );
 add_shortcode('agregaDatosMined', '' );
-add_shortcode('agregaDatos911', '' );
+add_shortcode('agregaDatosPNC', '' );
 add_shortcode('agregaDatosATransito', '' );
 add_shortcode('agregaDatosRetornados', '' );
 add_shortcode('agregaDatosCentroPenal', '' );
-add_shortcode('agregaDatosCEscolar', '' );
+add_shortcode('agregaIndCEscolar', '' );
+add_shortcode('agregaIndMunicipios', '' );
 /* Visualizadores */
 add_shortcode('graficoPriorizacionMunicipal', 'graficoPriorizacionMunicipal_shortcode' );
 add_shortcode('graficoAnalisisSituacional', 'graficoAnalisisSituacional_shortcode' );
@@ -29,12 +31,18 @@ if ( is_admin() ) {
 		require_once( dirname( __FILE__ ) . '/admin/load.php' );
 	}
 }
-
+function setup_menu(){
+ add_menu_page('Modulo de estadisticas', 'Modulo de estadisticas', 'manage_options', 'diatools', 'configure_load', 'dashicons-location-alt');
+}
 
 //the_content
 /**********************************************************************
  *  Views and Widgets
  * *******************************************************************/
+ function configure_load()
+ {
+	require('view/configureLoad.php');
+ }
 /**********************************************************************
  *  Shortcode
  * *******************************************************************/
@@ -43,7 +51,6 @@ function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
 	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/generaCodigoSeguridad.php";
 }
 function agregaDatosMunicipio_shortcode($atts, $mensaje = null) {
-	//require_once( dirname( __FILE__ ) . '/admin/load.php' );
 	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosMunicipio.php";
 }
 function graficoPriorizacionMunicipal_shortcode($atts, $mensaje = null) {
@@ -64,7 +71,6 @@ function estadisticasBasicas_shortcode($atts, $mensaje = null) {
 
 /* Acciones */
 function files_head_action() {
-	//$files = '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/><script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>';
 	$files = '<link href="'.plugin_dir_url( __FILE__ ).'public/js/leaflet/leaflet.css" rel="stylesheet" />';
 	$files .= '<script src="'.plugin_dir_url( __FILE__ ).'public/js/leaflet/leaflet.js"></script>';
 	$files .= '<style>#map { width: 100%; height: 900px; }</style>';
