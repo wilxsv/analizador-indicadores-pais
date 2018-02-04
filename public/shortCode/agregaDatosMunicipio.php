@@ -55,8 +55,8 @@ if(isset($_POST['importSubmit'])){
 	{
 		$status = 'invalid_file';
 	}
-	    
-	    
+
+
 }
 
 if(!empty($status)){
@@ -78,6 +78,11 @@ if(!empty($status)){
             $statusMsg = '';
     }
 }
+
+
+$acceso = acceso( $wpdb, "graficoAnalisisSituacional");
+if ( $acceso === true ):
+
 if(!empty($statusMsg)){
 	echo '<div class="alert '.$statusMsgClass.'">'.$statusMsg.'</div>';
 }
@@ -127,23 +132,23 @@ autor
    <?php
      $sql = "SELECT * FROM ind_municipio ORDER BY registro DESC";//LIMIT 3
  	 $hechos = $wpdb->get_results( $sql);
-	 foreach ($hechos as $key => $object) { 
+	 foreach ($hechos as $key => $object) {
 	   echo "<tr>
 	     <td>$object->departamento</td>
 	     <td>$object->municipio</td>
 	     <td>$object->homicidio</td>
 	     <td>$object->total_homicidio_mujer</td>
-	     <td>$object->desaparecidos</td> 
+	     <td>$object->desaparecidos</td>
 	     <td>$object->lesiones</td>
 	     <td>$object->vif</td>
 	     <td>$object->extorciones</td>
 	     <td>$object->robo</td>
-	     <td>$object->hurto</td> 
+	     <td>$object->hurto</td>
 	     <td>$object->robo_vehiculo</td>
 	     <td>$object->hurto_vehiculo</td>
 	     <td>$object->r_h_conmercio</td>
 	     <td>$object->ppl</td>
-	     <td>$object->ppurb</td> 
+	     <td>$object->ppurb</td>
 	     <td>$object->epp</td>
 	     <td>$object->veh</td>
 	     <td>$object->ipn</td>
@@ -158,9 +163,9 @@ autor
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>../plugins/bower_components/datatables/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"> 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-  
+
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -184,3 +189,12 @@ autor
     } );
 }(jQuery));
 </script>
+
+<?php else: ?>
+
+  <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
+  <?php echo $acceso; ?>
+
+
+
+<?php endif ?>

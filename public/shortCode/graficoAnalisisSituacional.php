@@ -61,7 +61,7 @@
  }
  $categoria.= "<optgroup>";
 
- $acceso = acceso();
+ $acceso = acceso( $wpdb, "graficoAnalisisSituacional");
  if ( $acceso === true ):
 ?>
 <div class="row"> <h5>Mapa interactivo</h5> </div>

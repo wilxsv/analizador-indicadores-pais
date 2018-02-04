@@ -29,6 +29,11 @@ require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/includes/GoogleAuthenti
 $ga = new PHPGangsta_GoogleAuthenticator();
 $secret = '3MLFYYMVH6HTFAQ4';
 $qrCodeUrl = $ga->getQRCodeGoogleUrl('Estadisticas - DIA', $secret);
+
+
+ $acceso = acceso( $wpdb, "graficoAnalisisSituacional");
+ if ( $acceso === true ):
+	 
 ?>
 
 <div class="row">
@@ -37,3 +42,12 @@ $qrCodeUrl = $ga->getQRCodeGoogleUrl('Estadisticas - DIA', $secret);
 		<img class="rounded" src="<?php echo $qrCodeUrl; ?>" >
 	</div>
 </div>
+
+<?php else: ?>
+
+  <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
+  <?php echo $acceso; ?>
+
+
+
+<?php endif ?>

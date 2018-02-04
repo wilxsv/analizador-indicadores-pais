@@ -11,6 +11,7 @@
  global $wpdb;
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
+ include(plugin_dir_path( __FILE__ )."../router.php");
 
  $municipios=$wpdb->get_results("SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio");
  $fase = $wpdb->get_results("SELECT fase_pess FROM `ind_focalizacion` WHERE sector IS NOT NULL group by fase_pess");
@@ -60,7 +61,8 @@
  $ce.= "<optgroup>";
  $cod.= "<optgroup>";
 
- if ( $dep ):
+ $acceso = acceso( $wpdb, "graficoFocalizacion");
+ if ( $acceso === true ):
 ?>
 <div class="row">
  <div class="pad group">
@@ -159,8 +161,8 @@ function restabecer() {
 }
 </script>
 
+
 <?php else: ?>
-
-  Debes ingresar tus credenciales para acceder al contenido.
-
+  <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
+  <?php echo $acceso; ?>
 <?php endif ?>

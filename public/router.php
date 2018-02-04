@@ -9,25 +9,43 @@
 */
 
 
- function acceso( $user = "", $pass = "" ){
+ function acceso( $wpdb, $idx ){
   //Verificacion de uso de protocolo seguro
   if ( !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) {
     return "No esta usando un protocolo seguro";
-  } elseif ( $_SESSION['user_name'] == NULL || isset($_SESSION['user_name'] ) ) {
+  } elseif ( $_SESSION['user_name'] != NULL || isset($_SESSION['user_name']) || isset($_SESSION['type'])  ) {
+    return TRUE;
     return generateLoginForm();
+  } elseif ($_POST['subject']) {
+    $pass = hash('sha512', $_POST['subject']);
+    $mail = $_POST["mail"];
+    $sql = "SELECT * FROM ind_seg_usuario WHERE email = '%s' AND password = '%s' AND active =1";
+    $id=$wpdb->get_results( $wpdb->prepare( $sql, array($mail , $pass) ) );
+    $result = FALSE;
+    foreach ($id as $l) {
+      session_name('wp-settings-old');
+      $_SESSION['user_name'] = $l->email;
+      $_SESSION['type'] = $l->rol_id;
+      $result = TRUE;
+    }
+    if ($result){
+      return TRUE;
+    } else {
+      return generateLoginForm();
+    }
   }
-  return TRUE;
+  return generateLoginForm();
  }
 
  function generateLoginForm(){
    echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
     echo '<p>';
     echo 'correo (requerido) <br />';
-    echo '<input type="email" name="mail" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="40" required />';
+    echo '<input type="email" name="mail" value="' . ( isset( $_POST["mail"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="40" required />';
     echo '</p>';
     echo '<p>';
     echo 'clave (requerido) <br />';
-    echo '<input type="text" name="cf-subject" pattern="[a-zA-Z ]+" value="' . ( isset( $_POST["cf-subject"] ) ? esc_attr( $_POST["cf-subject"] ) : '' ) . '" size="40" />';
+    echo '<input type="password" name="subject" size="40" />';
     echo '</p>';
     echo '<p><input type="submit" name="submitted" value="Autenticarme"/></p>';
     echo '</form>';

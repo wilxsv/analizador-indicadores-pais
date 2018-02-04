@@ -12,6 +12,7 @@
  global $wpdb;
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
+ include(plugin_dir_path( __FILE__ )."../router.php");
 
  $deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
@@ -26,7 +27,8 @@
  }
  $categoria.= "<optgroup>";
 
- if ( $anyo_ultimo ):
+ $acceso = acceso( $wpdb, "graficoAnalisisSituacional");
+ if ( $acceso === true ):
 ?>
 <div class="row"> <h5>Mapa interactivo</h5> </div>
 
@@ -133,7 +135,6 @@ function restabecer() {
 </script>
 
 <?php else: ?>
-
-Debes ingresar tus credenciales para acceder al contenido.
-
+  <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
+  <?php echo $acceso; ?>
 <?php endif ?>
