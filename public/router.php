@@ -23,20 +23,28 @@
   } elseif ($_POST['subject']) {
     $pass = hash('sha512', $_POST['subject']);
     $mail = $_POST["mail"];
-    $sql = "SELECT *
+    $sql = "SELECT U.id, U.email, R.nombre_rol, H.nombre_herramienta
       FROM ind_seg_usuario AS U, ind_seg_rol AS R, ind_seg_permiso AS P, ind_seg_herramienta AS H
       WHERE U.rol_id = R.id AND R.id = P.role_id AND P.herramienta_id = H.id
 	       AND U.active = 1 AND H.enabled = 1 AND U.email = '%s' AND U.password = '%s'";
     $id=$wpdb->get_results( $wpdb->prepare( $sql, array($mail , $pass) ) );
     $result = FALSE;
     $_SESSION['type'] = "";
+    $user = '';
     foreach ($id as $l) {
+      $sql = "INSERT INTO ind_seg_acceso (,ip,user,login) VALUES";
+      $sql .= "(CURRENT_TIMESTAMP,$l->email,$l->id, 1)";
       $_SESSION['user_name'] = $l->email;
       $_SESSION['user_rol'] = $l->nombre_rol;
       $_SESSION['type'] .= "$l->nombre_herramienta / ";
       $result = TRUE;
+      $user = $l->id;
     }
     if ($result){
+      $hoy = date("Y-m-d H:i:s");
+      $sql = "UPDATE ind_seg_usuario SET last_access = '$hoy' WHERE id = $user";
+      $wpdb->query($sql);
+      $wpdb->insert("ind_seg_acceso", array('fecha' => date('Y-m-d H:i:s'),'user' => $user,'login' => 1, 'ip' => get_client_ip_server()), array( '%s', '%d', '%d', '%s' ));
       return TRUE;
     } else {
       return generateLoginForm();
@@ -58,3 +66,43 @@
     echo '<p><input type="submit" name="submitted" value="Autenticarme"/></p>';
     echo '</form>';
  }
+
+ function get_client_ip_server() {
+     $ipaddress = '';
+     if ($_SERVER['HTTP_CLIENT_IP'])
+         $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+     else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+         $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+     else if($_SERVER['HTTP_X_FORWARDED'])
+         $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+     else if($_SERVER['HTTP_FORWARDED_FOR'])
+         $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+     else if($_SERVER['HTTP_FORWARDED'])
+         $ipaddress = $_SERVER['HTTP_FORWARDED'];
+     else if($_SERVER['REMOTE_ADDR'])
+         $ipaddress = $_SERVER['REMOTE_ADDR'];
+     else
+         $ipaddress = 'UNKNOWN';
+
+     return $ipaddress;
+ }
+
+ function get_client_ip_env() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+        $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+
+    return $ipaddress;
+}

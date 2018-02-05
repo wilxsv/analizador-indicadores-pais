@@ -25,7 +25,7 @@ $total = 0;
 if ( isset($_POST['importSubmit']) ) {
   if(isset($_POST['username']) && isset($_POST['mail']) && isset($_POST['subject']) && isset($_POST['rol']) ){
     $sql = "INSERT INTO ind_seg_usuario (username, email, salt, password, active, rol_id, create_at) VALUES ";
-    $sql .= "('".$_POST['username']."','".$_POST['mail']."','".uniqid()."','".hash('sha512', $_POST['subject'])."',1,".$_POST['rol'].",'".date('Y-m-s H:i:s')."' )";
+    $sql .= "('".$_POST['username']."','".$_POST['mail']."','".uniqid()."','".hash('sha512', $_POST['subject'])."',1,".$_POST['rol'].",'".date('Y-m-d H:i:s')."' )";
     $wpdb->query($sql);
     if($wpdb->last_error !== ''){
       $status = 'err';
@@ -115,7 +115,13 @@ include(plugin_dir_path( __FILE__ )."../public/footer_public.php");
   <table class="table table-bordered display" id="acceso">
     <thead><tr><th>Fecha</th><th>Correo</th><th>IP</th><th>Resultado</th></tr></thead>
     <tbody>
-      <tr><td></td><td></td><td></td><td></td></tr>
+      <?php
+      $sql = "SELECT A.fecha, A.ip, U.username AS user, IF(login = 1, 'Si' ,'NO') AS login FROM ind_seg_usuario AS U, ind_seg_acceso AS A WHERE U.id = A.user" ;
+      $hechos = $wpdb->get_results( $sql);
+      foreach ($hechos as $key => $o) {
+        echo "<tr><td>$o->fecha</td><td>$o->user</td><td>$o->ip</td><td>$o->login</td></tr>";
+      }
+      ?>
     </tbody>
   </table>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
