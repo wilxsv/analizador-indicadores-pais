@@ -14,18 +14,26 @@
   if ( !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) {
     return "No esta usando un protocolo seguro";
   } elseif ( $_SESSION['user_name'] != NULL || isset($_SESSION['user_name']) || isset($_SESSION['type'])  ) {
-    return TRUE;
+    if ( strpos($_SESSION['type'], $idx) !== FALSE ) {
+      return TRUE;
+    } else {
+      return "<h4> Sabemos que eres usuario pero por el momento no podemos mostrar este contenido, ...</h4>";
+    }
     return generateLoginForm();
   } elseif ($_POST['subject']) {
     $pass = hash('sha512', $_POST['subject']);
     $mail = $_POST["mail"];
-    $sql = "SELECT * FROM ind_seg_usuario WHERE email = '%s' AND password = '%s' AND active =1";
+    $sql = "SELECT *
+      FROM ind_seg_usuario AS U, ind_seg_rol AS R, ind_seg_permiso AS P, ind_seg_herramienta AS H
+      WHERE U.rol_id = R.id AND R.id = P.role_id AND P.herramienta_id = H.id
+	       AND U.active = 1 AND H.enabled = 1 AND U.email = '%s' AND U.password = '%s'";
     $id=$wpdb->get_results( $wpdb->prepare( $sql, array($mail , $pass) ) );
     $result = FALSE;
+    $_SESSION['type'] = "";
     foreach ($id as $l) {
-      session_name('wp-settings-old');
       $_SESSION['user_name'] = $l->email;
-      $_SESSION['type'] = $l->rol_id;
+      $_SESSION['user_rol'] = $l->nombre_rol;
+      $_SESSION['type'] .= "$l->nombre_herramienta / ";
       $result = TRUE;
     }
     if ($result){
