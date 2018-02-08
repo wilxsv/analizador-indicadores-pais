@@ -45,6 +45,11 @@
       $sql = "UPDATE ind_seg_usuario SET last_access = '$hoy' WHERE id = $user";
       $wpdb->query($sql);
       $wpdb->insert("ind_seg_acceso", array('fecha' => date('Y-m-d H:i:s'),'user' => $user,'login' => 1, 'ip' => get_client_ip_server()), array( '%s', '%d', '%d', '%s' ));
+      if ( strpos($_SESSION['type'], $idx) !== FALSE ) {
+        return TRUE;
+      } else {
+        return "<h4> Sabemos que eres usuario pero por el momento no podemos mostrar este contenido, ...</h4>";
+      }
       return TRUE;
     } else {
       return generateLoginForm();

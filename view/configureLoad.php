@@ -14,7 +14,7 @@
   echo '<p>username (requerido)<br /><input type="text" name="username" size="40" required /></p>';
   echo '<p>correo (requerido)<br /><input type="email" name="mail" size="40" required /></p>';
   echo '<p>clave (requerido)<br /><input type="password" name="subject" size="40" /></p>';
-  echo '<p>Rol (requerido) <br /><select name="rol" id="rol"><option value="1">Analista</option><option value="2" selected>Carga de datos</option></select></p>';
+  echo '<p>Rol (requerido) <br /><select name="rol" id="rol"><option value="2">Analista</option><option value="1" selected>Carga de datos</option></select></p>';
   echo '<p><input type="submit" class="btn btn-primary" name="importSubmit" value="Agregar"></p>';
   echo '</form>';
  }
@@ -41,7 +41,7 @@ if(!empty($status)){
     switch($status){
         case 'succ':
             $statusMsgClass = 'alert-success';
-            $statusMsg = 'Datos actualizados. '."[ $total ]";
+            $statusMsg = 'Banco de datos actualizado. ';
             break;
         case 'err':
             $statusMsgClass = 'alert-danger';
@@ -76,7 +76,7 @@ include(plugin_dir_path( __FILE__ )."../public/footer_public.php");
     <div class="panel panel-default">
         <div class="panel-heading">
             Usuarios
-            <a href="javascript:void(0);" onclick="$('#importFrm').slideToggle();">Importar datos</a>
+            <a href="javascript:void(0);" onclick="$('#importFrm').slideToggle();">Registrar a una persona como usuaria</a>
         </div>
         <div class="panel-body">
           <?php echo generateUserForm(); ?>
@@ -93,7 +93,7 @@ include(plugin_dir_path( __FILE__ )."../public/footer_public.php");
                 </thead>
                 <tbody>
 					<?php
-					$sql = "SELECT id, username, create_at, last_access, IF(active = 1, 'Si' ,'NO') AS active, IF(rol_id = 1, 'Analista' ,'Técnico') AS rol_id FROM ind_seg_usuario";
+					$sql = "SELECT id, username, create_at, last_access, IF(active = 1, 'Si' ,'NO') AS active, IF(rol_id = 2, 'Analista' ,'Técnico de registro') AS rol_id FROM ind_seg_usuario";
 					$hechos = $wpdb->get_results( $sql);
 					foreach ($hechos as $key => $object) {
           echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';

@@ -46,10 +46,6 @@ if ($data == 'table' && $anyo && $type == 'm') {
         echo getEstadisticaDelito($wpdb, 2017, $vars);
         break;
   }
-
-  if ($code == 'r'){
-  }
-//
 }elseif ($data == 'table' && $type == 's') {
   if ($vars){
     echo getTableSiatuacional($wpdb, $anyo, $vars, $code);
@@ -88,6 +84,31 @@ elseif ($data == 'map' && $anyo && $type == 's') {
   else {
     echo 'alert("No a seleccionado un todas las variables requeridas!!");';
   }
+}
+elseif ($data == 'map' && $anyo && $type == 's') {
+  if ($vars){
+    echo get_mapa_situacional($wpdb, $anyo, $vars, $code, get_centro_municipio($wpdb, $vars));
+  }
+  else {
+    echo 'alert("No a seleccionado un todas las variables requeridas!!");';
+  }
+}
+elseif ($data == 'table' && $type == 'u') {
+  switch ($code) {
+    case 4:
+        echo "<h6>CRUCES BANCO DE DATOS RETORNADOS [Municipio $vars]</h6>".getEstadisticaRetornados($wpdb, $anyo, $vars);
+        break;
+    case 3:
+        echo getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
+        break;
+    case 1:
+        echo getEstadisticaTransito($wpdb, $anyo, $vars);
+        break;
+    case 2:
+        echo getEstadisticaDelito($wpdb, $anyo, $vars);
+        break;
+  }
+  echo "";
 }
 else {
   echo "";

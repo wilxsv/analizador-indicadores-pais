@@ -34,17 +34,19 @@ function getEstadisticaDelito($wpdb, $anyo, $vars){
   $table .= getTableX($head, '', uniqid());
   $head = '<th>Sector policial</th><th>ARMA BLANCA</th><th>ARMA DE FUEGO</th><th>CONTUNDENTE</th><th>FUERZA FISICA</th><th>LLAMADA - MENSAJES</th><th>ND</th><th>OTRAS</th>';
   $table .= getTableX($head, '', uniqid());
-
-
-
   return $table;
 }
 
 function getEstadisticaTransito($wpdb, $anyo, $vars){
-  return $table;
+  return "$table";
 }
 
 function getEstadisticaRetornados($wpdb, $anyo, $vars){
+  $table = '';
+  //$head = '<tr><th>Cruce</th><th colspan="4">Variables</th></tr>';
+  $head = '<tr><th>Cruce</th><th>.</th><th>.</th><th>.</th><th>.</th></tr>';
+  $data = getRetornadosPorMunicipioSexo($wpdb, $anyo, $vars);
+  $table .= getTableX($head, $data, uniqid());
   return $table;
 }
 
@@ -83,7 +85,17 @@ function getTableX($head, $data, $idx){
   $t = '<table class="table table-bordered display" id="'.$idx.'"><thead>'.$head.'</thead><tbody>';
   $t .= $data;
   $t .='</tbody></table><script type="text/javascript">';
-  $t .="(function($){ $('#".$idx."').DataTable({ searching: false, pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
+  $t .="(function($){ $('#".$idx."').DataTable({ ordering: false, pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
   </script>";
   return $t;
 }
+/* ############################# Generadores de cruces */
+ function getRetornadosPorMunicipioSexo($wpdb, $anyo, $vars){
+   $data = "";
+   $sql = "select 'Retornados por sexo' AS u, IF(sexo = 'MASCULINO', COUNT(*) ,'0') AS d, IF(sexo = 'FEMENINO', COUNT(*) ,'0') AS t, IF(sexo = 'ND', COUNT(*) ,'0') AS c, '' AS i from ind_bnc_retornado where anyo = $anyo and municipio = '$vars' group by municipio";
+   $query = $wpdb->get_results( $sql);
+   foreach ($query as $key => $ob) {
+     $data = "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td><td>$ob->i</td></tr>";
+ 	 }
+   return $data;
+ }

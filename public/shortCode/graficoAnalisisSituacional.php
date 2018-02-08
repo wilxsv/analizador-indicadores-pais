@@ -235,15 +235,18 @@ function restabecer() {
 //funcion para generar la Estadisticas del indicador seleccionado
 function generar_estadistica( $value ) {
   //alert("generado!!");
+  var selects = document.getElementById("smunicipio");
+  var variable = selects.options[selects.selectedIndex].value;
+  var selects = document.getElementById("sanyo");
+  var anyo = selects.options[selects.selectedIndex].value;
+  $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&vars='+variable+'&type=u&anyo='+anyo+'&code='+$value, { data:'' }, function(resp) {
+      $('#more').html(resp);
+  });
   document.getElementById('more').scrollIntoView();
 }
 </script>
 
 <?php else: ?>
-
   <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
   <?php echo $acceso; ?>
-
-
-
 <?php endif ?>
