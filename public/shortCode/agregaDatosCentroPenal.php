@@ -8,7 +8,6 @@
  * Author URI: http://pnud.org.sv/
 */
 
-
 global $wpdb;
 
  include(plugin_dir_path( __FILE__ )."../head_public.php");
@@ -26,7 +25,7 @@ if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
 }
 $hash = md5( rand() );
 $user = get_current_user_id();
-
+$date = date('Y-m-d H:i:s');
 if(isset($_POST['importSubmit'])){
     $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
 	if(!empty($_FILES['input-file-now']['name']) && in_array($_FILES['input-file-now']['type'],$csvMimes)){
@@ -34,11 +33,11 @@ if(isset($_POST['importSubmit'])){
 			$csvFile = fopen($_FILES['input-file-now']['tmp_name'], 'r');
             fgetcsv($csvFile);
 			switch($_FILES['input-file-now']['name']){
-				case 'municipio.csv':
+				case 'dgcp.csv':
 					while(($line = fgetcsv($csvFile)) !== FALSE){
 						//$sql = "INSERT INTO `ind_municipio` (`codigo`,`departamento`, `municipio`, `homicidio`, `total_homicidio_hombre`, `total_homicidio_mujer`, `suicidio`, `accidentes_transito`, `sin_cobertura_primaria`, `pobresa`, `desagrega`, `anyo`, `hash`, `ip`, `usuario`) VALUES ('$line[0]', '$line[1]', '$line[2]', $line[3], $line[4], $line[5], $line[6], $line[7], $line[8], $line[9], $line[10], 2017, '$hash', '$ip', $user)";
-						$sql =  "INSERT INTO `ind_municipio` (`departamento`,`municipio`,`homicidio`,`total_homicidio_mujer`,`desaparecidos`,`lesiones`,`vif`,`extorciones`,`robo`,`hurto`,`robo_vehiculo`,`hurto_vehiculo`,`r_h_conmercio`,`ppl`,`ppurb`,`epp`,`veh`,`anyo`,`usuario`,`ip`,`hash`) VALUES ";
-						$sql .= "('$line[0]', '$line[1]', $line[2], $line[3], $line[4], $line[5], $line[6], $line[7], $line[8], $line[9], $line[10], $line[11], $line[12], $line[13], $line[14], $line[15], $line[16], $line[17], $user, '$ip', '$hash')";
+						$sql =  "INSERT INTO ind_bnc_dgcp (departamento, municipio, sipe, rango_edad, sexo, nivel_educativo, estado_civil, sector_policial, organizacion_delictiva, deportado, delito, anyo, registro, usuario, ip, hash) VALUES";
+						$sql .= "('$line[0]', '$line[1]', $line[2], '$line[3]', '$line[4]', '$line[5]', '$line[6]', '$line[7]', '$line[8]', '$line[9]', '$line[10]', $line[11], '$date', $user, '$ip', '$hash')";
 						$wpdb->query($sql);
 						$total+=1;
 					}
@@ -83,7 +82,7 @@ if(!empty($status)){
 }
 
 
-$acceso = acceso( $wpdb, "agregaDatosMunicipalidad");
+$acceso = acceso( $wpdb, "agregaDatosCentroPenal");
 if ( $acceso === true ):
 
 if(!empty($statusMsg)){

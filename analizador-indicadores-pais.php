@@ -16,7 +16,7 @@ add_shortcode('agregaDatosMined', '' );
 add_shortcode('agregaDatosPNC', '' );
 add_shortcode('agregaDatosATransito', '' );
 add_shortcode('agregaDatosRetornados', '' );
-add_shortcode('agregaDatosCentroPenal', '' );
+add_shortcode('agregaDatosCentroPenal', 'agregaDatosCentroPenal_shortcode' );
 add_shortcode('agregaIndCEscolar', '' );
 add_shortcode('agregaIndMunicipios', '' );
 /* Visualizadores */
@@ -52,6 +52,9 @@ function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
 }
 function agregaDatosMunicipio_shortcode($atts, $mensaje = null) {
 	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosMunicipio.php";
+}
+function agregaDatosCentroPenal_shortcode($atts, $mensaje = null) {
+	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosCentroPenal.php";
 }
 function graficoPriorizacionMunicipal_shortcode($atts, $mensaje = null) {
 	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoPriorizacionMunicipal.php";

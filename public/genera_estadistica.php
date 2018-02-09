@@ -38,14 +38,39 @@ function getEstadisticaDelito($wpdb, $anyo, $vars){
 }
 
 function getEstadisticaTransito($wpdb, $anyo, $vars){
-  return "$table";
+  $max = 4;
+  $table = '';
+  $data .= getRetornadosPorSQL($wpdb, "SELECT municipio AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY municipio ORDER BY 1", "<tr><td>Resultado de accidentes por rango de municipio</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT edad_rango AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY edad_rango ORDER BY 1", "<tr><td>Resultado de accidentes por rango de edades</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT calidad AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY calidad ORDER BY 1", "<tr><td>Resultado de accidentes por calidad</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT tipo_accidente AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY tipo_accidente ORDER BY 1", "<tr><td>Resultado de accidentes por tipo de accidente</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT causa AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY causa ORDER BY 1", "<tr><td>Resultado de accidentes por rango de causa</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT vehiculo AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY vehiculo ORDER BY 1", "<tr><td>Resultado de accidentes por clase de vehiculo</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT mes AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY mes ORDER BY 1", "<tr><td>Resultado de accidentes por meses</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT dia AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY dia ORDER BY 1", "<tr><td>Resultado de accidentes por dias</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT hora_rango AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY hora_rango ORDER BY 1", "<tr><td>Resultado de accidentes por rango de hora</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT resultado AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY resultado ORDER BY 1", "<tr><td>Dirección</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $head = '<tr><th>Cruce</th><th>.</th><th>.</th><th>.</th></tr>';
+  $table .= getTableX($head, $data, uniqid());
+  return $table;
 }
 
 function getEstadisticaRetornados($wpdb, $anyo, $vars){
+  $max = 4;
   $table = '';
   //$head = '<tr><th>Cruce</th><th colspan="4">Variables</th></tr>';
-  $head = '<tr><th>Cruce</th><th>.</th><th>.</th><th>.</th><th>.</th></tr>';
-  $data = getRetornadosPorMunicipioSexo($wpdb, $anyo, $vars);
+  $head = '<tr><th>Cruce</th><th>.</th><th>.</th><th>.</th></tr>';
+  $data .= getRetornadosPorSQL($wpdb, "SELECT 'Retornados por sexo en $vars' AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY municipio ORDER BY 1", "<tr><td>Municipio</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT pais_repatriacion AS u, COUNT(*) AS d, '' AS t, '' AS c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY pais_repatriacion ORDER BY 1", "<tr><td>Pais de Repatriación</td><td>Frecuencia</td><td></td><td></td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT mes AS u, COUNT(*) AS d, '' AS t, '' AS c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY mes ORDER BY 1", "<tr><td>Retornados a $vars por mes</td><td>Frecuencia</td><td></td><td></td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT consulado AS u, COUNT(*) AS d, '' AS t, '' AS c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY consulado ORDER BY 1", "<tr><td>Retornados a $vars por consulado</td><td>Frecuencia</td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT estado_civil AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY estado_civil ORDER BY 1", "<tr><td>'Retornados por estado civil en $vars'</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT persona_dependiente AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY persona_dependiente ORDER BY 1", "<tr><td>'Retornados por personas dependientes en $vars'</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT motivo AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY motivo ORDER BY 1", "<tr><td>'Retornados por motivo de migración en $vars'</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT nivel_educativo AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY nivel_educativo ORDER BY 1", "<tr><td>'Retornados segun nivel nivel_educativo en $vars'</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT antecedentes_penales AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY antecedentes_penales ORDER BY 1", "<tr><td>'Retornados segun antecedentes penales'</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT tiempo_fuera AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY tiempo_fuera ORDER BY 1", "<tr><td>'Tiempo de residir fuera de ES'</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT espectativa_migrante AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY espectativa_migrante ORDER BY 1", "<tr><td>'Retornados segun espectativas de vida en $vars'</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
   $table .= getTableX($head, $data, uniqid());
   return $table;
 }
@@ -91,11 +116,40 @@ function getTableX($head, $data, $idx){
 }
 /* ############################# Generadores de cruces */
  function getRetornadosPorMunicipioSexo($wpdb, $anyo, $vars){
+  $data = "";
+  $sql = "";
+  $query = $wpdb->get_results( $sql);
+  foreach ($query as $key => $ob) {
+   $data = "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td><td>$ob->i</td></tr>";
+ 	}
+  return "".$data;
+ }
+
+ function getRetornadosPorPaisRepatriacion($wpdb, $anyo, $vars){
+  $data = "";
+  $sql = "SELECT pais_repatriacion AS u, COUNT(*) AS d, '' AS t, '' AS c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY pais_repatriacion ORDER BY 1";
+  $query = $wpdb->get_results( $sql);
+  foreach ($query as $key => $ob) {
+    $data .= "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td><td>$ob->i</td></tr>";
+   }
+  return "<tr><td>Pais de Repatriación</td><td>Frecuencia</td><td></td><td></td><td></td></tr>".$data;
+ }
+
+  function getRetornadosPorSQL($wpdb, $sql, $titulo){
    $data = "";
-   $sql = "select 'Retornados por sexo' AS u, IF(sexo = 'MASCULINO', COUNT(*) ,'0') AS d, IF(sexo = 'FEMENINO', COUNT(*) ,'0') AS t, IF(sexo = 'ND', COUNT(*) ,'0') AS c, '' AS i from ind_bnc_retornado where anyo = $anyo and municipio = '$vars' group by municipio";
    $query = $wpdb->get_results( $sql);
    foreach ($query as $key => $ob) {
-     $data = "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td><td>$ob->i</td></tr>";
- 	 }
-   return $data;
+     $data .= "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td></tr>";
+    }
+   return "$titulo $data";
+  }
+
+ function getLinea($max){
+   $tr = '<tr>';
+   if ($max > 0){
+     for ($i = 1; $i <= $max; $i++) {
+       $tr .= "<td></td>";
+     }
+   }
+   return "$tr</tr>";
  }

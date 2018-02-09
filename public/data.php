@@ -102,7 +102,7 @@ elseif ($data == 'table' && $type == 'u') {
         echo getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
         break;
     case 1:
-        echo getEstadisticaTransito($wpdb, $anyo, $vars);
+        echo "<h6>CRUCES BANCO DE DATOS ACCIDENTES DE TRANSITO [Municipio $vars]</h6>".getEstadisticaTransito($wpdb, $anyo, $vars);
         break;
     case 2:
         echo getEstadisticaDelito($wpdb, $anyo, $vars);
