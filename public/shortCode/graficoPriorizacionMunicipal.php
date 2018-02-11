@@ -11,8 +11,8 @@
 
  global $wpdb;
 
- include(plugin_dir_path( __FILE__ )."../head_public.php");
- include(plugin_dir_path( __FILE__ )."../router.php");
+ require_once(plugin_dir_path( __FILE__ )."../head_public.php");
+ require_once(plugin_dir_path( __FILE__ )."../router.php");
 
  $deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );

@@ -10,8 +10,8 @@
 
  global $wpdb;
 
- include(plugin_dir_path( __FILE__ )."../head_public.php");
- include(plugin_dir_path( __FILE__ )."../router.php");
+ require_once(plugin_dir_path( __FILE__ )."../head_public.php");
+ require_once(plugin_dir_path( __FILE__ )."../router.php");
 
  $municipios = "SELECT departamento, municipio FROM `ind_centro_escolar` group by departamento, municipio order by departamento, municipio";
  $municipios=$wpdb->get_results("$municipios");

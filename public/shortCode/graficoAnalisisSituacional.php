@@ -10,8 +10,8 @@
 
  global $wpdb;
 
- include(plugin_dir_path( __FILE__ )."../head_public.php");
- include(plugin_dir_path( __FILE__ )."../router.php");
+ require_once(plugin_dir_path( __FILE__ )."../head_public.php");
+ require_once(plugin_dir_path( __FILE__ )."../router.php");
 
  $municipios=$wpdb->get_results( "SELECT d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id group by d.nombre_departamento, m.nombre_municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_bnc_dgcp GROUP BY anyo" );

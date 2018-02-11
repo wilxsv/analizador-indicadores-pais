@@ -11,8 +11,8 @@
 
 global $wpdb;
 
- include(plugin_dir_path( __FILE__ )."../head_public.php");
- include(plugin_dir_path( __FILE__ )."../router.php");
+ require_once(plugin_dir_path( __FILE__ )."../head_public.php");
+ require_once(plugin_dir_path( __FILE__ )."../router.php");
 
 $status = false;
 $total = 0;

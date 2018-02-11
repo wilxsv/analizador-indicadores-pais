@@ -10,7 +10,8 @@
 
  global $wpdb;
 
- include(plugin_dir_path( __FILE__ )."../head_public.php");
+ require_once(plugin_dir_path( __FILE__ )."../head_public.php");
+ 
  $depto = $_GET["depto"];
  $deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
 

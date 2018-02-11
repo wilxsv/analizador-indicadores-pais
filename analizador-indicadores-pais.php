@@ -41,35 +41,35 @@ function setup_menu(){
  * *******************************************************************/
  function configure_load()
  {
-	require('view/configureLoad.php');
+	require_once('view/configureLoad.php');
  }
 /**********************************************************************
  *  Shortcode
  * *******************************************************************/
 
 function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/generaCodigoSeguridad.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/generaCodigoSeguridad.php";
 }
 function agregaDatosMunicipio_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosMunicipio.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosMunicipio.php";
 }
 function agregaDatosCentroPenal_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosCentroPenal.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosCentroPenal.php";
 }
 function graficoPriorizacionMunicipal_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoPriorizacionMunicipal.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoPriorizacionMunicipal.php";
 }
 function graficoAnalisisSituacional_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoAnalisisSituacional.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoAnalisisSituacional.php";
 }
 function graficoFocalizacion_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoFocalizacion.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoFocalizacion.php";
 }
 function graficoCEscolar_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoCEscolar.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoCEscolar.php";
 }
 function estadisticasBasicas_shortcode($atts, $mensaje = null) {
-	include WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/estadisticasBasicas.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/estadisticasBasicas.php";
 }
 
 /* Acciones */

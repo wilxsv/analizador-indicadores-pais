@@ -10,8 +10,8 @@
 
  global $wpdb;
 
- include(plugin_dir_path( __FILE__ )."../head_public.php");
- include(plugin_dir_path( __FILE__ )."../router.php");
+ require_once(plugin_dir_path( __FILE__ )."../head_public.php");
+ require_once(plugin_dir_path( __FILE__ )."../router.php");
 
  $municipios=$wpdb->get_results("SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio");
  $fase = $wpdb->get_results("SELECT fase_pess FROM `ind_focalizacion` WHERE sector IS NOT NULL group by fase_pess");
