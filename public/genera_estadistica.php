@@ -58,7 +58,6 @@ function getEstadisticaTransito($wpdb, $anyo, $vars){
 function getEstadisticaRetornados($wpdb, $anyo, $vars){
   $max = 4;
   $table = '';
-  //$head = '<tr><th>Cruce</th><th colspan="4">Variables</th></tr>';
   $head = '<tr><th>Cruce</th><th>.</th><th>.</th><th>.</th></tr>';
   $data .= getRetornadosPorSQL($wpdb, "SELECT 'Retornados por sexo en $vars' AS u, COUNT(IF(sexo = 'MASCULINO',1,NULL)) d, COUNT(IF(sexo = 'FEMENINO',1,NULL)) t, COUNT(IF(sexo = 'ND',1,NULL)) c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY municipio ORDER BY 1", "<tr><td>Municipio</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td></tr>").getLinea($max);
   $data .= getRetornadosPorSQL($wpdb, "SELECT pais_repatriacion AS u, COUNT(*) AS d, '' AS t, '' AS c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY pais_repatriacion ORDER BY 1", "<tr><td>Pais de Repatriación</td><td>Frecuencia</td><td></td><td></td></tr>").getLinea($max);
@@ -76,34 +75,21 @@ function getEstadisticaRetornados($wpdb, $anyo, $vars){
 }
 
 function getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars){
+  $max = 9;
   $table = '';
-  $head = '<th>Municipios</th><th>B18</th><th>B18R</th><th>B18S</th><th>MAO MAO</th><th>MD</th><th>ML</th><th>MS13</th><th>NINGUNO</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Municipio</th><th>Masculino</th><th>Femenino</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Sector policial</th><th>B18</th><th>B18R</th><th>B18S</th><th>MAO MAO</th><th>MD</th><th>ML</th><th>MS13</th><th>NINGUNO</th>';
-  $table .= getTableX($head, '', uniqid());//Femenino
-  $head = '<th>Rango de edades</th><th>ANALFABETA</th><th>BACHILLERATO</th><th>PRIMARIA</th><th>SECUNDARIA</th><th>TÉCNICO</th><th>UNIVERSIDAD</th>';
-  $table .= getTableX($head, '', uniqid());//Masculino
-  $head = '<th>Rango de edades</th><th>ANALFABETA</th><th>BACHILLERATO</th><th>PRIMARIA</th><th>SECUNDARIA</th><th>TÉCNICO</th><th>UNIVERSIDAD</th>';
-  $table .= getTableX($head, '', uniqid());//Femenino
-  $head = '<th>Rango de edades</th><th>ACOMPAÑADO(A)</th><th>CASADO(A)</th><th>DIVORCIADO(A)</th><th>SIN ESPECIFICAR</th><th>SOLTERO(A)</th><th>VIUDO(A)</th>';
-  $table .= getTableX($head, '', uniqid());//Masculino
-  $head = '<th>Rango de edades</th><th>ACOMPAÑADO(A)</th><th>CASADO(A)</th><th>DIVORCIADO(A)</th><th>SIN ESPECIFICAR</th><th>SOLTERO(A)</th><th>VIUDO(A)</th>';
-  $table .= getTableX($head, '', uniqid());//Femenino
-  $head = '<th>Rango de edades</th><th>Agrupaciones ilicitas</th><th>Extorsión</th><th>Robo</th><th>Homicidio</th><th>Feminicidio</th><th>Otros Delitos</th>';
-  $table .= getTableX($head, '', uniqid());//Masculino
-  $head = '<th>Rango de edades</th><th>Agrupaciones ilicitas</th><th>Extorsión</th><th>Robo</th><th>Homicidio</th><th>Feminicidio</th><th>Otros Delitos</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Rango de edades</th><th>Agrupaciones ilicitas</th><th>Extorsión</th><th>Robo</th><th>Homicidio</th><th>Feminicidio</th><th>Otros Delitos</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Rango de edades</th><th>Agrupaciones ilicitas</th><th>Extorsión</th><th>Robo</th><th>Homicidio</th><th>Feminicidio</th><th>Otros Delitos</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Rango de edades</th><th>Agrupaciones ilicitas</th><th>Extorsión</th><th>Robo</th><th>Homicidio</th><th>Feminicidio</th><th>Otros Delitos</th>';
-  $table .= getTableX($head, '', uniqid());
+  $head = '<tr><th>Cruce</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>';
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT municipio AS a, COUNT(IF(organizacion_delictiva = 'MARA 18',1,NULL)) b, COUNT(IF(organizacion_delictiva = 'MARA 18 R',1,NULL)) c, COUNT(IF(organizacion_delictiva = 'MARA 18 S',1,NULL)) d, COUNT(IF(organizacion_delictiva = 'MAO MAO',1,NULL)) e, COUNT(IF(organizacion_delictiva = 'MD',1,NULL)) f, COUNT(IF(organizacion_delictiva = 'MIRADA LOCA',1,NULL)) g, COUNT(IF(organizacion_delictiva = 'MS13',1,NULL)) h, COUNT(IF(organizacion_delictiva = 'NINGUNO',1,NULL)) i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' GROUP BY municipio ORDER BY 1", "<tr><td>MUNICIPIO</td><td>BR18</td><td>BR18 R</td><td>BR18 S</td><td>MAO MAO</td><td>MD</td><td>MIRADA LOCA</td><td>MS13</td><td>NINGUNO</td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT municipio AS a, COUNT(IF(sexo = 'MASCULINO',1,NULL)) b, COUNT(IF(sexo = 'FEMENINO',1,NULL)) c, '' d, '' e, '' f, '' g, '' h, '' i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' GROUP BY municipio ORDER BY 1", "<tr><td>Segun rango etareo</td><td>MASCULINO</td><td>FEMENINO</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT sector_policial AS a, COUNT(IF(organizacion_delictiva = 'MARA 18',1,NULL)) b, COUNT(IF(organizacion_delictiva = 'MARA 18 R',1,NULL)) c, COUNT(IF(organizacion_delictiva = 'MARA 18 S',1,NULL)) d, COUNT(IF(organizacion_delictiva = 'MAO MAO',1,NULL)) e, COUNT(IF(organizacion_delictiva = 'MD',1,NULL)) f, COUNT(IF(organizacion_delictiva = 'MIRADA LOCA',1,NULL)) g, COUNT(IF(organizacion_delictiva = 'MS13',1,NULL)) h, COUNT(IF(organizacion_delictiva = 'NINGUNO',1,NULL)) i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' GROUP BY sector_policial ORDER BY 1", "<tr><td>SECTOR POLICIAL</td><td>BR18</td><td>BR18 R</td><td>BR18 S</td><td>MAO MAO</td><td>MD</td><td>MIRADA LOCA</td><td>MS13</td><td>NINGUNO</td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT rango_edad AS a, COUNT(IF(nivel_educativo = 'ANALFABETA',1,NULL)) b, COUNT(IF(nivel_educativo = 'BACHILLERATO',1,NULL)) c, COUNT(IF(nivel_educativo = 'PRIMARIA',1,NULL)) d, COUNT(IF(nivel_educativo = 'SECUNDARIA',1,NULL)) e, COUNT(IF(nivel_educativo = 'SIN ESPECIFICAR',1,NULL)) f, COUNT(IF(nivel_educativo = 'TECNICOS',1,NULL)) g, COUNT(IF(nivel_educativo = 'UNIVERSITARIA',1,NULL)) h, '' i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' AND sexo = 'MASCULINO' GROUP BY rango_edad ORDER BY 1", "<tr><td>RANGO DE EDADES [MASCULINO]</td><td>ANALFABETA</td><td>BACHILLERATO</td><td>PRIMARIA</td><td>SECUNDARIA</td><td>SIN ESPECIFICAR</td><td>TECNICOS</td><td>UNIVERSITARIA</td><td></td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT rango_edad AS a, COUNT(IF(nivel_educativo = 'ANALFABETA',1,NULL)) b, COUNT(IF(nivel_educativo = 'BACHILLERATO',1,NULL)) c, COUNT(IF(nivel_educativo = 'PRIMARIA',1,NULL)) d, COUNT(IF(nivel_educativo = 'SECUNDARIA',1,NULL)) e, COUNT(IF(nivel_educativo = 'SIN ESPECIFICAR',1,NULL)) f, COUNT(IF(nivel_educativo = 'TECNICOS',1,NULL)) g, COUNT(IF(nivel_educativo = 'UNIVERSITARIA',1,NULL)) h, '' i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' AND sexo = 'FEMENINO' GROUP BY rango_edad ORDER BY 1", "<tr><td>RANGO DE EDADES [FEMENINO]</td><td>ANALFABETA</td><td>BACHILLERATO</td><td>PRIMARIA</td><td>SECUNDARIA</td><td>SIN ESPECIFICAR</td><td>TECNICOS</td><td>UNIVERSITARIA</td><td></td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT rango_edad AS a, COUNT(IF(nivel_educativo = 'ANALFABETA',1,NULL)) b, COUNT(IF(nivel_educativo = 'BACHILLERATO',1,NULL)) c, COUNT(IF(nivel_educativo = 'PRIMARIA',1,NULL)) d, COUNT(IF(nivel_educativo = 'SECUNDARIA',1,NULL)) e, COUNT(IF(nivel_educativo = 'SIN ESPECIFICAR',1,NULL)) f, COUNT(IF(nivel_educativo = 'TECNICOS',1,NULL)) g, COUNT(IF(nivel_educativo = 'UNIVERSITARIA',1,NULL)) h, '' i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' GROUP BY rango_edad ORDER BY 1", "<tr><td>RANGO DE EDADES [AMBOS SEXOS]</td><td>ANALFABETA</td><td>BACHILLERATO</td><td>PRIMARIA</td><td>SECUNDARIA</td><td>SIN ESPECIFICAR</td><td>TECNICOS</td><td>UNIVERSITARIA</td><td></td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT rango_edad AS a, COUNT(IF(estado_civil = 'ACOMPAÑADO(A)',1,NULL)) b, COUNT(IF(estado_civil = 'CASADO(A)',1,NULL)) c, COUNT(IF(estado_civil = 'DIVORCIADO(A)',1,NULL)) d, COUNT(IF(estado_civil = 'SIN ESPECIFICAR',1,NULL)) e, COUNT(IF(estado_civil = 'SOLTERO(A)',1,NULL)) f, COUNT(IF(estado_civil = 'VIUDO(A)',1,NULL)) g, '' h, '' i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' AND sexo = 'MASCULINO' GROUP BY rango_edad ORDER BY 1", "<tr><td>SEGUN ESTADO CIVIL [MASCULINO]</td><td>ACOMPAÑADO(A)</td><td>CASADO(A)</td><td>DIVORCIADO(A)</td><td>SIN ESPECIFICAR</td><td>SOLTERO(A)</td><td>VIUDO(A)</td><td></td><td></td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT rango_edad AS a, COUNT(IF(estado_civil = 'ACOMPAÑADO(A)',1,NULL)) b, COUNT(IF(estado_civil = 'CASADO(A)',1,NULL)) c, COUNT(IF(estado_civil = 'DIVORCIADO(A)',1,NULL)) d, COUNT(IF(estado_civil = 'SIN ESPECIFICAR',1,NULL)) e, COUNT(IF(estado_civil = 'SOLTERO(A)',1,NULL)) f, COUNT(IF(estado_civil = 'VIUDO(A)',1,NULL)) g, '' h, '' i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' AND sexo = 'FEMENINO' GROUP BY rango_edad ORDER BY 1", "<tr><td>SEGUN ESTADO CIVIL [FEMENINO]</td><td>ACOMPAÑADO(A)</td><td>CASADO(A)</td><td>DIVORCIADO(A)</td><td>SIN ESPECIFICAR</td><td>SOLTERO(A)</td><td>VIUDO(A)</td><td></td><td></td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT rango_edad AS a, COUNT(IF(delito = 'AGRUPACIONES ILICITAS',1,NULL)) b, COUNT(IF(delito = 'EXTORSION',1,NULL)) c, COUNT(IF(delito = 'FEMINICIDIO',1,NULL)) d, COUNT(IF(delito = 'HOMICIDIO',1,NULL)) e, COUNT(IF(delito = 'ROBO',1,NULL)) f, COUNT(IF(delito = 'OTROS DELITOS',1,NULL)) g, COUNT(IF(delito = 'TRAFICO O TRATA DE PERSONAS',1,NULL)) h, COUNT(*) i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' AND sexo = 'MASCULINO' GROUP BY rango_edad ORDER BY 1", "<tr><td>SEGUN DELITO [MASCULINO]</td><td>AGRUPACIONES ILICITAS</td><td>EXTORSION</td><td>FEMINICIDIO</td><td>HOMICIDIO</td><td>ROBO</td><td>OTROS DELITOS</td><td>TRAFICO O TRATA DE PERSONAS</td><td>TODOS</td></tr>").getLinea($max);
+  $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT rango_edad AS a, COUNT(IF(delito = 'AGRUPACIONES ILICITAS',1,NULL)) b, COUNT(IF(delito = 'EXTORSION',1,NULL)) c, COUNT(IF(delito = 'FEMINICIDIO',1,NULL)) d, COUNT(IF(delito = 'HOMICIDIO',1,NULL)) e, COUNT(IF(delito = 'ROBO',1,NULL)) f, COUNT(IF(delito = 'OTROS DELITOS',1,NULL)) g, COUNT(IF(delito = 'TRAFICO O TRATA DE PERSONAS',1,NULL)) h, COUNT(*) i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' AND sexo = 'FEMENINO' GROUP BY rango_edad ORDER BY 1", "<tr><td>SEGUN DELITO [FEMENINO]</td><td>AGRUPACIONES ILICITAS</td><td>EXTORSION</td><td>FEMINICIDIO</td><td>HOMICIDIO</td><td>ROBO</td><td>OTROS DELITOS</td><td>TRAFICO O TRATA DE PERSONAS</td><td>TODOS</td></tr>").getLinea($max);
+  $table .= getTableX($head, $data, uniqid());
   return $table;
-  /*select rango_edad, IF(delito = 'EXTORSION', COUNT(*) ,'0') AS E,  IF(delito = 'ROBO', COUNT(*) ,'0') AS R,  IF(delito = 'HOMICIDIO', COUNT(*) ,'0') AS H,  IF(delito = 'FEMINICIDIO', COUNT(*) ,'0') AS F,  IF(delito = 'OTROS DELITOS', COUNT(*) ,'0') AS O
-from ind_bnc_dgcp group by rango_edad;*/
 }
 
 function getTableX($head, $data, $idx){
@@ -115,34 +101,24 @@ function getTableX($head, $data, $idx){
   return $t;
 }
 /* ############################# Generadores de cruces */
- function getRetornadosPorMunicipioSexo($wpdb, $anyo, $vars){
-  $data = "";
-  $sql = "";
-  $query = $wpdb->get_results( $sql);
-  foreach ($query as $key => $ob) {
-   $data = "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td><td>$ob->i</td></tr>";
- 	}
-  return "".$data;
- }
-
- function getRetornadosPorPaisRepatriacion($wpdb, $anyo, $vars){
-  $data = "";
-  $sql = "SELECT pais_repatriacion AS u, COUNT(*) AS d, '' AS t, '' AS c FROM ind_bnc_retornado WHERE anyo = $anyo AND municipio = '$vars' GROUP BY pais_repatriacion ORDER BY 1";
-  $query = $wpdb->get_results( $sql);
-  foreach ($query as $key => $ob) {
-    $data .= "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td><td>$ob->i</td></tr>";
-   }
-  return "<tr><td>Pais de Repatriación</td><td>Frecuencia</td><td></td><td></td><td></td></tr>".$data;
- }
-
-  function getRetornadosPorSQL($wpdb, $sql, $titulo){
-   $data = "";
-   $query = $wpdb->get_results( $sql);
-   foreach ($query as $key => $ob) {
-     $data .= "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td></tr>";
-    }
-   return "$titulo $data";
+function getRetornadosPorSQL($wpdb, $sql, $titulo){
+ $data = "";
+ $query = $wpdb->get_results( $sql);
+ foreach ($query as $key => $ob) {
+   $data .= "<tr><td>$ob->u</td><td>$ob->d</td><td>$ob->t</td><td>$ob->c</td></tr>";
   }
+ return "$titulo $data";
+}
+
+function getPersonasPrivadasLibertadPorSQL($wpdb, $sql, $titulo){
+ $data = "";
+ $query = $wpdb->get_results( $sql);
+ foreach ($query as $key => $o) {
+   $data .= "<tr><td>$o->a</td><td>$o->b</td><td>$o->c</td><td>$o->d</td>";
+   $data .= "<td>$o->e</td><td>$o->f</td><td>$o->g</td><td>$o->h</td><td>$o->i</td></tr>";
+  }
+ return "$titulo $data";
+}
 
  function getLinea($max){
    $tr = '<tr>';

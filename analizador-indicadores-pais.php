@@ -3,9 +3,9 @@
  * Plugin Name: indicadores-pais-El-Salvador-seguro
  * Plugin URI: http://wordpress.org/plugins/
  * Description: Administración de banco de datos del Sistema Integrado de Estadisticas (SIE), El SIE tiene como objetivo proporcionar información a las autoridades del MJSP para la definición de prioridades, diseño de estrategias, seguimiento a los resultados e impactos de la política del sector y la rendición de cuentas a la ciudadanía.
- * Author: PNUD - El Salvador
+ * Author: Dirección de Información y Análisis / PNUD - El Salvador
  * Version: 0.9
- * Author URI: http://pnud.org.sv/
+ * Author URI: http://www.seguridad.gob.sv/dia/
 */
 register_activation_hook( __FILE__, 'createDB' );
 add_action('admin_menu', 'setup_menu');
@@ -47,7 +47,7 @@ function https_habilitado(){
 	 return plugin_dir_path( __FILE__ );
  }
  function get_plugin_url(){
-	 return plugins_url();
+	 return plugin_dir_url( __FILE__ );
  }
  function configure_load()
  {
@@ -65,16 +65,18 @@ function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
 	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/generaCodigoSeguridad.php";
 }
 function agregaDatosMunicipio_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosMunicipio.php";
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/add/agregaDatosMunicipio.php";
 }
 function agregaDatosCentroPenal_shortcode($atts, $mensaje = null) {
 	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/agregaDatosCentroPenal.php";
 }
+/*  Visualizadores de indices en mapas de calor
+*/
+function graficoAnalisisSituacional_shortcode($atts, $mensaje = null) {
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/show/graficoAnalisisSituacional.php";
+}
 function graficoPriorizacionMunicipal_shortcode($atts, $mensaje = null) {
 	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoPriorizacionMunicipal.php";
-}
-function graficoAnalisisSituacional_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoAnalisisSituacional.php";
 }
 function graficoFocalizacion_shortcode($atts, $mensaje = null) {
 	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoFocalizacion.php";

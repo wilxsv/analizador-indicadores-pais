@@ -1,15 +1,15 @@
     <!-- jQuery -->
-    <script src="<?php echo plugin_dir_url( __FILE__ ); ?>plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo get_plugin_url(); ?>public/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo plugin_dir_url( __FILE__ ); ?>js/jasny-bootstrap.js"></script>
+    <script src="<?php echo get_plugin_url(); ?>public/js/jasny-bootstrap.js"></script>
     <!-- jQuery file upload -->
-    <script src="<?php echo plugin_dir_url( __FILE__ ); ?>plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
+    <script src="<?php echo get_plugin_url(); ?>public/plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
 	<script type="text/javascript">
 	(function($){
         // Basic
         $('.dropify').dropify();
         // Translated
-        $('.dropify-es_MX').dropify({
+        $('.dropify-es_ES').dropify({
             messages: {
                 default: 'Glissez-déposez un fichier ici ou cliquez',
                 replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
@@ -47,10 +47,10 @@
     });
     </script>
     <!--Style Switcher -->
-    <script src="<?php echo plugin_dir_url( __FILE__ ); ?>plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="<?php echo get_plugin_url(); ?>public/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>/plugins/bower_components/datatables/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo get_plugin_url(); ?>public/plugins/bower_components/datatables/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 
