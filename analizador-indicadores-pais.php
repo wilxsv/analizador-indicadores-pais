@@ -14,7 +14,7 @@ add_shortcode('generaCodigoSeguridad', 'generaCodigoSeguridad_shortcode' );
 add_shortcode('agregaDatosMunicipalidad', 'agregaDatosMunicipio_shortcode' );
 add_shortcode('agregaDatosMined', '' );
 add_shortcode('agregaDatosPNC', '' );
-add_shortcode('agregaDatosATransito', '' );
+add_shortcode('agregaDatosATransito', 'agregaDatosATransito_shortcode' );
 add_shortcode('agregaDatosRetornados', '' );
 add_shortcode('agregaDatosCentroPenal', 'agregaDatosCentroPenal_shortcode' );
 add_shortcode('agregaIndCEscolar', '' );
@@ -35,18 +35,32 @@ function setup_menu(){
  add_menu_page('Modulo de estadisticas', 'Modulo de estadisticas', 'manage_options', 'diatools', 'configure_load', 'dashicons-location-alt');
 }
 
+//Configuraciones globales
+function https_habilitado(){
+	return FALSE;
+}
 //the_content
 /**********************************************************************
  *  Views and Widgets
  * *******************************************************************/
+ function get_plugin_path(){
+	 return plugin_dir_path( __FILE__ );
+ }
+ function get_plugin_url(){
+	 return plugins_url();
+ }
  function configure_load()
  {
 	require_once('view/configureLoad.php');
  }
 /**********************************************************************
  *  Shortcode
- * *******************************************************************/
-
+ *********************************************************************/
+/*  Agrega Registros a los bancos de datos
+*/
+function agregaDatosATransito_shortcode($atts, $mensaje = null) {
+	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/add/agregaDatosATransito.php";
+}
 function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
 	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/generaCodigoSeguridad.php";
 }
