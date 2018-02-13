@@ -5,35 +5,29 @@
  * Description: Administración de banco de datos del Sistema Integrado de Estadisticas (SIE), El SIE tiene como objetivo proporcionar información a las autoridades del MJSP para la definición de prioridades, diseño de estrategias, seguimiento a los resultados e impactos de la política del sector y la rendición de cuentas a la ciudadanía.
  * Author: PNUD - El Salvador
  * Version: 0.9
- * Author URI: http://pnud.org.sv/
+ * Author URI: http://www.seguridad.gob.sv/dia/
 */
 
 function getEstadisticaDelito($wpdb, $anyo, $vars){
+  $max = 13;
   $table = '';
-  $head = '<th>DELITOS</th><th>Frecuencia</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS - SECTOR</th><th>Frecuencia</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS</th><th>Rural</th><th>Urbano</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS</th><th>BALDIO</th><th>CAMPO</th><th>CALLE</th><th>CAFETALES</th><th>BOSQUE</th><th>BASURERO</th><th>BARTOLINAS PNC</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS</th><th>Enero</th><th>Febrero</th><th>Marzo</th><th>Abril</th><th>Mayo</th><th>Junio</th><th>Agosto</th><th>Septiembre</th><th>Octubre</th><th>Noviembre</th><th>Diciembre</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS</th><th>D</th><th>L</th><th>M</th><th>M</th><th>J</th><th>V</th><th>S</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Rango etario victima</th><th>H</th><th>M</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Rango hora</th><th>Agrupaciones ilicitas</th><th>Extorsión</th><th>Robo</th><th>Homicidio</th><th>Feminicidio</th><th>Otros Delitos</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS</th><th>ABOGADA</th><th>AGRICULTOR</th><th>ALBAÑIL</th><th>AMA DE CASA</th><th>CAM</th><th>CARPINTERO</th><th>COBRADOR</th><th>COMERCIANTE</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS</th><th>AMIGOS</th><th>COMPAÑERO DE VIDA</th><th>CONOCIDOS</th><th>CUÑADO(A)</th><th>DESCONOCIDA</th><th>ESPOSO(A)</th><th>EX COMPAÑERO DE VIDA</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>DELITOS</th><th>ARMA BLANCA</th><th>ARMA DE FUEGO</th><th>CONTUNDENTE</th><th>FUERZA FISICA</th><th>LLAMADA - MENSAJES</th><th>ND</th><th>OTRAS</th>';
-  $table .= getTableX($head, '', uniqid());
-  $head = '<th>Sector policial</th><th>ARMA BLANCA</th><th>ARMA DE FUEGO</th><th>CONTUNDENTE</th><th>FUERZA FISICA</th><th>LLAMADA - MENSAJES</th><th>ND</th><th>OTRAS</th>';
-  $table .= getTableX($head, '', uniqid());
+  $head = '<tr><th>Cruce</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>';
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(*) b, '' c, '' d, '' e, '' f, '' g, '' h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO</td><td>FRECUENCIA</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT sector_policial a, delito b, COUNT(*) c, '' d, '' e, '' f, '' g, '' h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY sector_policial, delito  ORDER BY 1, 2", "<tr><td>SECTOR POLICIAL</td><td>DELITO</td><td>FRECUENCIA</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(IF(area = 'URBANA',1,NULL)) b, COUNT(IF(area = 'RURAL',1,NULL)) c, '' d, '' e, '' f, '' g, '' h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO SEGUN AREA</td><td>URBANA</td><td>RURAL</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(IF(espacio = 'BAR',1,NULL)) b, COUNT(IF(espacio = 'CALLE',1,NULL)) c, COUNT(IF(espacio = 'CALLE',1,NULL)) d, COUNT(IF(espacio = 'CAMPO',1,NULL)) e, COUNT(IF(espacio = 'CASA',1,NULL)) f, COUNT(IF(espacio = 'LOCAL',1,NULL)) g, COUNT(IF(espacio = 'MOTEL',1,NULL)) h, COUNT(IF(espacio = 'PARQUEO',1,NULL)) i, COUNT(*) j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO SEGUN ESPACIO</td><td>BAR</td><td>CALLE</td><td>CAMPO</td><td>CASA</td><td>LOCAL</td><td>MOTEL</td><td>PARQUEO</td><td>TRANS PUB</td><td>TODOS</td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(IF(mes = 'ENE',1,NULL)) b, COUNT(IF(mes = 'FEB',1,NULL)) c, COUNT(IF(mes = 'MAR',1,NULL)) d, COUNT(IF(mes = 'ABR',1,NULL)) e, COUNT(IF(mes = 'MAY',1,NULL)) f, COUNT(IF(mes = 'JUN',1,NULL)) g, COUNT(IF(mes = 'JUL',1,NULL)) h, COUNT(IF(mes = 'AGO',1,NULL)) i, COUNT(IF(mes = 'SEP',1,NULL)) j, COUNT(IF(mes = 'OCT',1,NULL)) k, COUNT(IF(mes = 'NOV',1,NULL)) l, COUNT(IF(mes = 'DIC',1,NULL)) m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO SEGUN MES</td><td>ENE</td><td>FEB</td><td>MAR</td><td>ABR</td><td>MAY</td><td>JUN</td><td>JUL</td><td>AGO</td><td>SEP</td><td>OCT</td><td>NOV</td><td>DIC</td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(IF(dia = 'LU',1,NULL)) b, COUNT(IF(dia = 'MA',1,NULL)) c, COUNT(IF(dia = 'MI',1,NULL)) d, COUNT(IF(dia = 'JU',1,NULL)) e, COUNT(IF(dia = 'VI',1,NULL)) f, COUNT(IF(dia = 'SA',1,NULL)) g, COUNT(IF(dia = 'DO',1,NULL)) h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO SEGUN DIA  DEL HECHO</td><td>LU</td><td>MA</td><td>MI</td><td>JU</td><td>VI</td><td>SA</td><td>DO</td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(IF(victima_sexo = 'MASCULINO',1,NULL)) b, COUNT(IF(victima_sexo = 'FEMENINO',1,NULL)) c, COUNT(IF(victima_sexo = 'ND',1,NULL)) d, '' e, '' f, '' g, '' h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO SEGUN SEXO VICTIMA</td><td>MASCULINO</td><td>FEMENINO</td><td>ND</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT hora_rango a, COUNT(IF(delito = 'AMENAZAS',1,NULL)) b, COUNT(IF(delito = 'DISPARO DE ARMA DE FUEGO',1,NULL)) c, COUNT(IF(delito = 'EXPRESIONES DE VIOLENCIA CONTRA LA MUJER',1,NULL)) d, COUNT(IF(delito = 'EXTORSION',1,NULL)) e, COUNT(IF(delito = 'HOMICIDIO',1,NULL)) f, COUNT(IF(delito LIKE 'HURTO%',1,NULL)) g, COUNT(IF(delito = 'LESIONES',1,NULL)) h, COUNT(IF(delito = 'ROBO',1,NULL)) i, COUNT(IF(delito = 'ROBO DE VEHICULOS',1,NULL)) j, COUNT(IF(delito = 'VIOLACION',1,NULL)) k, COUNT(IF(delito = 'VIOLENCIA INTRAFAMILIAR',1,NULL)) l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY hora_rango ORDER BY 1", "<tr><td>DELITO SEGUN RANGO DE HORA</td><td>AMENAZAS</td><td>DISPARO DE ARMA DE FUEGO</td><td>EXPRESIONES DE VIOLENCIA CONTRA LA MUJER</td><td>EXTORSION</td><td>HOMICIDIO</td><td>HURTO</td><td>LESIONES</td><td>ROBO</td><td>ROBO DE VEHICULOS</td><td>VIOLACION</td><td>VIOLENCIA INTRAFAMILIAR</td><td></td></tr>").getLinea($max);
+
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(IF(agresor_tipo_arma = 'ARMA BLANCA',1,NULL)) b, COUNT(IF(agresor_tipo_arma = 'ARMA DE FUEGO',1,NULL)) c, COUNT(IF(agresor_tipo_arma = 'CONTUNDENTE',1,NULL)) d, COUNT(IF(agresor_tipo_arma = 'FUERZA FISICA',1,NULL)) e, COUNT(IF(agresor_tipo_arma = 'LLAMADA - MENSAJES',1,NULL)) f, COUNT(IF(agresor_tipo_arma = 'ND',1,NULL)) g, COUNT(IF(agresor_tipo_arma = 'OTRAS',1,NULL)) h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO SEGUN OCUPACION</td><td>ARMA BLANCA</td><td>ARMA DE FUEGO</td><td>CONTUNDENTE</td><td>FUERZA FISICA</td><td>LLAMADA - MENSAJES</td><td>ND</td><td>OTRAS</td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+
+  $data .= getDelitosPorSQL($wpdb, "SELECT delito a, COUNT(IF(agresor_tipo_arma = 'ARMA BLANCA',1,NULL)) b, COUNT(IF(agresor_tipo_arma = 'ARMA DE FUEGO',1,NULL)) c, COUNT(IF(agresor_tipo_arma = 'CONTUNDENTE',1,NULL)) d, COUNT(IF(agresor_tipo_arma = 'FUERZA FISICA',1,NULL)) e, COUNT(IF(agresor_tipo_arma = 'LLAMADA - MENSAJES',1,NULL)) f, COUNT(IF(agresor_tipo_arma = 'ND',1,NULL)) g, COUNT(IF(agresor_tipo_arma = 'OTRAS',1,NULL)) h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY delito ORDER BY 1", "<tr><td>DELITO SEGUN ARMA AGRESOR</td><td>ARMA BLANCA</td><td>ARMA DE FUEGO</td><td>CONTUNDENTE</td><td>FUERZA FISICA</td><td>LLAMADA - MENSAJES</td><td>ND</td><td>OTRAS</td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $data .= getDelitosPorSQL($wpdb, "SELECT sector_policial a, COUNT(IF(agresor_tipo_arma = 'ARMA BLANCA',1,NULL)) b, COUNT(IF(agresor_tipo_arma = 'ARMA DE FUEGO',1,NULL)) c, COUNT(IF(agresor_tipo_arma = 'CONTUNDENTE',1,NULL)) d, COUNT(IF(agresor_tipo_arma = 'FUERZA FISICA',1,NULL)) e, COUNT(IF(agresor_tipo_arma = 'LLAMADA - MENSAJES',1,NULL)) f, COUNT(IF(agresor_tipo_arma = 'ND',1,NULL)) g, COUNT(IF(agresor_tipo_arma = 'OTRAS',1,NULL)) h, '' i, '' j, '' k, '' l, '' m FROM ind_bnc_delito WHERE anyo = $anyo AND municipio = '$vars' GROUP BY sector_policial ORDER BY 1", "<tr><td>SECTOR POLICIAL SEGUN ARMA AGRESOR</td><td>ARMA BLANCA</td><td>ARMA DE FUEGO</td><td>CONTUNDENTE</td><td>FUERZA FISICA</td><td>LLAMADA - MENSAJES</td><td>ND</td><td>OTRAS</td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+//    $data .= getPersonasPrivadasLibertadPorSQL($wpdb, "SELECT municipio AS a, COUNT(IF(organizacion_delictiva = 'MARA 18',1,NULL)) b, COUNT(IF(organizacion_delictiva = 'MARA 18 R',1,NULL)) c, COUNT(IF(organizacion_delictiva = 'MARA 18 S',1,NULL)) d, COUNT(IF(organizacion_delictiva = 'MAO MAO',1,NULL)) e, COUNT(IF(organizacion_delictiva = 'MD',1,NULL)) f, COUNT(IF(organizacion_delictiva = 'MIRADA LOCA',1,NULL)) g, COUNT(IF(organizacion_delictiva = 'MS13',1,NULL)) h, COUNT(IF(organizacion_delictiva = 'NINGUNO',1,NULL)) i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' GROUP BY municipio ORDER BY 1", "<tr><td>MUNICIPIO</td><td>BR18</td><td>BR18 R</td><td>BR18 S</td><td>MAO MAO</td><td>MD</td><td>MIRADA LOCA</td><td>MS13</td><td>NINGUNO</td></tr>").getLinea($max);
+//  $data .= getDelitosPorSQL($wpdb, "SELECT municipio AS a, COUNT(IF(sexo = 'MASCULINO',1,NULL)) b, COUNT(IF(sexo = 'FEMENINO',1,NULL)) c, '' d, '' e, '' f, '' g, '' h, '' i FROM ind_bnc_dgcp WHERE anyo = $anyo AND municipio = '$vars' GROUP BY municipio ORDER BY 1", "<tr><td>Segun rango etareo</td><td>MASCULINO</td><td>FEMENINO</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>").getLinea($max);
+  $table .= getTableX($head, $data, uniqid());
   return $table;
 }
 
@@ -119,6 +113,17 @@ function getPersonasPrivadasLibertadPorSQL($wpdb, $sql, $titulo){
   }
  return "$titulo $data";
 }
+
+ function getDelitosPorSQL($wpdb, $sql, $titulo){
+  $data = "";
+  $query = $wpdb->get_results( $sql);
+  foreach ($query as $key => $o) {
+   $data .= "<tr><td>$o->a</td><td>$o->b</td><td>$o->c</td><td>$o->d</td>";
+   $data .= "<td>$o->e</td><td>$o->f</td><td>$o->g</td><td>$o->h</td>";
+   $data .= "<td>$o->i</td><td>$o->j</td><td>$o->k</td><td>$o->l</td><td>$o->m</td></tr>";
+  }
+  return "$titulo $data";
+ }
 
  function getLinea($max){
    $tr = '<tr>';

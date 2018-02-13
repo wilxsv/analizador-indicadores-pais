@@ -15,7 +15,6 @@ require_once( '../../../../wp-load.php' );
 require_once( 'genera_mapa.php' );
 require_once( 'genera_estadistica.php' );
 require_once( 'genera_tabla.php' );
-
 global $wpdb;
 
 $data = $anyo = $type = $centro = $code = $vars = FALSE;
@@ -24,9 +23,8 @@ if ( isset( $_GET['anyo'] ) && is_numeric($_GET['anyo']) ) $anyo = $_GET['anyo']
 if ( isset( $_GET['type'] ) ) $type = $_GET['type'];
 if ( isset( $_GET['code'] ) ) $code = $_GET['code'];
 if ( isset( $_GET['vars'] ) ) $vars = $_GET['vars'];
-
 if ($data == 'table' && $anyo && $type == 'm') {
-  echo getTable($vars, $anyo, $wpdb);
+  echo getTable($vars, $agresor_tipo_armaanyo, $wpdb);
 }elseif ($data == 'table' && $code && $type == 'f') {
   echo getTablePrioridad($wpdb, $code);
 }elseif ($data == 'table' && $type == 'c') {
@@ -99,13 +97,13 @@ elseif ($data == 'table' && $type == 'u') {
         echo "<h6>CRUCES BANCO DE DATOS RETORNADOS [Municipio $vars]</h6>".getEstadisticaRetornados($wpdb, $anyo, $vars);
         break;
     case 3:
-        echo getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
+        echo "<h6>CRUCES BANCO DE DATOS PERSONAS PRIVADAS DE LIBERTAD [Municipio $vars]</h6>".getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
         break;
     case 1:
         echo "<h6>CRUCES BANCO DE DATOS ACCIDENTES DE TRANSITO [Municipio $vars]</h6>".getEstadisticaTransito($wpdb, $anyo, $vars);
         break;
     case 2:
-        echo getEstadisticaDelito($wpdb, $anyo, $vars);
+        echo "<h6>CRUCES BANCO DE DATOS DE DELITOS [Municipio $vars]</h6>".getEstadisticaDelito($wpdb, $anyo, $vars);
         break;
   }
   echo "";
