@@ -20,10 +20,10 @@
  $hash = md5( rand() );
  $user = $_SESSION['user_id'];
  $date = date('Y-m-d H:i:s');
- $file_name = "accidentestransito.csv";
- $head = "<tr><th>Departamento</th><th>Municipio</th><th>Sexo</th><th>Vehiculo</th><th>Año</th><th>Registro</th></tr>";
+ $file_name = "retornados.csv";
+ $head = "<tr><th>Departamento</th><th>Municipio</th><th>Pais de Repatriación</th><th>Sexo</th><th>Año</th><th>Registro</th></tr>";
  $limit = 1000;
- $sql_grid = "SELECT departamento AS u, municipio AS d, sexo AS t, vehiculo AS c, anyo AS i, registro AS s FROM ind_bnc_accidente_transito ORDER BY registro DESC LIMIT $limit";
+ $sql_grid = "SELECT departamento AS u, municipio AS d, pais_repatriacion AS t, sexo AS c, anyo AS i, registro AS s FROM ind_bnc_retornado ORDER BY registro DESC LIMIT $limit";
  $id = uniqid();
 
 if(isset($_POST['importSubmit'])){
@@ -35,9 +35,9 @@ if(isset($_POST['importSubmit'])){
 				case "$file_name":
           $wpdb->query("START TRANSACTION;");
 					while(($line = fgetcsv($csvFile)) !== FALSE){
-            if ( is_numeric($line[0]) && is_numeric($line[3]) && is_numeric($line[5]) ) {
-              $sql =  "INSERT INTO ind_bnc_accidente_transito (cuenta, departamento, municipio, anyo, sexo, edad, edad_rango, resultado, calidad, mes, dia, hora_rango, tipo_accidente, causa, direccion, vehiculo, registro, usuario, ip, hash) VALUES";
-  						$sql .= "($line[0], '$line[1]', '$line[2]', $line[3], '$line[4]', $line[5], '$line[6]', '$line[7]', '$line[8]', '$line[9]', '$line[10]', '$line[11]', '$line[12]', '$line[13]', '$line[14]', '$line[15]', '$date', $user, '$ip', '$hash')";
+            if ( is_numeric($line[0]) ) {
+              $sql =  "INSERT INTO ind_bnc_retornado (anyo, departamento, municipio, mes, sexo, edad_rango, estado_civil, persona_dependiente, tiempo_fuera, pais_repatriacion, motivo, nivel_educativo, consulado, antecedentes_penales, tipo_antecedente, espectativa_migrante, registro, usuario, ip, hash) VALUES";
+  						$sql .= "($line[0], '$line[1]', '$line[2]', '$line[3]', '$line[4]', '$line[5]', '$line[6]', '$line[7]', '$line[8]', '$line[9]', '$line[10]', '$line[11]', '$line[12]', '$line[13]', '$line[14]', '$line[15]', '$date', $user, '$ip', '$hash')";
   						$wpdb->query($sql);
               if($wpdb->last_error == ''){
                 $total+=1;
@@ -94,7 +94,7 @@ if(!empty($status)){
 }
 
 
-$acceso = acceso( $wpdb, "agregaDatosCentroPenal");
+$acceso = acceso( $wpdb, "agregaDatosDelito");
 if ( $acceso === true ):
 
 if(!empty($statusMsg)){
@@ -102,7 +102,6 @@ if(!empty($statusMsg)){
 }
 ?>
 
-<link rel="stylesheet" href="<?php echo get_plugin_url(); ?>public/plugins/bower_components/dropify/dist/css/dropify.min.css">
 <div class="row">
 	<div class="col-md-4 col-xs-12">
 	</div>

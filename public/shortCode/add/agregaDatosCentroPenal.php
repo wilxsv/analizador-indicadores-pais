@@ -10,7 +10,6 @@
  global $wpdb;
 
  require_once( get_plugin_path()."includes/utils/head.php" );
- require_once( get_plugin_path()."includes/libs/router.php" );
 
  $status = false;
  $total = 0;
@@ -21,10 +20,10 @@
  $hash = md5( rand() );
  $user = $_SESSION['user_id'];
  $date = date('Y-m-d H:i:s');
- $file_name = "accidentestransito.csv";
- $head = "<tr><th>Departamento</th><th>Municipio</th><th>Sexo</th><th>Vehiculo</th><th>Año</th><th>Registro</th></tr>";
+ $file_name = "dgcp.csv";
+ $head = "<tr><th>Departamento</th><th>Municipio</th><th>Sexo</th><th>Organizacion delictiva</th><th>Año</th><th>Registro</th></tr>";
  $limit = 1000;
- $sql_grid = "SELECT departamento AS u, municipio AS d, sexo AS t, vehiculo AS c, anyo AS i, registro AS s FROM ind_bnc_accidente_transito ORDER BY registro DESC LIMIT $limit";
+ $sql_grid = "SELECT departamento AS u, municipio AS d, sexo AS t, organizacion_delictiva AS c, anyo AS i, registro AS s FROM ind_bnc_dgcp ORDER BY registro DESC LIMIT $limit";
  $id = uniqid();
 
 if(isset($_POST['importSubmit'])){
@@ -36,9 +35,9 @@ if(isset($_POST['importSubmit'])){
 				case "$file_name":
           $wpdb->query("START TRANSACTION;");
 					while(($line = fgetcsv($csvFile)) !== FALSE){
-            if ( is_numeric($line[0]) && is_numeric($line[3]) && is_numeric($line[5]) ) {
-              $sql =  "INSERT INTO ind_bnc_accidente_transito (cuenta, departamento, municipio, anyo, sexo, edad, edad_rango, resultado, calidad, mes, dia, hora_rango, tipo_accidente, causa, direccion, vehiculo, registro, usuario, ip, hash) VALUES";
-  						$sql .= "($line[0], '$line[1]', '$line[2]', $line[3], '$line[4]', $line[5], '$line[6]', '$line[7]', '$line[8]', '$line[9]', '$line[10]', '$line[11]', '$line[12]', '$line[13]', '$line[14]', '$line[15]', '$date', $user, '$ip', '$hash')";
+            if ( is_numeric($line[2]) && is_numeric($line[11]) ) {
+              $sql =  "INSERT INTO ind_bnc_dgcp (departamento, municipio, sipe, rango_edad, sexo, nivel_educativo, estado_civil, sector_policial, organizacion_delictiva, deportado, delito, anyo, registro, usuario, ip, hash) VALUES";
+  						$sql .= "('$line[0]', '$line[1]', $line[2], '$line[3]', '$line[4]', '$line[5]', '$line[6]', '$line[7]', '$line[8]', '$line[9]', '$line[10]', $line[11], '$date', $user, '$ip', '$hash')";
   						$wpdb->query($sql);
               if($wpdb->last_error == ''){
                 $total+=1;
@@ -94,7 +93,6 @@ if(!empty($status)){
     }
 }
 
-
 $acceso = acceso( $wpdb, "agregaDatosCentroPenal");
 if ( $acceso === true ):
 
@@ -102,8 +100,6 @@ if(!empty($statusMsg)){
 	echo '<div class="'.$statusMsgClass.'">'.$statusMsg.'</div>';
 }
 ?>
-
-<link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>../../plugins/bower_components/dropify/dist/css/dropify.min.css">
 <div class="row">
 	<div class="col-md-4 col-xs-12">
 	</div>
@@ -134,7 +130,7 @@ if(!empty($statusMsg)){
  include(plugin_dir_path( __FILE__ )."../../footer_public.php");
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __FILE__ ); ?>../../plugins/bower_components/datatables/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo get_plugin_url(); ?>public/plugins/bower_components/datatables/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 
