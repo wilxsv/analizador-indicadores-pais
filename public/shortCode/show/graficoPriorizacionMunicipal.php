@@ -11,11 +11,11 @@
 
  global $wpdb;
 
- require_once(plugin_dir_path( __FILE__ )."../head_public.php");
- require_once(plugin_dir_path( __FILE__ )."../router.php");
+ require_once( get_plugin_path()."includes/utils/head.php" );
 
  $deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
+ $data_path = get_plugin_url()."public/data.php";
 
  $anyo_ultimo = NULL;
  foreach ($query_anyo as $l) {
@@ -46,7 +46,7 @@
   </div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
-      Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+      Restabecer <br/><input type=image src="<?php echo get_plugin_url(); ?>public/images/restore.png" width="25" height="25">
     </p>
   </div>
  </div>
@@ -73,10 +73,8 @@
  </div>
 </div>
 <?php
- include(plugin_dir_path( __FILE__ )."../footer_public.php");
+require_once( get_plugin_path()."includes/utils/footer.php" );
 ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
 <script type="text/javascript">
 (function($){
@@ -97,10 +95,10 @@
 	});
 	$('#sanyo').on('change', function() {
     if (this.value !== '0'){
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
+      $.post('<?php echo $data_path; ?>?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
           $('#datatable').html(resp);
       });
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
+      $.post('<?php echo $data_path; ?>?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
           $('#macromap').html(resp);
       });
     }
@@ -114,10 +112,10 @@
       } else {
         anyo = <?php echo $anyo_ultimo; ?>;
       }
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=m&vars='+this.value+'&anyo='+anyo, { }, function(resp) {
+      $.post('<?php echo $data_path; ?>?data=table&type=m&vars='+this.value+'&anyo='+anyo, { }, function(resp) {
           $('#datatable').html(resp);
       });
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=m&vars='+this.value+'&anyo='+anyo, { data:'map' }, function(resp) {
+      $.post('<?php echo $data_path; ?>?data=map&type=m&vars='+this.value+'&anyo='+anyo, { data:'map' }, function(resp) {
           $('#macromap').html(resp);
       });
     }

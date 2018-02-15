@@ -10,12 +10,12 @@
 
  global $wpdb;
 
- require_once(plugin_dir_path( __FILE__ )."../head_public.php");
- require_once(plugin_dir_path( __FILE__ )."../router.php");
+ require_once( get_plugin_path()."includes/utils/head.php" );
 
  $municipios=$wpdb->get_results("SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio");
  $fase = $wpdb->get_results("SELECT fase_pess FROM `ind_focalizacion` WHERE sector IS NOT NULL group by fase_pess");
  $centro = $wpdb->get_results("SELECT municipio, nombre_ce, codigo_ce FROM `ind_focalizacion` WHERE codigo_ce > 0 group by municipio, codigo_ce");
+ $data_path = get_plugin_url()."public/data.php";
 
  $dep = NULL;
  foreach ($municipios as $l) {
@@ -74,7 +74,7 @@
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
-      Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+      Restabecer <br/><input type=image src="<?php echo get_plugin_url(); ?>public/images/restore.png" width="25" height="25">
     </p>
   </div>
  </div>
@@ -100,10 +100,8 @@
  </div>
 </div>
 <?php
- include(plugin_dir_path( __FILE__ )."../footer_public.php");
+ require_once( get_plugin_path()."includes/utils/footer.php" );
 ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
 <script type="text/javascript">
 (function($){
@@ -122,31 +120,31 @@
 	});
 	$('#smunicipio').on('change', function() {
     if (this.value !== '0'){
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+      $.post('<?php echo $data_path; ?>?data=table&type=f&code='+this.value, { }, function(resp) {
           $('#datatable').html(resp);
       });
-      $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { }, function(resp) {
+      $.post('<?php echo $data_path; ?>?data=map&type=f&vars='+this.value, { }, function(resp) {
           $('#macromap').html(resp);
       });
     }
 	});
 	$('#policial').on('change', function() {
-		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+		$.post('<?php echo $data_path; ?>?data=table&type=f&code='+this.value, { }, function(resp) {
 			$('#datatable').html(resp);
 		});
     map.off();
     map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=f&vars='+this.value, { }, function(resp) {
+    $.post('<?php echo $data_path; ?>?data=map&type=f&vars='+this.value, { }, function(resp) {
         $('#macromap').html(resp);
     });
 	});
   $('#codigo').on('change', function() {
-		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+		$.post('<?php echo $data_path; ?>?data=table&type=f&code='+this.value, { }, function(resp) {
 			$('#datatable').html(resp);
 		});
 	});
   $('#ce').on('change', function() {
-		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=f&code='+this.value, { }, function(resp) {
+		$.post('<?php echo $data_path; ?>?data=table&type=f&code='+this.value, { }, function(resp) {
 			$('#datatable').html(resp);
 		});
 	});
@@ -160,8 +158,6 @@ function restabecer() {
   }(jQuery));
 }
 </script>
-
-
 <?php else: ?>
   <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
   <?php echo $acceso; ?>

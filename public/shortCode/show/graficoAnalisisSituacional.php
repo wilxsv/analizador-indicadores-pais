@@ -10,7 +10,6 @@
 
  global $wpdb;
  require_once( get_plugin_path()."includes/utils/head.php" );
- require_once( get_plugin_path()."includes/libs/router.php" );
 
  $municipios=$wpdb->get_results( "SELECT d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id group by d.nombre_departamento, m.nombre_municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_bnc_dgcp GROUP BY anyo" );
@@ -141,8 +140,6 @@
 <?php
 require_once( get_plugin_path()."includes/utils/footer.php" );
 ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
 <script type="text/javascript">
 (function($){

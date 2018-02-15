@@ -59,48 +59,52 @@ function https_habilitado(){
 /*  Agrega Registros a los bancos de datos
 */
 function agregaDatosDelito_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/add/agregaDatosDelito.php";
+	require_once get_plugin_path()."public/shortCode/add/agregaDatosDelito.php";
 }
 function agregaDatosATransito_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/add/agregaDatosATransito.php";
+	require_once get_plugin_path()."public/shortCode/add/agregaDatosATransito.php";
 }
 function agregaDatosCentroPenal_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/add/agregaDatosCentroPenal.php";
+	require_once get_plugin_path()."public/shortCode/add/agregaDatosCentroPenal.php";
 }
 function agregaDatosRetornados_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/add/agregaDatosRetornados.php";
+	require_once get_plugin_path()."public/shortCode/add/agregaDatosRetornados.php";
 }
 
 function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/generaCodigoSeguridad.php";
+	require_once get_plugin_path()."public/shortCode/generaCodigoSeguridad.php";
 }
 function agregaDatosMunicipio_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/add/agregaDatosMunicipio.php";
+	require_once get_plugin_path()."public/shortCode/add/agregaDatosMunicipio.php";
 }
 /*  Visualizadores de indices en mapas de calor
 */
 function graficoAnalisisSituacional_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/show/graficoAnalisisSituacional.php";
+	require_once get_plugin_path()."public/shortCode/show/graficoAnalisisSituacional.php";
 }
 function graficoPriorizacionMunicipal_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoPriorizacionMunicipal.php";
-}
-function graficoFocalizacion_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoFocalizacion.php";
+	require_once get_plugin_path()."public/shortCode/show/graficoPriorizacionMunicipal.php";
 }
 function graficoCEscolar_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/graficoCEscolar.php";
+	require_once get_plugin_path()."public/shortCode/show/graficoCEscolar.php";
 }
+function graficoFocalizacion_shortcode($atts, $mensaje = null) {
+	require_once get_plugin_path()."public/shortCode/show/graficoFocalizacion.php";
+}
+
 function estadisticasBasicas_shortcode($atts, $mensaje = null) {
-	require_once WP_PLUGIN_DIR."/analizador-indicadores-pais/public/shortCode/estadisticasBasicas.php";
+	require_once get_plugin_path()."public/shortCode/estadisticasBasicas.php";
 }
 
 /* Acciones */
 function files_head_action() {
-	$files = '<link href="'.plugin_dir_url( __FILE__ ).'public/js/leaflet/leaflet.css" rel="stylesheet" />';
+	$files = '<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.4.js"></script>';
+  $files = '<link href="'.plugin_dir_url( __FILE__ ).'public/js/leaflet/leaflet.css" rel="stylesheet" />';
 	$files .= '<script src="'.plugin_dir_url( __FILE__ ).'public/js/leaflet/leaflet.js"></script>';
 	$files .= '<style>#map { width: 100%; height: 900px; }</style>';
-	$files .= '<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />';
+	$files .= '<style>#map { width: 100%; height: 900px; }</style>';
+	$files .= '<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />';
+	$files .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>';
 	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/plugins/bower_components/dropify/dist/css/dropify.min.css">';
 	echo $files;
 }

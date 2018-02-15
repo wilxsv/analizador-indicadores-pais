@@ -10,14 +10,14 @@
 
  global $wpdb;
 
- require_once(plugin_dir_path( __FILE__ )."../head_public.php");
- require_once(plugin_dir_path( __FILE__ )."../router.php");
+ require_once( get_plugin_path()."includes/utils/head.php" );
 
  $municipios = "SELECT departamento, municipio FROM `ind_centro_escolar` group by departamento, municipio order by departamento, municipio";
  $municipios=$wpdb->get_results("$municipios");
  $codigo = $wpdb->get_results("SELECT municipio, codigo FROM `ind_centro_escolar`group by municipio, codigo");
  $centro = $wpdb->get_results("SELECT municipio, nombre_ce FROM `ind_centro_escolar` group by municipio, nombre_ce");
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_centro_escolar GROUP BY anyo" );
+ $data_path = get_plugin_url()."public/data.php";
 
  $anyo_ultimo = NULL;
  foreach ($query_anyo as $l) {
@@ -97,7 +97,7 @@
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last">
     <p id="restabecer" onclick="restabecer()"  style="text-align:right">
-      Restabecer <br/><input type=image src="<?php echo plugin_dir_url( __FILE__ ); ?>../images/restore.png" width="25" height="25">
+      Restabecer <br/><input type=image src="<?php echo get_plugin_url(); ?>public/images/restore.png" width="25" height="25">
     </p>
   </div>
  </div>
@@ -123,7 +123,7 @@
  </div>
 </div>
 <?php
- include(plugin_dir_path( __FILE__ )."../footer_public.php");
+ require_once( get_plugin_path()."includes/utils/footer.php" );
 ?>
 
 
@@ -144,25 +144,18 @@
   $('#sanyo').select2({
 		language: { noResults: function (params) { return "Sin registros para ese centro escolar."; } }
 	});
-	$('#sanyo').on('change', function() {/*
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
-        $('#datatable').html(resp);
-    });
-    map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value, { }, function(resp) {
-        $('#macromap').html(resp);
-    });*/
+	$('#sanyo').on('change', function() {
+    document.getElementById("sanyo").disabled = true;
 	});
 	$('#smunicipio').on('change', function() {
-    document.getElementById("sanyo").disabled = true;
     if (this.value !== '0'){
       var selects = document.getElementById("sanyo");
       var anyo = selects.options[selects.selectedIndex].value;
       if (anyo > 0){
-        $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
+        $.post('<?php echo $data_path; ?>?data=table&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
           $('#datatable').html(resp);
         });
-        $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
+        $.post('<?php echo $data_path; ?>?data=map&type=c&code='+this.value+'&anyo='+anyo, { }, function(resp) {
           $('#macromap').html(resp);
         });
       }
@@ -171,21 +164,6 @@
         document.getElementById("sanyo").disabled = false;
       }
     }
-	});
-	$('#codigo').on('change', function() {
-		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
-			$('#datatable').html(resp);
-		});
-    map.off();
-    map.remove();
-    $.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=map&type=c&vars='+this.value, { }, function(resp) {
-        $('#macromap').html(resp);
-    });
-	});
-	$('#ce').on('change', function() {
-		$.post('<?php echo plugin_dir_url( __FILE__ ); ?>../data.php?data=table&type=c&code='+this.value, { }, function(resp) {
-			$('#datatable').html(resp);
-		});
 	});
 }(jQuery));
 function restabecer() {

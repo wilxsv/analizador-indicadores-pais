@@ -24,7 +24,7 @@ if ( isset( $_GET['type'] ) ) $type = $_GET['type'];
 if ( isset( $_GET['code'] ) ) $code = $_GET['code'];
 if ( isset( $_GET['vars'] ) ) $vars = $_GET['vars'];
 if ($data == 'table' && $anyo && $type == 'm') {
-  echo getTable($vars, $agresor_tipo_armaanyo, $wpdb);
+  echo getTable($vars, $anyo, $wpdb);
 }elseif ($data == 'table' && $code && $type == 'f') {
   echo getTablePrioridad($wpdb, $code);
 }elseif ($data == 'table' && $type == 'c') {
