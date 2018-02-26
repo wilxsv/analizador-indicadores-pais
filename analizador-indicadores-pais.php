@@ -1,5 +1,5 @@
 <?php
-/**
+/** 
  * Plugin Name: indicadores-pais-El-Salvador-seguro
  * Plugin URI: http://wordpress.org/plugins/
  * Description: Administración de banco de datos del Sistema Integrado de Estadisticas (SIE), El SIE tiene como objetivo proporcionar información a las autoridades del MJSP para la definición de prioridades, diseño de estrategias, seguimiento a los resultados e impactos de la política del sector y la rendición de cuentas a la ciudadanía.
@@ -17,8 +17,8 @@ add_shortcode('agregaDatosDelito', 'agregaDatosDelito_shortcode' );
 add_shortcode('agregaDatosATransito', 'agregaDatosATransito_shortcode' );
 add_shortcode('agregaDatosRetornados', 'agregaDatosRetornados_shortcode' );
 add_shortcode('agregaDatosCentroPenal', 'agregaDatosCentroPenal_shortcode' );
-add_shortcode('agregaIndCEscolar', '' );
-add_shortcode('agregaIndMunicipios', '' );
+add_shortcode('agregaIndCEscolar', 'agregaIndCEscolar_shortcode' );
+add_shortcode('agregaIndMunicipios', 'agregaIndMunicipios_shortcode' );
 /* Visualizadores */
 add_shortcode('graficoPriorizacionMunicipal', 'graficoPriorizacionMunicipal_shortcode' );
 add_shortcode('graficoAnalisisSituacional', 'graficoAnalisisSituacional_shortcode' );
@@ -69,6 +69,12 @@ function agregaDatosCentroPenal_shortcode($atts, $mensaje = null) {
 }
 function agregaDatosRetornados_shortcode($atts, $mensaje = null) {
 	require_once get_plugin_path()."public/shortCode/add/agregaDatosRetornados.php";
+}
+function agregaIndCEscolar_shortcode($atts, $mensaje = null) {
+	require_once get_plugin_path()."public/shortCode/add/agregaIndCEscolar.php";
+}
+function agregaIndMunicipios_shortcode($atts, $mensaje = null) {
+	require_once get_plugin_path()."public/shortCode/add/agregaIndMunicipios.php";
 }
 
 function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {

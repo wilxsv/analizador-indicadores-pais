@@ -94,7 +94,7 @@ if(!empty($status)){
 }
 
 
-$acceso = acceso( $wpdb, "agregaDatosRetornados");
+$acceso = acceso( $wpdb, "agregaIndMunicipios");
 if ( $acceso === true ):
 
 if(!empty($statusMsg)){

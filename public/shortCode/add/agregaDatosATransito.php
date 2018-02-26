@@ -94,7 +94,7 @@ if(!empty($status)){
 }
 
 
-$acceso = acceso( $wpdb, "agregaDatosCentroPenal");
+$acceso = acceso( $wpdb, "agregaDatosATransito");
 if ( $acceso === true ):
 
 if(!empty($statusMsg)){

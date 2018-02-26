@@ -185,7 +185,7 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
   } elseif (!$centro AND $indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL";
   } else {
-    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE municipio = '$centro' OR codigo = '$centro' OR nombre_ce = '$centro' AND anyo = $anyo";
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE municipio = '$centro' AND anyo = $anyo";
   }
   $ce = $wpdb->get_results( $sql);
   $escuelas = "";

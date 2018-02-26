@@ -18,6 +18,20 @@
   echo '<p><input type="submit" class="btn btn-primary" name="importSubmit" value="Agregar"></p>';
   echo '</form>';
  }
+ function getSelect($idx){
+   $op=$op1="";
+   if ( $idx == 0){
+     $op1 = 'selected = "selected"';
+     $op = '';
+   } else {
+     $op = 'selected = "selected"';
+     $op1 = '';
+   }
+   $select = "<select class=\"form-control\" id=\"enabled\">
+    <option value=\"1\" $op1 > $idx Si</option>
+    <option value=\"0\" $op >No $idx</option></select>";
+   return $select;
+ }
 
 $status = false;
 $total = 0;
@@ -53,85 +67,120 @@ if(!empty($status)){
     }
 }
 
-include(plugin_dir_path( __FILE__ )."../public/head_public.php");
-include(plugin_dir_path( __FILE__ )."../public/footer_public.php");
 ?>
-
-
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <style type="text/css">
  .panel-heading a{float: right;}
  #importFrm{margin-bottom: 20px;display: none;}
  #importFrm input[type=file] {display: inline;}
+ /*****************************************************************************/
+ .nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+    .nav-tabs > li > a { border: none; color: #666; }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
+        .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+ .tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+ .card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); }
 </style>
 <div class="container">
-	<h3>Usuarios del modulo de estadistica.</h3>
+ <div class="row"> <h3>Modulo de Estadisticas.</h3> </div>
 </div>
+
 <div class="container">
-    <?php if(!empty($statusMsg)){
-        echo '<div class="alert '.$statusMsgClass.'">'.$statusMsg.'</div>';
-    } ?>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Usuarios
-            <a href="javascript:void(0);" onclick="$('#importFrm').slideToggle();">Registrar a una persona como usuaria</a>
-        </div>
-        <div class="panel-body">
-          <?php echo generateUserForm(); ?>
-            <table class="table table-bordered display" id="users">
-                <thead>
-                    <tr>
-                      <th>Nombre de Usuario</th>
-                      <th>Ingreso</th>
-                      <th>Ultimo acceso</th>
-                      <th>Habilitado</th>
-                      <th>Rol</th>
-                      <th>Accion</th>
-                    </tr>
-                </thead>
-                <tbody>
-					<?php
-					$sql = "SELECT id, username, create_at, last_access, IF(active = 1, 'Si' ,'NO') AS active, IF(rol_id = 2, 'Analista' ,'Técnico de registro') AS rol_id FROM ind_seg_usuario";
-					$hechos = $wpdb->get_results( $sql);
-					foreach ($hechos as $key => $object) {
-          echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
-          echo '<input type="hidden" name="disable" value="'.$object->id.'">';
-    			echo "<tr><td>$object->username</td><td>$object->create_at</td><td>$object->last_access</td>";
-          echo ''."<td>$object->active</td>";
-          echo "<td>$object->rol_id</td>";
-          echo '<td><input type="submit" class="btn btn-primary btn-xs" value="Actualizar"></td></tr>';
-          echo '</form>';
-					}
-					 ?>
-            </tbody>
-            </table>
-        </div>
+ <div class="row">
+  <div class="col-md-12">
+   <div class="cards">
+    <ul class="nav nav-tabs" role="tablist">
+     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Registros de acceso</a></li>
+     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Perfiles</a></li>
+     <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Roles y permisos</a></li>
+     <li role="presentation" class="disabled"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Configuraciones</a></li>
+    </ul>
+    <div class="tab-content">
+     <div role="tabpanel" class="tab-pane active" id="home">
+         <h3>Accesos al modulo.</h3>
+         <table class="table table-bordered display" id="acceso">
+           <thead><tr><th>Fecha</th><th>Correo</th><th>IP</th><th>Resultado</th></tr></thead>
+           <tbody>
+             <?php
+             $sql = "SELECT A.fecha, A.ip, U.username AS user, IF(login = 1, 'Si' ,'NO') AS login FROM ind_seg_usuario AS U, ind_seg_acceso AS A WHERE U.id = A.user" ;
+             $hechos = $wpdb->get_results( $sql);
+             foreach ($hechos as $key => $o) {
+               echo "<tr><td>$o->fecha</td><td>$o->user</td><td>$o->ip</td><td>$o->login</td></tr>";
+             }
+             ?>
+           </tbody>
+         </table>
+     </div>
+     <div role="tabpanel" class="tab-pane" id="profile">
+       <h3>Usuarios del modulo de estadistica.</h3>
+       <?php if(!empty($statusMsg)){
+           echo '<div class="alert '.$statusMsgClass.'">'.$statusMsg.'</div>';
+       } ?>
+       <div class="panel panel-default">
+           <div class="panel-heading">
+               Usuarios
+               <a href="javascript:void(0);" onclick="$('#importFrm').slideToggle();">Registrar a una persona como usuaria</a>
+           </div>
+           <div class="panel-body">
+             <?php echo generateUserForm(); ?>
+               <table class="table table-bordered display" id="users">
+                   <thead>
+                       <tr>
+                         <th>Nombre de Usuario</th>
+                         <th>Ingreso</th>
+                         <th>Ultimo acceso</th>
+                         <th>Habilitado</th>
+                         <th>Rol</th>
+                         <th>Accion</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+            <?php
+            $sql = "SELECT id, username, create_at, last_access, active, IF(rol_id = 2, 'Analista' ,'Técnico de registro') AS rol_id FROM ind_seg_usuario";
+            $hechos = $wpdb->get_results( $sql);
+            foreach ($hechos as $key => $object) {
+             echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
+             echo '<input type="hidden" name="disable" value="'.$object->id.'">';
+            echo "<tr><td>$object->username</td><td>$object->create_at</td><td>$object->last_access</td>";
+             echo '<td> '.$object->active.getSelect( $object->active ).'</td>';
+             echo "<td>$object->rol_id</td>";
+             echo '<td><input type="submit" class="btn btn-primary btn-xs" value="Actualizar"></td></tr>';
+             echo '</form>';
+            }
+             ?>
+               </tbody>
+               </table>
+     </div></div></div>
+     <div role="tabpanel" class="tab-pane" id="messages">
+       <h3>Roles y permisos.</h3>
+       <table class="table table-bordered display" id="acceso">
+         <thead><tr><th>Rol</th><th>Herramienta</th></tr></thead>
+         <tbody>
+           <?php
+           $sql = "SELECT R.nombre_rol AS rr, H.nombre_herramienta AS hh FROM ind_seg_rol AS R, ind_seg_permiso AS P, ind_seg_herramienta AS H WHERE R.id = P.role_id AND P.herramienta_id = H.id" ;
+           $hechos = $wpdb->get_results( $sql);
+           foreach ($hechos as $key => $o) {
+             echo "<tr><td>$o->rr</td><td>$o->hh</td></tr>";
+           }
+           ?>
+         </tbody>
+       </table>
+     </div>
     </div>
+   </div>
+  </div>
+ </div>
 </div>
-<div class="container">
-  <h3>Accesos al modulo.</h3>
-  <table class="table table-bordered display" id="acceso">
-    <thead><tr><th>Fecha</th><th>Correo</th><th>IP</th><th>Resultado</th></tr></thead>
-    <tbody>
-      <?php
-      $sql = "SELECT A.fecha, A.ip, U.username AS user, IF(login = 1, 'Si' ,'NO') AS login FROM ind_seg_usuario AS U, ind_seg_acceso AS A WHERE U.id = A.user" ;
-      $hechos = $wpdb->get_results( $sql);
-      foreach ($hechos as $key => $o) {
-        echo "<tr><td>$o->fecha</td><td>$o->user</td><td>$o->ip</td><td>$o->login</td></tr>";
-      }
-      ?>
-    </tbody>
-  </table>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 
   <script type="text/javascript">
    (function($){
-     $('#users').DataTable({pageLength: 2, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } );
      $('#acceso').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } );
    }(jQuery));
   </script>
-</div>
