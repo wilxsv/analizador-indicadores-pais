@@ -68,7 +68,7 @@
 
 <div class="row">
  <div class="col-md-12">
-  <div class="row" id="datatable">
+  <div class="row" id="datatable" style="width:100%">
   </div>
  </div>
 </div>
@@ -94,14 +94,15 @@ require_once( get_plugin_path()."includes/utils/footer.php" );
 		}
 	});
 	$('#sanyo').on('change', function() {
-    if (this.value !== '0'){
+    document.getElementById("sanyo").disabled = true;
+    /*if (this.value !== '0'){
       $.post('<?php echo $data_path; ?>?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
           $('#datatable').html(resp);
       });
       $.post('<?php echo $data_path; ?>?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
           $('#macromap').html(resp);
       });
-    }
+    }*/
 	});
 	$('#smunicipio').on('change', function() {
     if (this.value !== '0'){
@@ -128,6 +129,7 @@ function restabecer() {
     $('#macromap').html('');
     $('#sanyo').select2('val', '0');
     $('#smunicipio').select2('val', '0');
+    document.getElementById("sanyo").disabled = false;
   }(jQuery));
 }
 </script>

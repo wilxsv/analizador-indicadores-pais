@@ -12,14 +12,14 @@ function getTablePrioridad($wpdb, $code){
   $sql = "SELECT * FROM ind_focalizacion";
   if ($code == 'all' ){
     $sql = "SELECT * FROM ind_focalizacion";
-    $titulo = "<th>Departamento</th><th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sector SPD</th>";
+    $titulo = "<th>DEPARTAMENTO</th><th>MUNICIPIO</th><th>FASE PESS</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR SPD</th>";
   } else {
     $sql = "SELECT * FROM ind_focalizacion WHERE municipio = '$code' OR sector_policial = '$code' OR nombre_ce = '$code' OR codigo_ce = '$code'";
-    $titulo = "<th>Municipio</th><th>Fases PESS</th><th>Codigo</th><th>Centro Escolar</th><th>Sector SPD</th>";
+    $titulo = "<th>MUNICIPIO</th><th>FASE PESS</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR SPD</th>";
   }
   $hechos = $wpdb->get_results( $sql);
   $table = '
-  <table class="table table-bordered display" id="datosgrafico">
+  <table class="compact display" id="datosgrafico">
    <thead><tr>'.$titulo.'</tr></thead>
    <tbody>';
    foreach ($hechos as $key => $object) {
@@ -30,7 +30,7 @@ function getTablePrioridad($wpdb, $code){
      }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
-$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
+$table .="(function($){ $('#datosgrafico').DataTable({ responsive: true,pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, /*searching: false,*/dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
 </script>";
   return $table;
 }
@@ -39,14 +39,14 @@ function getTableCentroEscolar($wpdb, $anyo, $code){
   $sql = "SELECT * FROM ind_centro_escolar";
   if ($code == 'all' ){
     $sql = "SELECT * FROM ind_centro_escolar";
-    $titulo = "<th>Año</th><th>Departamento</th><th>Municipio</th><th>Codigo</th><th>Centro Escolar</th><th>Sector</th><th>Presencia de maras</th><th>Drogas</th><th>Violaciones</th><th>Portacion de armas blancas y fuego</th><th>Robos y hurtos</th><th>Matricula relativa</th><th>Indice</th>";
+    $titulo = "<th>AÑO</th><th>DEPARTAMENTO</th><th>MUNICIPIO</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR</th><th>PRESENCIA DE ARMAS</th><th>DROGAS</th><th>VIOLACIONES</th><th>PORTACION DE ARMA BLABCA Y FUEGO</th><th>ROBO Y HURTO</th><th>MATRICULA RELATIVA</th><th>INDICE</th>";
   } else {
     $sql = "SELECT * FROM ind_centro_escolar WHERE municipio = '$code' and anyo = $anyo";
-    $titulo = "<th>Año</th><th>Municipio</th><th>Codigo</th><th>Centro Escolar</th><th>Sector</th><th>Presencia de maras</th><th>Drogas</th><th>Violaciones</th><th>Portacion de armas blancas y fuego</th><th>Robos y hurtos</th><th>Matricula relativa</th><th>Indice</th>";
+    $titulo = "<th>AÑO</th><th>MUNICIPIO</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR SPD</th><th>PRESENCIA DE MARAS</th><th>DROGAS</th><th>VIOLACIONES</th><th>PORTACION DE ARMA BLANCA Y FUEGO</th><th>ROBO Y HURTO</th><th>MATRICULA RELATIVA</th><th>INDICE</th>";
   }
   $hechos = $wpdb->get_results( $sql);
   $table = '
-  <table class="table table-bordered display" id="datosgrafico">
+  <table class="display compact" id="datosgrafico" cellspacing="0" width="100%">
    <thead><tr>'.$titulo.'</tr></thead>
    <tbody>';
    foreach ($hechos as $key => $object) {
@@ -57,21 +57,21 @@ function getTableCentroEscolar($wpdb, $anyo, $code){
     }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
-$table .="(function($){ $('#datosgrafico').DataTable({ /*searching: false,*/ pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));</script>";
+$table .="(function($){ $('#datosgrafico').DataTable({ responsive: true, responsive: true,/*searching: false,*/ pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));</script>";
   return $table;
 }
 
 function getTable($vars, $anyo, $wpdb ){
   if (!$vars && $anyo >= 2014 ){
     $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo";
-    $titulo = "<tr><th>Departamento</th><th>Municipio</th><th>Homicidios Totales</th><th>Homicidios Mujeres</th><th>Desaparecidos</th><th>Lesiones</th><th>VIF</th><th>Extorsiones</th><th>Robos</th><th>Hurtos</th><th>Robos de Vehículos</th><th>Hurtos Vehículos</th><th>R/H Vehículos con Mercaderia</th><th>Pob. Privada Libertad</th><th>Proporción Pob. Urbana</th><th>Escuela con Amenaza Pandilla</th><th>Indice IPM</th></tr>";
+    $titulo = "<tr><th>DEPARTAMENTO</th><th>MUNICIPIO</th><th>HOMICIDIOS TOTAL</th><th>HOMICIDIOS MUJERES</th><th>DESAPARECIDOS</th><th>LESIONES</th><th>VIF</th><th>EXTORCIONES</th><th>ROBOS</th><th>HURTOS</th><th>ROBOS DE VEHICULOS</th><th>HURTO DE VEHICULOS</th><th>R/H VEHICULOS CON MERCADERIA</th><th>POB. PRIVADA DE LIBERTAD</th><th>PRO. PROBLACION URBANA</th><th>ESCUELA CON AMENAZA DE PANDILLAS</th><th>INDICE IPM</th></tr>";
   }elseif ($vars && $anyo >= 2014 ){
     $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo AND departamento = '$vars'";
-    $titulo = "<tr><th>Municipio</th><th>Homicidios Totales</th><th>Homicidios Mujeres</th><th>Desaparecidos</th><th>Lesiones</th><th>VIF</th><th>Extorsiones</th><th>Robos</th><th>Hurtos</th><th>Robos de Vehículos</th><th>Hurtos Vehículos</th><th>R/H Vehículos con Mercaderia</th><th>Pob. Privada Libertad</th><th>Proporción Pob. Urbana</th><th>Escuela con Amenaza Pandilla</th><th>Indice IPM</th></tr>";
+    $titulo = "<tr><th>MUNICIPIO</th><th>HOMICIDIOS TOTAL</th><th>FEMENICIDIOS</th><th>DESAPARECIDOS</th><th>LESION</th><th>VIF</th><th>EXTORCION</th><th>ROBO</th><th>HURTO</th><th>ROBO DE VEHICULO</th><th>HURTO DE VEHICULO</th><th>R/H VEHICULO CON MERCADERIA</th><th>POB. PRIVADA DE LIBERTAD</th><th>PRO. PROBLACION URBANA</th><th>ESCUELA CON AMENAZA DE PANDILLAS</th><th>INDICE IPM</th></tr>";
   }else { return ""; }
   $hechos = $wpdb->get_results( $sql);
   $table = '
-  <table class="table table-bordered display" id="datosgrafico">
+  <table class="display compact" id="datosgrafico" cellspacing="0" width="100%">
    <thead>'.$titulo.'</thead>
    <tbody>';
    foreach ($hechos as $key => $object) {
@@ -82,7 +82,7 @@ function getTable($vars, $anyo, $wpdb ){
     }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
-$table .="(function($){ $('#datosgrafico').DataTable({ /*searching: false,*/ pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
+$table .="(function($){ $('#datosgrafico').DataTable({ responsive: true, responsive: true, /*searching: false,*/ pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5'] } ); }(jQuery));
 </script>";
 return $table;
 }
@@ -159,11 +159,11 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
       transform: rotate(-90deg);
     }
   </style>
-  <table border="1" class="table table-bordered display" id="datosgrafico">
+  <table border="1" class="compact display" id="datosgrafico">
    <thead><tr>'.$titulo.'</tr></thead>'.$data.'
    <tbody>';
 $table .='</tbody></table><script type="text/javascript">';
-$table .="(function($){ $('#datosgrafico').DataTable({pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5',
+$table .="(function($){ $('#datosgrafico').DataTable({ responsive: true,pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5',
     {
      text: 'información sobre formatos de exportación', action: function ( e, dt, node, config ) {
        window.open('https://es.wikipedia.org/wiki/Exportaci%C3%B3n_(inform%C3%A1tica)');
