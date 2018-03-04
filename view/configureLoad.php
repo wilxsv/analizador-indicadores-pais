@@ -9,27 +9,37 @@
 */
  global $wpdb;
 
- function generateUserForm(){
+ function generateUserForm( $wpdb ){
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post" id="importFrm">';
   echo '<p>username (requerido)<br /><input type="text" name="username" size="40" required /></p>';
   echo '<p>correo (requerido)<br /><input type="email" name="mail" size="40" required /></p>';
   echo '<p>clave (requerido)<br /><input type="password" name="subject" size="40" /></p>';
-  echo '<p>Rol (requerido) <br /><select name="rol" id="rol"><option value="2">Analista</option><option value="1" selected>Carga de datos</option></select></p>';
+  echo "<p>Rol (requerido) <br />".getSelectRol( $wpdb )."</select></p>";
   echo '<p><input type="submit" class="btn btn-primary" name="importSubmit" value="Agregar"></p>';
   echo '</form>';
  }
- function getSelect($idx){
-   $op=$op1="";
-   if ( $idx == 0){
-     $op1 = 'selected = "selected"';
-     $op = '';
+ function getSelectEnable($idx){
+   $si="";
+   $no="";
+   if ( strcmp($idx, 's') !== 0){
+     $no = 'selected = "selected"';
+     $si = '';
    } else {
-     $op = 'selected = "selected"';
-     $op1 = '';
+     $si = 'selected = "selected"';
+     $no = '';
    }
    $select = "<select class=\"form-control\" id=\"enabled\">
-    <option value=\"1\" $op1 > $idx Si</option>
-    <option value=\"0\" $op >No $idx</option></select>";
+    <option value=\"1\" $si >Si</option>
+    <option value=\"0\" $no >No</option></select>";
+   return $select;
+ }
+ function getSelectRol( $wpdb ){
+   $option = '';
+   $query=$wpdb->get_results( "SELECT * FROM ind_seg_rol ORDER BY nombre_rol" );
+   foreach ($query as $l) {
+    $option.= "<option value='$l->id'>$l->nombre_rol</option>";
+   }
+   $select = '<select name="rol" id="rol">'.$option.'<option value="0" selected>Seleccione un rol</option></select>';
    return $select;
  }
 
@@ -126,7 +136,7 @@ if(!empty($status)){
                <a href="javascript:void(0);" onclick="$('#importFrm').slideToggle();">Registrar a una persona como usuaria</a>
            </div>
            <div class="panel-body">
-             <?php echo generateUserForm(); ?>
+             <?php echo generateUserForm( $wpdb ); ?>
                <table class="table table-bordered display" id="users">
                    <thead>
                        <tr>
@@ -135,19 +145,22 @@ if(!empty($status)){
                          <th>Ultimo acceso</th>
                          <th>Habilitado</th>
                          <th>Rol</th>
+                         <th>Clave</th>
                          <th>Accion</th>
                        </tr>
                    </thead>
                    <tbody>
             <?php
-            $sql = "SELECT id, username, create_at, last_access, active, IF(rol_id = 2, 'Analista' ,'Técnico de registro') AS rol_id FROM ind_seg_usuario";
+            $sql = "SELECT id, username, create_at, last_access, IF(active = 1, 's' ,'n') AS active, IF(rol_id = 2, 'Analista' ,'Técnico de registro') AS rol_id FROM ind_seg_usuario";
             $hechos = $wpdb->get_results( $sql);
             foreach ($hechos as $key => $object) {
              echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
              echo '<input type="hidden" name="disable" value="'.$object->id.'">';
-            echo "<tr><td>$object->username</td><td>$object->create_at</td><td>$object->last_access</td>";
-             echo '<td> '.$object->active.getSelect( $object->active ).'</td>';
+             echo "<tr><td>$object->username</td><td>$object->create_at</td><td>$object->last_access</td>";
+             echo '<td> '.getSelectEnable( $object->active ).'</td>';
              echo "<td>$object->rol_id</td>";
+             echo '<td> <input id="subject2" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" value="" name="subject2" list="subject2_datalist" placeholder="Actualizar" size="10" oninvalid="this.setCustomValidity(\'Su clave debe poseer: 8 caracteres como minimo, simbolos, mayusculas y minusculas.\')"
+ type="password"></td>';
              echo '<td><input type="submit" class="btn btn-primary btn-xs" value="Actualizar"></td></tr>';
              echo '</form>';
             }
