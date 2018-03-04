@@ -9,6 +9,10 @@
 */
  global $wpdb;
 
+ if ( isset( $_POST['change'] ) && is_numeric($_POST['change']) ) $change = $_POST['change'];
+ if ( isset( $_POST['disable'] ) && is_numeric($_POST['disable']) ) $disable = $_POST['disable'];
+ if ( isset( $_POST['subject2'] ) && strlen($_POST['subject2']) > 12 ) $subject = $_POST['subject2'];
+
  function generateUserForm( $wpdb ){
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post" id="importFrm">';
   echo '<p>username (requerido)<br /><input type="text" name="username" size="40" required /></p>';
@@ -28,7 +32,7 @@
      $si = 'selected = "selected"';
      $no = '';
    }
-   $select = "<select class=\"form-control\" id=\"enabled\">
+   $select = "<select class=\"form-control\" name=\"change\" id=\"change\">
     <option value=\"1\" $si >Si</option>
     <option value=\"0\" $no >No</option></select>";
    return $select;
@@ -45,6 +49,27 @@
 
 $status = false;
 $total = 0;
+
+if ( isset($disable) ) {
+  if ( $disable > 0 && $change >= 0 && $change <= 1 ){
+    $sql = "UPDATE ind_seg_usuario SET active = $change WHERE id = $disable ;";
+    $wpdb->query($sql);
+    if($wpdb->last_error !== ''){
+      $status = 'err';
+    } else {
+      $status = 'succ';
+    }
+  }
+  if ($disable > 0 &&  strlen($subject2) >= 12 ) {
+    $sql = "UPDATE ind_seg_usuario SET password = '".hash('sha512', $subject )."' WHERE id = $disable ;";
+    $wpdb->query($sql);
+    if($wpdb->last_error !== ''){
+      $status = 'err';
+    } else {
+      $status = 'succ';
+    }
+  }
+}
 
 if ( isset($_POST['importSubmit']) ) {
   if(isset($_POST['username']) && isset($_POST['mail']) && isset($_POST['subject']) && isset($_POST['rol']) ){
@@ -159,7 +184,7 @@ if(!empty($status)){
              echo "<tr><td>$object->username</td><td>$object->create_at</td><td>$object->last_access</td>";
              echo '<td> '.getSelectEnable( $object->active ).'</td>';
              echo "<td>$object->rol_id</td>";
-             echo '<td> <input id="subject2" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" value="" name="subject2" list="subject2_datalist" placeholder="Actualizar" size="10" oninvalid="this.setCustomValidity(\'Su clave debe poseer: 8 caracteres como minimo, simbolos, mayusculas y minusculas.\')"
+             echo '<td> <input id="subject2" pattern="(?=^.{8,}$)((?=.*\d)).*$" value="" name="subject2" list="subject2_datalist" placeholder="Actualizar" size="10" oninvalid="this.setCustomValidity(\'Su clave debe poseer: 12 caracteres como minimo, simbolos, mayusculas y minusculas.\')"
  type="password"></td>';
              echo '<td><input type="submit" class="btn btn-primary btn-xs" value="Actualizar"></td></tr>';
              echo '</form>';
