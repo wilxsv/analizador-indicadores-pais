@@ -303,6 +303,12 @@ function get_mapa_municipl($wpdb, $anyo, $filtro, $centro){
     attribution: 'Dirección de Información y Análisis'
 	}).addTo(map);
 	// control that shows state info on hover
+
+</script>";*/
+}
+
+function get_mapa_interactivo($titulo, $var, $cantidad, $msg, $c1, $c2, $c3, $c4, $feature, $nombreVar){
+  return "\n
 	var info = L.control();
 	info.onAdd = function (map) {
 		this._div = L.DomUtil.create('div', 'info');
@@ -311,18 +317,18 @@ function get_mapa_municipl($wpdb, $anyo, $filtro, $centro){
 		return this._div;
 	};
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>Municipio</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + parseInt(props.indice*100) : 'Pase el cursor sobre un municipio');
+		this._div.innerHTML = '$titulo' +  (props ?
+			'<b>' + props.$var + '</b><br />' + $cantidad : '$msg');
 	};
 	info.addTo(map);
 	function getColor(d) {
-		return d > 68 ? '#E94190' :
-				d > 48  ? '#F39200' :
-				d >= 31  ? '#FCEA12' :
-				d >= 18   ? '#94C11F' : '#009FE3';
+		return d > $c4 ? '#E94190' :
+				d > $c3  ? '#F39200' :
+				d >= $c2  ? '#FCEA12' :
+				d >= $c1   ? '#94C11F' : '#009FE3';
 	}
 	function style(feature) {
-		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor(feature.properties.indice*100) };
+		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor($feature) };
 	}
 	function highlightFeature(e) {
 		var layer = e.target;
@@ -336,7 +342,31 @@ function get_mapa_municipl($wpdb, $anyo, $filtro, $centro){
 	function onEachFeature(feature, layer) {
 		layer.on({mouseover: highlightFeature,mouseout: resetHighlight,click: zoomToFeature});
 	}
-	geojson = L.geoJson(municipiosData, {	style: style,	onEachFeature: onEachFeature	}).addTo(map);
-  $labels_municipios
-</script>";*/
+	geojson = L.geoJson($nombreVar, {	style: style,	onEachFeature: onEachFeature	}).addTo(map);
+  \n";
+}
+
+function get_geojson_indice_municipio($wpdb, $filtro, $anyo, $nombreVar){
+
+  if( (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) ){
+    $filtro = " AND i.departamento = '$filtro' ";
+  } else {
+    $filtro = "";
+  }
+  if ( $anyo >= 2014 ){
+    $anyo = " AND i.anyo = $anyo ";
+  } else {
+    $anyo = " AND i.anyo = 2015 ";
+  }
+  $sql = "SELECT i.id AS id, i.municipio AS municipio , i.ipn AS indice, m.geojson_municipio".map_load()." AS coordenada FROM ind_municipio i, ind_ctl_departamento d, ind_ctl_municipio m WHERE i.departamento = d.nombre_departamento AND d.id = m.ctl_departamento_id AND i.municipio = m.nombre_municipio $anyo $filtro";
+  $hechos = $wpdb->get_results( $sql);
+  $json = NULL;
+  foreach ($hechos as $key => $object) {
+    if ($json != NULL){
+      $json.= ",";
+    }
+    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->municipio\",\"indice\":$object->indice },\"geometry\":".$object->coordenada."}";
+  }
+
+  return "\n<script type=\"text/javascript\">var $nombreVar = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>\n";
 }

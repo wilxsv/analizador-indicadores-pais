@@ -8,19 +8,11 @@
  * Author URI: http://pnud.org.sv/
 */
 
-
  global $wpdb;
 
  require_once( get_plugin_path()."includes/utils/head.php" );
 
- if ( isset( $_POST['disable'] ) ) {
-   $_SESSION['user_name'] = NULL;
-   $_SESSION['user_rol'] = NULL;
-   $_SESSION['type'] = NULL;
-   $_SESSION['user_id'] = null;
-   session_destroy();
- }
-
+ require_once( get_plugin_path()."includes/libs/sessions.php" );
 
  $deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );

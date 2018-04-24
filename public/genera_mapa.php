@@ -57,16 +57,17 @@ function get_mapa_centroescolar($wpdb, $vars, $centro, $anyo){
 
 function get_mapa_municipal($wpdb, $anyo, $filtro, $centro){
   $map = uniqid();
-  $zoom = 12;
+  $zoom = 10;
   get_style_maps();
   $sectorBase = "sectoresData";
+  echo get_geojson_indice_municipio($wpdb, $filtro, $anyo, $sectorBase);
   $mapa = "
 <div id='$map' class=\"mapDiv\"></div>
 <script type=\"text/javascript\">
   var map = L.map('$map').setView([$centro], $zoom);
   L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
   ".get_info_leyenda('<i style="background:#009FE3"></i> Inseguridad muy baja (00 &ndash; 18)', '<i style="background:#94C11F"></i> Inseguridad baja     (18 &ndash; 31)', '<i style="background:#FCEA12"></i> Inseguridad media    (31 &ndash; 48)','<i style="background:#F39200"></i> Inseguridad alta     (48 &ndash; 68)','<i style="background:#E94190"></i> Inseguridad muy alta (68 &ndash; 100)')."
-
+  ".get_mapa_interactivo("<h4>Municipio</h4>", 'name', 'parseInt(props.indice*100)', 'Pase el cursor sobre un municipio', 18, 31, 48, 68, 'feature.properties.indice*100', $sectorBase)."
 </script>";
   return $mapa;
 }
