@@ -209,9 +209,9 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
   } elseif (!$indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND municipio = '$centro'";
   } elseif (!$centro AND $indice){
-    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL";
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, FORMAT(ipce, 2) AS ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL";
   } else {
-    $sql = "SELECT nombre_ce AS nombre, lon, lat, ipce FROM ind_centro_escolar WHERE municipio = '$centro' AND anyo = $anyo";
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, FORMAT(ipce, 2) AS ipce FROM ind_centro_escolar WHERE municipio = '$centro' AND anyo = $anyo";
   }
   $ce = $wpdb->get_results( $sql);
   $escuelas = "";
@@ -224,13 +224,13 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
     $style .= "var rosaIcon = L.icon({ iconUrl: '".get_plugin_url()."/public/images/punto_rosa.png' });\n";
     foreach ($ce as $key => $object) {
       if ( $object->ipce <= 0.2 ){
-        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: amarilloIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: azulIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }
       elseif ( $object->ipce <= 0.4 ) {
         $escuelas .= "L.marker([$object->lat, $object->lon], {icon: verdeIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }
       elseif ( $object->ipce <= 0.6 ) {
-        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: azulIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
+        $escuelas .= "L.marker([$object->lat, $object->lon], {icon: amarilloIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
       }
       elseif ( $object->ipce <= 0.8 ) {
         $escuelas .= "L.marker([$object->lat, $object->lon], {icon: naranjaIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
@@ -244,67 +244,6 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
     }
   }
   return "\n$style\n$escuelas\n";
-}
-
-
-function get_mapa_municipl($wpdb, $anyo, $filtro, $centro){
-
-  /*
-  $labels_municipios = "
-  var legend = L.control({position: 'bottomright'});
-  legend.onAdd = function (map) {
-  	var div = L.DomUtil.create('div', 'info legend'),
-  		grades = [],
-  		labels = [],
-  		from, to;
-  	labels.push('');
-  	labels.push('');
-  	labels.push('');
-  	labels.push('');
-  	labels.push('');
-  	div.innerHTML = labels.join('<br>');
-  	return div;
-  };
-  legend.addTo(map);";
-
-  $zoom = 9;
-  if( (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) ){
-    $filtro = " AND i.departamento = '$filtro' ";
-    $zoom = 10;
-  } else {
-    $filtro = "";
-  }
-  if ( $anyo >= 2014 ){
-    $anyo = " AND i.anyo = $anyo ";
-  } else {
-    $anyo = 2015;
-  }
-  $sql = "SELECT i.id AS id, i.municipio AS municipio , i.ipn AS indice, m.geojson_municipio".map_load()." AS coordenada FROM ind_municipio i, ind_ctl_departamento d, ind_ctl_municipio m WHERE i.departamento = d.nombre_departamento AND d.id = m.ctl_departamento_id AND i.municipio = m.nombre_municipio $anyo $filtro";
-  $hechos = $wpdb->get_results( $sql);
-  $json = NULL;
-  foreach ($hechos as $key => $object) {
-    if ($json != NULL){
-      $json.= ",";
-    }
-    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->municipio\",\"indice\":$object->indice },\"geometry\":".$object->coordenada."}";
-  }
-  $map = uniqid();
-  $files = '<style>
-  .info { padding: 6px 8px; font: 13px/15px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 12px; color: #777; }
-  .legend { text-align: left; line-height: 16px; color: #555; } .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.7; }</style>';
-  $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
-  return "
-  $files $datos
-  <div id='ma' style='width: 100%; height: 900px;'></div>
-<script type=\"text/javascript\">
-  var map = new L.map('ma', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false, touchZoom:false }).setView([$centro], $zoom);
-	L.tileLayer('', {
-		maxZoom: $zoom,minZoom: $zoom,
-    attribution: 'Dirección de Información y Análisis'
-	}).addTo(map);
-	// control that shows state info on hover
-
-</script>";*/
 }
 
 function get_mapa_interactivo($titulo, $var, $cantidad, $msg, $c1, $c2, $c3, $c4, $feature, $nombreVar){

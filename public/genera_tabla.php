@@ -51,9 +51,9 @@ function getTableCentroEscolar($wpdb, $anyo, $code){
    <tbody>';
    foreach ($hechos as $key => $object) {
    if ($code == 'all' ){
-     $table.= "<tr><td>$object->anyo</td><td>$object->departamento</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>$object->matricula</td><td>$object->ipce</td></tr>";
+     $table.= "<tr><td>$object->anyo</td><td>$object->departamento</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>$object->matricula</td><td>".round($object->ipce,2)."</td></tr>";
     } else {
-      $table.= "<tr><td>$object->anyo</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>$object->matricula</td><td>$object->ipce</td></tr>";
+      $table.= "<tr><td>$object->anyo</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>$object->matricula</td><td>".round($object->ipce,2)."</td></tr>";
     }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
@@ -76,9 +76,9 @@ function getTable($vars, $anyo, $wpdb ){
    <tbody>';
    foreach ($hechos as $key => $object) {
     if ($vars && $anyo >= 2014){
-     $table.="<tr><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>$object->ipn</td></tr>";
+     $table.="<tr><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>".round($object->ipn*100)."</td></tr>";
     } else {
-     $table.="<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>$object->ipn</td></tr>";
+     $table.="<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>".round($object->ipn*100)."</td></tr>";
     }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
