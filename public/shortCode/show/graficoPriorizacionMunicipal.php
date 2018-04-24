@@ -13,6 +13,15 @@
 
  require_once( get_plugin_path()."includes/utils/head.php" );
 
+ if ( isset( $_POST['disable'] ) ) {
+   $_SESSION['user_name'] = NULL;
+   $_SESSION['user_rol'] = NULL;
+   $_SESSION['type'] = NULL;
+   $_SESSION['user_id'] = null;
+   session_destroy();
+ }
+
+
  $deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
  $data_path = get_plugin_url()."public/data.php";
@@ -30,7 +39,21 @@
  $acceso = acceso( $wpdb, "graficoAnalisisSituacional");
  if ( $acceso === true ):
 ?>
-<div class="row"> <h5>Mapa interactivo</h5> </div>
+
+<div class="row">
+ <div class="pad group">
+  <div class="grid one-fifth "><h5>Mapa interactivo</h5> </div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last" ><br/></div>
+  <div class="grid one-fifth last" style="text-align:right">
+    <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?> " method="post">
+      <input type="hidden" name="disable" value="TRUE">
+      Cerrar sesión <button type="submit" class="btn btn-info btn-xs"><i class="fas fa-sign-out-alt"></i></button>
+    </form>
+  </div>
+ </div>
+</div>
 
 <div class="row">
  <div class="pad group">
@@ -133,7 +156,6 @@ function restabecer() {
   }(jQuery));
 }
 </script>
-
 <?php else: ?>
   <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
   <?php echo $acceso; ?>

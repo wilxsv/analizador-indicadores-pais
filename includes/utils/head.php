@@ -28,6 +28,7 @@ padding:0px;
 }
 
 </style>
+
 <script src="<?php echo get_plugin_url(); ?>public/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <?php
  $labels_municipios = "

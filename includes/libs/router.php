@@ -15,12 +15,15 @@
   if (false){//( https_habilitado() || !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] != 443 ) {
     return "No esta usando un protocolo seguro";
   } elseif ( $_SESSION['user_name'] != NULL || isset($_SESSION['user_name']) || isset($_SESSION['type'])  ) {
+    //si ya posee sesion abierta
     if ( strpos($_SESSION['type'], $idx) !== FALSE ) {
+      //echo $_SESSION['type']." - ".$idx;
       return TRUE;
     } else {
-      return "<h4> Sabemos que eres usuario pero por el momento no podemos mostrar este contenido, ...</h4>";
+      return generateLoginForm();
+      //return "<h4> Sabemos que eres usuario pero por el momento no podemos mostrar este contenido, ...</h4>";
     }
-    return generateLoginForm();
+    //return generateLoginForm();
   } elseif ($_POST['subject']) {
     $pass = hash('sha512', $_POST['subject']);
     $mail = $_POST["mail"];
@@ -50,6 +53,7 @@
       if ( strpos($_SESSION['type'], $idx) !== FALSE ) {
         return TRUE;
       } else {
+        return generateLoginForm();
         return "<h4> Sabemos que eres usuario pero por el momento no podemos mostrar este contenido, ...</h4>";
       }
       return TRUE;

@@ -21,51 +21,116 @@ $data = $anyo = $type = $centro = $code = $vars = FALSE;
 if ( isset( $_GET['data'] ) ) $data = $_GET['data'];
 if ( isset( $_GET['anyo'] ) && is_numeric($_GET['anyo']) ) $anyo = $_GET['anyo'];
 if ( isset( $_GET['type'] ) ) $type = $_GET['type'];
-if ( isset( $_GET['code'] ) ) $code = $_GET['code'];
 if ( isset( $_GET['vars'] ) ) $vars = $_GET['vars'];
-if ($data == 'table' && $anyo && $type == 'm') {
-  echo getTable($vars, $anyo, $wpdb);
-}elseif ($data == 'table' && $code && $type == 'f') {
-  echo getTablePrioridad($wpdb, $code);
-}elseif ($data == 'table' && $type == 'c') {
-  echo getTableCentroEscolar($wpdb, $anyo, $code);
-}elseif ($data == 'table' && $type == 'e') {
-  switch ($code) {
-    case "r":
-        echo getEstadisticaRetornados($wpdb, 2017, $vars);
-        break;
-    case "p":
-        echo getEstadisticaPrivadosLibertad($wpdb, 2017, $vars);
-        break;
-    case "t":
-        echo getEstadisticaTransito($wpdb, 2017, $vars);
-        break;
-    case "d":
-        echo getEstadisticaDelito($wpdb, 2017, $vars);
-        break;
+if ( isset( $_GET['code'] ) ) $code = $_GET['code'];
+
+// Impresion de tablas en pagina
+if ($data == 'table') {
+  if ($anyo && $type == 'm') {
+    echo getTable($vars, $anyo, $wpdb);
+  }elseif ($code && $type == 'f') {
+    echo getTablePrioridad($wpdb, $code);
+  }elseif ($type == 'c') {
+    echo getTableCentroEscolar($wpdb, $anyo, $code);
+  }elseif ($data == 'table' && $type == 'e') {
+    switch ($code) {
+      case "r":
+          echo getEstadisticaRetornados($wpdb, 2017, $vars);
+          break;
+      case "p":
+          echo getEstadisticaPrivadosLibertad($wpdb, 2017, $vars);
+          break;
+      case "t":
+          echo getEstadisticaTransito($wpdb, 2017, $vars);
+          break;
+      case "d":
+          echo getEstadisticaDelito($wpdb, 2017, $vars);
+          break;
+    }
+  }elseif ($type == 's') {
+    if ($vars){
+      echo getTableSiatuacional($wpdb, $anyo, $vars, $code);
+    }
   }
-}elseif ($data == 'table' && $type == 's') {
-  if ($vars){
-    echo getTableSiatuacional($wpdb, $anyo, $vars, $code);
+  // Inicio de Impresion de tablas situacional
+  elseif ($type == 'u') {
+    switch ($code) {
+      case 4:
+          echo "<h6>CRUCES BANCO DE DATOS RETORNADOS [Municipio $vars]</h6>".getEstadisticaRetornados($wpdb, $anyo, $vars);
+          break;
+      case 3:
+          echo "<h6>CRUCES BANCO DE DATOS PERSONAS PRIVADAS DE LIBERTAD [Municipio $vars]</h6>".getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
+          break;
+      case 1:
+          echo "<h6>CRUCES BANCO DE DATOS ACCIDENTES DE TRANSITO [Municipio $vars]</h6>".getEstadisticaTransito($wpdb, $anyo, $vars);
+          break;
+      case 2:
+          echo "<h6>CRUCES BANCO DE DATOS DE DELITOS [Municipio $vars]</h6>".getEstadisticaDelito($wpdb, $anyo, $vars);
+          break;
+    }
+    echo "";
+  } // Fin de Impresion de tabla situacional
+}
+// Fin de Impresion de tablas
+// Inicio de Impresion de mapas
+elseif ($data == 'map') {
+  if ($type == 'f' && $vars) {
+    echo get_mapa_focalizacion( $vars, get_centro_municipio($wpdb, $vars), $wpdb );
+    //echo get_sv($type, $vars, $wpdb, $centro, $zoom);
+    /*echo "
+<div id=\"mapid\" style=\"width: 600px; height: 400px;\"></div>
+<script>
+
+	var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; ',
+		id: 'mapbox.streets'
+	}).addTo(mymap);
+
+	L.marker([51.5, -0.09]).addTo(mymap)
+		.bindPopup(\"<b>Hello world!</b><br />I am a popup.\").openPopup();
+
+	L.circle([51.508, -0.11], 500, {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5
+	}).addTo(mymap).bindPopup(\"I am a circle.\");
+
+	L.polygon([
+		[51.509, -0.08],
+		[51.503, -0.06],
+		[51.51, -0.047]
+	]).addTo(mymap).bindPopup(\"I am a polygon.\");
+
+
+	var popup = L.popup();
+
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent(\"You clicked the map at \" + e.latlng.toString())
+			.openOn(mymap);
+	}
+
+	mymap.on('click', onMapClick);
+
+</script>";*/
   }
 }
-elseif ($data == 'map' && $anyo && $type == 'm') {
+// Fin de Impresion de mapas
+else {
+  echo "Petición no procesada";
+}
+
+
+
+
+
+if ($data == 'map' && $anyo && $type == 'm') {
   if ($vars){ echo get_mapa($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE)); }
   else { echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL, FALSE)); }
-}
-elseif ($data == 'map' && $type == 'f') {
-  if (!$vars) {
-    $zoom = 9;
-    $centro = get_centro($wpdb, NULL, FALSE);
-  }
-  elseif (1 === preg_match('~[0-9]~', $vars)) {
-    $zoom = 9;
-    $centro = get_centro_sector($wpdb, $vars);
-  } else {
-    $zoom = 9;
-    $centro = get_centro_municipio($wpdb, $vars);
-  }
-  echo get_sv($type, $vars, $wpdb, $centro, $zoom);
 }
 elseif ($data == 'map' && $type == 'c' && $anyo) {
   if ($code){
@@ -90,24 +155,4 @@ elseif ($data == 'map' && $anyo && $type == 's') {
   else {
     echo 'alert("No a seleccionado un todas las variables requeridas!!");';
   }
-}
-elseif ($data == 'table' && $type == 'u') {
-  switch ($code) {
-    case 4:
-        echo "<h6>CRUCES BANCO DE DATOS RETORNADOS [Municipio $vars]</h6>".getEstadisticaRetornados($wpdb, $anyo, $vars);
-        break;
-    case 3:
-        echo "<h6>CRUCES BANCO DE DATOS PERSONAS PRIVADAS DE LIBERTAD [Municipio $vars]</h6>".getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
-        break;
-    case 1:
-        echo "<h6>CRUCES BANCO DE DATOS ACCIDENTES DE TRANSITO [Municipio $vars]</h6>".getEstadisticaTransito($wpdb, $anyo, $vars);
-        break;
-    case 2:
-        echo "<h6>CRUCES BANCO DE DATOS DE DELITOS [Municipio $vars]</h6>".getEstadisticaDelito($wpdb, $anyo, $vars);
-        break;
-  }
-  echo "";
-}
-else {
-  echo "";
 }

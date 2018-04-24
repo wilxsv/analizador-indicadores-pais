@@ -11,7 +11,8 @@
 
  if ( isset( $_POST['change'] ) && is_numeric($_POST['change']) ) $change = $_POST['change'];
  if ( isset( $_POST['disable'] ) && is_numeric($_POST['disable']) ) $disable = $_POST['disable'];
- if ( isset( $_POST['subject2'] ) && strlen($_POST['subject2']) > 12 ) $subject = $_POST['subject2'];
+ if ( isset( $_POST['disable2'] ) && is_numeric($_POST['disable2']) ) $remove = $_POST['disable2'];
+ if ( isset( $_POST['subject2'] ) && strlen($_POST['subject2']) > 6 ) $subject2 = $_POST['subject2'];
 
  function generateUserForm( $wpdb ){
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post" id="importFrm">';
@@ -51,7 +52,7 @@ $status = false;
 $total = 0;
 
 if ( isset($disable) ) {
-  if ( $disable > 0 && $change >= 0 && $change <= 1 ){
+  if ( $change >= 0 && $change <= 1 ){
     $sql = "UPDATE ind_seg_usuario SET active = $change WHERE id = $disable ;";
     $wpdb->query($sql);
     if($wpdb->last_error !== ''){
@@ -60,8 +61,19 @@ if ( isset($disable) ) {
       $status = 'succ';
     }
   }
-  if ($disable > 0 &&  strlen($subject2) >= 12 ) {
-    $sql = "UPDATE ind_seg_usuario SET password = '".hash('sha512', $subject )."' WHERE id = $disable ;";
+  if ( strlen($subject2) >= 6 ) {
+    $sql = "UPDATE ind_seg_usuario SET password = '".hash('sha512', $subject2 )."' WHERE id = $disable ;";
+    $wpdb->query($sql);
+    if($wpdb->last_error !== ''){
+      $status = 'err';
+    } else {
+      $status = 'succ';
+    }
+  }
+}
+if ( isset($remove) ) {
+  if ( $remove > 0 ){
+    $sql = "DELETE FROM ind_seg_usuario WHERE id = $remove; ";
     $wpdb->query($sql);
     if($wpdb->last_error !== ''){
       $status = 'err';
@@ -106,6 +118,7 @@ if(!empty($status)){
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
 <style type="text/css">
  .panel-heading a{float: right;}
  #importFrm{margin-bottom: 20px;display: none;}
@@ -171,7 +184,7 @@ if(!empty($status)){
                          <th>Habilitado</th>
                          <th>Rol</th>
                          <th>Clave</th>
-                         <th>Accion</th>
+                         <th colspan="2">Acciones</th>
                        </tr>
                    </thead>
                    <tbody>
@@ -179,15 +192,17 @@ if(!empty($status)){
             $sql = "SELECT id, username, create_at, last_access, IF(active = 1, 's' ,'n') AS active, IF(rol_id = 2, 'Analista' ,'Técnico de registro') AS rol_id FROM ind_seg_usuario";
             $hechos = $wpdb->get_results( $sql);
             foreach ($hechos as $key => $object) {
-             echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
-             echo '<input type="hidden" name="disable" value="'.$object->id.'">';
+             $var = '<input type="hidden" name="disable" value="'.$object->id.'">';
+             $form = '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
+             echo $form;
+             echo $var;
              echo "<tr><td>$object->username</td><td>$object->create_at</td><td>$object->last_access</td>";
              echo '<td> '.getSelectEnable( $object->active ).'</td>';
              echo "<td>$object->rol_id</td>";
-             echo '<td> <input id="subject2" pattern="(?=^.{8,}$)((?=.*\d)).*$" value="" name="subject2" list="subject2_datalist" placeholder="Actualizar" size="10" oninvalid="this.setCustomValidity(\'Su clave debe poseer: 12 caracteres como minimo, simbolos, mayusculas y minusculas.\')"
+             echo '<td> <input id="subject2" value="" name="subject2" list="subject2_datalist" placeholder="Actualizar" size="10" oninvalid="this.setCustomValidity(\'Su clave debe poseer: 12 caracteres como minimo, simbolos, mayusculas y minusculas.\')"
  type="password"></td>';
-             echo '<td><input type="submit" class="btn btn-primary btn-xs" value="Actualizar"></td></tr>';
-             echo '</form>';
+             echo '<td><button type="submit" class="btn btn-info btn-xs"><i class="fas fa-redo" title="Actualizar"></i></button></form></td>';
+             echo '<td>'.$form.'<input type="hidden" name="disable2" value="'.$object->id.'">'.'<button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button></form></td></tr>';
             }
              ?>
                </tbody>
