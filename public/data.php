@@ -76,49 +76,12 @@ if ($data == 'table') {
 elseif ($data == 'map') {
   if ($type == 'f' && $vars) {
     echo get_mapa_focalizacion( $vars, get_centro_municipio($wpdb, $vars), $wpdb );
-    //echo get_sv($type, $vars, $wpdb, $centro, $zoom);
-    /*echo "
-<div id=\"mapid\" style=\"width: 600px; height: 400px;\"></div>
-<script>
-
-	var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; ',
-		id: 'mapbox.streets'
-	}).addTo(mymap);
-
-	L.marker([51.5, -0.09]).addTo(mymap)
-		.bindPopup(\"<b>Hello world!</b><br />I am a popup.\").openPopup();
-
-	L.circle([51.508, -0.11], 500, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(mymap).bindPopup(\"I am a circle.\");
-
-	L.polygon([
-		[51.509, -0.08],
-		[51.503, -0.06],
-		[51.51, -0.047]
-	]).addTo(mymap).bindPopup(\"I am a polygon.\");
-
-
-	var popup = L.popup();
-
-	function onMapClick(e) {
-		popup
-			.setLatLng(e.latlng)
-			.setContent(\"You clicked the map at \" + e.latlng.toString())
-			.openOn(mymap);
-	}
-
-	mymap.on('click', onMapClick);
-
-</script>";*/
+  } elseif ($type == 'c' && $anyo) {
+    echo get_mapa_centroescolar($wpdb, $code, get_centro_municipio($wpdb, $code), $anyo);
+  } elseif ($anyo && $type == 'm') {
+    echo get_mapa_municipal($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE));
   }
-}
+}// Fin de data == maps
 // Fin de Impresion de mapas
 else {
   echo "Petición no procesada";
@@ -127,20 +90,13 @@ else {
 
 
 
-
-if ($data == 'map' && $anyo && $type == 'm') {
+/*
+if ($data == 'map' && $anyo && $type != 'm') {
   if ($vars){ echo get_mapa($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE)); }
   else { echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL, FALSE)); }
 }
-elseif ($data == 'map' && $type == 'c' && $anyo) {
-  if ($code){
-    $zoom = 12;
-  }else {
-    $zoom = 9;
-  }
-  echo get_mapa_ce($wpdb, $code, get_centro_municipio($wpdb, $code), $zoom, $anyo);
-}
-elseif ($data == 'map' && $anyo && $type == 's') {
+else*/
+if ($data == 'map' && $anyo && $type == 's') {
   if ($vars){
     echo get_mapa_situacional($wpdb, $anyo, $vars, $code, get_centro_municipio($wpdb, $vars));
   }

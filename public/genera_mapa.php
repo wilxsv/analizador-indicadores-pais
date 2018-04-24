@@ -27,16 +27,49 @@ function get_mapa_focalizacion( $vars, $centro, $wpdb ){
   var map = L.map('$map').setView([$centro], $zoom);
   L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
 
-  ".get_info_leyenda('<img src="'.$img.'" width="15" height="15"> Centro escolar', '<i style="background:#989898"></i> Sector policial', '<i style="background:#E0E02D"></i> Sector policial priorizado','')."
+  ".get_info_leyenda('<img src="'.$img.'" width="15" height="15"> Centro escolar', '<i style="background:#989898"></i> Sector policial', '<i style="background:#E0E02D"></i> Sector policial priorizado','','')."
   ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
   ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
   ".add_sector_leaflet($sectorPri, 2, "yellow", "white")."
   ".get_centros_escolares($wpdb, $vars, FALSE)."
-
 </script>";
   return $mapa;
 }
 
+function get_mapa_centroescolar($wpdb, $vars, $centro, $anyo){
+  $map = uniqid();
+  $zoom = 12;
+  get_style_maps();
+  $sectorBase = "sectoresData";
+  echo get_sector_ppd($wpdb, $vars, $sectorBase, FALSE);
+  $mapa = "
+<div id='$map' class=\"mapDiv\"></div>
+<script type=\"text/javascript\">
+  var map = L.map('$map').setView([$centro], $zoom);
+  L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
+  ".get_info_leyenda('<i style="background:#009FE3"></i> Inseguridad muy baja (0.00 &ndash; 0.20)', '<i style="background:#94C11F"></i> Inseguridad baja     (0.21 &ndash; 0.40)', '<i style="background:#FCEA12"></i> Inseguridad media    (0.41 &ndash; 0.60)','<i style="background:#F39200"></i> Inseguridad alta     (0.61 &ndash; 0.80)','<i style="background:#E94190"></i> Inseguridad muy alta (0.81 &ndash; 1.00)')."
+  ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
+  ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
+  ".get_centros_escolares($wpdb, $vars, TRUE, $anyo)."
+</script>";
+  return $mapa;
+}
+
+function get_mapa_municipal($wpdb, $anyo, $filtro, $centro){
+  $map = uniqid();
+  $zoom = 12;
+  get_style_maps();
+  $sectorBase = "sectoresData";
+  $mapa = "
+<div id='$map' class=\"mapDiv\"></div>
+<script type=\"text/javascript\">
+  var map = L.map('$map').setView([$centro], $zoom);
+  L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
+  ".get_info_leyenda('<i style="background:#009FE3"></i> Inseguridad muy baja (00 &ndash; 18)', '<i style="background:#94C11F"></i> Inseguridad baja     (18 &ndash; 31)', '<i style="background:#FCEA12"></i> Inseguridad media    (31 &ndash; 48)','<i style="background:#F39200"></i> Inseguridad alta     (48 &ndash; 68)','<i style="background:#E94190"></i> Inseguridad muy alta (68 &ndash; 100)')."
+
+</script>";
+  return $mapa;
+}
 
 
 function get_mapa($wpdb, $anyo, $filtro, $centro){
@@ -84,8 +117,8 @@ function get_mapa($wpdb, $anyo, $filtro, $centro){
   .legend { text-align: left; line-height: 16px; color: #555; } .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.7; }</style>';
   $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
   return "
-  <div id='ma' style='width: 100%; height: 900px;'></div>
   $files $datos
+  <div id='ma' style='width: 100%; height: 900px;'></div>
 <script type=\"text/javascript\">
   var map = new L.map('ma', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false, touchZoom:false }).setView([$centro], $zoom);
 	L.tileLayer('', {

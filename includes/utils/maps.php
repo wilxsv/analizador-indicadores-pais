@@ -136,7 +136,7 @@ function get_style_maps(){
    			 </style>\n";
 }
 
-function get_info_leyenda($str, $str1, $str2, $str3){
+function get_info_leyenda($str, $str1, $str2, $str3, $str4){
   return "\n
   var legend = L.control({position: 'bottomright'});
   legend.onAdd = function (map) {
@@ -148,7 +148,8 @@ function get_info_leyenda($str, $str1, $str2, $str3){
    labels.push('$str1');
    labels.push('$str2');
    labels.push('$str3');
-   div.innerHTML = labels.join('<br>');
+   labels.push('$str4');
+   div.innerHTML = labels.join('<br/>');
    return div;
   };
   legend.addTo(map);\n";
@@ -200,7 +201,6 @@ function add_leyenda_geojson_leaflet($nombreVar, $color, $elemento){
       });";
 }
 
-
 function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
   if (!$centro AND !$indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL";
@@ -217,11 +217,11 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
   $escuelas = "";
   $style = "";
   if ($indice) {
-    $style  = "var amarilloIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_amarillo.png' });\n";
-    $style .= "var verdeIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_verde.png' });\n";
-    $style .= "var azulIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_azul.png' });\n";
-    $style .= "var naranjaIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_naranja.png' });\n";
-    $style .= "var rosaIcon = L.icon({ iconUrl: '".plugin_dir_url( __FILE__ )."/images/punto_rosa.png' });\n";
+    $style  = "var amarilloIcon = L.icon({ iconUrl: '".get_plugin_url()."/public/images/punto_amarillo.png' });\n";
+    $style .= "var verdeIcon = L.icon({ iconUrl: '".get_plugin_url()."/public/images/punto_verde.png' });\n";
+    $style .= "var azulIcon = L.icon({ iconUrl: '".get_plugin_url()."/public/images/punto_azul.png' });\n";
+    $style .= "var naranjaIcon = L.icon({ iconUrl: '".get_plugin_url()."/public/images/punto_naranja.png' });\n";
+    $style .= "var rosaIcon = L.icon({ iconUrl: '".get_plugin_url()."/public/images/punto_rosa.png' });\n";
     foreach ($ce as $key => $object) {
       if ( $object->ipce <= 0.2 ){
         $escuelas .= "L.marker([$object->lat, $object->lon], {icon: amarilloIcon}).addTo(map).bindPopup(\"<b>$object->nombre</b><br/>$object->ipce\").bindTooltip(\"<b>$object->nombre</b><br/>$object->ipce\");\n";
@@ -244,4 +244,99 @@ function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
     }
   }
   return "\n$style\n$escuelas\n";
+}
+
+
+function get_mapa_municipl($wpdb, $anyo, $filtro, $centro){
+
+  /*
+  $labels_municipios = "
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function (map) {
+  	var div = L.DomUtil.create('div', 'info legend'),
+  		grades = [],
+  		labels = [],
+  		from, to;
+  	labels.push('');
+  	labels.push('');
+  	labels.push('');
+  	labels.push('');
+  	labels.push('');
+  	div.innerHTML = labels.join('<br>');
+  	return div;
+  };
+  legend.addTo(map);";
+
+  $zoom = 9;
+  if( (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) ){
+    $filtro = " AND i.departamento = '$filtro' ";
+    $zoom = 10;
+  } else {
+    $filtro = "";
+  }
+  if ( $anyo >= 2014 ){
+    $anyo = " AND i.anyo = $anyo ";
+  } else {
+    $anyo = 2015;
+  }
+  $sql = "SELECT i.id AS id, i.municipio AS municipio , i.ipn AS indice, m.geojson_municipio".map_load()." AS coordenada FROM ind_municipio i, ind_ctl_departamento d, ind_ctl_municipio m WHERE i.departamento = d.nombre_departamento AND d.id = m.ctl_departamento_id AND i.municipio = m.nombre_municipio $anyo $filtro";
+  $hechos = $wpdb->get_results( $sql);
+  $json = NULL;
+  foreach ($hechos as $key => $object) {
+    if ($json != NULL){
+      $json.= ",";
+    }
+    $json.= "{\"type\":\"Feature\",\"id\":\"$object->id\",\"properties\":{\"name\":\"$object->municipio\",\"indice\":$object->indice },\"geometry\":".$object->coordenada."}";
+  }
+  $map = uniqid();
+  $files = '<style>
+  .info { padding: 6px 8px; font: 13px/15px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 12px; color: #777; }
+  .legend { text-align: left; line-height: 16px; color: #555; } .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.7; }</style>';
+  $datos = "<script type=\"text/javascript\">var municipiosData = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>";
+  return "
+  $files $datos
+  <div id='ma' style='width: 100%; height: 900px;'></div>
+<script type=\"text/javascript\">
+  var map = new L.map('ma', { zoomControl:false, dragging: false, tap: false, scrollWheelZoom: false, touchZoom:false }).setView([$centro], $zoom);
+	L.tileLayer('', {
+		maxZoom: $zoom,minZoom: $zoom,
+    attribution: 'Dirección de Información y Análisis'
+	}).addTo(map);
+	// control that shows state info on hover
+	var info = L.control();
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+    L.DomEvent.disableClickPropagation(this._div);
+		this.update();
+		return this._div;
+	};
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>Municipio</h4>' +  (props ?
+			'<b>' + props.name + '</b><br />' + parseInt(props.indice*100) : 'Pase el cursor sobre un municipio');
+	};
+	info.addTo(map);
+	function getColor(d) {
+		return d > 68 ? '#E94190' :
+				d > 48  ? '#F39200' :
+				d >= 31  ? '#FCEA12' :
+				d >= 18   ? '#94C11F' : '#009FE3';
+	}
+	function style(feature) {
+		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor(feature.properties.indice*100) };
+	}
+	function highlightFeature(e) {
+		var layer = e.target;
+		layer.setStyle({weight: 5,color: '#666',dashArray: '',fillOpacity: 0.7});
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {	layer.bringToFront();	}
+		info.update(layer.feature.properties);
+	}
+	var geojson;
+	function resetHighlight(e) {geojson.resetStyle(e.target);	info.update();}
+	function zoomToFeature(e) {map.fitBounds(e.target.getBounds());}
+	function onEachFeature(feature, layer) {
+		layer.on({mouseover: highlightFeature,mouseout: resetHighlight,click: zoomToFeature});
+	}
+	geojson = L.geoJson(municipiosData, {	style: style,	onEachFeature: onEachFeature	}).addTo(map);
+  $labels_municipios
+</script>";*/
 }
