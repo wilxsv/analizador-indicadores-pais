@@ -10,11 +10,20 @@
 
 function getTablePrioridad($wpdb, $code){
   $sql = "SELECT * FROM ind_focalizacion";
+  $filtro = "";
+  if (is_numeric($code)) {
+    $municipios=$wpdb->get_results( "SELECT m.id AS id, d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id WHERE m.id = $code group by d.nombre_departamento, m.nombre_municipio" );
+    foreach ($municipios as $l) {
+      $filtro = "WHERE municipio = '".strtoupper($l->municipio)."' AND departamento = '".strtoupper($l->departamento)."'";
+    }
+  } else {
+    $code = "all";
+  }
   if ($code == 'all' ){
     $sql = "SELECT * FROM ind_focalizacion";
     $titulo = "<th>DEPARTAMENTO</th><th>MUNICIPIO</th><th>FASE PESS</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR SPD</th>";
   } else {
-    $sql = "SELECT * FROM ind_focalizacion WHERE municipio = '$code' OR sector_policial = '$code' OR nombre_ce = '$code' OR codigo_ce = '$code'";
+    $sql = "SELECT * FROM ind_focalizacion $filtro ";
     $titulo = "<th>MUNICIPIO</th><th>FASE PESS</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR SPD</th>";
   }
   $hechos = $wpdb->get_results( $sql);
@@ -37,11 +46,20 @@ $table .="(function($){ $('#datosgrafico').DataTable({ responsive: true,pageLeng
 
 function getTableCentroEscolar($wpdb, $anyo, $code){
   $sql = "SELECT * FROM ind_centro_escolar";
+  $filtro = "";
+  if (is_numeric($code)) {
+    $municipios=$wpdb->get_results( "SELECT m.id AS id, d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id WHERE m.id = $code group by d.nombre_departamento, m.nombre_municipio" );
+    foreach ($municipios as $l) {
+      $filtro = " municipio = '".strtoupper($l->municipio)."' AND departamento = '".strtoupper($l->departamento)."'";
+    }
+  } else {
+    $code = "all";
+  }
   if ($code == 'all' ){
     $sql = "SELECT * FROM ind_centro_escolar";
     $titulo = "<th>AÑO</th><th>DEPARTAMENTO</th><th>MUNICIPIO</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR</th><th>PRESENCIA DE ARMAS</th><th>DROGAS</th><th>VIOLACIONES</th><th>PORTACION DE ARMA BLABCA Y FUEGO</th><th>ROBO Y HURTO</th><th>MATRICULA RELATIVA</th><th>INDICE</th>";
   } else {
-    $sql = "SELECT * FROM ind_centro_escolar WHERE municipio = '$code' and anyo = $anyo";
+    $sql = "SELECT * FROM ind_centro_escolar WHERE $filtro and anyo = $anyo";
     $titulo = "<th>AÑO</th><th>MUNICIPIO</th><th>CODIGO</th><th>CENTRO ESCOLAR</th><th>SECTOR SPD</th><th>PRESENCIA DE MARAS</th><th>DROGAS</th><th>VIOLACIONES</th><th>PORTACION DE ARMA BLANCA Y FUEGO</th><th>ROBO Y HURTO</th><th>MATRICULA RELATIVA</th><th>INDICE</th>";
   }
   $hechos = $wpdb->get_results( $sql);

@@ -13,10 +13,6 @@
  require_once( get_plugin_path()."includes/utils/head.php" );
   require_once( get_plugin_path()."includes/libs/sessions.php" );
 
- $municipios = "SELECT departamento, municipio FROM `ind_centro_escolar` group by departamento, municipio order by departamento, municipio";
- $municipios=$wpdb->get_results("$municipios");
- $codigo = $wpdb->get_results("SELECT municipio, codigo FROM `ind_centro_escolar`group by municipio, codigo");
- $centro = $wpdb->get_results("SELECT municipio, nombre_ce FROM `ind_centro_escolar` group by municipio, nombre_ce");
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_centro_escolar GROUP BY anyo" );
  $data_path = get_plugin_url()."public/data.php";
 
@@ -25,62 +21,6 @@
   $anyo.= "<option value='$l->anyo'>$l->anyo</option>";
   $anyo_ultimo = $l->anyo;
  }
- $dep = NULL;
- $aleatorio = rand(1, 262);
- $idx = 1;
- foreach ($municipios as $l) {
-   //Creacion de opciones para select de municipios
-   if ($dep == NULL){
-     $categoria.= "<optgroup label=\"$l->departamento\">";
-     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-   } elseif ($dep != $l->departamento) {
-     $categoria.= "<optgroup>";
-     $categoria.= "<optgroup label=\"$l->departamento\">";
-     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-   }else {
-     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-   }
-   $dep = $l->departamento;
-   if ( (is_numeric($aleatorio)) && ($idx == $aleatorio) ){
-     $aleatorio = $l->municipio;
-   }
-   $idx++;
- }
- $categoria.= "<optgroup>";
- $dep = NULL;
- $codigos = NULL;
- foreach ($codigo as $l) {
-     if ($dep == NULL){
-       $codigos.= "<optgroup label=\"$l->municipio\">";
-       $codigos.= "<option value=\"$l->codigo\">$l->codigo</option>";
-     } elseif ($dep != $l->municipio) {
-       $codigos.= "<optgroup>";
-       $codigos.= "<optgroup label=\"$l->municipio\">";
-       $codigos.= "<option value=\"$l->codigo\">$l->codigo</option>";
-     }else {
-       $codigos.= "<option value=\"$l->codigo\">$l->codigo</option>";
-     }
-     $dep = $l->municipio;
- }
- $codigos.= "<optgroup>";
- $dep = NULL;
- $ce = NULL;
- foreach ($centro as $l) {
-     if ($dep == NULL){
-       $ce.= "<optgroup label=\"$l->municipio\">";
-       $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
-     } elseif ($dep != $l->municipio) {
-       $ce.= "<optgroup>";
-       $ce.= "<optgroup label=\"$l->municipio\">";
-       $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
-     }else {
-       $ce.= "<option value=\"$l->nombre_ce\">$l->nombre_ce</option>";
-     }
-     $dep = $l->municipio;
- }
- $ce.= "<optgroup>";
-
-
   $acceso = acceso( $wpdb, "graficoCEscolar");
   if ( $acceso === true ):
 ?>
@@ -106,7 +46,7 @@
    Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option value="0" selected>Seleccione el año</option></select>
   </div>
   <div class="grid one-fifth last">
-  Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option value="0" selected>Seleccione el municipio</option></select>
+  Municipio:<br/><?php echo getFormSelectMunicipio($wpdb, 'smunicipio'); ?>
   </div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last"><br/></div>

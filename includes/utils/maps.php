@@ -15,18 +15,6 @@
         break;
 	 }
  }
-/*
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118049076-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-118049076-1');
-</script>
-
-*/
 /* Retorna e imprime el geojson */
 function get_geojson_municipio($wpdb, $nombre, $sector, $nombreVar){
   if ($sector) {
@@ -158,10 +146,11 @@ function get_info_leyenda($str, $str1, $str2, $str3, $str4){
 
 function get_sector_ppd($wpdb, $sector, $nombreVar, $priorizado){
   $coordenada = "geojson_ppd".map_load();
+  $filtro = getFiltro($wpdb, $sector);
   if ($priorizado) {
-    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.$coordenada AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector_policial AND s.nombre_municipio_ppd = '$sector'";
+    $sql = "SELECT s.id, s.dsc_ppd AS nombre, s.$coordenada AS coordenada FROM ind_ctl_sector_ppd AS s, ind_focalizacion as f WHERE s.dsc_ppd = f.sector_policial AND $filtro";
   } else {
-    $sql = "SELECT id, dsc_ppd AS nombre, $coordenada AS coordenada FROM ind_ctl_sector_ppd WHERE nombre_municipio_ppd = '$sector'";
+    $sql = "SELECT id, dsc_ppd AS nombre, $coordenada AS coordenada FROM ind_ctl_sector_ppd WHERE $filtro";
   }
 
   $sppd = $wpdb->get_results( $sql);
@@ -202,16 +191,23 @@ function add_leyenda_geojson_leaflet($nombreVar, $color, $elemento){
 }
 
 function get_centros_escolares($wpdb, $centro, $indice, $anyo = 0){
+  $filtro = "";
+  if (is_numeric($centro)) {
+    $municipios=$wpdb->get_results( "SELECT m.id AS id, d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id WHERE m.id = $centro group by d.nombre_departamento, m.nombre_municipio" );
+    foreach ($municipios as $l) {
+      $filtro = " municipio = '".strtoupper($l->municipio)."' AND departamento = '".strtoupper($l->departamento)."'";
+    }
+  }
   if (!$centro AND !$indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL";
   }  elseif (1 === preg_match('~[0-9]~', $centro) AND !$indice) {
-    $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND sector = '$centro'";
+    $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND $filtro";
   } elseif (!$indice){
-    $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND municipio = '$centro'";
+    $sql = "SELECT nombre_ce AS nombre, lon, lat FROM ind_focalizacion WHERE lon IS NOT NULL AND lat IS NOT NULL AND $filtro";
   } elseif (!$centro AND $indice){
     $sql = "SELECT nombre_ce AS nombre, lon, lat, FORMAT(ipce, 2) AS ipce FROM ind_centro_escolar WHERE anyo = $anyo AND lon IS NOT NULL AND lat IS NOT NULL";
   } else {
-    $sql = "SELECT nombre_ce AS nombre, lon, lat, FORMAT(ipce, 2) AS ipce FROM ind_centro_escolar WHERE municipio = '$centro' AND anyo = $anyo";
+    $sql = "SELECT nombre_ce AS nombre, lon, lat, FORMAT(ipce, 2) AS ipce FROM ind_centro_escolar WHERE $filtro AND anyo = $anyo";
   }
   $ce = $wpdb->get_results( $sql);
   $escuelas = "";
@@ -308,4 +304,16 @@ function get_geojson_indice_municipio($wpdb, $filtro, $anyo, $nombreVar){
   }
 
   return "\n<script type=\"text/javascript\">var $nombreVar = {\"type\":\"FeatureCollection\",\"features\":[$json]};</script>\n";
+}
+
+function getFiltro($wpdb, $vars){
+
+  $filtro = "";
+  if (is_numeric($vars)) {
+    $municipios=$wpdb->get_results( "SELECT m.id AS id, d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id WHERE m.id = $vars group by d.nombre_departamento, m.nombre_municipio" );
+    foreach ($municipios as $l) {
+      $filtro = " nombre_municipio_ppd = '".strtoupper($l->municipio)."' AND nombre_departamento_ppd = '".strtoupper($l->departamento)."'";
+    }
+  }
+  return $filtro;
 }

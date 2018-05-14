@@ -11,28 +11,12 @@
  global $wpdb;
 
  require_once( get_plugin_path()."includes/utils/head.php" );
-  require_once( get_plugin_path()."includes/libs/sessions.php" );
+ require_once( get_plugin_path()."includes/libs/sessions.php" );
 
- $municipios=$wpdb->get_results("SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio");
  $fase = $wpdb->get_results("SELECT fase_pess FROM `ind_focalizacion` WHERE sector IS NOT NULL group by fase_pess");
  $centro = $wpdb->get_results("SELECT municipio, nombre_ce, codigo_ce FROM `ind_focalizacion` WHERE codigo_ce > 0 group by municipio, codigo_ce");
  $data_path = get_plugin_url()."public/data.php";
 
- $dep = NULL;
- foreach ($municipios as $l) {
-     if ($dep == NULL){
-       $categoria.= "<optgroup label=\"$l->departamento\">";
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     } elseif ($dep != $l->departamento) {
-       $categoria.= "<optgroup>";
-       $categoria.= "<optgroup label=\"$l->departamento\">";
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     }else {
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     }
-     $dep = $l->departamento;
- }
- $categoria.= "<optgroup>";
  $policial = NULL;
  foreach ($fase as $l) {
    $policial.= "<option value=\"$l->fase_pess\">$l->fase_pess</option>";
@@ -84,7 +68,7 @@
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">
-	 Municipio:<br/><select name="smunicipio" id="smunicipio" style="width: 90%;"><?php echo $categoria; ?><option value="0" selected >Seleccione el municipio</option></select>
+	 Municipio:<br/><?php echo getFormSelectMunicipio($wpdb, 'smunicipio'); ?>
   </div>
   <div class="grid one-fifth last"><br/></div>
   <div class="grid one-fifth last"><br/></div>
