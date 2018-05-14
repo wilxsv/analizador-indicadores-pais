@@ -69,9 +69,9 @@ function getTableCentroEscolar($wpdb, $anyo, $code){
    <tbody>';
    foreach ($hechos as $key => $object) {
    if ($code == 'all' ){
-     $table.= "<tr><td>$object->anyo</td><td>$object->departamento</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>$object->matricula</td><td>".round($object->ipce,2)."</td></tr>";
+     $table.= "<tr><td>$object->anyo</td><td>$object->departamento</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>".round($object->matricula,2)."</td><td>".round($object->ipce,2)."</td></tr>";
     } else {
-      $table.= "<tr><td>$object->anyo</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>$object->matricula</td><td>".round($object->ipce,2)."</td></tr>";
+      $table.= "<tr><td>$object->anyo</td><td>$object->municipio</td><td>$object->codigo</td><td>$object->nombre_ce</td><td>$object->sector</td><td>$object->presencia_mara</td><td>$object->drogas</td><td>$object->violacion</td><td>$object->armas</td><td>$object->robos</td><td>".round($object->matricula,2)."</td><td>".round($object->ipce,2)."</td></tr>";
     }
  	 }
 $table .='</tbody></table><script type="text/javascript">';
