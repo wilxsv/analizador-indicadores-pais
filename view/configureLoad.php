@@ -13,6 +13,7 @@
  if ( isset( $_POST['disable'] ) && is_numeric($_POST['disable']) ) $disable = $_POST['disable'];
  if ( isset( $_POST['disable2'] ) && is_numeric($_POST['disable2']) ) $remove = $_POST['disable2'];
  if ( isset( $_POST['subject2'] ) && strlen($_POST['subject2']) > 6 ) $subject2 = $_POST['subject2'];
+ if ( isset( $_POST['tupla'] ) && strlen($_POST['id']) > 0 ) $tupla = $_POST['tupla'];
 
  function generateUserForm( $wpdb ){
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post" id="importFrm">';
@@ -50,6 +51,24 @@
 
 $status = false;
 $total = 0;
+
+if ( isset($tupla) ) {
+  if ( $_POST['id'] == 0  ){
+    $sql = "DELETE FROM ind_centro_escolar WHERE ((hash = '$tupla'));";
+  }elseif ( $_POST['id'] == 1 ) {
+    $sql = "DELETE FROM ind_municipio WHERE ((hash = '$tupla'));";
+  }else {
+    $sql = FALSE;
+  }
+  if ($sql) {
+    $wpdb->query($sql);
+    if($wpdb->last_error !== ''){
+      $status = 'err';
+    } else {
+      $status = 'succ';
+    }
+  }
+}
 
 if ( isset($disable) ) {
   if ( $change >= 0 && $change <= 1 ){
@@ -137,6 +156,10 @@ if(!empty($status)){
  <div class="row"> <h3>Modulo de Estadisticas.</h3> </div>
 </div>
 
+<?php if(!empty($statusMsg)){
+    echo '<div class="container"><div class="row">'.'<div class="alert '.$statusMsgClass.'">'.$statusMsg.'</div>'.'</div></div>';
+} ?>
+
 <div class="container">
  <div class="row">
   <div class="col-md-12">
@@ -145,7 +168,7 @@ if(!empty($status)){
      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Registros de acceso</a></li>
      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Perfiles</a></li>
      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Roles y permisos</a></li>
-     <li role="presentation" class="disabled"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Configuraciones</a></li>
+     <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Configuraciones</a></li>
     </ul>
     <div class="tab-content">
      <div role="tabpanel" class="tab-pane active" id="home">
@@ -153,21 +176,43 @@ if(!empty($status)){
          <table class="table table-bordered display" id="acceso">
            <thead><tr><th>Fecha</th><th>Correo</th><th>IP</th><th>Resultado</th></tr></thead>
            <tbody>
-             <?php
-             $sql = "SELECT A.fecha, A.ip, U.username AS user, IF(login = 1, 'Si' ,'NO') AS login FROM ind_seg_usuario AS U, ind_seg_acceso AS A WHERE U.id = A.user" ;
-             $hechos = $wpdb->get_results( $sql);
-             foreach ($hechos as $key => $o) {
-               echo "<tr><td>$o->fecha</td><td>$o->user</td><td>$o->ip</td><td>$o->login</td></tr>";
-             }
-             ?>
+           <?php
+           $sql = "SELECT A.fecha, A.ip, U.username AS user, IF(login = 1, 'Si' ,'NO') AS login FROM ind_seg_usuario AS U, ind_seg_acceso AS A WHERE U.id = A.user" ;
+           $hechos = $wpdb->get_results( $sql);
+           foreach ($hechos as $key => $o) {
+             echo "<tr><td>$o->fecha</td><td>$o->user</td><td>$o->ip</td><td>$o->login</td></tr>";
+           }
+           ?>
            </tbody>
          </table>
      </div>
+     <div role="tabpanel" class="tab-pane" id="settings">
+        <h3>Bancos de datos.</h3>
+        <table class="table table-bordered display" id="acceso">
+          <thead><tr><th>Categoria</th><th>Fecha</th><th>Hora</th><th>HASH</th><th>Operaciones</th></tr></thead>
+          <tbody>
+            <?php
+            $form = '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
+            $sql = "SELECT * FROM ind_centro_escolar GROUP BY hash" ;
+            $hechos = $wpdb->get_results( $sql);
+            foreach ($hechos as $key => $o) {
+              $date=date_create($o->registro);
+              $tag = $form.'<input type="hidden" name="tupla" value="'.$o->hash.'"><input type="hidden" name="id" value="0">'.'<button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Eliminar carga de datos</button></form>';
+              echo "<tr><td>Indice de seguridad de Centros escolares</td><td>".date_format($date,"Y - m - d")."</td><td>".date_format($date,'H:i:s')."</td><td>$o->hash</td><td>$tag</td></tr>";
+            }
+            $sql = "SELECT * FROM ind_municipio GROUP BY hash" ;
+            $hechos = $wpdb->get_results( $sql);
+            foreach ($hechos as $key => $o) {
+              $date=date_create($o->registro);
+              $tag = $form.'<input type="hidden" name="tupla" value="'.$o->hash.'"><input type="hidden" name="id" value="1">'.'<button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Eliminar carga de datos</button></form>';
+              echo "<tr><td>Indice de seguridad de Municipios</td><td>".date_format($date,"Y - m - d")."</td><td>".date_format($date,'H:i:s')."</td><td>$o->hash</td><td>$tag</td></tr>";
+            }
+            ?>
+          </tbody>
+        </table>
+     </div>
      <div role="tabpanel" class="tab-pane" id="profile">
        <h3>Usuarios del modulo de estadistica.</h3>
-       <?php if(!empty($statusMsg)){
-           echo '<div class="alert '.$statusMsgClass.'">'.$statusMsg.'</div>';
-       } ?>
        <div class="panel panel-default">
            <div class="panel-heading">
                Usuarios

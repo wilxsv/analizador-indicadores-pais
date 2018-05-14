@@ -11,10 +11,8 @@
  global $wpdb;
 
  require_once( get_plugin_path()."includes/utils/head.php" );
-
  require_once( get_plugin_path()."includes/libs/sessions.php" );
 
- $deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_municipio GROUP BY anyo" );
  $data_path = get_plugin_url()."public/data.php";
 
@@ -23,12 +21,8 @@
   $anyo.= "<option value='$l->anyo'>$l->anyo</option>";
   $anyo_ultimo = $l->anyo;
  }
- foreach ($deptos as $l) {
-   $categoria.= "<option value=\"$l->departamento\">$l->departamento</option>";
- }
- $categoria.= "<optgroup>";
 
- $acceso = acceso( $wpdb, "graficoAnalisisSituacional");
+ $acceso = acceso( $wpdb, "graficoPriorizacionMunicipal");
  if ( $acceso === true ):
 ?>
 
@@ -53,7 +47,7 @@
    Año:<br/><select name="sanyo" id="sanyo" style="width: 90%;"><option value="0" selected>Seleccione el año</option><?php echo $anyo; ?></select>
   </div>
   <div class="grid one-fifth last">
-   Departamento:<br/><select name="smunicipio" id="smunicipio" style="width:90%;"><option value="0" selected > Seleccione el departamento</option><?php echo $categoria; ?></select>
+   Departamento:<br/><?php echo getFormSelectDepartamento($wpdb, 'smunicipio'); ?>
   </div>
   <div class="grid one-fifth last"><br/>
   </div>
@@ -109,15 +103,15 @@ require_once( get_plugin_path()."includes/utils/footer.php" );
 		}
 	});
 	$('#sanyo').on('change', function() {
-    document.getElementById("sanyo").disabled = true;
-    /*if (this.value !== '0'){
+    if (this.value !== '0'){
       $.post('<?php echo $data_path; ?>?data=table&type=m&anyo='+this.value, { data:'table' }, function(resp) {
           $('#datatable').html(resp);
       });
       $.post('<?php echo $data_path; ?>?data=map&type=m&anyo='+this.value, { data:'map' }, function(resp) {
           $('#macromap').html(resp);
       });
-    }*/
+    }
+    document.getElementById("sanyo").disabled = true;
 	});
 	$('#smunicipio').on('change', function() {
     if (this.value !== '0'){

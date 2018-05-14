@@ -13,10 +13,12 @@ register_activation_hook( __FILE__, 'createDB' );
 add_action('admin_menu', 'setup_menu');
 /* shortCode */
 add_shortcode('generaCodigoSeguridad', 'generaCodigoSeguridad_shortcode' );
+/* agrega bancos de datos */
 add_shortcode('agregaDatosDelito', 'agregaDatosDelito_shortcode' );
 add_shortcode('agregaDatosATransito', 'agregaDatosATransito_shortcode' );
 add_shortcode('agregaDatosRetornados', 'agregaDatosRetornados_shortcode' );
 add_shortcode('agregaDatosCentroPenal', 'agregaDatosCentroPenal_shortcode' );
+/* agrega indicadores */
 add_shortcode('agregaIndCEscolar', 'agregaIndCEscolar_shortcode' );
 add_shortcode('agregaIndMunicipios', 'agregaIndMunicipios_shortcode' );
 /* Visualizadores */

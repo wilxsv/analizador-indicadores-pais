@@ -80,6 +80,13 @@ elseif ($data == 'map') {
     echo get_mapa_centroescolar($wpdb, $code, get_centro_municipio($wpdb, $code), $anyo);
   } elseif ($anyo && $type == 'm') {
     echo get_mapa_municipal($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE));
+  } elseif ($anyo && $type == 's') {
+    if ($vars){
+      echo get_mapa_analisis_situacional($wpdb, $anyo, $vars, $code, get_centro_municipio($wpdb, $vars));
+    }
+    else {
+      echo 'alert("No a seleccionado un todas las variables requeridas!!");';
+    }
   }
 }// Fin de data == maps
 // Fin de Impresion de mapas
@@ -95,7 +102,7 @@ if ($data == 'map' && $anyo && $type != 'm') {
   if ($vars){ echo get_mapa($wpdb, $anyo, $vars, get_centro($wpdb, $vars, TRUE)); }
   else { echo get_mapa($wpdb, $anyo, NULL, get_centro($wpdb, NULL, FALSE)); }
 }
-else*/
+else
 if ($data == 'map' && $anyo && $type == 's') {
   if ($vars){
     echo get_mapa_situacional($wpdb, $anyo, $vars, $code, get_centro_municipio($wpdb, $vars));
@@ -104,11 +111,4 @@ if ($data == 'map' && $anyo && $type == 's') {
     echo 'alert("No a seleccionado un todas las variables requeridas!!");';
   }
 }
-elseif ($data == 'map' && $anyo && $type == 's') {
-  if ($vars){
-    echo get_mapa_situacional($wpdb, $anyo, $vars, $code, get_centro_municipio($wpdb, $vars));
-  }
-  else {
-    echo 'alert("No a seleccionado un todas las variables requeridas!!");';
-  }
-}
+*/

@@ -64,10 +64,10 @@ $table .="(function($){ $('#datosgrafico').DataTable({ responsive: true, respons
 function getTable($vars, $anyo, $wpdb ){
   if (!$vars && $anyo >= 2014 ){
     $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo";
-    $titulo = "<tr><th>DEPARTAMENTO</th><th>MUNICIPIO</th><th>HOMICIDIOS TOTAL</th><th>HOMICIDIOS MUJERES</th><th>DESAPARECIDOS</th><th>LESIONES</th><th>VIF</th><th>EXTORCIONES</th><th>ROBOS</th><th>HURTOS</th><th>ROBOS DE VEHICULOS</th><th>HURTO DE VEHICULOS</th><th>R/H VEHICULOS CON MERCADERIA</th><th>POB. PRIVADA DE LIBERTAD</th><th>PRO. PROBLACION URBANA</th><th>ESCUELA CON AMENAZA DE PANDILLAS</th><th>INDICE IPM</th></tr>";
+    $titulo = "<tr><th>DEPARTAMENTO</th><th>MUNICIPIO</th><th>HOMICIDIOS TOTAL</th><th>HOMICIDIOS MUJERES</th><th>DESAPARECIDOS</th><th>LESIONES</th><th>VIF</th><th>EXTORSIONES</th><th>ROBOS</th><th>HURTOS</th><th>ROBOS DE VEHICULOS</th><th>HURTO DE VEHICULOS</th><th>R/H VEHICULOS CON MERCADERIA</th><th>POB. PRIVADA DE LIBERTAD</th><th>PRO. PROBLACION URBANA</th><th>ESCUELA CON AMENAZA DE PANDILLAS</th><th>INDICE IPM</th></tr>";
   }elseif ($vars && $anyo >= 2014 ){
     $sql = "SELECT * FROM ind_municipio WHERE anyo=$anyo AND departamento = '$vars'";
-    $titulo = "<tr><th>MUNICIPIO</th><th>HOMICIDIOS TOTAL</th><th>FEMENICIDIOS</th><th>DESAPARECIDOS</th><th>LESION</th><th>VIF</th><th>EXTORCION</th><th>ROBO</th><th>HURTO</th><th>ROBO DE VEHICULO</th><th>HURTO DE VEHICULO</th><th>R/H VEHICULO CON MERCADERIA</th><th>POB. PRIVADA DE LIBERTAD</th><th>PRO. PROBLACION URBANA</th><th>ESCUELA CON AMENAZA DE PANDILLAS</th><th>INDICE IPM</th></tr>";
+    $titulo = "<tr><th>MUNICIPIO</th><th>HOMICIDIOS TOTAL</th><th>FEMENICIDIOS</th><th>DESAPARECIDOS</th><th>LESION</th><th>VIF</th><th>EXTORSION</th><th>ROBO</th><th>HURTO</th><th>ROBO DE VEHICULO</th><th>HURTO DE VEHICULO</th><th>R/H VEHICULO CON MERCADERIA</th><th>POB. PRIVADA DE LIBERTAD</th><th>PRO. PROBLACION URBANA</th><th>ESCUELA CON AMENAZA DE PANDILLAS</th><th>INDICE IPM</th></tr>";
   }else { return ""; }
   $hechos = $wpdb->get_results( $sql);
   $table = '
@@ -76,9 +76,9 @@ function getTable($vars, $anyo, $wpdb ){
    <tbody>';
    foreach ($hechos as $key => $object) {
     if ($vars && $anyo >= 2014){
-     $table.="<tr><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>".round($object->ipn*100)."</td></tr>";
+     $table.="<tr><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>".round($object->ppurb,2)."</td><td>$object->epp</td><td>".round($object->ipn*100)."</td></tr>";
     } else {
-     $table.="<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>$object->ppurb</td><td>$object->epp</td><td>".round($object->ipn*100)."</td></tr>";
+     $table.="<tr><td>$object->departamento</td><td>$object->municipio</td><td>$object->homicidio</td><td>$object->total_homicidio_mujer</td><td>$object->desaparecidos</td><td>$object->lesiones</td><td>$object->vif</td><td>$object->extorciones</td><td>$object->robo</td><td>$object->hurto</td><td>$object->robo_vehiculo</td><td>$object->hurto_vehiculo</td><td>$object->r_h_conmercio</td><td>$object->ppl</td><td>".round($object->ppurb,2)."</td><td>$object->epp</td><td>".round($object->ipn*100)."</td></tr>";
     }
  	 }
 $table .='</tbody></table><script type="text/javascript">';

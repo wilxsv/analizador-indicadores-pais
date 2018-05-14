@@ -10,6 +10,7 @@
 
  global $wpdb;
  require_once( get_plugin_path()."includes/utils/head.php" );
+  require_once( get_plugin_path()."includes/libs/sessions.php" );
 
  $municipios=$wpdb->get_results( "SELECT d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id group by d.nombre_departamento, m.nombre_municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_bnc_dgcp GROUP BY anyo" );
@@ -62,7 +63,21 @@
  $acceso = acceso( $wpdb, "graficoAnalisisSituacional");
  if ( $acceso === true ):
 ?>
-<div class="row"> <h5>Mapa interactivo</h5> </div>
+
+<div class="row">
+ <div class="pad group">
+  <div class="grid one-fifth "><h5>Mapa interactivo</h5> </div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last" ><br/></div>
+  <div class="grid one-fifth last" style="text-align:right">
+    <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?> " method="post">
+      <input type="hidden" name="disable" value="TRUE">
+      Cerrar sesión <button type="submit" class="btn btn-info btn-xs"><i class="fas fa-sign-out-alt"></i></button>
+    </form>
+  </div>
+ </div>
+</div>
 
 <div class="row">
  <div class="pad group">

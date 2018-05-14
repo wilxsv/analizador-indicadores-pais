@@ -26,24 +26,18 @@ padding:0px;
     font-size:2em;
     vertical-align:middle;
 }
-
 </style>
-
+<link rel="stylesheet" href="<?php echo get_plugin_url(); ?>public/js/dropify/css/dropify.min.css"  type="text/css" />
 <script src="<?php echo get_plugin_url(); ?>public/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+
 <?php
- $labels_municipios = "
-var legend = L.control({position: 'bottomright'});
-legend.onAdd = function (map) {
-	var div = L.DomUtil.create('div', 'info legend'),
-		grades = [],
-		labels = [],
-		from, to;
-	labels.push('<i style=\"background:#009FE3\"></i> Inseguridad muy baja (00 &ndash; 18)');
-	labels.push('<i style=\"background:#94C11F\"></i> Inseguridad baja     (18 &ndash; 31)');
-	labels.push('<i style=\"background:#FCEA12\"></i> Inseguridad media    (31 &ndash; 48)');
-	labels.push('<i style=\"background:#F39200\"></i> Inseguridad alta     (48 &ndash; 68)');
-	labels.push('<i style=\"background:#E94190\"></i> Inseguridad muy alta (68 &ndash; 100)');
-	div.innerHTML = labels.join('<br>');
-	return div;
-};
-legend.addTo(map);";
+//$municipios=$wpdb->get_results( "SELECT m.id AS id, d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id group by d.nombre_departamento, m.nombre_municipio" );
+function getFormSelectDepartamento( $wpdb, $name ){
+	$deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
+	$form = "";
+  foreach ($deptos as $l) {
+    $form.= "<option value=\"$l->departamento\">$l->departamento</option>";
+  }
+	return '<select name="'.$name.'" id="'.$name.'" style="width:90%;"><option value="0" selected > Seleccione el departamento</option>'.$form.'</select>';
+}
+?>

@@ -11,6 +11,7 @@
  global $wpdb;
 
  require_once( get_plugin_path()."includes/utils/head.php" );
+  require_once( get_plugin_path()."includes/libs/sessions.php" );
 
  $municipios=$wpdb->get_results("SELECT departamento, municipio FROM `ind_focalizacion` group by departamento, municipio order by departamento, municipio");
  $fase = $wpdb->get_results("SELECT fase_pess FROM `ind_focalizacion` WHERE sector IS NOT NULL group by fase_pess");
@@ -64,6 +65,22 @@
  $acceso = acceso( $wpdb, "graficoFocalizacion");
  if ( $acceso === true ):
 ?>
+
+<div class="row">
+ <div class="pad group">
+  <div class="grid one-fifth "><h5>Mapa interactivo</h5> </div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last" ><br/></div>
+  <div class="grid one-fifth last" style="text-align:right">
+    <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?> " method="post">
+      <input type="hidden" name="disable" value="TRUE">
+      Cerrar sesión <button type="submit" class="btn btn-info btn-xs"><i class="fas fa-sign-out-alt"></i></button>
+    </form>
+  </div>
+ </div>
+</div>
+
 <div class="row">
  <div class="pad group">
   <div class="grid one-fifth ">

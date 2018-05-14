@@ -5,6 +5,7 @@
     <script src="<?php echo get_plugin_url(); ?>public/js/jasny-bootstrap.js"></script>
     <!-- jQuery file upload -->
     <script src="<?php echo get_plugin_url(); ?>public/plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
+    <script src="<?php echo get_plugin_url(); ?>public/js/dropify/js/dropify.min.js"></script>
 	<script type="text/javascript">
 	(function($){
         // Basic

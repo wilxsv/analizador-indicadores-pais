@@ -72,6 +72,73 @@ function get_mapa_municipal($wpdb, $anyo, $filtro, $centro){
   return $mapa;
 }
 
+function get_mapa_analisis_situacional($wpdb, $anyo, $vars, $code,  $centro){
+  $map = uniqid();
+  $zoom = 12;
+  get_style_maps();
+  $sectorBase = "sectoresData";
+  echo get_sector_ppd($wpdb, $vars, $sectorBase, FALSE);
+  if ($code == 6 | $code == 5  | $code == 3  | $code == 2  | $code == 0){
+    $max = get_max_delito($wpdb, $anyo, $vars, $code);
+  } elseif ($filtro == 4){
+    $max = get_max_dgcp($wpdb, $anyo, $vars, $code);
+  }
+  $sectorPri = "municipiosData";
+  echo get_indicador_situacional($wpdb, $sectorPri, $anyo, $vars, $code);
+  $l0 = intval($max*0.2);
+  $l1 = intval($max*0.4);
+  $l2 = intval($max*0.6);
+  $l3 = intval($max*0.8);
+
+  $mapa = "
+<div id='$map' class=\"mapDiv\"></div>
+<script type=\"text/javascript\">
+  var map = L.map('$map').setView([$centro], $zoom);
+  L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
+  ".get_info_leyenda("<i style=\"background:#009FE3\"></i> Inseguridad muy baja (00 &ndash; $l0)","<i style=\"background:#94C11F\"></i> Inseguridad baja     ($l0 &ndash; $l1)","<i style=\"background:#FCEA12\"></i> Inseguridad media    ($l1 &ndash; $l2)","<i style=\"background:#F39200\"></i> Inseguridad alta     ($l2 &ndash; $l3)","<i style=\"background:#E94190\"></i> Inseguridad muy alta ($l3 &ndash; $max)")."
+  ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
+  ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
+  ".get_mapa_interactivo("<h4>Sector policial</h4>", 'name', 'parseInt(props.cantidad)', 'Pase el cursor sobre un sector', $l0, $l1, $l2, $l3, 'feature.properties.cantidad', $sectorPri)."
+
+  /*
+  var info = L.control();
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+    L.DomEvent.disableClickPropagation(this._div);
+		this.update();
+		return this._div;
+	};
+	info.update = function (props) {
+		this._div.innerHTML = '<h4></h4>' +  (props ?
+			'<b>' + props.nombre + '</b><br />' +  : 'Pase el cursor sobre ');
+	};
+	info.addTo(map);
+	function getColor(d) {
+		return d > $l3 ? '#E94190' :
+				d > $l2  ? '#F39200' :
+				d >= $l1  ? '#FCEA12' :
+				d >= $l0   ? '#94C11F' : '#009FE3';
+	}
+	function style(feature) {
+		return { weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.7, fillColor: getColor() };
+	}
+	function highlightFeature(e) {
+		var layer = e.target;
+		layer.setStyle({weight: 5,color: '#666',dashArray: '',fillOpacity: 0.7});
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {	layer.bringToFront();	}
+		info.update(layer.feature.properties);
+	}
+	var geojson;
+	function resetHighlight(e) {geojson.resetStyle(e.target);	info.update();}
+	function zoomToFeature(e) {map.fitBounds(e.target.getBounds());}
+	function onEachFeature(feature, layer) {
+		layer.on({mouseover: highlightFeature,mouseout: resetHighlight,click: zoomToFeature});
+	}
+  geojson = L.geoJson(municipiosData, {	style: style,	onEachFeature: onEachFeature	}).addTo(map);
+  */
+</script>";
+  return $mapa;
+}
 
 function get_mapa($wpdb, $anyo, $filtro, $centro){
   $labels_municipios = "
@@ -405,7 +472,7 @@ function get_mapa_situacional($wpdb, $anyo, $vars, $filtro, $centro ){
   $l2 = intval($max*0.6);
   $l3 = intval($max*0.8);
   $labels_municipios = get_leyenda_municipio($wpdb, $anyo, $vars, $filtro);
-  $sector = get_sector_ppd($wpdb, $vars);
+  $sector = get_sector_ppd($wpdb, $vars, 'municipiosData', FALSE);
   $files = '<style>.info { padding: 6px 8px; font: 10px/12px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 14px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }.legend { text-align: left; line-height: 15px; color: #555; } .legend i { width: 15px; height: 15px; float: left; margin-right: 8px; opacity: 0.7; }</style>';
   return "<div id='$map' style='width: 100%; height: 900px;'></div>
   $files\n$datos\n$sector
