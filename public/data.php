@@ -56,16 +56,16 @@ if ($data == 'table') {
   elseif ($type == 'u') {
     switch ($code) {
       case 4:
-          echo "<h6>CRUCES BANCO DE DATOS RETORNADOS [Municipio $vars]</h6>".getEstadisticaRetornados($wpdb, $anyo, $vars);
+          echo "<h6>CRUCES BANCO DE DATOS RETORNADOS </h6>".getEstadisticaRetornados($wpdb, $anyo, $vars);
           break;
       case 3:
-          echo "<h6>CRUCES BANCO DE DATOS PERSONAS PRIVADAS DE LIBERTAD [Municipio $vars]</h6>".getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
+          echo "<h6>CRUCES BANCO DE DATOS PERSONAS PRIVADAS DE LIBERTAD </h6>".getEstadisticaPrivadosLibertad($wpdb, $anyo, $vars);
           break;
       case 1:
-          echo "<h6>CRUCES BANCO DE DATOS ACCIDENTES DE TRANSITO [Municipio $vars]</h6>".getEstadisticaTransito($wpdb, $anyo, $vars);
+          echo "<h6>CRUCES BANCO DE DATOS ACCIDENTES DE TRANSITO </h6>".getEstadisticaTransito($wpdb, $anyo, $vars);
           break;
       case 2:
-          echo "<h6>CRUCES BANCO DE DATOS DE DELITOS [Municipio $vars]</h6>".getEstadisticaDelito($wpdb, $anyo, $vars);
+          echo "<h6>CRUCES BANCO DE DATOS DE DELITOS </h6>".getEstadisticaDelito($wpdb, $anyo, $vars);
           break;
     }
     echo "";

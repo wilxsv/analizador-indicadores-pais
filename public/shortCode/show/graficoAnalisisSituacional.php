@@ -12,7 +12,6 @@
  require_once( get_plugin_path()."includes/utils/head.php" );
   require_once( get_plugin_path()."includes/libs/sessions.php" );
 
- $municipios=$wpdb->get_results( "SELECT d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id group by d.nombre_departamento, m.nombre_municipio" );
  $query_anyo=$wpdb->get_results( "SELECT anyo FROM ind_bnc_dgcp GROUP BY anyo" );
  $data_path = get_plugin_url()."public/data.php";
 
@@ -21,44 +20,6 @@
   $anyo.= "<option value='$l->anyo'>$l->anyo</option>";
   $anyo_ultimo = $l->anyo;
  }
-
- $dep = NULL;
- $aleatorio = rand(1, 262);
- $idx = 1;
- foreach ($municipios as $l) {
-   //Creacion de opciones para select de municipios
-   if ($dep == NULL){
-     $categoria.= "<optgroup label=\"$l->departamento\">";
-     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-   } elseif ($dep != $l->departamento) {
-     $categoria.= "<optgroup>";
-     $categoria.= "<optgroup label=\"$l->departamento\">";
-     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-   }else {
-     $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-   }
-   $dep = $l->departamento;
-   if ( (is_numeric($aleatorio)) && ($idx == $aleatorio) ){
-     $aleatorio = $l->municipio;
-   }
-   $idx++;
- }
- $categoria.= "<optgroup>";
-
- foreach ($municipios as $l) {
-     if ($dep == NULL){
-       $categoria.= "<optgroup label=\"$l->departamento\">";
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     } elseif ($dep != $l->departamento) {
-       $categoria.= "<optgroup>";
-       $categoria.= "<optgroup label=\"$l->departamento\">";
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     }else {
-       $categoria.= "<option value=\"$l->municipio\">".ucfirst(strtolower($l->municipio))."</option>";
-     }
-     $dep = $l->departamento;
- }
- $categoria.= "<optgroup>";
 
  $acceso = acceso( $wpdb, "graficoAnalisisSituacional");
  if ( $acceso === true ):
@@ -85,7 +46,7 @@
    <p>Año: <br /><select name="sanyo" id="sanyo" style="width: 90%;"><?php echo $anyo; ?><option value="0" selected>Seleccione el año</option></select></p>
   </div>
   <div class="grid one-fifth last">
-   <p>Municipio: <br /><select name="smunicipio" id="smunicipio"  style="width: 90%;"><?php echo $categoria; ?><option value="0" selected>Seleccione el municipio</option></select></p>
+   <p>Municipio: <br /><?php echo getFormSelectMunicipio($wpdb, 'smunicipio'); ?>
   </div>
   <div class="grid one-fifth last">Indicador: <br />
 	<select name="variable" id="variable"  style="width: 90%;" >
@@ -211,7 +172,7 @@ require_once( get_plugin_path()."includes/utils/footer.php" );
       //Verificacion de municipio seleccionado
       var selects = document.getElementById("smunicipio");
       var variable = selects.options[selects.selectedIndex].value;
-      if (variable.length > 3 && variable !== 'Seleccione el municipio'){
+      if (variable > 0 ){
         document.getElementById("banco").disabled = false;
         var selects = document.getElementById("sanyo");
         var anyo = selects.options[selects.selectedIndex].value;
