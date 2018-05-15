@@ -67,7 +67,7 @@ function get_mapa_municipal($wpdb, $anyo, $filtro, $centro){
   var map = L.map('$map').setView([$centro], $zoom);
   L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
   ".get_info_leyenda('<i style="background:#009FE3"></i> Inseguridad muy baja (00 &ndash; 18)', '<i style="background:#94C11F"></i> Inseguridad baja     (18 &ndash; 31)', '<i style="background:#FCEA12"></i> Inseguridad media    (31 &ndash; 48)','<i style="background:#F39200"></i> Inseguridad alta     (48 &ndash; 68)','<i style="background:#E94190"></i> Inseguridad muy alta (68 &ndash; 100)')."
-  ".get_mapa_interactivo("<h4>Municipio</h4>", 'name', 'parseInt(props.indice*100)', 'Pase el cursor sobre un municipio', 18, 31, 48, 68, 'feature.properties.indice*100', $sectorBase)."
+  ".get_mapa_interactivo("<h4>Municipio</h4>IPM ", 'name', 'parseInt(props.indice*100)', 'Pase el cursor sobre un municipio', 18, 31, 48, 68, 'feature.properties.indice*100', $sectorBase)."
 </script>";
   return $mapa;
 }
@@ -182,8 +182,9 @@ function get_municipio_by_sector($wpdb, $filtro){
  }
 
  function get_geojson_por_sector($wpdb, $sector){
+   $coordenada = "geojson_ppd".map_load();
    if ($sector !== "ND"){
-     $sql = "SELECT geojson_ppd AS coordenada FROM ind_ctl_sector_ppd WHERE dsc_ppd = '$sector'";
+     $sql = "SELECT $coordenada AS coordenada FROM ind_ctl_sector_ppd WHERE dsc_ppd = '$sector' AND $coordenada IS NOT NULL";
      $sppd = $wpdb->get_results( $sql);
      foreach ($sppd as $key => $object) {
          return $object->coordenada;

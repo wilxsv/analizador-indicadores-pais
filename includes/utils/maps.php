@@ -283,7 +283,7 @@ function get_mapa_interactivo($titulo, $var, $cantidad, $msg, $c1, $c2, $c3, $c4
 }
 
 function get_geojson_indice_municipio($wpdb, $filtro, $anyo, $nombreVar){
-
+  $coordenada = "m.geojson_municipio".map_load();
   if( (strlen($filtro) > 0) && !(1 === preg_match('~[0-9]~', $filtro)) ){
     $filtro = " AND i.departamento = '$filtro' ";
   } else {
@@ -294,7 +294,7 @@ function get_geojson_indice_municipio($wpdb, $filtro, $anyo, $nombreVar){
   } else {
     $anyo = " AND i.anyo = 2015 ";
   }
-  $sql = "SELECT i.id AS id, i.municipio AS municipio , i.ipn AS indice, m.geojson_municipio".map_load()." AS coordenada FROM ind_municipio i, ind_ctl_departamento d, ind_ctl_municipio m WHERE i.departamento = d.nombre_departamento AND d.id = m.ctl_departamento_id AND i.municipio = m.nombre_municipio $anyo $filtro";
+  $sql = "SELECT i.id AS id, i.municipio AS municipio , i.ipn AS indice, $coordenada AS coordenada FROM ind_municipio i, ind_ctl_departamento d, ind_ctl_municipio m WHERE i.departamento = d.nombre_departamento AND d.id = m.ctl_departamento_id AND i.municipio = m.nombre_municipio $anyo $filtro";
   $hechos = $wpdb->get_results( $sql);
   $json = NULL;
   foreach ($hechos as $key => $object) {

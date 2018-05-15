@@ -127,7 +127,7 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
   $titulo = '<th>SECTOR POLICIAL</th>';
   if ($code == 0) {
     $titulo .= '<th class="vTH"><p>AMENAZAS</p></th><th class="vTH"><p>AUTONOMIA</p></th>';
-    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%AMENAZAS%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%AMENAZAS%' AND anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
     $ppd = $wpdb->get_results( $sql);
     $data = '';
     foreach ($ppd as $key => $object) {
@@ -136,7 +136,7 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
   }elseif ($code == 1) {
   }elseif ($code == 2) {
     $titulo .= '<th class="vTH"><p>LESIONES</p></th><th class="vTH"><p>INTEGRIDAD</p></th>';
-    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%LESIONES%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%LESIONES%' AND  anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
     $ppd = $wpdb->get_results( $sql);
     $data = '';
     foreach ($ppd as $key => $object) {
@@ -144,7 +144,7 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
     }
   }elseif ($code == 3) {
     $titulo .= '<th class="vTH"><p>ROBO</p></th><th class="vTH"><p>ROBO DE VEHICULOS</p></th><th class="vTH"><p>HURTO Y ROBO VEH/CM</p></th><th class="vTH"><p>HURTO DE VEHICULOS</p></th><th class="vTH"><p>HURTO</p></th><th class="vTH"><p>EXTORSION</p></th><th class="vTH"><p>PATRIMONIO</p></th>';
-    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd, municipio, IF(delito = 'ROBO', COUNT(*) ,'0') AS R, IF(delito = 'ROBO DE VEHICULOS', COUNT(*) ,'0') AS RV, IF(delito = 'HURTO Y ROBO VEH/CM', COUNT(*) ,'0') AS RH, IF(delito = 'HURTO DE VEHICULOS', COUNT(*) ,'0') AS HV, IF(delito = 'HURTO', COUNT(*) ,'0') AS H, IF(delito = 'EXTORSION', COUNT(*) ,'0') AS E FROM ind_bnc_delito WHERE anyo = $anyo AND $filtro2 AND delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' GROUP BY sector_policial HAVING $having;";
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd, municipio, IF(delito = 'ROBO', COUNT(*) ,'0') AS R, IF(delito = 'ROBO DE VEHICULOS', COUNT(*) ,'0') AS RV, IF(delito = 'HURTO Y ROBO VEH/CM', COUNT(*) ,'0') AS RH, IF(delito = 'HURTO DE VEHICULOS', COUNT(*) ,'0') AS HV, IF(delito = 'HURTO', COUNT(*) ,'0') AS H, IF(delito = 'EXTORSION', COUNT(*) ,'0') AS E FROM ind_bnc_delito WHERE anyo = $anyo AND $filtro2 AND delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' GROUP BY sector_policial HAVING $having;";
     $ppd = $wpdb->get_results( $sql);
     $data = '';
     foreach ($ppd as $key => $object) {
@@ -152,7 +152,7 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
     }
   }elseif ($code == 4) {
     $titulo .= '<th class="vTH"><p>MARA 18 R</p></th><th class="vTH"><p>MARA 18 S</p></th><th class="vTH"><p>MARA 18</p></th><th class="vTH"><p>MAO MAO</p></th><th class="vTH"><p>MD</p></th><th class="vTH"><p>MIRADA LOCA</p></th><th class="vTH"><p>BANDA LA RAZA</p></th><th class="vTH"><p>MS13</p></th><th class="vTH"><p>MAQUINA</p></th><th class="vTH"><p>OTRAS BANDAS</p></th><th class="vTH"><p>NINGUNO</p></th><th class="vTH"><p>SIN ESPECIFICAR</p></th><th class="vTH"><p>PERSONAS PRIVADAS DE LIBERTAD</p></th>';
-    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd, municipio, IF(organizacion_delictiva = 'BANDA LA RAZA', COUNT(*) ,'0') AS BR, IF(organizacion_delictiva = 'MAO MAO', COUNT(*) ,'0') AS MM, IF(organizacion_delictiva = 'MAQUINA', COUNT(*) ,'0') AS BM, IF(organizacion_delictiva = 'MARA 18', COUNT(*) ,'0') AS MN, IF(organizacion_delictiva = 'MARA 18 R', COUNT(*) ,'0') AS MNR, IF(organizacion_delictiva = 'MARA 18 S', COUNT(*) ,'0') AS MNS, IF(organizacion_delictiva = 'MD', COUNT(*) ,'0') AS MD, IF(organizacion_delictiva = 'MIRADA LOCA', COUNT(*) ,'0') AS ML, IF(organizacion_delictiva = 'MS13', COUNT(*) ,'0') AS MS, IF(organizacion_delictiva = 'NINGUNO', COUNT(*) ,'0') AS NO, IF(organizacion_delictiva = 'OTRAS BANDAS', COUNT(*) ,'0') AS OB, IF(organizacion_delictiva = 'SIN ESPECIFICAR', COUNT(*) ,'0') AS SE FROM ind_bnc_dgcp WHERE anyo = $anyo  AND $filtro2 AND sector_policial != 'ND' GROUP BY sector_policial HAVING $having;";
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd, municipio, IF(organizacion_delictiva = 'BANDA LA RAZA', COUNT(*) ,'0') AS BR, IF(organizacion_delictiva = 'MAO MAO', COUNT(*) ,'0') AS MM, IF(organizacion_delictiva = 'MAQUINA', COUNT(*) ,'0') AS BM, IF(organizacion_delictiva = 'MARA 18', COUNT(*) ,'0') AS MN, IF(organizacion_delictiva = 'MARA 18 R', COUNT(*) ,'0') AS MNR, IF(organizacion_delictiva = 'MARA 18 S', COUNT(*) ,'0') AS MNS, IF(organizacion_delictiva = 'MD', COUNT(*) ,'0') AS MD, IF(organizacion_delictiva = 'MIRADA LOCA', COUNT(*) ,'0') AS ML, IF(organizacion_delictiva = 'MS13', COUNT(*) ,'0') AS MS, IF(organizacion_delictiva = 'NINGUNO', COUNT(*) ,'0') AS NO, IF(organizacion_delictiva = 'OTRAS BANDAS', COUNT(*) ,'0') AS OB, IF(organizacion_delictiva = 'SIN ESPECIFICAR', COUNT(*) ,'0') AS SE FROM ind_bnc_dgcp WHERE anyo = $anyo  AND $filtro2 GROUP BY sector_policial HAVING $having;";
     $ppd = $wpdb->get_results( $sql);
     $data = '';
     foreach ($ppd as $key => $object) {
@@ -160,7 +160,7 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
     }
   }elseif ($code == 5) {
     $titulo .= '<th class="vTH"><p>VIOLACION</p></th><th class="vTH"><p>SEXUAL</p></th>';
-    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
+    $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND  anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
     $ppd = $wpdb->get_results( $sql);
     $data = '';
     foreach ($ppd as $key => $object) {
@@ -168,7 +168,7 @@ function getTableSiatuacional($wpdb, $anyo, $vars, $code){
     }
   }elseif ($code == 6) {
     $titulo .= '<th class="vTH"><p>HOMICIDIO</p></th><th class="vTH"><p>FEMENICIDIO</p></th><th class="vTH"><p>VIDA</p></th>';
-    $sql = "SELECT id, IF(delito = 'FEMENICIDIO', COUNT(*) ,'0') AS F, IF(delito = 'HOMICIDIO', COUNT(*) ,'0') AS H, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%FEMENICIDIO%' OR delito LIKE '%HOMICIDIO%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
+    $sql = "SELECT id, IF(delito = 'FEMENICIDIO', COUNT(*) ,'0') AS F, IF(delito = 'HOMICIDIO', COUNT(*) ,'0') AS H, COUNT(*) AS cantidad, sector_policial AS dsc_ppd FROM ind_bnc_delito WHERE delito LIKE '%FEMENICIDIO%' OR delito LIKE '%HOMICIDIO%' AND anyo = $anyo  AND $filtro2 GROUP BY sector_policial;";
     $ppd = $wpdb->get_results( $sql);
     $data = '';
     foreach ($ppd as $key => $object) {
