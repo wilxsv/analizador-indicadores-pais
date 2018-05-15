@@ -153,14 +153,15 @@ function get_municipio_by_sector($wpdb, $filtro){
 
  function get_indicador_situacional($wpdb, $nombre_var, $anyo, $vars, $indicador){
    $filtro = getFiltroE($wpdb, $vars);
+   $having = getHaving($wpdb, $vars);
    if ($indicador == 4){
-     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_dgcp WHERE anyo = $anyo  AND $filtro GROUP BY sector_policial ";
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_dgcp WHERE anyo = $anyo  AND $filtro AND sector_policial != 'ND' GROUP BY sector_policial ";
    } elseif ($indicador == 6) {
      $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%FEMENICIDIO%' OR delito LIKE '%HOMICIDIO%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro GROUP BY sector_policial;";
    } elseif ($indicador == 5) {
      $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%VIOLACION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro GROUP BY sector_policial;";
    } elseif ($indicador == 3) {
-     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre, municipio FROM ind_bnc_delito WHERE delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro GROUP BY sector_policial HAVING municipio = '$vars';";
+     $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre, municipio FROM ind_bnc_delito WHERE delito LIKE '%ROBO%' OR delito LIKE '%HURTO%' OR delito LIKE '%EXTORSION%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro GROUP BY sector_policial HAVING $having;";
    } elseif ($indicador == 2) {
      $sql = "SELECT id, COUNT(*) AS cantidad, sector_policial AS nombre FROM ind_bnc_delito WHERE delito LIKE '%LESIONES%' AND sector_policial != 'ND' AND  anyo = $anyo  AND $filtro GROUP BY sector_policial;";
    } elseif ($indicador == 0) {
