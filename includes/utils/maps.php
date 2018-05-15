@@ -83,17 +83,18 @@ function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
    legend.addTo(map);";
  }
 
- function get_max_dgcp($wpdb, $anyo, $vars, $filtro){
-   if ($filtro == 4){
-     $query=$wpdb->get_results( "SELECT count(*) AS total FROM ind_bnc_dgcp WHERE sector_policial != 'ND' AND anyo = $anyo AND municipio = '$vars' GROUP BY sector_policial ORDER BY total DESC LIMIT 1" );
-   }
+ function get_max_dgcp($wpdb, $anyo, $vars){
+   $filtroLocalidad = getFiltroE($wpdb, $vars);
+   $sql = "SELECT count(*) AS total FROM ind_bnc_dgcp WHERE sector_policial != 'ND' AND anyo = $anyo AND $filtroLocalidad GROUP BY sector_policial ORDER BY total DESC LIMIT 1" ;
+   $query=$wpdb->get_results( $sql );
    foreach ($query as $l) {
     return $l->total;
    }
-   return 0;
   }
 
   function get_max_delito($wpdb, $anyo, $vars, $filtro){
+    $filtroLocalidad = getFiltroE($wpdb, $vars);
+    $having = getHaving($wpdb, $vars);
     if ($filtro == 6) {
       $where = " delito LIKE '%FEMENICIDIO%' OR delito LIKE '%HOMICIDIO%' AND ";
     } elseif ($filtro == 5){
@@ -107,7 +108,7 @@ function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
     } else {
       $where = "";
     }
-    $query=$wpdb->get_results( "SELECT count(*) AS total, municipio FROM ind_bnc_delito WHERE $where anyo = $anyo AND sector_policial != 'ND' AND municipio = '$vars' GROUP BY sector_policial HAVING municipio = '$vars' ORDER BY total DESC LIMIT 1" );
+    $query=$wpdb->get_results( "SELECT count(*) AS total, municipio FROM ind_bnc_delito WHERE $where anyo = $anyo AND sector_policial != 'ND' AND $filtroLocalidad GROUP BY sector_policial HAVING $having ORDER BY total DESC LIMIT 1" );
     foreach ($query as $l) {
      return $l->total;
     }
