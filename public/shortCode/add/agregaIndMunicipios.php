@@ -10,6 +10,7 @@
  global $wpdb;
 
  require_once( get_plugin_path()."includes/utils/head.php" );
+ require_once( get_plugin_path()."public/genera_tabla.php" );
 
  $status = false;
  $total = 0;
@@ -20,13 +21,10 @@
  $hash = md5( rand() );
  $user = $_SESSION['user_id'];
  $date = date('Y-m-d H:i:s');
- $file_name = "retornados.csv";
- $head = "<tr><th>Departamento</th><th>Municipio</th><th>Pais de Repatriación</th><th>Sexo</th><th>Año</th><th>Registro</th></tr>";
- $limit = 1000;
- $sql_grid = "SELECT departamento AS u, municipio AS d, pais_repatriacion AS t, sexo AS c, anyo AS i, registro AS s FROM ind_bnc_retornado ORDER BY registro DESC LIMIT $limit";
- $id = uniqid();
+ $file_name = "municipio.csv";
+ $anyo = 0;
 
-if(isset($_POST['importSubmit'])){
+if(isset($_POST['importSubmitMunicipio'])){
     $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
 	if(!empty($_FILES['input-file-now']['name']) && in_array($_FILES['input-file-now']['type'],$csvMimes)){
 		if(is_uploaded_file($_FILES['input-file-now']['tmp_name'])){
@@ -35,10 +33,11 @@ if(isset($_POST['importSubmit'])){
 				case "$file_name":
           $wpdb->query("START TRANSACTION;");
 					while(($line = fgetcsv($csvFile)) !== FALSE){
-            if ( is_numeric($line[0]) ) {
-              $sql =  "INSERT INTO ind_bnc_retornado (anyo, departamento, municipio, mes, sexo, edad_rango, estado_civil, persona_dependiente, tiempo_fuera, pais_repatriacion, motivo, nivel_educativo, consulado, antecedentes_penales, tipo_antecedente, espectativa_migrante, registro, usuario, ip, hash) VALUES";
-  						$sql .= "($line[0], '$line[1]', '$line[2]', '$line[3]', '$line[4]', '$line[5]', '$line[6]', '$line[7]', '$line[8]', '$line[9]', '$line[10]', '$line[11]', '$line[12]', '$line[13]', '$line[14]', '$line[15]', '$date', $user, '$ip', '$hash')";
-  						$wpdb->query($sql);
+            if ( is_numeric($line[2]) && is_numeric($line[3]) && is_numeric($line[4]) && is_numeric($line[5]) && is_numeric($line[6]) && is_numeric($line[7]) && is_numeric($line[8]) && is_numeric($line[9]) && is_numeric($line[10]) && is_numeric($line[11]) && is_numeric($line[12]) && is_numeric($line[13]) && is_numeric($line[14]) && is_numeric($line[15]) && is_numeric($line[16]) && is_numeric($line[17]) ) {
+              $sql =  "INSERT INTO ind_municipio (departamento,municipio,homicidio,total_homicidio_mujer,desaparecidos,lesiones,vif,extorciones,robo,hurto,robo_vehiculo,hurto_vehiculo,r_h_conmercio,ppl,ppurb,epp,veh,anyo,usuario,ip,hash) VALUES ";
+  						$sql .= "('$line[0]', '$line[1]', $line[2], $line[3], $line[4], $line[5], $line[6], $line[7], $line[8], $line[9], $line[10], $line[11], $line[12], $line[13], $line[14], $line[15], $line[16], $line[17], $user, '$ip', '$hash')";
+  						$anyo = $line[17];
+              $wpdb->query($sql);
               if($wpdb->last_error == ''){
                 $total+=1;
                 $linea+=1;
@@ -50,6 +49,8 @@ if(isset($_POST['importSubmit'])){
           if ( $linea == $total ){
             $status = 'succ';
             $wpdb->query("COMMIT;");
+            $sql = "CALL ind_municipio_set( $anyo );";
+            $wpdb->query($sql);
           } else {
             $status = 'err';
             $total = $linea - $total;
@@ -92,8 +93,6 @@ if(!empty($status)){
             $statusMsg .= '';
     }
 }
-
-
 $acceso = acceso( $wpdb, "agregaIndMunicipios");
 if ( $acceso === true ):
 
@@ -104,42 +103,21 @@ if(!empty($statusMsg)){
 
 <div class="row">
 	<div class="col-md-4 col-xs-12">
+    <h2>Registro de indice de seguridad en municipios</h2>
 	</div>
 	<div class="col-md-8 ol-md-6 col-xs-12">
 		<form  method="post" enctype="multipart/form-data" id="importFrm">
 			<label for="input-file-now">Subir el archivo en formato csv</label>
 			<input type="file" name="input-file-now" id="input-file-now" class="dropify"/>
-            <input type="submit" class="btn btn-primary" name="importSubmit" value="Importar archivo">
+            <input type="submit" class="btn btn-primary" name="importSubmitMunicipio" value="Importar archivo">
         </form>
 	</div>
 </div>
 <div class="row">
- <table class="table table-bordered display" id="datosregistro<?php echo $id; ?>">
-  <thead>
-    <?php echo $head; ?>
-  </thead>
-  <tbody>
-   <?php
- 	 $hechos = $wpdb->get_results( $sql_grid );
-	 foreach ($hechos as $key => $o) {
-	   echo "<tr><td>$o->u</td><td>$o->d</td><td>$o->t</td><td>$o->c</td><td>$o->i</td><td>$o->s</td></tr>";
-	 }
-   ?>
-  </tbody>
- </table>
 </div>
 <?php
  require_once( get_plugin_path()."includes/utils/footer.php" );
 ?>
-<script type="text/javascript">
-(function($){
-	$.noConflict();
-    $('#datosregistro<?php echo $id; ?>').DataTable({
-         responsive: true,pageLength: 20, language: {url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json'}, searching: false,dom: 'Bfrtip',buttons: ['copyHtml5','excelHtml5','csvHtml5','pdfHtml5']
-    } );
-}(jQuery));
-</script>
-
 <?php else: ?>
 
   <h5>Debes ingresar tus credenciales para acceder al contenido.</h5>
