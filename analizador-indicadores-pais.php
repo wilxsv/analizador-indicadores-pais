@@ -119,8 +119,9 @@ function files_head_action() {
 	$files .= '<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />';
 	$files .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>';
 	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/plugins/bower_components/dropify/dist/css/dropify.min.css">';
-	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/js/leaflet/leaflet_fullscreen/dist/leaflet.fullscreen.css">';
+	$files .= '<link href="'.get_plugin_url().'public/js/leaflet/leaflet_fullscreen/dist/leaflet.fullscreen.css" rel="stylesheet">';
 	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/js/leaflet/leaflet_fullscreen/dist/Leaflet.fullscreen.min.js">';
+	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/js/leaflet/leaflet_easyPrint/dist/bundle.js">';
 	echo $files;
 }
 add_action('wp_head', 'files_head_action');
