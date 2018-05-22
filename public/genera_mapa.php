@@ -24,7 +24,7 @@ function get_mapa_focalizacion( $vars, $centro, $wpdb ){
   $mapa = "
 <div id='$map' class=\"mapDiv\"></div>
 <script type=\"text/javascript\">
-  var map = L.map('$map').setView([$centro], $zoom);
+  var map = L.map('$map',{ fullscreenControl: { pseudoFullscreen: TRUE } }).setView([$centro], $zoom);
   L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
 
   ".get_info_leyenda('<img src="'.$img.'" width="15" height="15"> Centro escolar', '<i style="background:#989898"></i> Sector policial', '<i style="background:#E0E02D"></i> Sector policial priorizado','','')."
