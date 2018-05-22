@@ -120,8 +120,8 @@ function files_head_action() {
 	$files .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>';
 	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/plugins/bower_components/dropify/dist/css/dropify.min.css">';
 	$files .= '<link href="'.get_plugin_url().'public/js/leaflet/leaflet_fullscreen/dist/leaflet.fullscreen.css" rel="stylesheet">';
-	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/js/leaflet/leaflet_fullscreen/dist/Leaflet.fullscreen.min.js">';
 	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/js/leaflet/leaflet_easyPrint/dist/bundle.js">';
+	$files .= "<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>";
 	echo $files;
 }
 add_action('wp_head', 'files_head_action');

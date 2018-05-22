@@ -52,6 +52,7 @@ function get_mapa_centroescolar($wpdb, $vars, $centro, $anyo){
   ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
   ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
   ".get_centros_escolares($wpdb, $vars, TRUE, $anyo)."
+  map.addControl(new L.Control.Fullscreen());
 </script>";
   return $mapa;
 }
@@ -67,8 +68,9 @@ function get_mapa_municipal($wpdb, $anyo, $filtro, $centro){
 <script type=\"text/javascript\">
   var map = L.map('$map').setView([$centro], $zoom);
   L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
-  ".get_info_leyenda('<i style="background:#009FE3"></i> Inseguridad muy baja (00 &ndash; 18)', '<i style="background:#94C11F"></i> Inseguridad baja     (18 &ndash; 31)', '<i style="background:#FCEA12"></i> Inseguridad media    (31 &ndash; 48)','<i style="background:#F39200"></i> Inseguridad alta     (48 &ndash; 68)','<i style="background:#E94190"></i> Inseguridad muy alta (68 &ndash; 100)')."
-  ".get_mapa_interactivo("<h4>Municipio</h4>IPM ", 'name', 'parseInt(props.indice*100)', 'Pase el cursor sobre un municipio', 18, 31, 48, 68, 'feature.properties.indice*100', $sectorBase)."
+  ".get_info_leyenda('<i style="background:#009FE3"></i> Inseguridad muy baja (00 &ndash; 0.18)', '<i style="background:#94C11F"></i> Inseguridad baja     (0.18 &ndash; 0.31)', '<i style="background:#FCEA12"></i> Inseguridad media    (0.31 &ndash; 0.48)','<i style="background:#F39200"></i> Inseguridad alta     (0.48 &ndash; 0.68)','<i style="background:#E94190"></i> Inseguridad muy alta (0.68 &ndash; 1.0)')."
+  ".get_mapa_interactivo("<h4>Municipio:</h4>", 'name', "'IPM : '+parseFloat(props.indice).toFixed(2)", 'Pase el cursor sobre un municipio', 0.18, 0.31, 0.48, 0.68, 'feature.properties.indice', $sectorBase)."
+  map.addControl(new L.Control.Fullscreen());
 </script>";
   return $mapa;
 }
@@ -99,8 +101,8 @@ function get_mapa_analisis_situacional($wpdb, $anyo, $vars, $code,  $centro){
   ".get_info_leyenda("<i style=\"background:#009FE3\"></i> Inseguridad muy baja (00 &ndash; $l0)","<i style=\"background:#94C11F\"></i> Inseguridad baja     ($l0 &ndash; $l1)","<i style=\"background:#FCEA12\"></i> Inseguridad media    ($l1 &ndash; $l2)","<i style=\"background:#F39200\"></i> Inseguridad alta     ($l2 &ndash; $l3)","<i style=\"background:#E94190\"></i> Inseguridad muy alta ($l3 &ndash; $max)")."
   ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
   ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
-  ".get_mapa_interactivo("<h4>Sector policial</h4>", 'nombre', 'parseInt(props.cantidad)', 'Pase el cursor sobre un sector', $l0, $l1, $l2, $l3, 'feature.properties.cantidad', $sectorPri)."
-
+  ".get_mapa_interactivo("<h4>Sector policial:</h4>", 'nombre', "'Total delitos : '+parseInt(props.cantidad)", 'Pase el cursor sobre un sector', $l0, $l1, $l2, $l3, 'feature.properties.cantidad', $sectorPri)."
+  map.addControl(new L.Control.Fullscreen());
 </script>";
   return $mapa;
 }
