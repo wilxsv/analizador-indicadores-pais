@@ -21,6 +21,7 @@ add_shortcode('agregaDatosCentroPenal', 'agregaDatosCentroPenal_shortcode' );
 /* agrega indicadores */
 add_shortcode('agregaIndCEscolar', 'agregaIndCEscolar_shortcode' );
 add_shortcode('agregaIndMunicipios', 'agregaIndMunicipios_shortcode' );
+add_shortcode('agregaIndFocalizacion', 'agregaIndFocalizacion_shortcode' );
 /* Visualizadores */
 add_shortcode('graficoPriorizacionMunicipal', 'graficoPriorizacionMunicipal_shortcode' );
 add_shortcode('graficoAnalisisSituacional', 'graficoAnalisisSituacional_shortcode' );
@@ -78,6 +79,9 @@ function agregaIndCEscolar_shortcode($atts, $mensaje = null) {
 function agregaIndMunicipios_shortcode($atts, $mensaje = null) {
 	require_once get_plugin_path()."public/shortCode/add/agregaIndMunicipios.php";
 }
+function agregaIndFocalizacion_shortcode($atts, $mensaje = null) {
+	require_once get_plugin_path()."public/shortCode/add/agregaIndFocalizacion.php";
+}
 
 function generaCodigoSeguridad_shortcode($atts, $mensaje = null) {
 	require_once get_plugin_path()."public/shortCode/generaCodigoSeguridad.php";
@@ -120,8 +124,9 @@ function files_head_action() {
 	$files .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>';
 	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/plugins/bower_components/dropify/dist/css/dropify.min.css">';
 	$files .= '<link href="'.get_plugin_url().'public/js/leaflet/leaflet_fullscreen/dist/leaflet.fullscreen.css" rel="stylesheet">';
-	$files .= '<link rel="stylesheet" href="'.get_plugin_url().'public/js/leaflet/leaflet_easyPrint/dist/bundle.js">';
-	$files .= "<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>";
+	$files .= "<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+						 <script src='".get_plugin_url()."public/js/leaflet/leaflet.browser.print-master/dist/leaflet.browser.print.js'></script>
+ 						 <script src='".get_plugin_url()."public/js/leaflet/leaflet_easyPrint/dist/bundle.js'></script>";
 	echo $files;
 }
 add_action('wp_head', 'files_head_action');

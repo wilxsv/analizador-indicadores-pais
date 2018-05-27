@@ -33,6 +33,13 @@ function get_mapa_focalizacion( $vars, $centro, $wpdb ){
   ".add_sector_leaflet($sectorPri, 2, "yellow", "white")."
   ".get_centros_escolares($wpdb, $vars, FALSE)."
   map.addControl(new L.Control.Fullscreen());
+  var printer = L.easyPrint({
+        tileLayer: map,
+        sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
+        filename: 'myMap',
+        exportOnly: true,
+        hideControlContainer: true
+  }).addTo(map);
 </script>";
   return $mapa;
 }
