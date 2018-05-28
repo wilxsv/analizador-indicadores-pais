@@ -33,13 +33,7 @@ function get_mapa_focalizacion( $vars, $centro, $wpdb ){
   ".add_sector_leaflet($sectorPri, 2, "yellow", "white")."
   ".get_centros_escolares($wpdb, $vars, FALSE)."
   map.addControl(new L.Control.Fullscreen());
-  var printer = L.easyPrint({
-        tileLayer: map,
-        sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
-        filename: 'myMap',
-        exportOnly: true,
-        hideControlContainer: true
-  }).addTo(map);
+  L.control.browserPrint().addTo(map);
 </script>";
   return $mapa;
 }
@@ -60,6 +54,7 @@ function get_mapa_centroescolar($wpdb, $vars, $centro, $anyo){
   ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
   ".get_centros_escolares($wpdb, $vars, TRUE, $anyo)."
   map.addControl(new L.Control.Fullscreen());
+  L.control.browserPrint().addTo(map)
 </script>";
   return $mapa;
 }
@@ -78,6 +73,7 @@ function get_mapa_municipal($wpdb, $anyo, $filtro, $centro){
   ".get_info_leyenda('<i style="background:#009FE3"></i> Inseguridad muy baja (00 &ndash; 0.18)', '<i style="background:#94C11F"></i> Inseguridad baja     (0.18 &ndash; 0.31)', '<i style="background:#FCEA12"></i> Inseguridad media    (0.31 &ndash; 0.48)','<i style="background:#F39200"></i> Inseguridad alta     (0.48 &ndash; 0.68)','<i style="background:#E94190"></i> Inseguridad muy alta (0.68 &ndash; 1.0)')."
   ".get_mapa_interactivo("<h4>Municipio:</h4>", 'name', "'IPM : '+parseFloat(props.indice).toFixed(2)", 'Pase el cursor sobre un municipio', 0.18, 0.31, 0.48, 0.68, 'feature.properties.indice', $sectorBase)."
   map.addControl(new L.Control.Fullscreen());
+  L.control.browserPrint().addTo(map)
 </script>";
   return $mapa;
 }
@@ -110,6 +106,7 @@ function get_mapa_analisis_situacional($wpdb, $anyo, $vars, $code,  $centro){
   ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
   ".get_mapa_interactivo("<h4>Sector policial:</h4>", 'nombre', "'Total delitos : '+parseInt(props.cantidad)", 'Pase el cursor sobre un sector', $l0, $l1, $l2, $l3, 'feature.properties.cantidad', $sectorPri)."
   map.addControl(new L.Control.Fullscreen());
+  L.control.browserPrint().addTo(map)
 </script>";
   return $mapa;
 }
