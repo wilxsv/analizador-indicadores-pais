@@ -88,8 +88,11 @@ function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
    $sql = "SELECT count(*) AS total FROM ind_bnc_dgcp WHERE sector_policial != 'ND' AND anyo = $anyo AND $filtroLocalidad GROUP BY sector_policial ORDER BY total DESC LIMIT 1" ;
    $query=$wpdb->get_results( $sql );
    foreach ($query as $l) {
-    return $l->total;
-   }
+     if ($l->total < 5)
+            return 10;
+         else
+            return $l->total;
+    }
   }
 
   function get_max_delito($wpdb, $anyo, $vars, $filtro){
@@ -110,7 +113,10 @@ function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
     }
     $query=$wpdb->get_results( "SELECT count(*) AS total, municipio FROM ind_bnc_delito WHERE $where anyo = $anyo AND sector_policial != 'ND' AND $filtroLocalidad GROUP BY sector_policial HAVING $having ORDER BY total DESC LIMIT 1" );
     foreach ($query as $l) {
-     return $l->total;
+      if ($l->total < 5)
+         return 10;
+      else
+         return $l->total;
     }
     return 0;
    }
