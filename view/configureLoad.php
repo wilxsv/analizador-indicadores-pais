@@ -207,6 +207,13 @@ if(!empty($status)){
               $tag = $form.'<input type="hidden" name="tupla" value="'.$o->hash.'"><input type="hidden" name="id" value="1">'.'<button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Eliminar carga de datos</button></form>';
               echo "<tr><td>Indice de seguridad de Municipios</td><td>".date_format($date,"Y - m - d")."</td><td>".date_format($date,'H:i:s')."</td><td>$o->hash</td><td>$tag</td></tr>";
             }
+            $sql = "SELECT * FROM ind_focalizacion GROUP BY hash" ;
+            $hechos = $wpdb->get_results( $sql);
+            foreach ($hechos as $key => $o) {
+              $date=date_create($o->registro);
+              $tag = $form.'<input type="hidden" name="tupla" value="'.$o->hash.'"><input type="hidden" name="id" value="1">'.'<button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Eliminar carga de datos</button></form>';
+              echo "<tr><td>Focalizacion PESS</td><td>".date_format($date,"Y - m - d")."</td><td>".date_format($date,'H:i:s')."</td><td>$o->hash</td><td>$tag</td></tr>";
+            }
             ?>
           </tbody>
         </table>

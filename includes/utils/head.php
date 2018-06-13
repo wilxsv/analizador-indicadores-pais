@@ -58,6 +58,6 @@ padding:0px;
 	     }
 	     $dep = $l->departamento;
 	 }
-	 return '<select name="'.$name.'" id="'.$name.'" style="width:90%;"><option value="0" selected > Seleccione el departamento</option>'.$categoria.'</select>';
+	 return '<select name="'.$name.'" id="'.$name.'" style="width:90%;"><option value="0" selected > Seleccione el municipio</option>'.$categoria.'</select>';
  }
 ?>
