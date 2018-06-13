@@ -34,6 +34,13 @@ function get_mapa_focalizacion( $vars, $centro, $wpdb ){
   ".get_centros_escolares($wpdb, $vars, FALSE)."
   map.addControl(new L.Control.Fullscreen());
   L.control.browserPrint().addTo(map);
+  L.easyPrint({
+          //tileLayer: tiles,
+          sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
+          filename: 'myMap',
+          exportOnly: true,
+          hideControlContainer: true
+  }).addTo(map);
 </script>";
   return $mapa;
 }
@@ -54,7 +61,14 @@ function get_mapa_centroescolar($wpdb, $vars, $centro, $anyo){
   ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
   ".get_centros_escolares($wpdb, $vars, TRUE, $anyo)."
   map.addControl(new L.Control.Fullscreen());
-  L.control.browserPrint().addTo(map)
+  L.control.browserPrint().addTo(map);
+  L.easyPrint({
+          //tileLayer: tiles,
+          sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
+          filename: 'myMap',
+          exportOnly: true,
+          hideControlContainer: true
+  }).addTo(map);
 </script>";
   return $mapa;
 }
@@ -114,7 +128,15 @@ function get_mapa_analisis_situacional($wpdb, $anyo, $vars, $code,  $centro){
   ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
   ".get_mapa_interactivo("<h4>Sector policial:</h4>", 'nombre', "'Total delitos : '+parseInt(props.cantidad)", 'Pase el cursor sobre un sector', $l0, $l1, $l2, $l3, 'feature.properties.cantidad', $sectorPri)."
   map.addControl(new L.Control.Fullscreen());
-  L.control.browserPrint().addTo(map)
+  L.control.browserPrint().addTo(map);
+
+  L.easyPrint({
+          //tileLayer: tiles,
+          sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
+          filename: 'myMap',
+          exportOnly: true,
+          hideControlContainer: true
+  }).addTo(map);
 </script>";
   return $mapa;
 }
