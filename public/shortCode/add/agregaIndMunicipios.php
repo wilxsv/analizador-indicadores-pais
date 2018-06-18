@@ -49,7 +49,7 @@ if(isset($_POST['importSubmitMunicipio'])){
           if ( $linea == $total ){
             $status = 'succ';
             $wpdb->query("COMMIT;");
-            $sql = "CALL ind_municipio_set( $anyo );";
+            $sql = "CALL fnc_indice_municipal_caculo( $anyo );";
             $wpdb->query($sql);
           } else {
             $status = 'err';

@@ -66,8 +66,33 @@ function getEstadisticaTransito($wpdb, $anyo, $vars){
   $data .= getRetornadosPorSQL($wpdb, "SELECT tipo_accidente AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY tipo_accidente ORDER BY 1", "<tr><td>RESULTADO DE ACCIDENTES POR TIPO DE ACCIDENTE</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
   $data .= getRetornadosPorSQL($wpdb, "SELECT causa AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY causa ORDER BY 1", "<tr><td>RESULTADO DE ACCIDENTES POR CAUSA</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
   $data .= getRetornadosPorSQL($wpdb, "SELECT vehiculo AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY vehiculo ORDER BY 1", "<tr><td>RESULTADO DE ACCIDENTES POR CLASE DE VEHICULO</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
-  $data .= getRetornadosPorSQL($wpdb, "SELECT mes AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY mes ORDER BY 1", "<tr><td>RESULTADO DE ACCIDENTES POR MES</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
-  $data .= getRetornadosPorSQL($wpdb, "SELECT dia AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY dia ORDER BY 1", "<tr><td>RESULTADO DE ACCIDENTES POR DIAS</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT mes AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c,
+CASE
+    WHEN mes = 'ENE' THEN 0
+    WHEN mes = 'FEB' THEN 1
+    WHEN mes = 'MAR' THEN 2
+    WHEN mes = 'ABR' THEN 3
+    WHEN mes = 'MAY' THEN 4
+    WHEN mes = 'JUN' THEN 5
+    WHEN mes = 'JUL' THEN 6
+    WHEN mes = 'AGO' THEN 7
+    WHEN mes = 'SEP' THEN 8
+    WHEN mes = 'OCT' THEN 9
+    WHEN mes = 'NOV' THEN 10
+    WHEN mes = 'DIC' THEN 11
+    ELSE 12
+END AS num_mes FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY mes ORDER BY 5", "<tr><td>RESULTADO DE ACCIDENTES POR MES</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
+  $data .= getRetornadosPorSQL($wpdb, "SELECT dia AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c,
+  CASE
+      WHEN dia = 'DO' THEN 0
+      WHEN dia = 'LU' THEN 1
+      WHEN dia = 'MA' THEN 2
+      WHEN dia = 'MI' THEN 3
+      WHEN dia = 'JU' THEN 4
+      WHEN dia = 'VI' THEN 5
+      WHEN dia = 'SA' THEN 6
+      ELSE 7
+  END AS num_dia FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY dia ORDER BY 5", "<tr><td>RESULTADO DE ACCIDENTES POR DIAS</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
   $data .= getRetornadosPorSQL($wpdb, "SELECT hora_rango AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY hora_rango ORDER BY 1", "<tr><td>RESULTADO DE ACCIDENTES POR RANGO DE HORA</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
   $data .= getRetornadosPorSQL($wpdb, "SELECT direccion AS u, COUNT(IF(resultado = 'FALLECIDO',1,NULL)) d, COUNT(IF(resultado = 'LESIONADO',1,NULL)) t, COUNT(*) c FROM ind_bnc_accidente_transito WHERE anyo = $anyo AND $filtro GROUP BY direccion ORDER BY 1", "<tr><td>RESULTADO DE ACCIDENTES POR DIRECCION</td><td>FALLECIDO</td><td>LESIONADO</td><td>TOTAL</td></tr>").getLinea($max);
   $head = '<tr><th>Cruce</th><th>.</th><th>.</th><th>.</th></tr>';

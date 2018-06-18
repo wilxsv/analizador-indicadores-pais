@@ -32,7 +32,7 @@ padding:0px;
 
 <?php
  function getFormSelectDepartamento( $wpdb, $name ){
-	$deptos=$wpdb->get_results( "SELECT departamento FROM ind_municipio group by departamento order by departamento" );
+	$deptos=$wpdb->get_results( "SELECT nombre_departamento AS departamento FROM ind_ctl_departamento group by 1 order by 1" );
 	$form = "";
   foreach ($deptos as $l) {
     $form.= "<option value=\"$l->departamento\">$l->departamento</option>";
