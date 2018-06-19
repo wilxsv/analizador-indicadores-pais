@@ -25,7 +25,7 @@ function get_mapa_focalizacion( $vars, $centro, $wpdb ){
 <div id='$map' class=\"mapDiv\"></div>
 <script type=\"text/javascript\">
   var map = L.map('$map').setView([$centro], $zoom);
-  L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
+  var tiles = L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
 
   ".get_info_leyenda('<img src="'.$img.'" width="15" height="15"> Centro escolar', '<i style="background:#989898"></i> Sector policial', '<i style="background:#E0E02D"></i> Sector policial priorizado','','')."
   ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
@@ -35,7 +35,7 @@ function get_mapa_focalizacion( $vars, $centro, $wpdb ){
   map.addControl(new L.Control.Fullscreen());
   L.control.browserPrint().addTo(map);
   L.easyPrint({
-          //tileLayer: tiles,
+          tileLayer: tiles,
           sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
           filename: 'myMap',
           exportOnly: true,
