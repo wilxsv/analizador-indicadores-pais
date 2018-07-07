@@ -65,6 +65,10 @@ function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
    $l1 = intval($max*0.4);
    $l2 = intval($max*0.6);
    $l3 = intval($max*0.8);
+   $l01 = $l0+1;
+   $l11 = $l1+1;
+   $l21 = $l2+1;
+   $l31 = $l3+1;
    return "
    var legend = L.control({position: 'bottomright'});
    legend.onAdd = function (map) {
@@ -73,10 +77,10 @@ function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
    		labels = [],
    		from, to;
    	labels.push('<i style=\"background:#009FE3\"></i> Inseguridad muy baja (00 &ndash; $l0)');
-   	labels.push('<i style=\"background:#94C11F\"></i> Inseguridad baja     ($l0 &ndash; $l1)');
-   	labels.push('<i style=\"background:#FCEA12\"></i> Inseguridad media    ($l1 &ndash; $l2)');
-   	labels.push('<i style=\"background:#F39200\"></i> Inseguridad alta     ($l2 &ndash; $l3)');
-   	labels.push('<i style=\"background:#E94190\"></i> Inseguridad muy alta ($l3 &ndash; $max)');
+   	labels.push('<i style=\"background:#94C11F\"></i> Inseguridad baja     ($l01 &ndash; $l1)');
+   	labels.push('<i style=\"background:#FCEA12\"></i> Inseguridad media    ($l11 &ndash; $l2)');
+   	labels.push('<i style=\"background:#F39200\"></i> Inseguridad alta     ($l21 &ndash; $l3)');
+   	labels.push('<i style=\"background:#E94190\"></i> Inseguridad muy alta ($l31 &ndash; $max)');
    	div.innerHTML = labels.join('<br>');
    	return div;
    };
