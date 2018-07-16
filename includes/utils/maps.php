@@ -97,6 +97,7 @@ function get_leyenda_municipio($wpdb, $anyo, $vars, $filtro){
          else
             return $l->total;
     }
+           return 10;
   }
 
   function get_max_delito($wpdb, $anyo, $vars, $filtro){

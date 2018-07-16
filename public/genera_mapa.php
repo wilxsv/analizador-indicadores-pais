@@ -1,5 +1,5 @@
 <?php
-ini_set('memory_limit', '356M');
+ini_set('memory_limit', '556M');
 /**
  * Plugin Name: indicadores-pais-El-Salvador-seguro
  * Plugin URI: http://wordpress.org/plugins/
@@ -105,7 +105,7 @@ function get_mapa_analisis_situacional($wpdb, $anyo, $vars, $code,  $centro){
 <script type=\"text/javascript\">
   var map = L.map('$map').setView([$centro], $zoom);
   L.tileLayer('', {attribution: 'Dirección de Información y Análisis'}).addTo(map);
-  ".get_info_leyenda("<i style=\"background:#009FE3\"></i> Inseguridad muy baja (01 &ndash; $l0)","<i style=\"background:#94C11F\"></i> Inseguridad baja     ($l01 &ndash; $l1)","<i style=\"background:#FCEA12\"></i> Inseguridad media    ($l11 &ndash; $l2)","<i style=\"background:#F39200\"></i> Inseguridad alta     ($l21 &ndash; $l3)","<i style=\"background:#E94190\"></i> Inseguridad muy alta ($l31 &ndash; $max)")."
+  ".get_info_leyenda("<i style=\"background:#009FE3\"></i> Inseguridad muy baja (0 &ndash; $l0)","<i style=\"background:#94C11F\"></i> Inseguridad baja     ($l01 &ndash; $l1)","<i style=\"background:#FCEA12\"></i> Inseguridad media    ($l11 &ndash; $l2)","<i style=\"background:#F39200\"></i> Inseguridad alta     ($l21 &ndash; $l3)","<i style=\"background:#E94190\"></i> Inseguridad muy alta ($l31 &ndash; $max)")."
   ".add_sector_leaflet($sectorBase, 1, "gray", "white")."
   ".add_leyenda_geojson_leaflet($sectorBase, "black", "feature.properties.name")."
   ".get_mapa_interactivo("<h4>Sector policial:</h4>", 'nombre', "'Total delitos : '+parseInt(props.cantidad)", 'Pase el cursor sobre un sector', $l0, $l1, $l2, $l3, 'feature.properties.cantidad', $sectorPri)."

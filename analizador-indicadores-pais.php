@@ -131,4 +131,18 @@ function files_head_action() {
 }
 add_action('wp_head', 'files_head_action');
 
+function getFiltroE($wpdb, $vars){
+  $filtro = "";
+  $filtro2 = "";
+  $having = "";
+  if (is_numeric($vars)) {
+    $municipios=$wpdb->get_results( "SELECT m.id AS id, d.nombre_departamento AS departamento, m.nombre_municipio AS municipio FROM ind_ctl_departamento AS d INNER JOIN ind_ctl_municipio AS m ON d.id = m.ctl_departamento_id WHERE m.id = $vars group by d.nombre_departamento, m.nombre_municipio" );
+    foreach ($municipios as $l) {
+      $filtro = " nombre_municipio_ppd = '".strtoupper($l->municipio)."' AND nombre_departamento_ppd = '".strtoupper($l->departamento)."'";
+      $filtro2 = " municipio = '".strtoupper($l->municipio)."'  AND departamento = '".strtoupper($l->departamento)."' ";
+      $having = " municipio = '".strtoupper($l->municipio)."'";
+    }
+  }
+  return $filtro2;
+}
 ?>
