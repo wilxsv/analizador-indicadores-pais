@@ -33,7 +33,7 @@ if(isset($_POST['importSubmitFO'])){
           $wpdb->query("START TRANSACTION;");
 					while(($line = fgetcsv($csvFile)) !== FALSE){
             if ( is_numeric($line[4]) && is_numeric($line[6]) && is_numeric($line[7]) ) {
-              $sql =  "(departamento, municipio, fase_pess, sector_policial, codigo_ce, nombre_ce, lon, lat, sector, registro, usuario, ip, hash)
+              $sql =  "INSERT INTO ind_focalizacion (departamento, municipio, fase_pess, sector_policial, codigo_ce, nombre_ce, lon, lat, sector, registro, usuario, ip, hash)
 VALUES";
   						$sql .= "('$line[0]', '$line[1]', '$line[2]', '$line[3]', $line[4], '$line[5]', $line[6], $line[7], '$line[8]', '$date', $user, '$ip', '$hash')";
               $wpdb->query($sql);

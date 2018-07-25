@@ -48,7 +48,7 @@ if(isset($_POST['importSubmitCE'])){
           if ( $linea == $total ){
             $status = 'succ';
             $wpdb->query("COMMIT;");
-            $sql = "CALL ind_centroescolar_set( $anyo );";
+            $sql = "CALL fnc_indice_centroescolar_caculo( $anyo );";
             $wpdb->query($sql);
           } else {
             $status = 'err';
