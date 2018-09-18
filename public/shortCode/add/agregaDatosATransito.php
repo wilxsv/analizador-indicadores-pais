@@ -10,7 +10,7 @@
  global $wpdb;
 
  require_once( get_plugin_path()."includes/utils/head.php" );
-
+ require_once( get_plugin_path()."includes/libs/sessions.php" );
  $status = false;
  $total = 0;
  $linea = 0;
@@ -101,7 +101,20 @@ if(!empty($statusMsg)){
 	echo '<div class="'.$statusMsgClass.'">'.$statusMsg.'</div>';
 }
 ?>
-
+<div class="row">
+ <div class="pad group">
+  <div class="grid one-fifth "><h5></h5> </div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last"><br/></div>
+  <div class="grid one-fifth last" ><br/></div>
+  <div class="grid one-fifth last" style="text-align:right">
+    <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?> " method="post">
+      <input type="hidden" name="disable" value="TRUE">
+      Cerrar sesión <button type="submit" class="btn btn-info btn-xs"><i class="fas fa-sign-out-alt"></i></button>
+    </form>
+  </div>
+ </div>
+</div>
 <link rel="stylesheet" href="<?php echo get_plugin_url(); ?>public/plugins/bower_components/dropify/dist/css/dropify.min.css">
 <div class="row">
 	<div class="col-md-4 col-xs-12">
